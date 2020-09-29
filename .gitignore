@@ -1,0 +1,12 @@
+target
+.project
+.idea
+.settings
+*.iml
+.classpath
+*.classes
+*.jar
+*.war
+*.log
+dependency-reduced-pom.xml
+pom.xml.versionsBackup

@@ -1,0 +1,169 @@
+<!--
+
+    Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 配置父 -->
+    <parent>
+        <groupId>com.lodsve</groupId>
+        <artifactId>lodsve-parent</artifactId>
+        <version>6</version>
+    </parent>
+
+    <groupId>com.lodsve.boot</groupId>
+    <artifactId>lodsve-boot-build</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2020</inceptionYear>
+    <name>lodsve boot build</name>
+    <description>Lodsve develop kits base on Spring-Boot and some opensource components!</description>
+    <url>https://github.com/lodsve/lodsve-boot</url>
+
+    <properties>
+        <github.repository.url>https://maven.pkg.github.com/lodsve/lodsve-boot</github.repository.url>
+        <main.user.dir>${project.basedir}</main.user.dir>
+        <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
+    </properties>
+
+    <modules>
+        <module>lodsve-boot-project</module>
+    </modules>
+
+    <!-- issue -->
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/lodsve/lodsve-boot/issues</url>
+    </issueManagement>
+
+    <!-- 代码库 -->
+    <scm>
+        <connection>scm:git:git@github.com:lodsve/lodsve-boot.git</connection>
+        <developerConnection>scm:git:git@github.com:lodsve/lodsve-boot.git</developerConnection>
+        <url>https://github.com/lodsve/lodsve-boot</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <!-- copyright header -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${maven.copyright.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <quiet>false</quiet>
+                    <header>${main.user.dir}/.mvn/HEADER</header>
+                    <excludes>
+                        <exclude>*.sh</exclude>
+                        <exclude>.gitignore</exclude>
+                        <exclude>**/*.md</exclude>
+                        <exclude>.editorconfig</exclude>
+                        <exclude>.travis.yml</exclude>
+                        <exclude>CHANGELOG.md</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>.github/**</exclude>
+                        <exclude>.mvn/**</exclude>
+                        <exclude>**/spring.factories</exclude>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/src/main/java/**/*.java</include>
+                        <include>**/src/main/java/**/*.xml</include>
+                        <include>**/src/test/java/**/*.java</include>
+                        <include>**/src/test/java/**/*.xml</include>
+                    </includes>
+                    <strictCheck>true</strictCheck>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>release-third-party</id>
+            <!-- 第三方发布仓库 -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>third-party-snapshots</id>
+                    <name>Third Party SNAPSHOTS</name>
+                    <url>${third.party.snapshots.repository.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>third-party-releases</id>
+                    <name>Third Party releases</name>
+                    <url>${third.party.releases.repository.url}</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <!-- 生成javadoc的插件 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <show>public</show>
+                            <aggregate>true</aggregate>
+                            <charset>${project.build.sourceEncoding}</charset>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </plugin>
+                    <!-- 生成源代码的插件 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven.source.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
