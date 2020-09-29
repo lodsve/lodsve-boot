@@ -1,31 +1,12 @@
-<!--
-
-    Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
--->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 配置父 -->
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
+        <artifactId>lodsve-boot-build</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <relativePath>../../../lodsve-boot</relativePath>
     </parent>
 
     <artifactId>lodsve-boot-dependencies</artifactId>
@@ -33,6 +14,8 @@
     <name>lodsve boot dependencies</name>
 
     <properties>
+        <main.user.dir>${basedir}/../..</main.user.dir>
+
         <dozer.version>6.5.0</dozer.version>
         <guava.version>28.2-jre</guava.version>
         <jxl.version>2.6.12</jxl.version>
@@ -41,6 +24,9 @@
         <ant.version>1.7.0</ant.version>
         <lombok.version>1.18.2</lombok.version>
         <beetl.version>2.9.8</beetl.version>
+        <aliyun.sdk.oss.version>3.11.1</aliyun.sdk.oss.version>
+        <aws.java.sdk.s3.version>1.11.868</aws.java.sdk.s3.version>
+        <commons-io.version>2.4</commons-io.version>
     </properties>
 
     <dependencyManagement>
@@ -93,7 +79,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <scope>compile</scope>
             </dependency>
             <!-- lombok start -->
             <!-- 模板引擎 start -->
@@ -103,6 +88,30 @@
                 <version>${beetl.version}</version>
             </dependency>
             <!-- 模板引擎 end -->
+
+            <!-- aliyun oss start -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.sdk.oss.version}</version>
+            </dependency>
+            <!-- aliyun oss end -->
+
+            <!-- aws s3 start -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws.java.sdk.s3.version}</version>
+            </dependency>
+            <!-- aws s3 end -->
+
+            <!-- apache commons start -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- apache commons end -->
         </dependencies>
     </dependencyManagement>
 </project>

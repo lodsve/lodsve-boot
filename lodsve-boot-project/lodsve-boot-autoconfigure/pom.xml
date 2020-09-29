@@ -1,35 +1,48 @@
-<!--
-
-    Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
--->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 配置父 -->
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-dependencies</artifactId>
+        <artifactId>lodsve-boot-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-dependencies</relativePath>
+        <relativePath>../lodsve-boot-parent</relativePath>
     </parent>
 
     <artifactId>lodsve-boot-autoconfigure</artifactId>
     <packaging>jar</packaging>
     <name>lodsve boot autoconfigure</name>
 
+    <properties>
+        <main.user.dir>${basedir}/../..</main.user.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-filesystem</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>

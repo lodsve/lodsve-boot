@@ -1,61 +1,39 @@
-<!--
-
-    Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
--->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 配置父 -->
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-dependencies</artifactId>
+        <artifactId>lodsve-boot-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-dependencies</relativePath>
+        <relativePath>../lodsve-boot-parent</relativePath>
     </parent>
 
     <artifactId>lodsve-boot</artifactId>
     <packaging>jar</packaging>
     <name>lodsve boot</name>
 
+    <properties>
+        <main.user.dir>${basedir}/../..</main.user.dir>
+    </properties>
+
     <dependencies>
+        <!-- spring dependencies begin -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
+        <!-- spring dependencies end -->
+
+        <!-- lodsve boot dependencies begin -->
         <dependency>
             <groupId>com.github.dozermapper</groupId>
             <artifactId>dozer-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
@@ -76,17 +54,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- lodsve boot dependencies end -->
     </dependencies>
 
 </project>

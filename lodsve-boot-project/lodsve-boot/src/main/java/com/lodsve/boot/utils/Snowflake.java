@@ -1,5 +1,5 @@
 /*
- * Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
+ * Copyright © 2020 Sun.Hao(https://www.crazy-coder.cn/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

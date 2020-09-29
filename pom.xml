@@ -1,30 +1,13 @@
-<!--
-
-    Copyright © 2009 Sun.Hao(https://www.crazy-coder.cn/)
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
--->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 配置父 -->
     <parent>
-        <groupId>com.lodsve</groupId>
-        <artifactId>lodsve-parent</artifactId>
-        <version>6</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+        <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.lodsve.boot</groupId>
@@ -37,14 +20,66 @@
     <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
-        <github.repository.url>https://maven.pkg.github.com/lodsve/lodsve-boot</github.repository.url>
-        <main.user.dir>${project.basedir}</main.user.dir>
+        <!-- 基本属性 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+
+        <!-- 所有的插件版本 -->
+        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version>
+        <maven.dependency.plugin.version>2.8</maven.dependency.plugin.version>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.source.plugin.version>2.4</maven.source.plugin.version>
+        <maven.clean.plugin.version>2.6.1</maven.clean.plugin.version>
+        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+        <maven.gpg.plugin.version>1.5</maven.gpg.plugin.version>
+        <maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
+        <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
         <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
+
+        <!-- 仓库地址配置 -->
+        <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
+        </oss.snapshots.repository.url>
+        <oss.releases.repository.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+        </oss.releases.repository.url>
+
+        <!-- 自定义配置 -->
+        <main.user.dir>${basedir}</main.user.dir>
+        <manifest.built.name>Sun.Hao</manifest.built.name>
     </properties>
 
     <modules>
         <module>lodsve-boot-project</module>
     </modules>
+
+    <organization>
+        <name>lodsve</name>
+        <url>https://github.com/lodsve</url>
+    </organization>
+
+    <!-- license -->
+    <licenses>
+        <license>
+            <name>GNU General Public License version 3</name>
+            <url>https://opensource.org/licenses/GPL-3.0</url>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <id>sunhao</id>
+            <name>孙昊</name>
+            <email>sunhao.java@gmail.com</email>
+            <roles>
+                <role>creator</role>
+                <role>manager</role>
+                <role>developer</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <!-- issue -->
     <issueManagement>
@@ -59,8 +94,91 @@
         <url>https://github.com/lodsve/lodsve-boot</url>
     </scm>
 
+    <!-- 仓库 -->
+    <repositories>
+        <repository>
+            <id>default-center</id>
+            <name>default center</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jcenter</id>
+            <name>jcenter</name>
+            <url>https://jcenter.bintray.com</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
+            <!-- 编译 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <debuglevel>lines,vars,source</debuglevel>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven.clean.plugin.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/..</directory>
+                            <includes>
+                                <include>dependency-reduced-pom.xml</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>${manifest.built.name}</Built-By>
+                        </manifestEntries>
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
             <!-- copyright header -->
             <plugin>
                 <groupId>com.mycila</groupId>
@@ -91,10 +209,8 @@
                         <exclude>**/*.txt</exclude>
                     </excludes>
                     <includes>
-                        <include>**/src/main/java/**/*.java</include>
-                        <include>**/src/main/java/**/*.xml</include>
-                        <include>**/src/test/java/**/*.java</include>
-                        <include>**/src/test/java/**/*.xml</include>
+                        <include>**/src/main/java/**</include>
+                        <include>**/src/main/java/**</include>
                     </includes>
                     <strictCheck>true</strictCheck>
                     <mapping>
@@ -106,6 +222,103 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <jdk>1.8</jdk>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        <profile>
+            <id>release-oss</id>
+            <build>
+                <plugins>
+                    <!-- GPG,发布maven中央仓库用 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- 生成javadoc的插件 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <show>public</show>
+                            <aggregate>true</aggregate>
+                            <charset>${project.build.sourceEncoding}</charset>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </plugin>
+                    <!-- 在maven仓库中自动close和release的插件 -->
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.staging.maven.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>oss-releases</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <!-- 生成源代码的插件 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven.source.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <!-- 发布仓库 -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss-snapshots</id>
+                    <name>oss SNAPSHOTS</name>
+                    <url>${oss.snapshots.repository.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>oss-releases</id>
+                    <name>oss releases</name>
+                    <url>${oss.releases.repository.url}</url>
+                </repository>
+            </distributionManagement>
+        </profile>
         <profile>
             <id>release-third-party</id>
             <!-- 第三方发布仓库 -->
