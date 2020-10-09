@@ -11,7 +11,7 @@
 
     <artifactId>lodsve-boot-autoconfigure</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot autoconfigure</name>
+    <name>dataSource for RDBMS</name>
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
@@ -31,6 +31,12 @@
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-filesystem</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-rdbms</artifactId>
             <version>${project.version}</version>
             <optional>true</optional>
         </dependency>

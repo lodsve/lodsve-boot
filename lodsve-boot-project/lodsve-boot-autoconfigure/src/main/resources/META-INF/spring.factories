@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.lodsve.boot.autoconfigure.filesystem.FileSystemAutoConfiguration
+    com.lodsve.boot.autoconfigure.filesystem.FileSystemAutoConfiguration, \
+    com.lodsve.boot.autoconfigure.mybatis.MybatisAutoConfiguration, \
+    com.lodsve.boot.autoconfigure.rdbms.RdbmsAutoConfiguration

@@ -16,6 +16,7 @@
     <modules>
         <module>lodsve-boot-filesystem</module>
         <module>lodsve-boot-mybatis</module>
+        <module>lodsve-boot-rdbms</module>
     </modules>
 
     <properties>
