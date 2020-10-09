@@ -9,9 +9,9 @@
         <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-filesystem-oss-starter</artifactId>
+    <artifactId>lodsve-boot-starter-filesystem-oss</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot filesystem starter For aliyun oss</name>
+    <name>lodsve boot starter filesystem For aliyun oss</name>
 
     <properties>
         <main.user.dir>${basedir}/../../..</main.user.dir>

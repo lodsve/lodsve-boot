@@ -9,9 +9,9 @@
         <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-filesystem-s3-starter</artifactId>
+    <artifactId>lodsve-boot-starter-filesystem-s3</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot filesystem starter For aws s3</name>
+    <name>lodsve boot starter filesystem For aws s3</name>
 
     <properties>
         <main.user.dir>${basedir}/../../..</main.user.dir>

@@ -9,9 +9,9 @@
         <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-rdbms-starter</artifactId>
+    <artifactId>lodsve-boot-starter-rdbms</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot filesystem starter For aws s3</name>
+    <name>lodsve boot starter rdbms</name>
 
     <properties>
         <main.user.dir>${basedir}/../../..</main.user.dir>
@@ -25,12 +25,8 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-filesystem</artifactId>
+            <artifactId>lodsve-boot-rdbms</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
         </dependency>
     </dependencies>
 

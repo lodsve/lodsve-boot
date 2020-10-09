@@ -14,8 +14,9 @@
     <name>lodsve boot starters</name>
 
     <modules>
-        <module>lodsve-boot-filesystem-oss-starter</module>
-        <module>lodsve-boot-filesystem-s3-starter</module>
+        <module>lodsve-boot-starter-filesystem-oss</module>
+        <module>lodsve-boot-starter-filesystem-s3</module>
+        <module>lodsve-boot-starter-rdbms</module>
     </modules>
 
     <properties>
