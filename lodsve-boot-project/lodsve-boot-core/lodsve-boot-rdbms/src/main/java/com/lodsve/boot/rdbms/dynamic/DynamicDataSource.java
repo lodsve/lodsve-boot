@@ -23,8 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
+import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 动态数据源.
@@ -59,8 +59,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setTargetDataSources(targetDataSources);
 
         if (StringUtils.isNotBlank(defaultDataSource)) {
-            Set<String> keys = dataSourceMap.keySet();
-            super.setDefaultTargetDataSource(Lists.newArrayList(keys).get(0));
+            Collection<DataSource> values = dataSourceMap.values();
+            super.setDefaultTargetDataSource(Lists.newArrayList(values).get(0));
         }
 
         super.afterPropertiesSet();

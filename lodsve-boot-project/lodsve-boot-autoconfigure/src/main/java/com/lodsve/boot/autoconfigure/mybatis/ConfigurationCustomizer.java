@@ -24,6 +24,7 @@ import org.apache.ibatis.session.Configuration;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  * @date 2018-11-27 22:15
  */
+@FunctionalInterface
 public interface ConfigurationCustomizer {
     /**
      * Customize the given a {@link Configuration} object.

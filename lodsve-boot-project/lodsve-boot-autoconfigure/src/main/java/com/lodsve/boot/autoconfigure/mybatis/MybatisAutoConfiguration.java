@@ -16,11 +16,16 @@
  */
 package com.lodsve.boot.autoconfigure.mybatis;
 
+import com.google.common.collect.Lists;
+import com.lodsve.boot.mybatis.plugins.pagination.PaginationInterceptor;
+import com.lodsve.boot.mybatis.plugins.repository.BaseRepositoryInterceptor;
 import com.lodsve.boot.mybatis.repository.BaseRepository;
+import com.lodsve.boot.mybatis.type.TypeHandlerScanner;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperFactoryBean;
@@ -48,6 +53,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -62,19 +68,17 @@ import java.util.List;
 public class MybatisAutoConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(MybatisAutoConfiguration.class);
 
-    private final List<ConfigurationCustomizer> customizers;
     private final Interceptor[] interceptors;
     private final MybatisProperties mybatisProperties;
 
-    public MybatisAutoConfiguration(ObjectProvider<List<ConfigurationCustomizer>> customizers, ObjectProvider<Interceptor[]> interceptors, ObjectProvider<MybatisProperties> mybatisProperties) {
-        this.customizers = customizers.getIfAvailable();
+    public MybatisAutoConfiguration(ObjectProvider<Interceptor[]> interceptors, ObjectProvider<MybatisProperties> mybatisProperties) {
         this.interceptors = interceptors.getIfAvailable();
         this.mybatisProperties = mybatisProperties.getIfUnique();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public SqlSessionFactory sqlSessionFactory(ObjectProvider<DataSource> dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(ObjectProvider<DataSource> dataSource, ObjectProvider<List<ConfigurationCustomizer>> customizers) throws Exception {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource.getIfUnique());
         if (ArrayUtils.isNotEmpty(interceptors)) {
@@ -82,22 +86,32 @@ public class MybatisAutoConfiguration {
         }
 
         Configuration configuration = new Configuration();
-        customizers.forEach(c -> c.customize(configuration));
+        customizers.getIfAvailable(Lists::newArrayList).forEach(c -> c.customize(configuration));
+        // 默认的配置
+        defaultCustomizer().customize(configuration);
         factory.setConfiguration(configuration);
 
         return factory.getObject();
+    }
+
+    private ConfigurationCustomizer defaultCustomizer() {
+        return c -> {
+            c.setMapUnderscoreToCamelCase(mybatisProperties.isMapUnderscoreToCamelCase());
+
+            c.addInterceptor(new PaginationInterceptor());
+            c.addInterceptor(new BaseRepositoryInterceptor());
+
+            if (ArrayUtils.isNotEmpty(mybatisProperties.getEnumsLocations())) {
+                TypeHandler<?>[] handlers = new TypeHandlerScanner().find(mybatisProperties.getEnumsLocations());
+                Arrays.stream(handlers).forEach(c.getTypeHandlerRegistry()::register);
+            }
+        };
     }
 
     @Bean
     @ConditionalOnMissingBean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public ConfigurationCustomizer customizer() {
-        return new LodsveConfigurationCustomizer(mybatisProperties.isMapUnderscoreToCamelCase(), mybatisProperties.getEnumsLocations());
     }
 
     @org.springframework.context.annotation.Configuration

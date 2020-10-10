@@ -20,6 +20,7 @@ import com.lodsve.boot.rdbms.annotations.SwitchDataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
@@ -30,6 +31,7 @@ import java.lang.reflect.Method;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  * @date 2017/12/14 下午6:16
  */
+@Aspect
 public class DynamicDataSourceAspect {
     @Around("@annotation(com.lodsve.boot.rdbms.annotations.SwitchDataSource)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
