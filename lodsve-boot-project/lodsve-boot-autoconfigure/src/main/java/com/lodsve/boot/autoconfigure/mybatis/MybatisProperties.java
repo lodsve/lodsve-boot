@@ -27,12 +27,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "lodsve.mybatis")
 public class MybatisProperties {
-    /**
-     * Base packages to scan for MyBatis interfaces. Note that only interfaces
-     * with at least one method will be registered; concrete classes will be
-     * ignored.
-     */
-    private String[] basePackages;
 
     /**
      * 枚举类型所在包路径,可以多个

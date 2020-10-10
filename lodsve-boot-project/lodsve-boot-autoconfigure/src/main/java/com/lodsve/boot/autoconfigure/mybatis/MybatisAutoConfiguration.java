@@ -114,7 +114,7 @@ public class MybatisAutoConfiguration {
         private BeanFactory beanFactory;
 
         @Override
-        public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
             if (!AutoConfigurationPackages.has(this.beanFactory)) {
                 logger.debug("Could not determine auto-configuration package, automatic mapper scanning disabled.");
                 return;

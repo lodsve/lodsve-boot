@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>lodsve-boot-starter-filesystem-oss</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>lodsve boot starter filesystem For aliyun oss</name>
 
     <properties>

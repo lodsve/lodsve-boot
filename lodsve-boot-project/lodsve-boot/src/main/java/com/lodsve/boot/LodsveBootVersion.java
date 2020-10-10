@@ -18,10 +18,16 @@ package com.lodsve.boot;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
+import java.security.CodeSource;
 import java.util.Enumeration;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 /**
@@ -35,7 +41,30 @@ public final class LodsveBootVersion {
     }
 
     public static String getVersion() {
-        return LodsveBootVersion.class.getPackage().getImplementationVersion();
+        String implementationVersion = LodsveBootVersion.class.getPackage().getImplementationVersion();
+        if (implementationVersion != null) {
+            return implementationVersion;
+        }
+        CodeSource codeSource = LodsveBootVersion.class.getProtectionDomain().getCodeSource();
+        if (codeSource == null) {
+            return StringUtils.EMPTY;
+        }
+        URL codeSourceLocation = codeSource.getLocation();
+        try {
+            URLConnection connection = codeSourceLocation.openConnection();
+            if (connection instanceof JarURLConnection) {
+                return getImplementationVersion(((JarURLConnection) connection).getJarFile());
+            }
+            try (JarFile jarFile = new JarFile(new File(codeSourceLocation.toURI()))) {
+                return getImplementationVersion(jarFile);
+            }
+        } catch (Exception ex) {
+            return StringUtils.EMPTY;
+        }
+    }
+
+    private static String getImplementationVersion(JarFile jarFile) throws IOException {
+        return jarFile.getManifest().getMainAttributes().getValue(Attributes.Name.IMPLEMENTATION_VERSION);
     }
 
     public static String getBuilter() {

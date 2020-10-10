@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>lodsve-boot-starter-filesystem-s3</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>lodsve boot starter filesystem For aws s3</name>
 
     <properties>

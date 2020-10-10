@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>lodsve-boot-starter-rdbms</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>lodsve boot starter rdbms</name>
 
     <properties>
