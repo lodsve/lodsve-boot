@@ -75,9 +75,14 @@ public final class LodsveBootVersion {
         InputStream inputStream = null;
         try {
             ClassLoader classLoader = LodsveBootVersion.class.getClassLoader();
-            Enumeration<URL> manifestResources = classLoader.getResources("META-INF/MANIFEST.MF");
-            while (manifestResources.hasMoreElements()) {
-                inputStream = manifestResources.nextElement().openStream();
+            Enumeration<URL> resources = classLoader.getResources("META-INF/MANIFEST.MF");
+            while (resources.hasMoreElements()) {
+                URL url = resources.nextElement();
+                if (!url.toString().contains("lodsve-boot")) {
+                    continue;
+                }
+
+                inputStream = resources.nextElement().openStream();
                 Manifest manifest = new Manifest(inputStream);
                 String builter = manifest.getMainAttributes().getValue(name);
 
