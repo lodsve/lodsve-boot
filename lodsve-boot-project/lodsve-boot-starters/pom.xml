@@ -16,6 +16,7 @@
     <modules>
         <module>lodsve-boot-starter-filesystem-oss</module>
         <module>lodsve-boot-starter-filesystem-s3</module>
+        <module>lodsve-boot-starter-mybatis</module>
         <module>lodsve-boot-starter-rdbms</module>
     </modules>
 

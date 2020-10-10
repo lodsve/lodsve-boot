@@ -9,9 +9,9 @@
         <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-starter-filesystem-s3</artifactId>
+    <artifactId>lodsve-boot-starter-mybatis</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot starter filesystem For aws s3</name>
+    <name>lodsve boot starter mybatis</name>
 
     <properties>
         <main.user.dir>${basedir}/../../..</main.user.dir>
@@ -24,11 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-filesystem</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
+            <artifactId>lodsve-boot-mybatis</artifactId>
         </dependency>
     </dependencies>
 

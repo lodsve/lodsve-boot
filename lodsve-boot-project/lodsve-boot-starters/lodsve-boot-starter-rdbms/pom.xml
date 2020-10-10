@@ -21,12 +21,10 @@
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-autoconfigure</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-rdbms</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

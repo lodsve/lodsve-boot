@@ -4,39 +4,35 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-core</artifactId>
+        <artifactId>lodsve-boot-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../lodsve-boot-core</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-rdbms</artifactId>
+    <artifactId>lodsve-boot-example-mybatis</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot rdbms</name>
-    <description>DataSource for RDBMS</description>
+    <name>lodsve boot examples for mybatis</name>
 
     <properties>
-        <main.user.dir>${basedir}/../../..</main.user.dir>
+        <main.user.dir>${basedir}/..</main.user.dir>
     </properties>
 
     <dependencies>
-        <!-- required dependency -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-
-        <!-- lodsve -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot</artifactId>
+            <artifactId>lodsve-boot-starter-rdbms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-starter-mybatis</artifactId>
         </dependency>
     </dependencies>
+
 </project>

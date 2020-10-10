@@ -61,7 +61,6 @@
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

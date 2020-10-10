@@ -31,13 +31,16 @@
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-filesystem</artifactId>
-            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-mybatis</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-rdbms</artifactId>
-            <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
