@@ -28,19 +28,10 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- filesystem start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-filesystem</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-mybatis</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-rdbms</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -53,5 +44,25 @@
             <artifactId>aws-java-sdk-s3</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- filesystem end -->
+        <!-- mybatis start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-mybatis</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- mybatis end -->
+        <!-- rdbms start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-rdbms</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- rdbms end -->
     </dependencies>
 </project>

@@ -19,13 +19,16 @@ package com.lodsve.boot.autoconfigure.rdbms;
 import com.google.common.collect.Maps;
 import com.lodsve.boot.rdbms.dynamic.DynamicDataSource;
 import com.lodsve.boot.rdbms.dynamic.DynamicDataSourceAspect;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 import java.util.Map;
@@ -40,6 +43,8 @@ import java.util.Map;
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @Configuration
 public class RdbmsAutoConfiguration {
+    private static final String DATA_SOURCE_TYPE_NAME_HIKARI = "com.zaxxer.hikari.HikariDataSource";
+
     private final RdbmsProperties rdbmsProperties;
 
     public RdbmsAutoConfiguration(RdbmsProperties rdbmsProperties) {
@@ -48,16 +53,43 @@ public class RdbmsAutoConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        Map<String, DataSourceProperties> dataSourceProperties = rdbmsProperties.getDataSourceProperties();
+        Map<String, DataSourceProperty> dataSourceProperties = rdbmsProperties.getDataSourceProperties();
         String defaultDataSourceName = rdbmsProperties.getDefaultDataSourceName();
         Map<String, DataSource> dataSourceMap = Maps.newHashMap();
 
-        dataSourceProperties.forEach((k, v) -> {
-            DataSource dataSource = v.initializeDataSourceBuilder().build();
-            dataSourceMap.put(k, dataSource);
+        dataSourceProperties.forEach((name, properties) -> {
+            DataSource dataSource = buildDataSourcePool(properties);
+            dataSourceMap.put(name, dataSource);
         });
 
         return new DynamicDataSource(dataSourceMap, defaultDataSourceName);
+    }
+
+    private DataSource buildDataSourcePool(DataSourceProperty properties) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if (ClassUtils.isPresent(DATA_SOURCE_TYPE_NAME_HIKARI, classLoader)) {
+            // hikari pool
+            return createHikariDataSource(properties);
+        } else {
+            // no datasource pool type
+            throw new IllegalStateException("No supported DataSource pool type found");
+        }
+    }
+
+    private DataSource createHikariDataSource(DataSourceProperty properties) {
+        HikariCpConfig globalConfig = rdbmsProperties.getHikari();
+        HikariCpConfig config = properties.getHikari();
+        HikariConfig hikariConfig = config.toHikariConfig(globalConfig);
+
+        hikariConfig.setUsername(properties.getUsername());
+        hikariConfig.setPassword(properties.getPassword());
+        hikariConfig.setJdbcUrl(properties.getUrl());
+        hikariConfig.setPoolName(properties.getPoolName());
+        String driverClassName = properties.getDriverClassName();
+        if (!StringUtils.isEmpty(driverClassName)) {
+            config.setDriverClassName(driverClassName);
+        }
+        return new HikariDataSource(hikariConfig);
     }
 
     @Bean

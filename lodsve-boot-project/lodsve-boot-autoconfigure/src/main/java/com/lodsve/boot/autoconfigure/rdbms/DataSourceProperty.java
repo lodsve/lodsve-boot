@@ -17,31 +17,54 @@
 package com.lodsve.boot.autoconfigure.rdbms;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
-import java.util.Map;
-
 /**
- * 数据源的配置.
+ * .
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-@ConfigurationProperties(prefix = "lodsve.rdbms")
 @Data
-public class RdbmsProperties {
+public class DataSourceProperty {
     /**
-     * 默认数据源名称，不填为{@link #dataSourceProperties}的第一个值
+     * 连接池名称(只是一个名称标识)</br> 默认是配置文件上的名称
      */
-    private String defaultDataSourceName;
+    private String poolName;
     /**
-     * 多数据源配置
-     * 数据源名称 -> 数据源配置
+     * JDBC driver
      */
-    private Map<String, DataSourceProperty> dataSourceProperties;
+    private String driverClassName;
     /**
-     * hikari连接池配置[全局配置]
+     * JDBC url 地址
+     */
+    private String url;
+    /**
+     * JDBC 用户名
+     */
+    private String username;
+    /**
+     * JDBC 密码
+     */
+    private String password;
+    /**
+     * 自动运行的建表脚本
+     */
+    private String schema;
+    /**
+     * 自动运行的数据脚本
+     */
+    private String data;
+    /**
+     * 错误是否继续 默认 true
+     */
+    private boolean continueOnError = true;
+    /**
+     * 分隔符 默认 ;
+     */
+    private String separator = ";";
+    /**
+     * HikariCp参数配置
      */
     @NestedConfigurationProperty
-    private HikariCpConfig hikari;
+    private HikariCpConfig hikari = new HikariCpConfig();
 }
