@@ -35,8 +35,14 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
     public String downloadFileForStream(String objectName, String targetDir) throws IOException {
         File tempFolder = createTempFolder(targetDir);
 
-        logger.info("download file : " + tempFolder.getAbsolutePath() + "/" + objectName);
-        File fileTemp = new File(tempFolder, objectName);
+        if (logger.isInfoEnabled()) {
+            logger.info("download file : " + tempFolder.getAbsolutePath() + "/" + objectName);
+        }
+
+        // 获取文件真实名称
+        String realName = resolveRealName(objectName);
+
+        File fileTemp = new File(tempFolder, realName);
         File parentFolder = new File(fileTemp.getParent());
         if (!parentFolder.exists()) {
             if (!parentFolder.mkdirs()) {
@@ -74,5 +80,13 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
      * @param downloadFile 指定位置
      */
     public abstract void download(String objectName, File downloadFile);
+
+    /**
+     * 解析文件真实名称
+     *
+     * @param objectName 需要下载的文件
+     * @return 文件真实名称
+     */
+    public abstract String resolveRealName(String objectName) throws FileSystemException;
 
 }

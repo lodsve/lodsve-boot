@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.FileSystemException;
 import java.util.Date;
 
 /**
@@ -56,6 +57,11 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
     @Override
     public void download(String objectName, File downloadFile) {
 
+    }
+
+    @Override
+    public String resolveRealName(String objectName) throws FileSystemException {
+        return null;
     }
 
     @Override
@@ -96,7 +102,7 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
             PutObjectResult putResult = amazonS3Client.putObject(putObjectRequest);
 
             // 解析结果
-            result.setObjectName(file.getFolder() + "/" + file.getFinalFileName());
+            result.setObjectName(file.getFinalFileName());
             result.setEtag(putResult.getETag());
             result.setFileName(fileName);
             result.setResult(StringUtils.isNotBlank(putResult.getETag()));

@@ -46,10 +46,6 @@ public class FileSystemProperties {
      */
     private String bucketName;
     /**
-     * 临时文件路径，本地
-     */
-    private String tempFilePath = System.getProperty("java.io.tmpdir");
-    /**
      * 阿里云oss配置
      */
     private OssProperties oss = new OssProperties();

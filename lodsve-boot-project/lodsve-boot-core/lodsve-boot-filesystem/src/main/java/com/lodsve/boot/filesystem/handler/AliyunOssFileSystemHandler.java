@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.FileSystemException;
 import java.util.Date;
 
 /**
@@ -91,7 +92,7 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
             PutObjectResult putResult = client.putObject(bucketName, file.getFinalFileName(), content, metadata);
 
             // 解析结果
-            result.setObjectName(file.getFolder() + "/" + file.getFinalFileName());
+            result.setObjectName(file.getFinalFileName());
             result.setEtag(putResult.getETag());
             result.setFileName(fileName);
             result.setResult(StringUtils.isNotBlank(putResult.getETag()));
@@ -145,6 +146,19 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
     @Override
     public void download(String objectName, File downloadFile) {
         client.getObject(new GetObjectRequest(bucketName, objectName), downloadFile);
+    }
+
+    @Override
+    public String resolveRealName(String objectName) throws FileSystemException {
+        ObjectMetadata metadata = client.getObjectMetadata(bucketName, objectName);
+        if (null == metadata) {
+            throw new FileSystemException(String.format("Object Metadata is NULL! Object name is [%s]!", objectName));
+        }
+
+        String disposition = metadata.getContentDisposition();
+        String realName = StringUtils.removeStart(disposition, "attachment;filename=\"");
+        realName = StringUtils.removeEnd(realName, "\"");
+        return realName;
     }
 
     @Override
