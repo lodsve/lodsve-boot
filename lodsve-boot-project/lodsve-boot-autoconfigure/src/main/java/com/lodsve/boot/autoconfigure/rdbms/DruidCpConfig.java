@@ -24,4 +24,5 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 public class DruidCpConfig extends DruidDataSource {
+
 }

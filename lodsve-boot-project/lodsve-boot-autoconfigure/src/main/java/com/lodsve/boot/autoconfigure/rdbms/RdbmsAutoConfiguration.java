@@ -17,6 +17,10 @@
 package com.lodsve.boot.autoconfigure.rdbms;
 
 import com.google.common.collect.Maps;
+import com.lodsve.boot.autoconfigure.rdbms.druid.DruidFilterConfiguration;
+import com.lodsve.boot.autoconfigure.rdbms.druid.DruidSpringAopConfiguration;
+import com.lodsve.boot.autoconfigure.rdbms.druid.DruidStatViewServletConfiguration;
+import com.lodsve.boot.autoconfigure.rdbms.druid.DruidWebStatFilterConfiguration;
 import com.lodsve.boot.rdbms.dynamic.DynamicDataSource;
 import com.lodsve.boot.rdbms.dynamic.DynamicDataSourceAspect;
 import com.lodsve.boot.rdbms.exception.RdbmsException;
@@ -29,6 +33,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
@@ -40,11 +45,17 @@ import java.util.Map;
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-@EnableConfigurationProperties(RdbmsProperties.class)
+@EnableConfigurationProperties({RdbmsProperties.class, DruidStatProperties.class})
 @ConditionalOnClass(DynamicDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @Slf4j
 @Configuration
+@Import({
+    DruidFilterConfiguration.class,
+    DruidStatViewServletConfiguration.class,
+    DruidSpringAopConfiguration.class,
+    DruidWebStatFilterConfiguration.class
+})
 public class RdbmsAutoConfiguration {
     private static final String DATA_SOURCE_TYPE_NAME_HIKARI = "com.zaxxer.hikari.HikariDataSource";
     private static final String DATA_SOURCE_TYPE_NAME_DRUID = "com.alibaba.druid.pool.DruidDataSource";
