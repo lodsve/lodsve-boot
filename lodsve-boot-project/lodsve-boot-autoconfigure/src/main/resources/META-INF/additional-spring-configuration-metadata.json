@@ -55,6 +55,13 @@
             "sourceType": "com.lodsve.boot.autoconfigure.rdbms.druid.DruidFilterConfiguration",
             "description": "Enable WallFilter.",
             "defaultValue": false
+        },
+        {
+            "name": "lodsve.countdown.enabled",
+            "type": "java.lang.Boolean",
+            "sourceType": "com.lodsve.boot.autoconfigure.countdown.CountdownAutoConfiguration",
+            "description": "Enable Redis Timer.",
+            "defaultValue": false
         }
     ],
     "hints": [

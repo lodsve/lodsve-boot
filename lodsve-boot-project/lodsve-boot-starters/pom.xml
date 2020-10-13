@@ -18,6 +18,7 @@
         <module>lodsve-boot-starter-filesystem-s3</module>
         <module>lodsve-boot-starter-mybatis</module>
         <module>lodsve-boot-starter-rdbms</module>
+        <module>lodsve-boot-starter-countdown</module>
     </modules>
 
     <properties>

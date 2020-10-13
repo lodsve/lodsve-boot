@@ -74,5 +74,17 @@
             <optional>true</optional>
         </dependency>
         <!-- rdbms end -->
+        <!-- redis timer start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-countdown</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- redis timer end -->
     </dependencies>
 </project>
