@@ -16,12 +16,12 @@
  */
 package com.lodsve.boot.autoconfigure.rdbms;
 
-import com.zaxxer.hikari.HikariConfig;
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
- * Hikari连接池配置.
+ * Druid连接池配置.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-public class HikariCpConfig extends HikariConfig {
+public class DruidCpConfig extends DruidDataSource {
 }

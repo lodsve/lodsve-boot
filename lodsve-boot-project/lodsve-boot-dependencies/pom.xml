@@ -33,6 +33,8 @@
         <persistence.version>1.0</persistence.version>
         <javassist.version>3.20.0-GA</javassist.version>
         <vjkit.version>1.0.5</vjkit.version>
+        <druid.version>1.2.1</druid.version>
+        <jasypt.spring.boot.starter.version>3.0.3</jasypt.spring.boot.starter.version>
     </properties>
 
     <dependencyManagement>
@@ -182,9 +184,18 @@
             <dependency>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>3.0.3</version>
+                <version>${jasypt.spring.boot.starter.version}</version>
             </dependency>
             <!-- jasypt end -->
+
+            <!-- druid start -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- druid end -->
 
             <!-- lodsve boot start -->
             <dependency>

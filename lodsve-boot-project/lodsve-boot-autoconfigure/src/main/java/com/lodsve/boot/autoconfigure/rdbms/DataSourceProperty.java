@@ -19,8 +19,10 @@ package com.lodsve.boot.autoconfigure.rdbms;
 import lombok.Data;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
+import javax.sql.DataSource;
+
 /**
- * .
+ * 数据源配置.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
@@ -30,6 +32,10 @@ public class DataSourceProperty {
      * 连接池名称(只是一个名称标识)</br> 默认是配置文件上的名称
      */
     private String poolName;
+    /**
+     * 连接池类型，如果不设置自动查找 Druid > HikariCp
+     */
+    private Class<? extends DataSource> type;
     /**
      * JDBC driver
      */
@@ -47,24 +53,13 @@ public class DataSourceProperty {
      */
     private String password;
     /**
-     * 自动运行的建表脚本
-     */
-    private String schema;
-    /**
-     * 自动运行的数据脚本
-     */
-    private String data;
-    /**
-     * 错误是否继续 默认 true
-     */
-    private boolean continueOnError = true;
-    /**
-     * 分隔符 默认 ;
-     */
-    private String separator = ";";
-    /**
      * HikariCp参数配置
      */
     @NestedConfigurationProperty
     private HikariCpConfig hikari = new HikariCpConfig();
+    /**
+     * druid连接池配置
+     */
+    @NestedConfigurationProperty
+    private DruidCpConfig druid = new DruidCpConfig();
 }

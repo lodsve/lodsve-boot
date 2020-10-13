@@ -63,6 +63,11 @@
             <artifactId>HikariCP</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- rdbms end -->
     </dependencies>
 </project>

@@ -16,12 +16,18 @@
  */
 package com.lodsve.boot.autoconfigure.rdbms;
 
-import com.zaxxer.hikari.HikariConfig;
+import lombok.Data;
 
 /**
- * Hikari连接池配置.
+ * .
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-public class HikariCpConfig extends HikariConfig {
+@Data
+public class DruidStatConfig {
+    private Long slowSqlMillis;
+
+    private Boolean logSlowSql;
+
+    private Boolean mergeSql;
 }

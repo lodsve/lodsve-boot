@@ -18,7 +18,6 @@ package com.lodsve.boot.autoconfigure.rdbms;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.util.Map;
 
@@ -31,17 +30,12 @@ import java.util.Map;
 @Data
 public class RdbmsProperties {
     /**
-     * 默认数据源名称，不填为{@link #dataSourceProperties}的第一个值
+     * 默认数据源名称，不填为{@link #dataSource}的第一个值
      */
     private String defaultDataSourceName;
     /**
      * 多数据源配置
      * 数据源名称 -> 数据源配置
      */
-    private Map<String, DataSourceProperty> dataSourceProperties;
-    /**
-     * hikari连接池配置[全局配置]
-     */
-    @NestedConfigurationProperty
-    private HikariCpConfig hikari;
+    private Map<String, DataSourceProperty> dataSource;
 }
