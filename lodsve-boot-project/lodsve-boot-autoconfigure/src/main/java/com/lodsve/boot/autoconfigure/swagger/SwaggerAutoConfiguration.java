@@ -17,37 +17,39 @@
 package com.lodsve.boot.autoconfigure.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.data.domain.Pageable;
 import springfox.documentation.RequestHandler;
-import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.schema.AlternateTypeRuleConvention;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
@@ -63,30 +65,60 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @ConditionalOnMissingBean(Docket.class)
 @ConditionalOnProperty(name = "lodsve.swagger.enabled")
 @ConditionalOnClass(Docket.class)
+@EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
+    private final SwaggerProperties swaggerProperties;
     private BeanFactory beanFactory;
 
-    @Value("${lodsve.swagger.title:Swagger的Rest接口文档}")
-    private String title;
+    public SwaggerAutoConfiguration(SwaggerProperties swaggerProperties) {
+        this.swaggerProperties = swaggerProperties;
+    }
+
+    @Bean
+    public SwaggerUiWebMvcConfigurer swaggerUiConfigurer() {
+        return new SwaggerUiWebMvcConfigurer();
+    }
 
     @Bean
     @ConditionalOnMissingBean(Docket.class)
-    public Docket createRestApi() {
-        List<String> basePackages = AutoConfigurationPackages.get(beanFactory);
-
+    public Docket defaultDocket(ApiInfo apiInfo) {
         ApiSelectorBuilder builder = new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo())
+            .apiInfo(apiInfo)
             .ignoredParameterTypes(Pageable.class).select();
 
-        List<Predicate<RequestHandler>> predicates = Lists.newArrayList();
-        basePackages.forEach(bp -> predicates.add(RequestHandlerSelectors.basePackage(bp)));
+        List<String> basePackages = AutoConfigurationPackages.get(beanFactory);
+        if (CollectionUtils.isEmpty(basePackages)) {
+            throw new RuntimeException("can not find any base packages!");
+        }
+        Predicate<RequestHandler> predicate;
+        if (1 == basePackages.size()) {
+            predicate = RequestHandlerSelectors.basePackage(basePackages.get(0));
+        } else {
+            List<Predicate<RequestHandler>> predicates = Lists.newArrayList();
+            basePackages.forEach(bp -> predicates.add(RequestHandlerSelectors.basePackage(bp)));
+            predicate = predicates.stream().reduce(x -> true, Predicate::or);
+        }
 
-        return builder.apis(Predicates.or(predicates))
-            .paths(PathSelectors.any()).build();
+        return builder.apis(predicate).paths(PathSelectors.any()).build();
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(title).build();
+    @Bean
+    @ConditionalOnMissingBean
+    public ApiInfo apiInfo() {
+        SwaggerProperties.Contact contactProp = swaggerProperties.getContact();
+        Contact contact = null;
+        if (null != contactProp) {
+            contact = new Contact(contactProp.getName(), contactProp.getUrl(), contactProp.getEmail());
+        }
+
+        return new ApiInfo(swaggerProperties.getTitle(),
+            swaggerProperties.getDescription(),
+            swaggerProperties.getVersion(),
+            swaggerProperties.getTermsOfServiceUrl(),
+            contact,
+            swaggerProperties.getLicense(),
+            swaggerProperties.getLicenseUrl(),
+            Lists.newArrayList());
     }
 
     @Bean
@@ -100,9 +132,15 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
             @Override
             public List<AlternateTypeRule> rules() {
-                return singletonList(newRule(resolver.resolve(Pageable.class), resolver.resolve(Page.class)));
+                return singletonList(newRule(resolver.resolve(Pageable.class), resolver.resolve(SwaggerPageable.class)));
             }
         };
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public UiConfiguration uiConfiguration() {
+        return UiConfigurationBuilder.builder().build();
     }
 
     @Override
@@ -111,7 +149,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
     }
 
     @ApiModel
-    static class Page {
+    static class SwaggerPageable {
         @ApiModelProperty(value = "当前页码", example = "0")
         private Integer page;
 
