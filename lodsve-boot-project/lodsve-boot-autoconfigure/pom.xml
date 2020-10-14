@@ -93,5 +93,17 @@
             <optional>true</optional>
         </dependency>
         <!-- rocketmq end -->
+        <!-- springfox start -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- springfox end -->
     </dependencies>
 </project>

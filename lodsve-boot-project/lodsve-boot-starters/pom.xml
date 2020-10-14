@@ -20,6 +20,7 @@
         <module>lodsve-boot-starter-mybatis</module>
         <module>lodsve-boot-starter-rdbms</module>
         <module>lodsve-boot-starter-rocketmq</module>
+        <module>lodsve-boot-starter-swagger</module>
     </modules>
 
     <properties>

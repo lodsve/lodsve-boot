@@ -62,6 +62,20 @@
             "sourceType": "com.lodsve.boot.autoconfigure.countdown.CountdownAutoConfiguration",
             "description": "Enable Redis Timer.",
             "defaultValue": false
+        },
+        {
+            "name": "lodsve.swagger.enabled",
+            "type": "java.lang.Boolean",
+            "sourceType": "com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration",
+            "description": "Enable Swagger.",
+            "defaultValue": true
+        },
+        {
+            "name": "lodsve.swagger.title",
+            "type": "java.lang.String",
+            "sourceType": "com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration",
+            "description": "Description For Swagger.",
+            "defaultValue": "Swagger的Rest接口文档"
         }
     ],
     "hints": [

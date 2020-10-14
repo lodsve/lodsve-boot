@@ -35,6 +35,7 @@
         <vjkit.version>1.0.5</vjkit.version>
         <druid.version>1.2.1</druid.version>
         <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
+        <springfox.swagger.version>2.9.2</springfox.swagger.version>
         <jasypt.spring.boot.starter.version>3.0.3</jasypt.spring.boot.starter.version>
     </properties>
 
@@ -206,6 +207,19 @@
             </dependency>
             <!-- rocketmq end -->
 
+            <!-- springfox start -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.swagger.version}</version>
+            </dependency>
+            <!-- springfox end -->
+
             <!-- lodsve boot start -->
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
@@ -265,6 +279,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-rocketmq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-swagger</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- lodsve boot end -->
