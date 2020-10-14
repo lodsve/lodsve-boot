@@ -74,7 +74,7 @@
             <optional>true</optional>
         </dependency>
         <!-- rdbms end -->
-        <!-- redis timer start -->
+        <!-- countdown start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-countdown</artifactId>
@@ -85,6 +85,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- redis timer end -->
+        <!-- countdown end -->
+        <!-- rocketmq start -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- rocketmq end -->
     </dependencies>
 </project>

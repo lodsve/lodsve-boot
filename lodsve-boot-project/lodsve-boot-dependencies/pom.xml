@@ -34,6 +34,7 @@
         <javassist.version>3.20.0-GA</javassist.version>
         <vjkit.version>1.0.5</vjkit.version>
         <druid.version>1.2.1</druid.version>
+        <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
         <jasypt.spring.boot.starter.version>3.0.3</jasypt.spring.boot.starter.version>
     </properties>
 
@@ -197,6 +198,14 @@
             </dependency>
             <!-- druid end -->
 
+            <!-- rocketmq start -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.spring.boot.starter.version}</version>
+            </dependency>
+            <!-- rocketmq end -->
+
             <!-- lodsve boot start -->
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
@@ -251,6 +260,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-countdown</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-rocketmq</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- lodsve boot end -->

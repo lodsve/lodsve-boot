@@ -14,11 +14,12 @@
     <name>lodsve boot starters</name>
 
     <modules>
+        <module>lodsve-boot-starter-countdown</module>
         <module>lodsve-boot-starter-filesystem-oss</module>
         <module>lodsve-boot-starter-filesystem-s3</module>
         <module>lodsve-boot-starter-mybatis</module>
         <module>lodsve-boot-starter-rdbms</module>
-        <module>lodsve-boot-starter-countdown</module>
+        <module>lodsve-boot-starter-rocketmq</module>
     </modules>
 
     <properties>
