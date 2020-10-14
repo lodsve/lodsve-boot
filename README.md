@@ -16,10 +16,10 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
 3. Blog: [Blog][] [OSChina][]
 
 ## License
-The `Lodsve Framework` is released under version 3.0 of the [GNU General Public License][].
+The `Lodsve Boot` is released under version 3.0 of the [GNU General Public License][].
 
 ## Thanks
-The `Lodsve Framework` was created using awesome [JetBrains IDEA][].
+The `Lodsve Boot` was created using awesome [JetBrains IDEA][].
 
 ![LOGO](.github/JetBrains.png "JetBrains")
 
