@@ -18,6 +18,7 @@
         <module>lodsve-boot-mybatis</module>
         <module>lodsve-boot-rdbms</module>
         <module>lodsve-boot-countdown</module>
+        <module>lodsve-boot-script</module>
     </modules>
 
     <properties>

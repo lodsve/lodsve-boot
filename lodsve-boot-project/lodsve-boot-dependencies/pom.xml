@@ -36,6 +36,9 @@
         <druid.version>1.2.1</druid.version>
         <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
+        <groovy.all.version>2.4.15</groovy.all.version>
+        <jruby.version>1.7.26</jruby.version>
+        <jyphon.version>2.7.1b3</jyphon.version>
         <jasypt.spring.boot.starter.version>3.0.3</jasypt.spring.boot.starter.version>
     </properties>
 
@@ -220,6 +223,24 @@
             </dependency>
             <!-- springfox end -->
 
+            <!-- other languages start -->
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jruby</groupId>
+                <artifactId>jruby</artifactId>
+                <version>${jruby.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.python</groupId>
+                <artifactId>jython-standalone</artifactId>
+                <version>${jyphon.version}</version>
+            </dependency>
+            <!-- other languages end -->
+
             <!-- lodsve boot start -->
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
@@ -249,6 +270,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-countdown</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-script</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -284,6 +310,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-swagger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-script</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- lodsve boot end -->
