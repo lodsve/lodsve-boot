@@ -24,6 +24,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -32,6 +33,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.data.domain.Pageable;
 import springfox.documentation.RequestHandler;
@@ -46,7 +48,7 @@ import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -61,11 +63,10 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
  */
 @Configuration
 @ConditionalOnWebApplication
-@EnableSwagger2
-@ConditionalOnMissingBean(Docket.class)
 @ConditionalOnProperty(name = "lodsve.swagger.enabled")
 @ConditionalOnClass(Docket.class)
 @EnableConfigurationProperties(SwaggerProperties.class)
+@Import({Swagger2DocumentationConfiguration.class})
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
     private final SwaggerProperties swaggerProperties;
     private BeanFactory beanFactory;
@@ -83,8 +84,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
     @ConditionalOnMissingBean(Docket.class)
     public Docket defaultDocket(ApiInfo apiInfo) {
         ApiSelectorBuilder builder = new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo)
-            .ignoredParameterTypes(Pageable.class).select();
+            .apiInfo(apiInfo).select();
 
         List<String> basePackages = AutoConfigurationPackages.get(beanFactory);
         if (CollectionUtils.isEmpty(basePackages)) {
@@ -122,22 +122,6 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
     }
 
     @Bean
-    @ConditionalOnClass(Pageable.class)
-    public AlternateTypeRuleConvention pageableConvention(final TypeResolver resolver) {
-        return new AlternateTypeRuleConvention() {
-            @Override
-            public int getOrder() {
-                return Ordered.HIGHEST_PRECEDENCE;
-            }
-
-            @Override
-            public List<AlternateTypeRule> rules() {
-                return singletonList(newRule(resolver.resolve(Pageable.class), resolver.resolve(SwaggerPageable.class)));
-            }
-        };
-    }
-
-    @Bean
     @ConditionalOnMissingBean
     public UiConfiguration uiConfiguration() {
         return UiConfigurationBuilder.builder().build();
@@ -148,39 +132,59 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
         this.beanFactory = beanFactory;
     }
 
-    @ApiModel
-    static class SwaggerPageable {
-        @ApiModelProperty(value = "当前页码", example = "0")
-        private Integer page;
+    @ConditionalOnClass(Pageable.class)
+    @Configuration
+    public static class SpringDataPageableSupportConfiguration {
+        @Bean
+        public AlternateTypeRuleConvention pageableConvention(ObjectProvider<TypeResolver> objectProvider) {
+            TypeResolver resolver = (null == objectProvider.getIfUnique() ? new TypeResolver() : objectProvider.getIfUnique());
+            return new AlternateTypeRuleConvention() {
+                @Override
+                public int getOrder() {
+                    return Ordered.HIGHEST_PRECEDENCE;
+                }
 
-        @ApiModelProperty(value = "每页记录数", example = "10")
-        private Integer size;
-
-        @ApiModelProperty(value = "排序,格式{字段名,ASC|DESC},可以多条记录")
-        private List<String> sort;
-
-        public Integer getPage() {
-            return page;
+                @Override
+                public List<AlternateTypeRule> rules() {
+                    return singletonList(newRule(resolver.resolve(Pageable.class), resolver.resolve(SwaggerPageable.class)));
+                }
+            };
         }
 
-        public void setPage(Integer page) {
-            this.page = page;
-        }
+        @ApiModel
+        static class SwaggerPageable {
+            @ApiModelProperty(value = "当前页码", example = "0")
+            private Integer page;
 
-        public Integer getSize() {
-            return size;
-        }
+            @ApiModelProperty(value = "每页记录数", example = "10")
+            private Integer size;
 
-        public void setSize(Integer size) {
-            this.size = size;
-        }
+            @ApiModelProperty(value = "排序,格式{字段名,ASC|DESC},可以多条记录")
+            private List<String> sort;
 
-        public List<String> getSort() {
-            return sort;
-        }
+            public Integer getPage() {
+                return page;
+            }
 
-        public void setSort(List<String> sort) {
-            this.sort = sort;
+            public void setPage(Integer page) {
+                this.page = page;
+            }
+
+            public Integer getSize() {
+                return size;
+            }
+
+            public void setSize(Integer size) {
+                this.size = size;
+            }
+
+            public List<String> getSort() {
+                return sort;
+            }
+
+            public void setSort(List<String> sort) {
+                this.sort = sort;
+            }
         }
     }
 }

@@ -68,7 +68,7 @@
             "type": "java.lang.Boolean",
             "sourceType": "com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration",
             "description": "Enable Swagger.",
-            "defaultValue": true
+            "defaultValue": false
         },
         {
             "name": "lodsve.swagger.title",

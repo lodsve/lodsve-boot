@@ -43,7 +43,12 @@ public class DynamicScriptEngineFactory {
     public static ScriptEngine getEngine(String scriptName) {
         Assert.notNull(scriptName, "类型不可为空!");
 
-        return SCRIPT_ENGINE.get(scriptName);
+        ScriptEngine engine = SCRIPT_ENGINE.get(scriptName);
+        if (null == engine) {
+            throw new UnsupportedOperationException(scriptName + " is not supported for Dynamic Script Language!");
+        }
+
+        return engine;
     }
 
     private void resolveEngine(List<ScriptEngine> engines) {

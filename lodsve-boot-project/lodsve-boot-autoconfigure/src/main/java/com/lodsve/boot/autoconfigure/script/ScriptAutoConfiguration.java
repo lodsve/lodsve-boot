@@ -17,9 +17,14 @@
 package com.lodsve.boot.autoconfigure.script;
 
 import com.lodsve.boot.script.*;
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
+import org.jruby.embed.jsr223.JRubyEngineFactory;
+import org.python.jsr223.PyScriptEngineFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.expression.ExpressionParser;
 
 import java.util.List;
 
@@ -36,33 +41,48 @@ public class ScriptAutoConfiguration {
         return new DynamicScriptEngineFactory(engines);
     }
 
-    @Bean
-    @ConditionalOnClass(name = "jdk.nashorn.api.scripting.NashornScriptEngineFactory")
-    public ScriptEngine javascript() {
-        return new JsScriptEngine();
+    @Configuration
+    @ConditionalOnClass(NashornScriptEngineFactory.class)
+    static class JavaScriptEngineConfiguration {
+        @Bean
+        public ScriptEngine javascript() {
+            return new JsScriptEngine();
+        }
     }
 
-    @Bean
-    @ConditionalOnClass(name = "org.python.jsr223.PyScriptEngineFactory")
-    public ScriptEngine python() {
-        return new PythonScriptEngine();
+    @Configuration
+    @ConditionalOnClass(PyScriptEngineFactory.class)
+    static class PythonEngineConfiguration {
+        @Bean
+        public ScriptEngine python() {
+            return new PythonScriptEngine();
+        }
     }
 
-    @Bean
-    @ConditionalOnClass(name = "org.codehaus.groovy.jsr223.GroovyScriptEngineFactory")
-    public ScriptEngine groovy() {
-        return new GroovyScriptEngine();
+    @Configuration
+    @ConditionalOnClass(GroovyScriptEngineFactory.class)
+    static class GroovyEngineConfiguration {
+        @Bean
+        public ScriptEngine groovy() {
+            return new GroovyScriptEngine();
+        }
     }
 
-    @Bean
-    @ConditionalOnClass(name = "org.jruby.embed.jsr223.JRubyEngineFactory")
-    public ScriptEngine ruby() {
-        return new RubyScriptEngine();
+    @Configuration
+    @ConditionalOnClass(JRubyEngineFactory.class)
+    static class RubyEngineConfiguration {
+        @Bean
+        public ScriptEngine ruby() {
+            return new RubyScriptEngine();
+        }
     }
 
-    @Bean
-    @ConditionalOnClass(name = "org.springframework.expression.ExpressionParser")
-    public ScriptEngine spel() {
-        return new SpelScriptEngine();
+    @Configuration
+    @ConditionalOnClass(ExpressionParser.class)
+    static class SpelEngineConfiguration {
+        @Bean
+        public ScriptEngine spel() {
+            return new SpelScriptEngine();
+        }
     }
 }
