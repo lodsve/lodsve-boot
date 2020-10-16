@@ -33,16 +33,14 @@ import java.io.PrintStream;
  */
 public class LodsveBootBanner implements Banner {
     private static final String[] DEFAULT_BANNER = new String[]{
-        "$$\\                      $$\\                                      $$$$$$$\\                       $$\\",
-        "$$ |                     $$ |                                     $$  __$$\\                      $$ |",
-        "$$ |      $$$$$$\\   $$$$$$$ | $$$$$$$\\ $$\\    $$\\  $$$$$$\\        $$ |  $$ | $$$$$$\\   $$$$$$\\ $$$$$$\\",
-        "$$ |     $$  __$$\\ $$  __$$ |$$  _____|\\$$\\  $$  |$$  __$$\\       $$$$$$$\\ |$$  __$$\\ $$  __$$\\\\_$$  _|",
-        "$$ |     $$ /  $$ |$$ /  $$ |\\$$$$$$\\   \\$$\\$$  / $$$$$$$$ |      $$  __$$\\ $$ /  $$ |$$ /  $$ | $$ |",
-        "$$ |     $$ |  $$ |$$ |  $$ | \\____$$\\   \\$$$  /  $$   ____|      $$ |  $$ |$$ |  $$ |$$ |  $$ | $$ |$$\\",
-        "$$$$$$$$\\$$$$$$  |\\$$$$$$$ |$$$$$$$  |   \\$  /   \\$$$$$$$\\       $$$$$$$  |\\$$$$$$  |\\$$$$$$  | \\$$$$  |",
-        "\\________|\\______/  \\_______|\\_______/     \\_/     \\_______|      \\_______/  \\______/  \\______/   \\____/"
+        " _               _                ______             _",
+        "| |             | |               | ___ \\           | |",
+        "| |     ___   __| |_____   _____  | |_/ / ___   ___ | |_",
+        "| |    / _ \\ / _` / __\\ \\ / / _ \\ | ___ \\/ _ \\ / _ \\| __|",
+        "| |___| (_) | (_| \\__ \\ V /  __/ | |_/ / (_) | (_) | |_",
+        "\\_____/\\___/ \\__,_|___/ \\_/ \\___| \\____/ \\___/ \\___/ \\__|"
     };
-    private static final int LINE_WIDTH = DEFAULT_BANNER[6].length();
+    private static final int LINE_WIDTH = DEFAULT_BANNER[3].length();
     private static final String LODSVE_DESCRIPTION = "Let our development of Spring very easy!";
     private static final String LODSVE_VERSION = " :: Lodsve Boot :: ";
     private static final String SPRING_BOOT_VERSION = " :: Spring Boot :: ";
@@ -51,10 +49,6 @@ public class LodsveBootBanner implements Banner {
 
     @Override
     public void printBanner(Environment environment, Class<?> sourceClass, PrintStream out) {
-        String builder = "Author: " + environment.getProperty("lodsve-boot.author");
-        StringBuilder blank1 = new StringBuilder();
-        fillBlank(LODSVE_DESCRIPTION.length() + builder.length(), blank1);
-
         String lodsveBootVersion = formatVersion(environment.getProperty("lodsve-boot.version"));
         StringBuilder blank2 = new StringBuilder();
         fillBlank(LODSVE_VERSION.length() + lodsveBootVersion.length(), blank2);
@@ -72,7 +66,8 @@ public class LodsveBootBanner implements Banner {
             out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, line, AnsiColor.DEFAULT));
         }
 
-        out.println("\n" + AnsiOutput.toString(AnsiColor.BLUE, LODSVE_DESCRIPTION, AnsiColor.RED, blank1.toString(), builder, AnsiColor.DEFAULT));
+        out.println("\n" + AnsiOutput.toString(AnsiColor.BLUE, LODSVE_DESCRIPTION, AnsiColor.DEFAULT));
+        out.println(AnsiOutput.toString(AnsiColor.BLUE, "Author: " + environment.getProperty("lodsve-boot.author"), AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, LODSVE_VERSION, AnsiColor.RED, blank2.toString(), lodsveBootVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_BOOT_VERSION, AnsiColor.RED, blank3.toString(), springBootVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_FRAMEWORK_VERSION, AnsiColor.RED, blank4.toString(), springFrameworkVersion, AnsiColor.DEFAULT));
