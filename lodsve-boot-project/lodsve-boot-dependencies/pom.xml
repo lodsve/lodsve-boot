@@ -279,6 +279,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-webmvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-filesystem-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -315,6 +320,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-script</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-webmvc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- lodsve boot end -->

@@ -5,4 +5,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.lodsve.boot.autoconfigure.countdown.CountdownAutoConfiguration, \
     com.lodsve.boot.autoconfigure.rocketmq.RocketMqAutoConfiguration, \
     com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration, \
-    com.lodsve.boot.autoconfigure.script.ScriptAutoConfiguration
+    com.lodsve.boot.autoconfigure.script.ScriptAutoConfiguration, \
+    com.lodsve.boot.autoconfigure.webmvc.WebMvcAutoConfiguration

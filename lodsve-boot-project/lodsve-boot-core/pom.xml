@@ -19,6 +19,7 @@
         <module>lodsve-boot-rdbms</module>
         <module>lodsve-boot-countdown</module>
         <module>lodsve-boot-script</module>
+        <module>lodsve-boot-webmvc</module>
     </modules>
 
     <properties>

@@ -76,6 +76,13 @@
             "sourceType": "com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration",
             "description": "Description For Swagger.",
             "defaultValue": "Swagger的Rest接口文档"
+        },
+        {
+            "name": "lodsve.web-mvc.is-debug",
+            "type": "java.lang.Boolean",
+            "sourceType": "com.lodsve.boot.autoconfigure.webmvc.WebMvcAutoConfiguration$LodsveWebDebugConfiguration",
+            "description": "是否开启打印web请求日志.",
+            "defaultValue": "false"
         }
     ],
     "hints": [

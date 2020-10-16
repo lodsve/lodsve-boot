@@ -132,5 +132,12 @@
             <optional>true</optional>
         </dependency>
         <!-- script end -->
+        <!-- webmvc start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-webmvc</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- webmvc end -->
     </dependencies>
 </project>
