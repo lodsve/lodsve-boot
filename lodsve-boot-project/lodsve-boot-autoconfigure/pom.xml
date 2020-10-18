@@ -139,5 +139,16 @@
             <optional>true</optional>
         </dependency>
         <!-- webmvc end -->
+        <!-- dynamic mongodb datasource start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <!-- dynamic mongodb datasource end -->
     </dependencies>
 </project>

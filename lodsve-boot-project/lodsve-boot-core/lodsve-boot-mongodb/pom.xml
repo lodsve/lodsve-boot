@@ -1,0 +1,35 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lodsve.boot</groupId>
+        <artifactId>lodsve-boot-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../lodsve-boot-core</relativePath>
+    </parent>
+
+    <artifactId>lodsve-boot-mongodb</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot mongodb</name>
+    <description>mongodb support</description>
+
+    <properties>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
+    </properties>
+
+    <dependencies>
+        <!-- required dependency -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- optional dependency -->
+    </dependencies>
+</project>
