@@ -15,10 +15,12 @@
 
     <modules>
         <module>lodsve-boot-starter-countdown</module>
+        <module>lodsve-boot-starter-encryption</module>
         <module>lodsve-boot-starter-filesystem-oss</module>
         <module>lodsve-boot-starter-filesystem-s3</module>
         <module>lodsve-boot-starter-mybatis</module>
         <module>lodsve-boot-starter-rdbms</module>
+        <module>lodsve-boot-starter-redis</module>
         <module>lodsve-boot-starter-rocketmq</module>
         <module>lodsve-boot-starter-script</module>
         <module>lodsve-boot-starter-swagger</module>

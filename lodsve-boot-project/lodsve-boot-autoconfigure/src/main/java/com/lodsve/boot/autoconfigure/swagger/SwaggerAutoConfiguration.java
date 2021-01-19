@@ -18,9 +18,12 @@ package com.lodsve.boot.autoconfigure.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.collect.Lists;
+import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.AuthConfig;
+import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.GlobalParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -39,11 +42,13 @@ import org.springframework.data.domain.Pageable;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.schema.AlternateTypeRuleConvention;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
+import springfox.documentation.schema.ScalarType;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
@@ -52,6 +57,7 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.singletonList;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
@@ -99,7 +105,29 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
             predicate = predicates.stream().reduce(x -> true, Predicate::or);
         }
 
-        return builder.apis(predicate).paths(PathSelectors.any()).build();
+        Docket docket = builder.apis(predicate).paths(PathSelectors.any()).build();
+        List<GlobalParameter> globalParameters = swaggerProperties.getGlobalParameters();
+        if (CollectionUtils.isNotEmpty(globalParameters)) {
+            List<RequestParameter> parameters = globalParameters.stream().map(gb -> new RequestParameterBuilder()
+                .name(gb.getName())
+                .description(gb.getDescription())
+                .required(gb.isRequired())
+                .in(ParameterType.from(gb.getScope()))
+                .query(q -> q.model(m -> m.scalarModel(ScalarType.from(gb.getType(), "").orElse(ScalarType.STRING))))
+                .build()).collect(Collectors.toList());
+            docket.globalRequestParameters(parameters);
+        }
+        AuthConfig authConfig = swaggerProperties.getAuth();
+        if (null != authConfig && authConfig.isEnabled() && StringUtils.isNoneBlank(authConfig.getKey())) {
+            List<SecurityScheme> securitySchemes = Lists.newArrayList(new ApiKey(authConfig.getKey(), authConfig.getKey(), "header"));
+            docket.securitySchemes(securitySchemes);
+
+            AuthorizationScope authorizationScope = new AuthorizationScope("global", "authorization");
+            List<SecurityReference> securityReferences = Lists.newArrayList(new SecurityReference(authConfig.getKey(), new AuthorizationScope[]{authorizationScope}));
+            List<SecurityContext> securityContexts = Lists.newArrayList(SecurityContext.builder().securityReferences(securityReferences).forPaths(PathSelectors.any()).build());
+            docket.securityContexts(securityContexts);
+        }
+        return docket;
     }
 
     @Bean

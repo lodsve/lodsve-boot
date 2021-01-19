@@ -19,6 +19,8 @@ package com.lodsve.boot.autoconfigure.swagger;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
+
 /**
  * swagger配置.
  *
@@ -55,6 +57,14 @@ public class SwaggerProperties {
      * 项目联系人
      */
     private Contact contact;
+    /**
+     * 全局变量
+     */
+    private List<GlobalParameter> globalParameters;
+    /**
+     * 认证配置，目前仅支持header传参
+     */
+    private AuthConfig auth;
 
     @Data
     public static class Contact {
@@ -70,5 +80,42 @@ public class SwaggerProperties {
          * 项目联系人邮箱
          */
         private String email;
+    }
+
+    @Data
+    public static class GlobalParameter {
+        /**
+         * 参数名称
+         */
+        private String name;
+        /**
+         * 参数描述
+         */
+        private String description;
+        /**
+         * 参数类型<p/>
+         * integer/string/boolean/number/object
+         */
+        private String type;
+        /**
+         * 参数位置[query/header/path/cookie/form/formData/body]
+         */
+        private String scope;
+        /**
+         * 是否必填
+         */
+        private boolean required;
+    }
+
+    @Data
+    public static class AuthConfig {
+        /**
+         * 是否启用认证
+         */
+        private boolean enabled;
+        /**
+         * 认证的key名称
+         */
+        private String key;
     }
 }

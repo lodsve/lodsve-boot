@@ -14,10 +14,11 @@
     <name>lodsve boot core</name>
 
     <modules>
+        <module>lodsve-boot-countdown</module>
         <module>lodsve-boot-filesystem</module>
         <module>lodsve-boot-mybatis</module>
         <module>lodsve-boot-rdbms</module>
-        <module>lodsve-boot-countdown</module>
+        <module>lodsve-boot-redis</module>
         <module>lodsve-boot-script</module>
         <module>lodsve-boot-webmvc</module>
     </modules>

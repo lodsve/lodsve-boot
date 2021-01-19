@@ -139,5 +139,17 @@
             <optional>true</optional>
         </dependency>
         <!-- webmvc end -->
+        <!-- redis start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- redis end -->
     </dependencies>
 </project>

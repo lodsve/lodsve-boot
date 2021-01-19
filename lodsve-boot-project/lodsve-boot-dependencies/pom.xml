@@ -269,6 +269,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-countdown</artifactId>
                 <version>${project.version}</version>
             </dependency>
