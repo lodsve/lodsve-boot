@@ -18,5 +18,4 @@ com.lodsve.boot.autoconfigure.env.EnvironmentCustomizer=\
   com.lodsve.boot.autoconfigure.env.DisabledSpringRedisAutoConfig,\
   com.lodsve.boot.autoconfigure.env.LodsveVersionEnvironmentCustomizer,\
   com.lodsve.boot.autoconfigure.env.HealthProbesEnvironmentCustomizer,\
-  com.lodsve.boot.autoconfigure.env.HttpMessageConverterEnvironmentCustomizer,\
-  com.lodsve.boot.autoconfigure.env.MybatisPlusEnvironmentCustomizer
+  com.lodsve.boot.autoconfigure.env.HttpMessageConverterEnvironmentCustomizer

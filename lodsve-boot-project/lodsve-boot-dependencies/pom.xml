@@ -39,7 +39,7 @@
         <groovy.all.version>2.4.15</groovy.all.version>
         <jruby.version>1.7.26</jruby.version>
         <jyphon.version>2.7.1b3</jyphon.version>
-        <jasypt.spring.boot.starter.version>3.0.3</jasypt.spring.boot.starter.version>
+        <jasypt.version>1.9.3</jasypt.version>
     </properties>
 
     <dependencyManagement>
@@ -187,9 +187,9 @@
 
             <!-- jasypt start -->
             <dependency>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>${jasypt.spring.boot.starter.version}</version>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
             <!-- jasypt end -->
 

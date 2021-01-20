@@ -151,5 +151,12 @@
             <optional>true</optional>
         </dependency>
         <!-- redis end -->
+        <!-- encryption start -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- encryption end -->
     </dependencies>
 </project>

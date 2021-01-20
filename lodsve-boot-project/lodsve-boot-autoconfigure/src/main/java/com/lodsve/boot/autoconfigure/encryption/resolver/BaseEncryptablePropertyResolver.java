@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
 
 /**
- * .
+ * 解密公共部分.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
