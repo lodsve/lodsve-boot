@@ -254,6 +254,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-countdown</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-filesystem</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -274,17 +279,22 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-countdown</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-script</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-webmvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-countdown</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-encryption</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -309,7 +319,7 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-starter-countdown</artifactId>
+                <artifactId>lodsve-boot-starter-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -319,12 +329,12 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-starter-swagger</artifactId>
+                <artifactId>lodsve-boot-starter-script</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-starter-script</artifactId>
+                <artifactId>lodsve-boot-starter-swagger</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
