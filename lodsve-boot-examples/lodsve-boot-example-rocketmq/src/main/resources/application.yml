@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mybatis
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+# rocketmq
+rocketmq:
+  # name-server地址，用来查找broker
+  name-server: xxxxx
+  producer:
+    # 生产者group
+    group: DefaultProducer
+    send-message-timeout: 300000
+
+lodsve:
+  rocketmq:
+    charset: UTF-8
+    consumer:
+      group: DefaultConsumer
+      consume-thread-min: 20
+      consume-thread-max: 64

@@ -1,0 +1,34 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lodsve.boot</groupId>
+        <artifactId>lodsve-boot-build</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>lodsve-boot-examples</artifactId>
+    <packaging>pom</packaging>
+    <name>lodsve boot examples</name>
+
+    <properties>
+        <main.user.dir>${basedir}/..</main.user.dir>
+
+        <!-- 基本属性 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+    </properties>
+
+    <modules>
+        <module>lodsve-boot-example-filesystem</module>
+        <module>lodsve-boot-example-mybatis</module>
+        <module>lodsve-boot-example-countdown</module>
+        <module>lodsve-boot-example-rocketmq</module>
+        <module>lodsve-boot-example-script</module>
+        <module>lodsve-boot-example-webmvc</module>
+        <module>lodsve-boot-example-mongodb</module>
+    </modules>
+
+</project>
