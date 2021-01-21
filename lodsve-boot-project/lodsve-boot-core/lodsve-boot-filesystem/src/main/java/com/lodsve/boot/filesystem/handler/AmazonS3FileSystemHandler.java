@@ -158,7 +158,7 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
                 return CannedAccessControlList.PublicReadWrite;
             case DEFAULT:
             default:
-                return CannedAccessControlList.BucketOwnerFullControl;
+                return CannedAccessControlList.AuthenticatedRead;
         }
     }
 }
