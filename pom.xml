@@ -196,7 +196,7 @@
                 </executions>
                 <configuration>
                     <quiet>false</quiet>
-                    <header>${main.user.dir}/.mvn/HEADER</header>
+                    <header>${main.user.dir}/tools/HEADER</header>
                     <excludes>
                         <exclude>*.sh</exclude>
                         <exclude>.gitignore</exclude>
