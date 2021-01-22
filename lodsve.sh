@@ -16,19 +16,19 @@ help(){
 
 
 # Start
-./.mvn/logo.sh
+./tools/logo.sh
 case "$1" in
   'versions')
-    ./.mvn/versions.sh $2
+    ./tools/versions.sh $2
 	;;
   'deployOss')
-    ./.mvn/deploy.sh release-oss $2
+    ./tools/deploy.sh release-oss $2
 	;;
   'deployGithub')
-    ./.mvn/deploy.sh release-github $2
+    ./tools/deploy.sh release-github $2
 	;;
   'deployThirdParty')
-    ./.mvn/deploy.sh release-third-party $2
+    ./tools/deploy.sh release-third-party $2
 	;;
   *)
     help
