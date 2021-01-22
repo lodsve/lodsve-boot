@@ -16,19 +16,19 @@ help(){
 
 
 # Start
-./tools/logo.sh
+sh ./tools/logo.sh
 case "$1" in
   'versions')
-    ./tools/versions.sh $2
+    sh ./tools/versions.sh $2
 	;;
   'deployOss')
-    ./tools/deploy.sh release-oss $2
+    sh ./tools/deploy.sh release-oss $2
 	;;
   'deployGithub')
-    ./tools/deploy.sh release-github $2
+    sh ./tools/deploy.sh release-github $2
 	;;
   'deployThirdParty')
-    ./tools/deploy.sh release-third-party $2
+    sh ./tools/deploy.sh release-third-party $2
 	;;
   *)
     help
