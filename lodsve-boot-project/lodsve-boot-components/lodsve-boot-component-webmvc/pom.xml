@@ -4,14 +4,14 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-core</artifactId>
+        <artifactId>lodsve-boot-components</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../lodsve-boot-core</relativePath>
+        <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-webmvc</artifactId>
+    <artifactId>lodsve-boot-component-webmvc</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot webmvc</name>
+    <name>lodsve boot component webmvc</name>
     <description>lodsve-webmvc for enhance spring-webmvc</description>
 
     <properties>

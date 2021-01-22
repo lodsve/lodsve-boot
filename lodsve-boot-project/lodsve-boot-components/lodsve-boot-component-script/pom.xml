@@ -4,14 +4,14 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-core</artifactId>
+        <artifactId>lodsve-boot-components</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../lodsve-boot-core</relativePath>
+        <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-script</artifactId>
+    <artifactId>lodsve-boot-component-script</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot script</name>
+    <name>lodsve boot component script</name>
     <description>Script language support</description>
 
     <properties>

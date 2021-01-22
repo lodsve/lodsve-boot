@@ -4,47 +4,40 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-core</artifactId>
+        <artifactId>lodsve-boot-components</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../lodsve-boot-core</relativePath>
+        <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-filesystem</artifactId>
+    <artifactId>lodsve-boot-component-redis</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot filesystem</name>
-    <description>Manage oss/aws s3/...</description>
+    <name>lodsve boot component redis</name>
+    <description>redis component</description>
 
     <properties>
         <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>compile</scope>
-        </dependency>
+        <!-- required dependency -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-
-        <!-- optional dependency -->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <optional>true</optional>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <optional>true</optional>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
+        <!-- lodsve -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot</artifactId>

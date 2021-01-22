@@ -254,37 +254,37 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-countdown</artifactId>
+                <artifactId>lodsve-boot-component-countdown</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-filesystem</artifactId>
+                <artifactId>lodsve-boot-component-filesystem</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-mybatis</artifactId>
+                <artifactId>lodsve-boot-component-mybatis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-rdbms</artifactId>
+                <artifactId>lodsve-boot-component-rdbms</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-redis</artifactId>
+                <artifactId>lodsve-boot-component-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-script</artifactId>
+                <artifactId>lodsve-boot-component-script</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
-                <artifactId>lodsve-boot-webmvc</artifactId>
+                <artifactId>lodsve-boot-component-webmvc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

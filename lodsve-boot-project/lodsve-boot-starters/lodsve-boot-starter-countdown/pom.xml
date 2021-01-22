@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-countdown</artifactId>
+            <artifactId>lodsve-boot-component-countdown</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

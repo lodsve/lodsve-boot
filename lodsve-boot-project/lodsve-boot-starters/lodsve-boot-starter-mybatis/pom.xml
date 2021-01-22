@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-mybatis</artifactId>
+            <artifactId>lodsve-boot-component-mybatis</artifactId>
         </dependency>
     </dependencies>
 

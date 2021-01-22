@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-script</artifactId>
+            <artifactId>lodsve-boot-component-script</artifactId>
         </dependency>
     </dependencies>
 

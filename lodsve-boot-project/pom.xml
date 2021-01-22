@@ -20,7 +20,7 @@
     <modules>
         <module>lodsve-boot</module>
         <module>lodsve-boot-autoconfigure</module>
-        <module>lodsve-boot-core</module>
+        <module>lodsve-boot-components</module>
         <module>lodsve-boot-dependencies</module>
         <module>lodsve-boot-parent</module>
         <module>lodsve-boot-starters</module>

@@ -9,18 +9,18 @@
         <relativePath>../lodsve-boot-parent</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-core</artifactId>
+    <artifactId>lodsve-boot-components</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot core</name>
+    <name>lodsve boot components</name>
 
     <modules>
-        <module>lodsve-boot-countdown</module>
-        <module>lodsve-boot-filesystem</module>
-        <module>lodsve-boot-mybatis</module>
-        <module>lodsve-boot-rdbms</module>
-        <module>lodsve-boot-redis</module>
-        <module>lodsve-boot-script</module>
-        <module>lodsve-boot-webmvc</module>
+        <module>lodsve-boot-component-countdown</module>
+        <module>lodsve-boot-component-filesystem</module>
+        <module>lodsve-boot-component-mybatis</module>
+        <module>lodsve-boot-component-rdbms</module>
+        <module>lodsve-boot-component-redis</module>
+        <module>lodsve-boot-component-script</module>
+        <module>lodsve-boot-component-webmvc</module>
     </modules>
 
     <properties>

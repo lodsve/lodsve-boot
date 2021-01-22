@@ -31,7 +31,7 @@
         <!-- filesystem start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-filesystem</artifactId>
+            <artifactId>lodsve-boot-component-filesystem</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -48,14 +48,14 @@
         <!-- mybatis start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-mybatis</artifactId>
+            <artifactId>lodsve-boot-component-mybatis</artifactId>
             <optional>true</optional>
         </dependency>
         <!-- mybatis end -->
         <!-- rdbms start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-rdbms</artifactId>
+            <artifactId>lodsve-boot-component-rdbms</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -77,7 +77,7 @@
         <!-- countdown start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-countdown</artifactId>
+            <artifactId>lodsve-boot-component-countdown</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -113,7 +113,7 @@
         <!-- script start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-script</artifactId>
+            <artifactId>lodsve-boot-component-script</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -135,14 +135,14 @@
         <!-- webmvc start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-webmvc</artifactId>
+            <artifactId>lodsve-boot-component-webmvc</artifactId>
             <optional>true</optional>
         </dependency>
         <!-- webmvc end -->
         <!-- redis start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-redis</artifactId>
+            <artifactId>lodsve-boot-component-redis</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>

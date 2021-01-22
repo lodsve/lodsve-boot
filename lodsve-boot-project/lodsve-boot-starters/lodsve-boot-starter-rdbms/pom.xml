@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-rdbms</artifactId>
+            <artifactId>lodsve-boot-component-rdbms</artifactId>
         </dependency>
         <!-- 连接池 -->
         <dependency>

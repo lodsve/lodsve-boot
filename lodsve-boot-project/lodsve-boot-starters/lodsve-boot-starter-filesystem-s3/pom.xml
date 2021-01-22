@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-filesystem</artifactId>
+            <artifactId>lodsve-boot-component-filesystem</artifactId>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>

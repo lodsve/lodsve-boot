@@ -4,14 +4,14 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-core</artifactId>
+        <artifactId>lodsve-boot-components</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../lodsve-boot-core</relativePath>
+        <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-countdown</artifactId>
+    <artifactId>lodsve-boot-component-countdown</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot countdown</name>
+    <name>lodsve boot component countdown</name>
     <description>Countdown via redis key expired callback</description>
 
     <properties>
