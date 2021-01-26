@@ -1,18 +1,7 @@
 /*
- * Copyright © 2020 Sun.Hao(https://www.crazy-coder.cn/)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2019, All rights Reserved, Designed By Technology Middle Platform
+ * @Copyright: 2020 www.oppo.com Inc. All rights reserved.
+ * 注意：本内容仅限于OPPO公司内部传阅，禁止外泄以及用于其他的商业目的
  */
 package com.lodsve.boot.autoconfigure.redis;
 
@@ -20,14 +9,15 @@ import com.google.common.collect.Maps;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.*;
 import com.lodsve.boot.redis.dynamic.DynamicLettuceConnectionFactory;
 import io.lettuce.core.ClientOptions;
+import io.lettuce.core.RedisClient;
 import io.lettuce.core.TimeoutOptions;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.LettuceClientConfigurationBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -51,11 +41,12 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-@Configuration
-public class DynamicConnectionConfiguration extends AbstractRedisConnectionConfiguration {
-    protected DynamicConnectionConfiguration(ObjectProvider<RedisProperties> properties,
-                                             ObjectProvider<RedisSentinelConfiguration> sentinelConfigurationProvider,
-                                             ObjectProvider<RedisClusterConfiguration> clusterConfigurationProvider) {
+@Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(RedisClient.class)
+public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnectionConfiguration {
+    protected DynamicLettuceConnectionConfiguration(ObjectProvider<RedisProperties> properties,
+                                                    ObjectProvider<RedisSentinelConfiguration> sentinelConfigurationProvider,
+                                                    ObjectProvider<RedisClusterConfiguration> clusterConfigurationProvider) {
         super(properties, sentinelConfigurationProvider, clusterConfigurationProvider);
     }
 
@@ -114,7 +105,7 @@ public class DynamicConnectionConfiguration extends AbstractRedisConnectionConfi
             if (0 == index.getAndIncrement()) {
                 defaultName.set(key);
             }
-
+            value.setShareNativeConnection(getProperties().isShareNativeConnection());
             value.afterPropertiesSet();
         });
 
@@ -168,18 +159,6 @@ public class DynamicConnectionConfiguration extends AbstractRedisConnectionConfi
         }
 
         return factories;
-    }
-
-    private boolean isDynamicSentinelConnection(Map<String, Sentinel> sentinels) {
-        return MapUtils.isNotEmpty(sentinels);
-    }
-
-    private boolean isDynamicClusterConnection(Map<String, Cluster> clusters) {
-        return MapUtils.isNotEmpty(clusters);
-    }
-
-    private boolean isDynamicSingletonConnection(Map<String, Singleton> singletons) {
-        return MapUtils.isNotEmpty(singletons);
     }
 
     private LettuceClientConfiguration getLettuceClientConfiguration(ObjectProvider<LettuceClientConfigurationBuilderCustomizer> builderCustomizers, ClientResources clientResources, Pool pool) {

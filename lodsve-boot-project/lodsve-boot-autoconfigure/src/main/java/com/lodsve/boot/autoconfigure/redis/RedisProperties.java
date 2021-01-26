@@ -16,6 +16,7 @@
  */
 package com.lodsve.boot.autoconfigure.redis;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -28,6 +29,7 @@ import java.util.Map;
  *
  * @author sunhao(hulk)
  */
+@Data
 @ConfigurationProperties("lodsve.redis")
 public class RedisProperties {
     /**
@@ -94,6 +96,11 @@ public class RedisProperties {
     @NestedConfigurationProperty
     private Map<String, Cluster> clusters;
 
+    /**
+     * 表示多个LettuceConnection将共享一个native connection
+     */
+    private boolean shareNativeConnection = true;
+
     private final Jedis jedis = new Jedis();
 
     private final Lettuce lettuce = new Lettuce();
@@ -106,145 +113,10 @@ public class RedisProperties {
      */
     private long defaultExpiration = 0;
 
-    public int getDatabase() {
-        return database;
-    }
-
-    public void setDatabase(int database) {
-        this.database = database;
-    }
-
-    public String getDefaultName() {
-        return defaultName;
-    }
-
-    public void setDefaultName(String defaultName) {
-        this.defaultName = defaultName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public boolean isSsl() {
-        return ssl;
-    }
-
-    public void setSsl(boolean ssl) {
-        this.ssl = ssl;
-    }
-
-    public Duration getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(Duration timeout) {
-        this.timeout = timeout;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public Sentinel getSentinel() {
-        return sentinel;
-    }
-
-    public void setSentinel(Sentinel sentinel) {
-        this.sentinel = sentinel;
-    }
-
-    public Cluster getCluster() {
-        return cluster;
-    }
-
-    public void setCluster(Cluster cluster) {
-        this.cluster = cluster;
-    }
-
-    public Map<String, Singleton> getSingletons() {
-        return singletons;
-    }
-
-    public void setSingletons(Map<String, Singleton> singletons) {
-        this.singletons = singletons;
-    }
-
-    public Map<String, Sentinel> getSentinels() {
-        return sentinels;
-    }
-
-    public void setSentinels(Map<String, Sentinel> sentinels) {
-        this.sentinels = sentinels;
-    }
-
-    public Map<String, Cluster> getClusters() {
-        return clusters;
-    }
-
-    public void setClusters(Map<String, Cluster> clusters) {
-        this.clusters = clusters;
-    }
-
-    public Jedis getJedis() {
-        return jedis;
-    }
-
-    public Lettuce getLettuce() {
-        return lettuce;
-    }
-
-    public Map<String, Long> getKeyTtl() {
-        return keyTtl;
-    }
-
-    public void setKeyTtl(Map<String, Long> keyTtl) {
-        this.keyTtl = keyTtl;
-    }
-
-    public long getDefaultExpiration() {
-        return defaultExpiration;
-    }
-
-    public void setDefaultExpiration(long defaultExpiration) {
-        this.defaultExpiration = defaultExpiration;
-    }
-
     /**
      * Pool properties.
      */
+    @Data
     public static class Pool {
 
         /**
@@ -278,52 +150,12 @@ public class RedisProperties {
          * object evictor thread starts, otherwise no idle object eviction is performed.
          */
         private Duration timeBetweenEvictionRuns;
-
-        public int getMaxIdle() {
-            return this.maxIdle;
-        }
-
-        public void setMaxIdle(int maxIdle) {
-            this.maxIdle = maxIdle;
-        }
-
-        public int getMinIdle() {
-            return this.minIdle;
-        }
-
-        public void setMinIdle(int minIdle) {
-            this.minIdle = minIdle;
-        }
-
-        public int getMaxActive() {
-            return this.maxActive;
-        }
-
-        public void setMaxActive(int maxActive) {
-            this.maxActive = maxActive;
-        }
-
-        public Duration getMaxWait() {
-            return this.maxWait;
-        }
-
-        public void setMaxWait(Duration maxWait) {
-            this.maxWait = maxWait;
-        }
-
-        public Duration getTimeBetweenEvictionRuns() {
-            return this.timeBetweenEvictionRuns;
-        }
-
-        public void setTimeBetweenEvictionRuns(Duration timeBetweenEvictionRuns) {
-            this.timeBetweenEvictionRuns = timeBetweenEvictionRuns;
-        }
-
     }
 
     /**
      * Cluster properties.
      */
+    @Data
     public static class Cluster {
 
         /**
@@ -342,36 +174,12 @@ public class RedisProperties {
          * cluster.
          */
         private Integer maxRedirects;
-
-        public List<String> getNodes() {
-            return this.nodes;
-        }
-
-        public void setNodes(List<String> nodes) {
-            this.nodes = nodes;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Integer getMaxRedirects() {
-            return this.maxRedirects;
-        }
-
-        public void setMaxRedirects(Integer maxRedirects) {
-            this.maxRedirects = maxRedirects;
-        }
-
     }
 
     /**
      * Redis sentinel properties.
      */
+    @Data
     public static class Sentinel {
 
         /**
@@ -388,56 +196,24 @@ public class RedisProperties {
          * Password for authenticating with sentinel(s).
          */
         private String password;
-
-        public String getMaster() {
-            return this.master;
-        }
-
-        public void setMaster(String master) {
-            this.master = master;
-        }
-
-        public List<String> getNodes() {
-            return this.nodes;
-        }
-
-        public void setNodes(List<String> nodes) {
-            this.nodes = nodes;
-        }
-
-        public String getPassword() {
-            return this.password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
     }
 
     /**
      * Jedis client properties.
      */
+    @Data
     public static class Jedis {
 
         /**
          * Jedis pool configuration.
          */
         private Pool pool;
-
-        public Pool getPool() {
-            return this.pool;
-        }
-
-        public void setPool(Pool pool) {
-            this.pool = pool;
-        }
-
     }
 
     /**
      * Lettuce client properties.
      */
+    @Data
     public static class Lettuce {
 
         /**
@@ -452,34 +228,12 @@ public class RedisProperties {
 
         private final Cluster cluster = new Cluster();
 
-        public Duration getShutdownTimeout() {
-            return this.shutdownTimeout;
-        }
-
-        public void setShutdownTimeout(Duration shutdownTimeout) {
-            this.shutdownTimeout = shutdownTimeout;
-        }
-
-        public Pool getPool() {
-            return this.pool;
-        }
-
-        public void setPool(Pool pool) {
-            this.pool = pool;
-        }
-
-        public Cluster getCluster() {
-            return this.cluster;
-        }
-
+        @Data
         public static class Cluster {
 
             private final Refresh refresh = new Refresh();
 
-            public Refresh getRefresh() {
-                return this.refresh;
-            }
-
+            @Data
             public static class Refresh {
 
                 /**
@@ -492,29 +246,13 @@ public class RedisProperties {
                  * triggers should be used.
                  */
                 private boolean adaptive;
-
-                public Duration getPeriod() {
-                    return this.period;
-                }
-
-                public void setPeriod(Duration period) {
-                    this.period = period;
-                }
-
-                public boolean isAdaptive() {
-                    return this.adaptive;
-                }
-
-                public void setAdaptive(boolean adaptive) {
-                    this.adaptive = adaptive;
-                }
-
             }
 
         }
 
     }
 
+    @Data
     public static class Singleton {
         /**
          * Redis server host.
@@ -534,37 +272,5 @@ public class RedisProperties {
          * 数据库索引
          */
         private int database = 0;
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public int getPort() {
-            return port;
-        }
-
-        public void setPort(int port) {
-            this.port = port;
-        }
-
-        public int getDatabase() {
-            return database;
-        }
-
-        public void setDatabase(int database) {
-            this.database = database;
-        }
     }
 }

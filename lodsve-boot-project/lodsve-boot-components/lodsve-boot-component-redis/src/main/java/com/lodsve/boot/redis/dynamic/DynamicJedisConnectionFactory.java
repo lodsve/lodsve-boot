@@ -17,60 +17,51 @@
 package com.lodsve.boot.redis.dynamic;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.*;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.RedisClusterConnection;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisSentinelConnection;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 
 import java.util.Map;
 
 /**
- * 多数据源对Lettuce的支持.
+ * 多数据源对jedis的支持.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-public class DynamicLettuceConnectionFactory extends AbstractDynamicConnectionFactory<LettuceConnectionFactory> implements RedisConnectionFactory, ReactiveRedisConnectionFactory {
-    public DynamicLettuceConnectionFactory(String defaultConnectionFactoryName, Map<String, LettuceConnectionFactory> connectionFactories) {
+public class DynamicJedisConnectionFactory extends AbstractDynamicConnectionFactory<JedisConnectionFactory> implements RedisConnectionFactory {
+    public DynamicJedisConnectionFactory(String defaultConnectionFactoryName, Map<String, JedisConnectionFactory> connectionFactories) {
         super(defaultConnectionFactoryName, connectionFactories);
     }
 
     @Override
-    public ReactiveRedisConnection getReactiveConnection() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
-        return connectionFactory.getReactiveConnection();
-    }
-
-    @Override
-    public ReactiveRedisClusterConnection getReactiveClusterConnection() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
-        return connectionFactory.getReactiveClusterConnection();
-    }
-
-    @Override
     public RedisConnection getConnection() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
+        JedisConnectionFactory connectionFactory = getRealConnectionFactory();
         return connectionFactory.getConnection();
     }
 
     @Override
     public RedisClusterConnection getClusterConnection() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
+        JedisConnectionFactory connectionFactory = getRealConnectionFactory();
         return connectionFactory.getClusterConnection();
     }
 
     @Override
     public boolean getConvertPipelineAndTxResults() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
+        JedisConnectionFactory connectionFactory = getRealConnectionFactory();
         return connectionFactory.getConvertPipelineAndTxResults();
     }
 
     @Override
     public RedisSentinelConnection getSentinelConnection() {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
+        JedisConnectionFactory connectionFactory = getRealConnectionFactory();
         return connectionFactory.getSentinelConnection();
     }
 
     @Override
-    public DataAccessException translateExceptionIfPossible(RuntimeException e) {
-        LettuceConnectionFactory connectionFactory = getRealConnectionFactory();
-        return connectionFactory.translateExceptionIfPossible(e);
+    public DataAccessException translateExceptionIfPossible(RuntimeException ex) {
+        JedisConnectionFactory connectionFactory = getRealConnectionFactory();
+        return connectionFactory.translateExceptionIfPossible(ex);
     }
 }

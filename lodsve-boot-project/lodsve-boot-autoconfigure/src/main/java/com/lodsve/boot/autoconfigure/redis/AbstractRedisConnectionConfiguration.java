@@ -1,23 +1,14 @@
 /*
- * Copyright © 2020 Sun.Hao(https://www.crazy-coder.cn/)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2019, All rights Reserved, Designed By Technology Middle Platform
+ * @Copyright: 2020 www.oppo.com Inc. All rights reserved.
+ * 注意：本内容仅限于OPPO公司内部传阅，禁止外泄以及用于其他的商业目的
  */
 package com.lodsve.boot.autoconfigure.redis;
 
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.Cluster;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.Sentinel;
+import com.lodsve.boot.autoconfigure.redis.RedisProperties.Singleton;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.redis.connection.*;
 import org.springframework.util.Assert;
@@ -27,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Base Redis connection configuration.
@@ -158,6 +150,18 @@ public abstract class AbstractRedisConnectionConfiguration {
         } catch (URISyntaxException ex) {
             throw new RedisUrlSyntaxException(url, ex);
         }
+    }
+
+    protected boolean isDynamicSentinelConnection(Map<String, Sentinel> sentinels) {
+        return MapUtils.isNotEmpty(sentinels);
+    }
+
+    protected boolean isDynamicClusterConnection(Map<String, Cluster> clusters) {
+        return MapUtils.isNotEmpty(clusters);
+    }
+
+    protected boolean isDynamicSingletonConnection(Map<String, Singleton> singletons) {
+        return MapUtils.isNotEmpty(singletons);
     }
 
     static class ConnectionInfo {

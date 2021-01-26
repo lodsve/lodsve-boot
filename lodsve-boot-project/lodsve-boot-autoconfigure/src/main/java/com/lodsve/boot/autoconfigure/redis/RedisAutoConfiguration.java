@@ -43,7 +43,7 @@ import java.net.UnknownHostException;
 @Configuration
 @EnableConfigurationProperties(RedisProperties.class)
 @ConditionalOnClass({RedisOperations.class, DynamicLettuceConnectionFactory.class})
-@Import({DynamicConnectionConfiguration.class, RedisSerializerConfiguration.class, RedisCacheManagerConfiguration.class})
+@Import({DynamicLettuceConnectionConfiguration.class, DynamicJedisConnectionConfiguration.class, RedisSerializerConfiguration.class, RedisCacheManagerConfiguration.class})
 public class RedisAutoConfiguration {
     /**
      * 重写Redis序列化方式，使用Json方式:
