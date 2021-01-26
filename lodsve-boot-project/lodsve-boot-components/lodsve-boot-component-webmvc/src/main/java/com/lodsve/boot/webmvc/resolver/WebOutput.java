@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.webmvc.resolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lodsve.boot.json.JsonConverter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -32,17 +32,17 @@ import java.util.Map;
  */
 public class WebOutput {
     private final HttpServletResponse response;
-    private final ObjectMapper objectMapper;
+    private final JsonConverter jsonConverter;
 
     /**
      * 构造函数
      *
      * @param response
-     * @param objectMapper
+     * @param jsonConverter
      */
-    public WebOutput(HttpServletResponse response, ObjectMapper objectMapper) {
+    public WebOutput(HttpServletResponse response, JsonConverter jsonConverter) {
         this.response = response;
-        this.objectMapper = objectMapper;
+        this.jsonConverter = jsonConverter;
     }
 
     public HttpServletResponse getResponse() {
@@ -88,7 +88,7 @@ public class WebOutput {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
 
-        write(objectMapper.writeValueAsString(params));
+        write(jsonConverter.toJson(params));
     }
 
     /**
@@ -102,7 +102,7 @@ public class WebOutput {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
 
-        write(objectMapper.writeValueAsString(params));
+        write(jsonConverter.toJson(params));
     }
 
     public void write(String content) throws Exception {

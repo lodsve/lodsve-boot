@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.lodsve.boot.webmvc.json;
+package com.lodsve.boot.json.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.lodsve.boot.bean.Codeable;
 import com.lodsve.boot.utils.EnumUtils;
-import com.lodsve.boot.utils.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.io.IOException;
@@ -49,31 +49,18 @@ public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {
         }
 
         if (!Codeable.class.isAssignableFrom(clazz)) {
-            return getEnumByOrdinal(clazz, value);
+            if (NumberUtils.isCreatable(value)) {
+                return EnumUtils.evalByOrdinal(clazz, NumberUtils.createInteger(value));
+            } else {
+                return Enum.valueOf(clazz, value);
+            }
         }
 
         // 优先根据codeable去获取
-        Enum<?> result = getEnumFromCodeable(clazz, value);
-        if (null != result) {
-            return result;
-        }
-
-        try {
-            // 根据枚举名称
-            result = EnumUtils.getEnumByName(clazz, value);
-        } catch (Exception e) {
-            // 根据Ordinal
-            result = getEnumByOrdinal(clazz, value);
-        }
-
-        return result;
+        return getEnumFromCodeable(clazz, value);
     }
 
-    @Override
-    public Class<?> handledType() {
-        return Enum.class;
-    }
-
+    @SuppressWarnings("unchecked")
     private <T extends Enum<T>> Class<T> getType(JsonParser p) throws IOException {
         Object object = p.getCurrentValue();
         Class<?> clazz = object.getClass();
@@ -93,18 +80,9 @@ public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {
         return clazz != null && Enum.class.isAssignableFrom(clazz) && Enum.class.isAssignableFrom(clazz);
     }
 
-    private Enum<?> getEnumByOrdinal(Class<? extends Enum> clazz, String value) {
-        if (!NumberUtils.isCreatable(value)) {
-            throw new IllegalArgumentException("This value " + value + " is not Enum's Ordinal!");
-        }
-
-        return EnumUtils.getEnumByOrdinal(clazz, Integer.valueOf(value));
-    }
-
     private Enum<?> getEnumFromCodeable(Class<? extends Enum> clazz, String value) {
         for (Enum<?> em : clazz.getEnumConstants()) {
             Codeable codeable = (Codeable) em;
-
             if (codeable.getCode().equals(value)) {
                 return em;
             }

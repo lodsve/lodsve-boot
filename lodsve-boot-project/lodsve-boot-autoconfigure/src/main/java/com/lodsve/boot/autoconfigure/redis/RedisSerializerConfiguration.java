@@ -17,10 +17,14 @@
 package com.lodsve.boot.autoconfigure.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.lodsve.boot.redis.gson.GsonRedisSerializer;
 import com.lodsve.boot.redis.jackson.Jackson2JsonObjectRedisSerializer;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +47,17 @@ public class RedisSerializerConfiguration {
         @Bean
         public RedisSerializer<Object> serializer() {
             return new Jackson2JsonObjectRedisSerializer();
+        }
+    }
+
+    @Configuration
+    @ConditionalOnClass(Gson.class)
+    @AutoConfigureAfter(GsonAutoConfiguration.class)
+    @ConditionalOnProperty(name = PREFERRED_MAPPER_PROPERTY, havingValue = "gson")
+    public static class GsonRedisSerializerConfiguration {
+        @Bean
+        public RedisSerializer<Object> serializer(ObjectProvider<Gson> gson) {
+            return new GsonRedisSerializer<>(Object.class, gson.getIfAvailable());
         }
     }
 }

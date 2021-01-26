@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.lodsve.boot.webmvc.json;
+package com.lodsve.boot.json.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -29,15 +29,14 @@ import java.io.IOException;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  * @date 15/6/24 下午9:31
  */
-@SuppressWarnings("all")
 public class CodeableEnumSerializer extends JsonSerializer<Enum> {
+
     @Override
-    public void serialize(Enum value, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException {
+    public void serialize(Enum value, JsonGenerator jsonGenerator, SerializerProvider serializers) throws IOException {
         if (!(value instanceof Codeable)) {
             jsonGenerator.writeNumber(value.ordinal());
             return;
         }
-
         Codeable codeable = (Codeable) value;
 
         jsonGenerator.writeStartObject();

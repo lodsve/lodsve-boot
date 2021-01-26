@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.webmvc.resolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lodsve.boot.json.JsonConverter;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -33,10 +33,10 @@ import javax.servlet.http.HttpServletResponse;
  * @date 15/7/7 上午9:20
  */
 public class WebResourceDataHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-    private final ObjectMapper objectMapper;
+    private final JsonConverter jsonConverter;
 
-    public WebResourceDataHandlerMethodArgumentResolver(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public WebResourceDataHandlerMethodArgumentResolver(JsonConverter jsonConverter) {
+        this.jsonConverter = jsonConverter;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class WebResourceDataHandlerMethodArgumentResolver implements HandlerMeth
         if (paramType.equals(WebInput.class)) {
             return new WebInput(request);
         } else if (paramType.equals(WebOutput.class)) {
-            return new WebOutput(response, objectMapper);
+            return new WebOutput(response, jsonConverter);
         } else if (paramType.equals(FileWebInput.class)) {
             return new FileWebInput(request);
         }

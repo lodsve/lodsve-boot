@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.webmvc.resolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lodsve.boot.json.JsonConverter;
 import com.lodsve.boot.utils.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -37,10 +37,10 @@ import java.util.Map;
  * @date 2015-1-29 21:49
  */
 public class BindDataHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-    private final ObjectMapper objectMapper;
+    private final JsonConverter jsonConverter;
 
-    public BindDataHandlerMethodArgumentResolver(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public BindDataHandlerMethodArgumentResolver(JsonConverter jsonConverter) {
+        this.jsonConverter = jsonConverter;
     }
 
     @Override
@@ -79,11 +79,11 @@ public class BindDataHandlerMethodArgumentResolver implements HandlerMethodArgum
         }
 
         //转成json
-        String paramsJson = objectMapper.writeValueAsString(paramsMap);
+        String paramsJson = jsonConverter.toJson(paramsMap);
 
         WebInput in = new WebInput(request);
         Object normalValue = in.getBean(clazz);
-        Object jacksonValue = objectMapper.readValue(paramsJson, clazz);
+        Object jacksonValue = jsonConverter.toObject(paramsJson, clazz);
 
         return ObjectUtils.mergerObject(jacksonValue, normalValue);
     }

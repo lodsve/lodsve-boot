@@ -16,6 +16,7 @@
  */
 package com.lodsve.boot.utils;
 
+import com.lodsve.boot.bean.Codeable;
 import org.springframework.util.Assert;
 
 /**
@@ -25,6 +26,9 @@ import org.springframework.util.Assert;
  * @date 2018-11-26 22:55
  */
 public class EnumUtils {
+    private EnumUtils() {
+    }
+
     /**
      * 根据枚举下标获取枚举值
      *
@@ -53,5 +57,58 @@ public class EnumUtils {
      */
     public static <T extends Enum<T>> T getEnumByName(Class<T> clazz, String name) {
         return Enum.valueOf(clazz, name);
+    }
+
+    /**
+     * 根据枚举名称获取枚举值
+     *
+     * @param clazz 枚举类型
+     * @param name  枚举值
+     * @param <T>   枚举类型
+     * @return 枚举值
+     */
+    public static <T extends Enum<T>> T evalByName(Class<T> clazz, String name) {
+        return Enum.valueOf(clazz, name);
+    }
+
+    /**
+     * 通过枚举的value来获取枚举项
+     *
+     * @param clazz 枚举类
+     * @param value 枚举的value值
+     * @param <T>   枚举类型
+     * @return 枚举项
+     */
+    public static <T extends Codeable> T evalByValue(Class<T> clazz, String value) {
+        Assert.notNull(value, "枚举值不能为空!");
+        Assert.notNull(clazz, "枚举不能为空!");
+
+        T[] constants = clazz.getEnumConstants();
+        for (T constant : constants) {
+            if (value.equals(constant.getCode())) {
+                return constant;
+            }
+        }
+
+        throw new RuntimeException(String.format("根据值[%s]在枚举类[%s]中找不到枚举项!", value, clazz.getName()));
+    }
+
+    /**
+     * 通过枚举下标获取枚举项
+     *
+     * @param clazz   枚举类
+     * @param ordinal 下标
+     * @param <T>     枚举类型
+     * @return 枚举项
+     */
+    public static <T extends Enum<?>> T evalByOrdinal(Class<T> clazz, int ordinal) {
+        Assert.notNull(clazz, "枚举不能为空!");
+
+        T[] constants = clazz.getEnumConstants();
+
+        if (ordinal < 0 || ordinal >= constants.length) {
+            throw new IndexOutOfBoundsException("Invalid ordinal");
+        }
+        return constants[ordinal];
     }
 }

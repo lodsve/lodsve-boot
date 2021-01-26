@@ -16,18 +16,13 @@
  */
 package com.lodsve.boot.autoconfigure.webmvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lodsve.boot.json.JsonConverter;
 import com.lodsve.boot.webmvc.convert.EnumCodeConverterFactory;
 import com.lodsve.boot.webmvc.convert.StringDateConvertFactory;
 import com.lodsve.boot.webmvc.resolver.BindDataHandlerMethodArgumentResolver;
 import com.lodsve.boot.webmvc.resolver.WebResourceDataHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -38,16 +33,16 @@ import java.util.List;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 public class LodsveWebMvcConfigurer implements WebMvcConfigurer {
-    private final ObjectMapper objectMapper;
+    private final JsonConverter jsonConverter;
 
-    public LodsveWebMvcConfigurer(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public LodsveWebMvcConfigurer(JsonConverter jsonConverter) {
+        this.jsonConverter = jsonConverter;
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        BindDataHandlerMethodArgumentResolver bindDataHandlerMethodArgumentResolver = new BindDataHandlerMethodArgumentResolver(objectMapper);
-        WebResourceDataHandlerMethodArgumentResolver webResourceDataHandlerMethodArgumentResolver = new WebResourceDataHandlerMethodArgumentResolver(objectMapper);
+        BindDataHandlerMethodArgumentResolver bindDataHandlerMethodArgumentResolver = new BindDataHandlerMethodArgumentResolver(jsonConverter);
+        WebResourceDataHandlerMethodArgumentResolver webResourceDataHandlerMethodArgumentResolver = new WebResourceDataHandlerMethodArgumentResolver(jsonConverter);
 
         argumentResolvers.add(bindDataHandlerMethodArgumentResolver);
         argumentResolvers.add(webResourceDataHandlerMethodArgumentResolver);
@@ -57,25 +52,5 @@ public class LodsveWebMvcConfigurer implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverterFactory(new EnumCodeConverterFactory());
         registry.addConverterFactory(new StringDateConvertFactory());
-    }
-
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setObjectMapper(objectMapper);
-        converters.add(converter);
-        converters.add(new ByteArrayHttpMessageConverter());
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.favorParameter(true)
-            .parameterName("mediaType")
-            .ignoreAcceptHeader(true)
-            .useRegisteredExtensionsOnly(true)
-            .defaultContentType(MediaType.APPLICATION_JSON)
-            .mediaType("xml", MediaType.APPLICATION_XML)
-            .mediaType("json", MediaType.APPLICATION_JSON)
-            .mediaType("html", MediaType.TEXT_HTML);
     }
 }

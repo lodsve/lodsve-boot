@@ -1,7 +1,9 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.lodsve.boot.autoconfigure.core.CoreAutoConfiguration,\
     com.lodsve.boot.autoconfigure.countdown.CountdownAutoConfiguration,\
     com.lodsve.boot.autoconfigure.encryption.EncryptionAutoConfiguration,\
     com.lodsve.boot.autoconfigure.filesystem.FileSystemAutoConfiguration,\
+    com.lodsve.boot.autoconfigure.json.JsonAutoConfiguration,\
     com.lodsve.boot.autoconfigure.mybatis.MybatisAutoConfiguration,\
     com.lodsve.boot.autoconfigure.rdbms.RdbmsAutoConfiguration,\
     com.lodsve.boot.autoconfigure.redis.RedisAutoConfiguration,\

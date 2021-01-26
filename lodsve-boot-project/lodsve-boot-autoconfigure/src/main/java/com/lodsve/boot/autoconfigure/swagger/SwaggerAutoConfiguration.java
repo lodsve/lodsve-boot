@@ -18,6 +18,7 @@ package com.lodsve.boot.autoconfigure.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.collect.Lists;
+import com.google.gson.*;
 import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.AuthConfig;
 import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.GlobalParameter;
 import io.swagger.annotations.ApiModel;
@@ -29,10 +30,13 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
+import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,12 +53,14 @@ import springfox.documentation.schema.ScalarType;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
+import springfox.documentation.spring.web.json.Json;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -74,6 +80,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @EnableConfigurationProperties(SwaggerProperties.class)
 @Import({Swagger2DocumentationConfiguration.class})
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
+    private static final String PREFERRED_MAPPER_PROPERTY = "spring.mvc.converters.preferred-json-mapper";
     private final SwaggerProperties swaggerProperties;
     private BeanFactory beanFactory;
 
@@ -212,6 +219,26 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
             public void setSort(List<String> sort) {
                 this.sort = sort;
+            }
+        }
+    }
+
+    @Configuration
+    @ConditionalOnClass(Gson.class)
+    @AutoConfigureAfter({SwaggerAutoConfiguration.class, GsonAutoConfiguration.class})
+    @ConditionalOnProperty(name = PREFERRED_MAPPER_PROPERTY, havingValue = "gson")
+    public static class GsonRedisSerializerConfiguration {
+        @Bean
+        public GsonBuilderCustomizer customizer() {
+            return builder -> {
+                builder.registerTypeAdapter(Json.class, new SpringfoxJsonToGsonAdapter());
+            };
+        }
+
+        private static class SpringfoxJsonToGsonAdapter implements JsonSerializer<Json> {
+            @Override
+            public JsonElement serialize(Json json, Type typeOfSrc, JsonSerializationContext context) {
+                return JsonParser.parseString(json.value());
             }
         }
     }
