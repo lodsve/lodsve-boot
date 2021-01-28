@@ -22,8 +22,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
@@ -33,9 +31,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 import org.springframework.data.web.config.SortHandlerMethodArgumentResolverCustomizer;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -71,26 +66,6 @@ public class CoreAutoConfiguration {
     @Bean
     public I18nMessageUtil messageUtil() {
         return new I18nMessageUtil();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
-    public ClientHttpRequestFactory requestFactory() {
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(15000);
-        factory.setReadTimeout(15000);
-        return factory;
-    }
-
-    /**
-     * 初始化RestTemplate
-     */
-    @Bean
-    @ConditionalOnMissingBean({RestTemplate.class})
-    public RestTemplate restTemplate(ClientHttpRequestFactory factory, HttpMessageConverters messageConverters) {
-        RestTemplate restTemplate = new RestTemplate(messageConverters.getConverters());
-        restTemplate.setRequestFactory(factory);
-        return restTemplate;
     }
 
     @Configuration

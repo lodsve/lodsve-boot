@@ -18,6 +18,7 @@ package com.lodsve.boot.autoconfigure.swagger;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.util.List;
 
@@ -56,14 +57,17 @@ public class SwaggerProperties {
     /**
      * 项目联系人
      */
+    @NestedConfigurationProperty
     private Contact contact;
     /**
      * 全局变量
      */
+    @NestedConfigurationProperty
     private List<GlobalParameter> globalParameters;
     /**
      * 认证配置，目前仅支持header传参
      */
+    @NestedConfigurationProperty
     private AuthConfig auth;
 
     @Data

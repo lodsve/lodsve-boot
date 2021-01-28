@@ -25,15 +25,11 @@ import com.lodsve.boot.exception.LodsveBootException;
  * @date 16/8/15 下午4:10
  */
 public class RdbmsException extends LodsveBootException {
-    public RdbmsException(String content) {
-        super(content);
+    public RdbmsException(String message) {
+        super(message);
     }
 
-    public RdbmsException(Integer code, String content) {
-        super(code, content);
-    }
-
-    public RdbmsException(Integer code, String content, String... args) {
-        super(code, content, args);
+    public RdbmsException(Integer code, String message) {
+        super(code, message);
     }
 }

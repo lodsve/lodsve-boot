@@ -14,21 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.lodsve.boot.example;
+package com.lodsve.boot.webmvc.response;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
+import java.lang.annotation.*;
 
 /**
- * .
+ * 忽略返回值转换.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
-@SpringBootApplication
-@RestController
-public class RocketMqApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(RocketMqApplication.class, args);
-    }
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface IgnoreResult {
 }

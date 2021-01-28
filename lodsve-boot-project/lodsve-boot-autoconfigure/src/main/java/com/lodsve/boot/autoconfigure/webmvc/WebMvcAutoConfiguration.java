@@ -23,6 +23,8 @@ import com.lodsve.boot.json.JsonConverter;
 import com.lodsve.boot.webmvc.debug.DebugRequestAspect;
 import com.lodsve.boot.webmvc.resolver.WebInput;
 import com.lodsve.boot.webmvc.resolver.WebOutput;
+import com.lodsve.boot.webmvc.response.LodsveBootExceptionHandler;
+import com.lodsve.boot.webmvc.response.ResultSetResponseHandler;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -55,6 +57,16 @@ public class WebMvcAutoConfiguration {
     @Bean
     public WebMvcConfigurer webMvcConfigurer(ObjectProvider<JsonConverter> jsonConverter) {
         return new LodsveWebMvcConfigurer(jsonConverter.getIfAvailable());
+    }
+
+    @Bean
+    public ResultSetResponseHandler responseHandler() {
+        return new ResultSetResponseHandler();
+    }
+
+    @Bean
+    public LodsveBootExceptionHandler exceptionHandler() {
+        return new LodsveBootExceptionHandler();
     }
 
     @Configuration

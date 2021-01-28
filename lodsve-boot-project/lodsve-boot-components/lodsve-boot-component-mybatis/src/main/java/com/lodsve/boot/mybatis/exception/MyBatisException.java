@@ -25,15 +25,11 @@ import com.lodsve.boot.exception.LodsveBootException;
  * @date 16/8/15 下午4:10
  */
 public class MyBatisException extends LodsveBootException {
-    public MyBatisException(String content) {
-        super(content);
+    public MyBatisException(String message) {
+        super(message);
     }
 
-    public MyBatisException(Integer code, String content) {
-        super(code, content);
-    }
-
-    public MyBatisException(Integer code, String content, String... args) {
-        super(code, content, args);
+    public MyBatisException(Integer code, String message) {
+        super(code, message);
     }
 }

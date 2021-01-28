@@ -29,17 +29,17 @@ import java.io.Serializable;
  */
 @Data
 public class ResultSet<T> implements Serializable {
-    private static final String SUCCESS = "200";
-    private static final String ERROR = "500";
+    private static final Integer SUCCESS = 200;
+    private static final Integer ERROR = 500;
     private static final String OK_MESSAGE = "Successful";
     private static final String ERROR_MESSAGE = "Some internal exceptions occurred";
 
     private Boolean result;
-    private String code;
+    private Integer code;
     private T data;
     private String message;
 
-    public ResultSet<T> ok(T data) {
+    public static <T> ResultSet<T> ok(T data) {
         ResultSet<T> result = new ResultSet<>();
         result.setCode(SUCCESS);
         result.setResult(true);
@@ -49,7 +49,7 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public ResultSet<T> ok(T data, String message) {
+    public static <T> ResultSet<T> ok(T data, String message) {
         ResultSet<T> result = new ResultSet<>();
         result.setCode(SUCCESS);
         result.setResult(true);
@@ -59,7 +59,7 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public ResultSet<T> error() {
+    public static <T> ResultSet<T> error() {
         ResultSet<T> result = new ResultSet<>();
         result.setCode(ERROR);
         result.setResult(false);
@@ -69,7 +69,7 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public ResultSet<T> error(T data) {
+    public static <T> ResultSet<T> error(T data) {
         ResultSet<T> result = new ResultSet<>();
         result.setCode(ERROR);
         result.setResult(false);
@@ -79,9 +79,9 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public ResultSet<T> error(T data, String code, String message) {
+    public static <T> ResultSet<T> error(T data, Integer code, String message) {
         ResultSet<T> result = new ResultSet<>();
-        result.setCode(StringUtils.isBlank(code) ? ERROR : code);
+        result.setCode(null == code ? ERROR : code);
         result.setResult(false);
         result.setData(data);
         result.setMessage(StringUtils.isBlank(message) ? ERROR_MESSAGE : message);

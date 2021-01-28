@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 @Aspect
-public class DynamicDataSourceAspect {
+public class DynamicRedisConnectionFactoryAspect {
     @Around("@annotation(com.lodsve.boot.redis.dynamic.SwitchRedis)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         String dataSource = StringUtils.EMPTY;

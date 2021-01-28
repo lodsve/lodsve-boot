@@ -25,59 +25,27 @@ import org.springframework.core.NestedRuntimeException;
  * @date 15/8/14 下午12:27
  */
 public class LodsveBootException extends NestedRuntimeException {
+    private static final Integer BAD_REQUEST_CODE = 400;
     /**
      * 异常code
      */
-    private Integer code;
-    /**
-     * 异常信息里的占位符参数
-     */
-    private String[] args;
-    /**
-     * 后台异常
-     */
-    private String content;
+    private final Integer code;
 
-    public LodsveBootException(String content) {
-        super(content);
-        this.content = content;
+    public LodsveBootException(String message) {
+        super(message);
+        this.code = BAD_REQUEST_CODE;
     }
 
     /**
      * @param code    异常编码，在i18n配置文件中配置的编码，请确保该异常编码已经定义
-     * @param content 后台异常内容，这个内容主要用于输出后台日志，便于异常诊断
+     * @param message 后台异常内容，这个内容主要用于输出后台日志，便于异常诊断
      */
-    public LodsveBootException(Integer code, String content) {
-        super(content);
+    public LodsveBootException(Integer code, String message) {
+        super(message);
         this.code = code;
-        this.content = content;
-    }
-
-    /**
-     * @param code    异常编码，在i18n配置文件中配置的编码，请确保该异常编码已经定义
-     * @param content 后台异常内容，这个内容主要用于输出后台日志，便于异常诊断
-     * @param args    在i18n配置文件中配置的错误描述中的占位符填充信息
-     */
-    public LodsveBootException(Integer code, String content, String... args) {
-        super(content);
-        this.code = code;
-        this.args = args;
-        this.content = content;
     }
 
     public Integer getCode() {
         return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 }

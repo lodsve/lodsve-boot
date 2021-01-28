@@ -16,8 +16,8 @@
  */
 package com.lodsve.boot.autoconfigure.redis;
 
-import com.lodsve.boot.rdbms.dynamic.DynamicDataSourceAspect;
 import com.lodsve.boot.redis.dynamic.DynamicLettuceConnectionFactory;
+import com.lodsve.boot.redis.dynamic.DynamicRedisConnectionFactoryAspect;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -82,7 +82,7 @@ public class RedisAutoConfiguration {
     }
 
     @Bean
-    public DynamicDataSourceAspect aspect() {
-        return new DynamicDataSourceAspect();
+    public DynamicRedisConnectionFactoryAspect aspect() {
+        return new DynamicRedisConnectionFactoryAspect();
     }
 }
