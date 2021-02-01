@@ -49,9 +49,9 @@ public class LodsveBootBanner implements Banner {
 
     @Override
     public void printBanner(Environment environment, Class<?> sourceClass, PrintStream out) {
-        String lodsveBootVersion = formatVersion(environment.getProperty("lodsve-boot.version"));
+        String lodsveVersion = formatVersion(LodsveBootVersion.getVersion());
         StringBuilder blank2 = new StringBuilder();
-        fillBlank(LODSVE_VERSION.length() + lodsveBootVersion.length(), blank2);
+        fillBlank(LODSVE_VERSION.length() + lodsveVersion.length(), blank2);
 
         String springBootVersion = formatVersion(SpringBootVersion.getVersion());
         StringBuilder blank3 = new StringBuilder();
@@ -68,7 +68,7 @@ public class LodsveBootBanner implements Banner {
 
         out.println("\n" + AnsiOutput.toString(AnsiColor.BLUE, LODSVE_DESCRIPTION, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.BLUE, "Author: " + environment.getProperty("lodsve-boot.author"), AnsiColor.DEFAULT));
-        out.println(AnsiOutput.toString(AnsiColor.GREEN, LODSVE_VERSION, AnsiColor.RED, blank2.toString(), lodsveBootVersion, AnsiColor.DEFAULT));
+        out.println(AnsiOutput.toString(AnsiColor.GREEN, LODSVE_VERSION, AnsiColor.RED, blank2.toString(), lodsveVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_BOOT_VERSION, AnsiColor.RED, blank3.toString(), springBootVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_FRAMEWORK_VERSION, AnsiColor.RED, blank4.toString(), springFrameworkVersion, AnsiColor.DEFAULT));
         out.println("\n");
