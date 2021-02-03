@@ -42,17 +42,16 @@ import java.io.IOException;
 public class Jackson2JsonObjectRedisSerializer implements RedisSerializer<Object> {
     protected GenericJackson2JsonRedisSerializer serializer;
 
-    public Jackson2JsonObjectRedisSerializer() {
-        ObjectMapper om = new ObjectMapper();
-        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        om.registerModule(new JavaTimeModule());
-        om.registerModule((new SimpleModule()).addSerializer(new NullValueSerializer()));
-        om.activateDefaultTyping(om.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
-        this.serializer = new GenericJackson2JsonRedisSerializer(om);
-    }
+    public Jackson2JsonObjectRedisSerializer(ObjectMapper objectMapper) {
+        if (null == objectMapper) {
+            objectMapper = new ObjectMapper();
+        }
 
-    public Jackson2JsonObjectRedisSerializer(ObjectMapper om) {
-        this.serializer = new GenericJackson2JsonRedisSerializer(om);
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.registerModule((new SimpleModule()).addSerializer(new NullValueSerializer()));
+        objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        this.serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
     }
 
     @Override
@@ -65,20 +64,17 @@ public class Jackson2JsonObjectRedisSerializer implements RedisSerializer<Object
         return serializer.deserialize(bytes);
     }
 
-
     protected static class NullValueSerializer extends StdSerializer<NullValue> {
-        private static final long serialVersionUID = 1999052150548658807L;
-        private final String classIdentifier = "@class";
-
         NullValueSerializer() {
             super(NullValue.class);
         }
 
         @Override
-        public void serialize(NullValue value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-            jgen.writeStartObject();
-            jgen.writeStringField(this.classIdentifier, NullValue.class.getName());
-            jgen.writeEndObject();
+        public void serialize(NullValue value, JsonGenerator generator, SerializerProvider provider) throws IOException {
+            generator.writeStartObject();
+            String classIdentifier = "@class";
+            generator.writeStringField(classIdentifier, NullValue.class.getName());
+            generator.writeEndObject();
         }
     }
 }

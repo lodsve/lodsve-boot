@@ -45,8 +45,8 @@ public class RedisSerializerConfiguration {
     @ConditionalOnProperty(name = PREFERRED_MAPPER_PROPERTY, havingValue = "jackson", matchIfMissing = true)
     public static class JacksonRedisSerializerConfiguration {
         @Bean
-        public RedisSerializer<Object> serializer() {
-            return new Jackson2JsonObjectRedisSerializer();
+        public RedisSerializer<Object> serializer(ObjectProvider<ObjectMapper> objectProvider) {
+            return new Jackson2JsonObjectRedisSerializer(objectProvider.getIfAvailable());
         }
     }
 
