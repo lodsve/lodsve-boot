@@ -22,9 +22,10 @@ import java.lang.annotation.*;
  * 忽略返回值转换.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @see ResultWrapper
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface IgnoreResult {
+public @interface SkipWrapper {
 }

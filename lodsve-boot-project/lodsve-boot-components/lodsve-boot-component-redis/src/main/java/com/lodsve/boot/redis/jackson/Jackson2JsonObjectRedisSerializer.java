@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.support.NullValue;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -43,15 +44,16 @@ public class Jackson2JsonObjectRedisSerializer implements RedisSerializer<Object
     protected GenericJackson2JsonRedisSerializer serializer;
 
     public Jackson2JsonObjectRedisSerializer(ObjectMapper objectMapper) {
-        if (null == objectMapper) {
-            objectMapper = new ObjectMapper();
+        ObjectMapper objectMapperForRedis = new ObjectMapper();
+        if (null != objectMapper) {
+            BeanUtils.copyProperties(objectMapper, objectMapperForRedis);
         }
 
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.registerModule((new SimpleModule()).addSerializer(new NullValueSerializer()));
-        objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
-        this.serializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+        objectMapperForRedis.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapperForRedis.registerModule(new JavaTimeModule());
+        objectMapperForRedis.registerModule((new SimpleModule()).addSerializer(new NullValueSerializer()));
+        objectMapperForRedis.activateDefaultTyping(objectMapperForRedis.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        this.serializer = new GenericJackson2JsonRedisSerializer(objectMapperForRedis);
     }
 
     @Override

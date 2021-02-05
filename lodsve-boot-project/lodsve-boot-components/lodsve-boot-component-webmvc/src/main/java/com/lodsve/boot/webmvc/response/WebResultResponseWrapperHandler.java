@@ -16,11 +16,13 @@
  */
 package com.lodsve.boot.webmvc.response;
 
-import com.lodsve.boot.bean.ResultSet;
+import com.lodsve.boot.bean.WebResult;
+import com.lodsve.boot.json.JsonConverter;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,26 +38,51 @@ import java.lang.reflect.Method;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 @RestControllerAdvice(annotations = RestController.class)
-public class ResultSetResponseHandler implements ResponseBodyAdvice<Object> {
+public class WebResultResponseWrapperHandler implements ResponseBodyAdvice<Object> {
+    private final JsonConverter jsonConverter;
+
+    public WebResultResponseWrapperHandler(JsonConverter jsonConverter) {
+        this.jsonConverter = jsonConverter;
+    }
+
     @Override
     public boolean supports(@Nonnull MethodParameter parameter, @Nonnull Class<? extends HttpMessageConverter<?>> converterClass) {
         Method method = parameter.getMethod();
         if (null == method) {
             return false;
         }
-        IgnoreResult ignore = method.getAnnotation(IgnoreResult.class);
-        if (null != ignore) {
-            // 忽略
+        if (checkReturnType(method.getReturnType())) {
             return false;
         }
 
-        Class<?> returnType = method.getReturnType();
-        return !ResultSet.class.isAssignableFrom(returnType) && !ResultSet.class.isAssignableFrom(returnType) && !ResponseEntity.class.isAssignableFrom(returnType);
+        // 先判断该类头上是否有SkipWrapper，如果有，直接返回false
+        SkipWrapper skip = method.getAnnotation(SkipWrapper.class);
+        if (null != skip) {
+            return false;
+        }
+        // 如果没有SkipWrapper，则判断方法上是否有ResultWrapper，如果有，返回true
+        ResultWrapper wrapper = method.getAnnotation(ResultWrapper.class);
+        if (null != wrapper) {
+            return true;
+        }
+        // 如果方法上没有ResultWrapper，则判断类头上是否有ResultWrapper，如果没有，则返回false
+        Class<?> controllerType = parameter.getContainingClass();
+        ResultWrapper controllerWrapper = controllerType.getAnnotation(ResultWrapper.class);
+        return null != controllerWrapper;
+    }
+
+    private boolean checkReturnType(Class<?> returnType) {
+        return WebResult.class.isAssignableFrom(returnType) || ResponseEntity.class.isAssignableFrom(returnType);
     }
 
     @Override
     public Object beforeBodyWrite(Object object, @Nonnull MethodParameter parameter, @Nonnull MediaType mediaType,
                                   @Nonnull Class<? extends HttpMessageConverter<?>> converterClass, @Nonnull ServerHttpRequest request, @Nonnull ServerHttpResponse response) {
-        return ResultSet.ok(object);
+
+        if (object instanceof String || StringHttpMessageConverter.class.isAssignableFrom(converterClass)) {
+            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+            return jsonConverter.toJson(WebResult.ok(object));
+        }
+        return WebResult.ok(object);
     }
 }

@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.webmvc.response;
 
-import com.lodsve.boot.bean.ResultSet;
+import com.lodsve.boot.bean.WebResult;
 import com.lodsve.boot.exception.LodsveBootException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,13 +39,13 @@ public class LodsveBootExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(LodsveBootException.class)
     @ResponseBody
-    public ResultSet<Object> handleException(final LodsveBootException exception) {
+    public WebResult<Object> handleException(final LodsveBootException exception) {
         if (logger.isErrorEnabled()) {
             logger.error(exception.getMessage(), exception);
         }
         int code = (null == exception.getCode()) ? HttpStatus.BAD_REQUEST.value() : exception.getCode();
         String message = StringUtils.isNotBlank(exception.getMessage()) ? exception.getMessage() : HttpStatus.BAD_REQUEST.getReasonPhrase();
-        return ResultSet.error(null, code, message);
+        return WebResult.error(null, code, message);
     }
 
     /**
@@ -54,14 +54,14 @@ public class LodsveBootExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Throwable.class)
     @ResponseBody
-    public ResultSet<Object> handleException(final Throwable throwable) {
+    public WebResult<Object> handleException(final Throwable throwable) {
         if (logger.isErrorEnabled()) {
             logger.error(throwable.getMessage(), throwable);
         }
 
         int code = HttpStatus.INTERNAL_SERVER_ERROR.value();
         String message = StringUtils.isNotBlank(throwable.getMessage()) ? throwable.getMessage() : HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
-        return ResultSet.error(null, code, message);
+        return WebResult.error(null, code, message);
 
     }
 }

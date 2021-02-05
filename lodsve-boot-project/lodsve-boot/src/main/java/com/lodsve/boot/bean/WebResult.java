@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @date 13-7-6 上午7:58
  */
 @Data
-public class ResultSet<T> implements Serializable {
+public class WebResult<T> implements Serializable {
     private static final Integer SUCCESS = 200;
     private static final Integer ERROR = 500;
     private static final String OK_MESSAGE = "Successful";
@@ -39,8 +39,8 @@ public class ResultSet<T> implements Serializable {
     private T data;
     private String message;
 
-    public static <T> ResultSet<T> ok(T data) {
-        ResultSet<T> result = new ResultSet<>();
+    public static <T> WebResult<T> ok(T data) {
+        WebResult<T> result = new WebResult<>();
         result.setCode(SUCCESS);
         result.setResult(true);
         result.setData(data);
@@ -49,8 +49,8 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public static <T> ResultSet<T> ok(T data, String message) {
-        ResultSet<T> result = new ResultSet<>();
+    public static <T> WebResult<T> ok(T data, String message) {
+        WebResult<T> result = new WebResult<>();
         result.setCode(SUCCESS);
         result.setResult(true);
         result.setData(data);
@@ -59,8 +59,8 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public static <T> ResultSet<T> error() {
-        ResultSet<T> result = new ResultSet<>();
+    public static <T> WebResult<T> error() {
+        WebResult<T> result = new WebResult<>();
         result.setCode(ERROR);
         result.setResult(false);
         result.setData(null);
@@ -69,8 +69,8 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public static <T> ResultSet<T> error(T data) {
-        ResultSet<T> result = new ResultSet<>();
+    public static <T> WebResult<T> error(T data) {
+        WebResult<T> result = new WebResult<>();
         result.setCode(ERROR);
         result.setResult(false);
         result.setData(data);
@@ -79,8 +79,8 @@ public class ResultSet<T> implements Serializable {
         return result;
     }
 
-    public static <T> ResultSet<T> error(T data, Integer code, String message) {
-        ResultSet<T> result = new ResultSet<>();
+    public static <T> WebResult<T> error(T data, Integer code, String message) {
+        WebResult<T> result = new WebResult<>();
         result.setCode(null == code ? ERROR : code);
         result.setResult(false);
         result.setData(data);
