@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.lodsve.boot</groupId>
         <artifactId>lodsve-boot-build</artifactId>
-        <version>1.0.0.SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../../lodsve-boot</relativePath>
     </parent>
 
@@ -15,7 +15,7 @@
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
-        <lodsve.boot.version>1.0.0.SNAPSHOT</lodsve.boot.version>
+        <lodsve.boot.version>1.0.0-SNAPSHOT</lodsve.boot.version>
 
         <dozer.version>6.5.0</dozer.version>
         <guava.version>28.2-jre</guava.version>
