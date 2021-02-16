@@ -37,7 +37,7 @@ public class LodsveBootBanner implements Banner {
         "| |             | |               | ___ \\           | |",
         "| |     ___   __| |_____   _____  | |_/ / ___   ___ | |_",
         "| |    / _ \\ / _` / __\\ \\ / / _ \\ | ___ \\/ _ \\ / _ \\| __|",
-        "| |___| (_) | (_| \\__ \\ V /  __/ | |_/ / (_) | (_) | |_",
+        "| |___| (_) | (_| \\__ \\ V /  __/| |_/ / (_) | (_) | | |",
         "\\_____/\\___/ \\__,_|___/ \\_/ \\___| \\____/ \\___/ \\___/ \\__|"
     };
     private static final int LINE_WIDTH = DEFAULT_BANNER[3].length();
@@ -67,7 +67,6 @@ public class LodsveBootBanner implements Banner {
         }
 
         out.println("\n" + AnsiOutput.toString(AnsiColor.BLUE, LODSVE_DESCRIPTION, AnsiColor.DEFAULT));
-        out.println(AnsiOutput.toString(AnsiColor.BLUE, "Author: " + environment.getProperty("lodsve-boot.author"), AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, LODSVE_VERSION, AnsiColor.RED, blank2.toString(), lodsveVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_BOOT_VERSION, AnsiColor.RED, blank3.toString(), springBootVersion, AnsiColor.DEFAULT));
         out.println(AnsiOutput.toString(AnsiColor.GREEN, SPRING_FRAMEWORK_VERSION, AnsiColor.RED, blank4.toString(), springFrameworkVersion, AnsiColor.DEFAULT));
