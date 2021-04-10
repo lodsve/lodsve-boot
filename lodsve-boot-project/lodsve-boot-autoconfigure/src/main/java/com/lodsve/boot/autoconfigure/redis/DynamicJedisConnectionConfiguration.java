@@ -99,9 +99,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         }
 
         // 单数据源 - 单实例模式
-        RedisStandaloneConfiguration configuration = getStandaloneConfig(getProperties().getUrl(), getProperties().getHost(), getProperties().getPort(), getProperties().getPassword(), getProperties().getDatabase());
-        if (null != configuration) {
-            factories.put("JedisConnectionFactory-Standalone", new JedisConnectionFactory(configuration, clientConfiguration));
+        Singleton singleton = getProperties().getSingleton();
+        if (singleton != null) {
+            RedisStandaloneConfiguration configuration = getStandaloneConfig(singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
+            if (null != configuration) {
+                factories.put("JedisConnectionFactory-Standalone", new JedisConnectionFactory(configuration, clientConfiguration));
+            }
         }
 
         AtomicReference<String> defaultName = new AtomicReference<>();
@@ -121,7 +124,7 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         Map<String, JedisConnectionFactory> factories = Maps.newHashMap();
         for (String name : singletons.keySet()) {
             Singleton singleton = singletons.get(name);
-            RedisStandaloneConfiguration configuration = getStandaloneConfig("", singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
+            RedisStandaloneConfiguration configuration = getStandaloneConfig(singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
             if (null == configuration) {
                 continue;
             }
@@ -165,15 +168,11 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return factories;
     }
 
-    private JedisClientConfiguration getJedisClientConfiguration(
-        ObjectProvider<JedisClientConfigurationBuilderCustomizer> builderCustomizers) {
+    private JedisClientConfiguration getJedisClientConfiguration(ObjectProvider<JedisClientConfigurationBuilderCustomizer> builderCustomizers) {
         JedisClientConfigurationBuilder builder = applyProperties(JedisClientConfiguration.builder());
         Pool pool = getProperties().getJedis().getPool();
         if (pool != null) {
             applyPooling(pool, builder);
-        }
-        if (StringUtils.hasText(getProperties().getUrl())) {
-            customizeConfigurationFromUrl(builder);
         }
         builderCustomizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
         return builder.build();
@@ -209,12 +208,5 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
             config.setMaxWaitMillis(pool.getMaxWait().toMillis());
         }
         return config;
-    }
-
-    private void customizeConfigurationFromUrl(JedisClientConfigurationBuilder builder) {
-        ConnectionInfo connectionInfo = parseUrl(getProperties().getUrl());
-        if (connectionInfo.isUseSsl()) {
-            builder.useSsl();
-        }
     }
 }

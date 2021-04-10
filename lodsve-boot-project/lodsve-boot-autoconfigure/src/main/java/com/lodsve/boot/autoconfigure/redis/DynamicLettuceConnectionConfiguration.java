@@ -104,10 +104,13 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
         }
 
         // 单数据源 - 单实例模式
-        RedisStandaloneConfiguration configuration = getStandaloneConfig(getProperties().getUrl(), getProperties().getHost(), getProperties().getPort(), getProperties().getPassword(), getProperties().getDatabase());
-        if (null != configuration) {
-            LettuceClientConfiguration clientConfig = getLettuceClientConfiguration(builderCustomizers, clientResources, getProperties().getLettuce().getPool());
-            factories.put("LettuceConnectionFactory-Standalone", new LettuceConnectionFactory(configuration, clientConfig));
+        Singleton singleton = getProperties().getSingleton();
+        if (singleton != null) {
+            RedisStandaloneConfiguration configuration = getStandaloneConfig(singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
+            if (null != configuration) {
+                LettuceClientConfiguration clientConfig = getLettuceClientConfiguration(builderCustomizers, clientResources, getProperties().getLettuce().getPool());
+                factories.put("LettuceConnectionFactory-Standalone", new LettuceConnectionFactory(configuration, clientConfig));
+            }
         }
 
         AtomicReference<String> defaultName = new AtomicReference<>();
@@ -116,7 +119,7 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
             if (0 == index.getAndIncrement()) {
                 defaultName.set(key);
             }
-            value.setShareNativeConnection(getProperties().isShareNativeConnection());
+            value.setShareNativeConnection(getProperties().getLettuce().isShareNativeConnection());
             value.afterPropertiesSet();
         });
 
@@ -128,7 +131,7 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
         Map<String, LettuceConnectionFactory> factories = Maps.newHashMap();
         for (String name : singletons.keySet()) {
             Singleton singleton = singletons.get(name);
-            RedisStandaloneConfiguration configuration = getStandaloneConfig("", singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
+            RedisStandaloneConfiguration configuration = getStandaloneConfig(singleton.getHost(), singleton.getPort(), singleton.getPassword(), singleton.getDatabase());
             if (null == configuration) {
                 continue;
             }
@@ -175,9 +178,6 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
     private LettuceClientConfiguration getLettuceClientConfiguration(ObjectProvider<LettuceClientConfigurationBuilderCustomizer> builderCustomizers, ClientResources clientResources, Pool pool) {
         LettuceClientConfiguration.LettuceClientConfigurationBuilder builder = createBuilder(pool);
         applyProperties(builder);
-        if (StringUtils.hasText(getProperties().getUrl())) {
-            customizeConfigurationFromUrl(builder);
-        }
         builder.clientOptions(initializeClientOptionsBuilder().timeoutOptions(TimeoutOptions.enabled()).build());
         builder.clientResources(clientResources);
         builderCustomizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
@@ -191,8 +191,7 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
         return new PoolBuilderFactory().createBuilder(pool);
     }
 
-    private LettuceClientConfiguration.LettuceClientConfigurationBuilder applyProperties(
-        LettuceClientConfiguration.LettuceClientConfigurationBuilder builder) {
+    private LettuceClientConfiguration.LettuceClientConfigurationBuilder applyProperties(LettuceClientConfiguration.LettuceClientConfigurationBuilder builder) {
         if (getProperties().isSsl()) {
             builder.useSsl();
         }
@@ -225,13 +224,6 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
             return builder.topologyRefreshOptions(refreshBuilder.build());
         }
         return ClientOptions.builder();
-    }
-
-    private void customizeConfigurationFromUrl(LettuceClientConfiguration.LettuceClientConfigurationBuilder builder) {
-        ConnectionInfo connectionInfo = parseUrl(getProperties().getUrl());
-        if (connectionInfo.isUseSsl()) {
-            builder.useSsl();
-        }
     }
 
     /**

@@ -65,7 +65,7 @@ public class RedisAutoConfiguration {
 
         // 设置键（key）的序列化采用StringRedisSerializer。
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        // 设置值（value）的序列化采用FastJsonRedisSerializer。
+        // 设置值（value）的序列化
         redisTemplate.setValueSerializer(redisSerializer.getIfAvailable());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashValueSerializer(redisSerializer.getIfAvailable());

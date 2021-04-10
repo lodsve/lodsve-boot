@@ -24,6 +24,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,7 @@ import java.util.List;
 @ConditionalOnBean(RedisConnectionFactory.class)
 @ConditionalOnClass({RedisConnectionFactory.class, CountdownMessageListenerContainer.class})
 @ConditionalOnProperty(name = "lodsve.countdown.enabled")
+@EnableConfigurationProperties(CountdownProperties.class)
 @Configuration
 public class CountdownAutoConfiguration {
     private final RedisConnectionFactory connectionFactory;
@@ -78,8 +80,8 @@ public class CountdownAutoConfiguration {
     }
 
     @Bean
-    public CountdownMessageListenerContainer countdownRedisMessageListenerContainer(CountdownListener countdownListener) {
-        return new CountdownMessageListenerContainer(connectionFactory, countdownListener);
+    public CountdownMessageListenerContainer countdownRedisMessageListenerContainer(CountdownListener countdownListener, CountdownProperties properties) {
+        return new CountdownMessageListenerContainer(connectionFactory, countdownListener, properties.getDatabase());
     }
 
     @Bean

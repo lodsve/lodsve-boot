@@ -33,34 +33,9 @@ import java.util.Map;
 @ConfigurationProperties("lodsve.redis")
 public class RedisProperties {
     /**
-     * Database index used by the connection factory.
-     */
-    private int database = 0;
-    /**
      * 默认数据源名称，如果不填，则默认取第一个，可能会带来不稳定
      */
     private String defaultName;
-
-    /**
-     * Connection URL. Overrides host, port, and password. User is ignored. Example:
-     * redis://user:password@example.com:6379
-     */
-    private String url;
-
-    /**
-     * Redis server host.
-     */
-    private String host;
-
-    /**
-     * Login password of the redis server.
-     */
-    private String password;
-
-    /**
-     * Redis server port.
-     */
-    private int port = 6379;
 
     /**
      * Whether to enable SSL support.
@@ -76,9 +51,20 @@ public class RedisProperties {
      * Client name to be set on connections with CLIENT SETNAME.
      */
     private String clientName;
-
+    /**
+     * 单数据源-单redis
+     */
+    @NestedConfigurationProperty
+    private Singleton singleton;
+    /**
+     * 单数据源-Sentinel
+     */
+    @NestedConfigurationProperty
     private Sentinel sentinel;
-
+    /**
+     * 单数据源-Cluster
+     */
+    @NestedConfigurationProperty
     private Cluster cluster;
     /**
      * 多数据源 - 单节点redis
@@ -95,11 +81,6 @@ public class RedisProperties {
      */
     @NestedConfigurationProperty
     private Map<String, Cluster> clusters;
-
-    /**
-     * 表示多个LettuceConnection将共享一个native connection
-     */
-    private boolean shareNativeConnection = true;
 
     private final Jedis jedis = new Jedis();
 
@@ -118,33 +99,28 @@ public class RedisProperties {
      */
     @Data
     public static class Pool {
-
         /**
          * Maximum number of "idle" connections in the pool. Use a negative value to
          * indicate an unlimited number of idle connections.
          */
         private int maxIdle = 8;
-
         /**
          * Target for the minimum number of idle connections to maintain in the pool. This
          * setting only has an effect if both it and time between eviction runs are
          * positive.
          */
         private int minIdle = 0;
-
         /**
          * Maximum number of connections that can be allocated by the pool at a given
          * time. Use a negative value for no limit.
          */
         private int maxActive = 8;
-
         /**
          * Maximum amount of time a connection allocation should block before throwing an
          * exception when the pool is exhausted. Use a negative value to block
          * indefinitely.
          */
         private Duration maxWait = Duration.ofMillis(-1);
-
         /**
          * Time between runs of the idle object evictor thread. When positive, the idle
          * object evictor thread starts, otherwise no idle object eviction is performed.
@@ -153,11 +129,35 @@ public class RedisProperties {
     }
 
     /**
+     * singleton redis
+     */
+    @Data
+    public static class Singleton {
+        /**
+         * Redis server host.
+         */
+        private String host;
+
+        /**
+         * Login password of the redis server.
+         */
+        private String password;
+
+        /**
+         * Redis server port.
+         */
+        private int port = 6379;
+        /**
+         * 数据库索引
+         */
+        private int database = 0;
+    }
+
+    /**
      * Cluster properties.
      */
     @Data
     public static class Cluster {
-
         /**
          * Comma-separated list of "host:port" pairs to bootstrap from. This represents an
          * "initial" list of cluster nodes and is required to have at least one entry.
@@ -181,7 +181,6 @@ public class RedisProperties {
      */
     @Data
     public static class Sentinel {
-
         /**
          * Name of the Redis server.
          */
@@ -193,9 +192,18 @@ public class RedisProperties {
         private List<String> nodes;
 
         /**
+         * Password for authenticating with data none(s).
+         */
+        private String sentinelPassword;
+
+        /**
          * Password for authenticating with sentinel(s).
          */
         private String password;
+        /**
+         * 数据库索引
+         */
+        private int database = 0;
     }
 
     /**
@@ -203,7 +211,6 @@ public class RedisProperties {
      */
     @Data
     public static class Jedis {
-
         /**
          * Jedis pool configuration.
          */
@@ -215,22 +222,22 @@ public class RedisProperties {
      */
     @Data
     public static class Lettuce {
-
+        /**
+         * 表示多个LettuceConnection将共享一个native connection
+         */
+        private boolean shareNativeConnection = true;
         /**
          * Shutdown timeout.
          */
         private Duration shutdownTimeout = Duration.ofMillis(100);
-
         /**
          * Lettuce pool configuration.
          */
         private Pool pool;
-
         private final Cluster cluster = new Cluster();
 
         @Data
         public static class Cluster {
-
             private final Refresh refresh = new Refresh();
 
             @Data
@@ -247,30 +254,7 @@ public class RedisProperties {
                  */
                 private boolean adaptive;
             }
-
         }
-
-    }
-
-    @Data
-    public static class Singleton {
-        /**
-         * Redis server host.
-         */
-        private String host;
-
-        /**
-         * Login password of the redis server.
-         */
-        private String password;
-
-        /**
-         * Redis server port.
-         */
-        private int port = 6379;
-        /**
-         * 数据库索引
-         */
-        private int database = 0;
     }
 }
+

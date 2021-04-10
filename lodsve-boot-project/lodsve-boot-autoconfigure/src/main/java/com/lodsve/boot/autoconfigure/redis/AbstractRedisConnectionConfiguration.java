@@ -25,8 +25,6 @@ import org.springframework.data.redis.connection.*;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,14 +53,9 @@ public abstract class AbstractRedisConnectionConfiguration {
         this.clusterConfiguration = clusterConfigurationProvider.getIfAvailable();
     }
 
-    protected final RedisStandaloneConfiguration getStandaloneConfig(String url, String host, int port, String password, int database) {
+    protected final RedisStandaloneConfiguration getStandaloneConfig(String host, int port, String password, int database) {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-        if (StringUtils.hasText(url)) {
-            ConnectionInfo connectionInfo = parseUrl(url);
-            config.setHostName(connectionInfo.getHostName());
-            config.setPort(connectionInfo.getPort());
-            config.setPassword(RedisPassword.of(connectionInfo.getPassword()));
-        } else if (StringUtils.hasText(host)) {
+        if (StringUtils.hasText(host)) {
             config.setHostName(host);
             config.setPort(port);
             config.setPassword(RedisPassword.of(password));
@@ -84,13 +77,14 @@ public abstract class AbstractRedisConnectionConfiguration {
         RedisSentinelConfiguration config = new RedisSentinelConfiguration();
         config.master(sentinelProperties.getMaster());
         config.setSentinels(createSentinels(sentinelProperties));
-        if (this.properties.getPassword() != null) {
-            config.setPassword(RedisPassword.of(this.properties.getPassword()));
-        }
+
         if (sentinelProperties.getPassword() != null) {
-            config.setSentinelPassword(RedisPassword.of(sentinelProperties.getPassword()));
+            config.setPassword(RedisPassword.of(sentinelProperties.getPassword()));
         }
-        config.setDatabase(this.properties.getDatabase());
+        if (sentinelProperties.getSentinelPassword() != null) {
+            config.setSentinelPassword(RedisPassword.of(sentinelProperties.getSentinelPassword()));
+        }
+        config.setDatabase(sentinelProperties.getDatabase());
         return config;
     }
 
@@ -111,12 +105,7 @@ public abstract class AbstractRedisConnectionConfiguration {
         if (clusterProperties.getMaxRedirects() != null) {
             config.setMaxRedirects(clusterProperties.getMaxRedirects());
         }
-        String password = null;
-        if (clusterProperties.getPassword() != null) {
-            password = clusterProperties.getPassword();
-        } else if (properties.getPassword() != null) {
-            password = properties.getPassword();
-        }
+        String password = clusterProperties.getPassword();
         if (password != null) {
             config.setPassword(RedisPassword.of(password));
         }
@@ -141,28 +130,6 @@ public abstract class AbstractRedisConnectionConfiguration {
         return nodes;
     }
 
-    protected ConnectionInfo parseUrl(String url) {
-        try {
-            URI uri = new URI(url);
-            String scheme = uri.getScheme();
-            if (!"redis".equals(scheme) && !"rediss".equals(scheme)) {
-                throw new RedisUrlSyntaxException(url);
-            }
-            boolean useSsl = ("rediss".equals(scheme));
-            String password = null;
-            if (uri.getUserInfo() != null) {
-                password = uri.getUserInfo();
-                int index = password.indexOf(':');
-                if (index >= 0) {
-                    password = password.substring(index + 1);
-                }
-            }
-            return new ConnectionInfo(uri, useSsl, password);
-        } catch (URISyntaxException ex) {
-            throw new RedisUrlSyntaxException(url, ex);
-        }
-    }
-
     protected boolean isDynamicSentinelConnection(Map<String, Sentinel> sentinels) {
         return MapUtils.isNotEmpty(sentinels);
     }
@@ -173,62 +140,5 @@ public abstract class AbstractRedisConnectionConfiguration {
 
     protected boolean isDynamicSingletonConnection(Map<String, Singleton> singletons) {
         return MapUtils.isNotEmpty(singletons);
-    }
-
-    static class ConnectionInfo {
-
-        private final URI uri;
-
-        private final boolean useSsl;
-
-        private final String password;
-
-        ConnectionInfo(URI uri, boolean useSsl, String password) {
-            this.uri = uri;
-            this.useSsl = useSsl;
-            this.password = password;
-        }
-
-        boolean isUseSsl() {
-            return this.useSsl;
-        }
-
-        String getHostName() {
-            return this.uri.getHost();
-        }
-
-        int getPort() {
-            return this.uri.getPort();
-        }
-
-        String getPassword() {
-            return this.password;
-        }
-
-    }
-
-
-    private static class RedisUrlSyntaxException extends RuntimeException {
-
-        private final String url;
-
-        RedisUrlSyntaxException(String url, Exception cause) {
-            super(buildMessage(url), cause);
-            this.url = url;
-        }
-
-        RedisUrlSyntaxException(String url) {
-            super(buildMessage(url));
-            this.url = url;
-        }
-
-        String getUrl() {
-            return this.url;
-        }
-
-        private static String buildMessage(String url) {
-            return "Invalid Redis URL '" + url + "'";
-        }
-
     }
 }
