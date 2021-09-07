@@ -29,11 +29,11 @@ import java.lang.annotation.*;
 public @interface MessageHandler {
 
     /**
-     * 消费者所属组，默认是在配置文件中配置的，详见{@link RocketMQConsumerProperties.Consumer#getGroup()}
+     * 消费者所属组，默认是在配置文件中配置的，详见{@link RocketMqConsumerProperties.Consumer#getGroup()}
      *
      * @return 消费者所属组
      */
-    String group() default "${rocketmq.consumer.group}";
+    String group() default "${lodsve.rocketmq.consumer.group}";
 
     /**
      * 这个消息处理方法需要订阅的topic

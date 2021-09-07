@@ -17,6 +17,7 @@
 package com.lodsve.boot.autoconfigure.rocketmq;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.util.ParameterizedTypeImpl;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -42,11 +43,10 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -144,7 +144,7 @@ public class ConsumerConfigurationInitializing implements ApplicationContextAwar
                     Method method = b.getMethod();
                     Object target = b.getTarget();
 
-                    Class<?>[] parameterTypes = method.getParameterTypes();
+                    Type[] parameterTypes = method.getGenericParameterTypes();
                     if (ArrayUtils.isEmpty(parameterTypes)) {
                         logger.warn("handler has no parameter types!tag is '[{}]'! message '[{}]' will be push back to rocketmq!", tag, m);
                         return ConsumeConcurrentlyStatus.RECONSUME_LATER;
@@ -175,14 +175,39 @@ public class ConsumerConfigurationInitializing implements ApplicationContextAwar
         this.applicationContext = (ConfigurableApplicationContext) applicationContext;
     }
 
-    private Object doConvertMessage(Class<?> messageType, MessageExt messageExt, String charset) {
-        String str = new String(messageExt.getBody(), Charset.forName(charset));
+    private Object doConvertMessage(Type messageType, MessageExt messageExt, String charset) {
+        String json = new String(messageExt.getBody(), Charset.forName(charset));
+
+        if (!(messageType instanceof ParameterizedType)) {
+            return doConvertMessageWithNoGeneric((Class<?>) messageType, json);
+        }
+
+        // 存在泛型
+        ParameterizedType type = (ParameterizedType) messageType;
+        Type rawType = type.getRawType();
+        // 获取参数的泛型列表
+        Type[] actualTypeArguments = type.getActualTypeArguments();
+
+        if (Arrays.asList(List.class, Set.class).contains(rawType)) {
+            // collection
+            ParameterizedTypeImpl originType = new ParameterizedTypeImpl(new Type[]{actualTypeArguments[0]}, null, rawType);
+            return JSON.parseObject(json, originType);
+        } else if (Map.class.equals(rawType)) {
+            // map
+        } else {
+            // other type
+        }
+
+        return null;
+    }
+
+    private Object doConvertMessageWithNoGeneric(Class<?> messageType, String json) {
         if (Objects.equals(messageType, String.class)) {
-            return str;
+            return json;
         } else {
             // If msgType not string, use JSON change it.
             try {
-                return JSON.parseObject(str, messageType);
+                return JSON.parseObject(json, messageType);
             } catch (Exception e) {
                 throw new RuntimeException("cannot convert message to " + messageType, e);
             }

@@ -17,11 +17,9 @@
 package com.lodsve.boot.autoconfigure.rocketmq;
 
 import org.apache.rocketmq.client.MQAdmin;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +31,6 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 @ConditionalOnClass({RocketMQListener.class, MQAdmin.class})
-@ConditionalOnBean(DefaultMQProducer.class)
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @EnableConfigurationProperties(RocketMqConsumerProperties.class)
 @Configuration
