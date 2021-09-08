@@ -55,6 +55,8 @@
         <druid.version>1.2.1</druid.version>
         <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
+        <spring.cloud.starter.alibaba.nacos.config.version>2.2.3.RELEASE
+        </spring.cloud.starter.alibaba.nacos.config.version>
         <groovy.all.version>2.4.15</groovy.all.version>
         <jruby.version>1.7.26</jruby.version>
         <jyphon.version>2.7.1b3</jyphon.version>
@@ -242,6 +244,12 @@
             </dependency>
             <!-- springfox end -->
 
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${spring.cloud.starter.alibaba.nacos.config.version}</version>
+            </dependency>
+
             <!-- other languages start -->
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
@@ -324,6 +332,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-mybatis</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-nacos</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
             <dependency>
