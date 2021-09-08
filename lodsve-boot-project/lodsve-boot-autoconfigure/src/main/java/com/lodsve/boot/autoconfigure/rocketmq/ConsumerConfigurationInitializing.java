@@ -17,7 +17,6 @@
 package com.lodsve.boot.autoconfigure.rocketmq;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.util.ParameterizedTypeImpl;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +45,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -179,29 +181,14 @@ public class ConsumerConfigurationInitializing implements ApplicationContextAwar
         String json = new String(messageExt.getBody(), Charset.forName(charset));
 
         if (!(messageType instanceof ParameterizedType)) {
-            return doConvertMessageWithNoGeneric((Class<?>) messageType, json);
+            return doConvertMessageWithoutGeneric((Class<?>) messageType, json);
         }
 
         // 存在泛型
-        ParameterizedType type = (ParameterizedType) messageType;
-        Type rawType = type.getRawType();
-        // 获取参数的泛型列表
-        Type[] actualTypeArguments = type.getActualTypeArguments();
-
-        if (Arrays.asList(List.class, Set.class).contains(rawType)) {
-            // collection
-            ParameterizedTypeImpl originType = new ParameterizedTypeImpl(new Type[]{actualTypeArguments[0]}, null, rawType);
-            return JSON.parseObject(json, originType);
-        } else if (Map.class.equals(rawType)) {
-            // map
-        } else {
-            // other type
-        }
-
-        return null;
+        return JSON.parseObject(json, messageType);
     }
 
-    private Object doConvertMessageWithNoGeneric(Class<?> messageType, String json) {
+    private Object doConvertMessageWithoutGeneric(Class<?> messageType, String json) {
         if (Objects.equals(messageType, String.class)) {
             return json;
         } else {
