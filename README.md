@@ -1,4 +1,5 @@
 # lodsve-boot
+
 Lodsve develop kits base on Spring-Boot and some opensource components!
 
 ```
@@ -11,20 +12,27 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
 ```
 
 ## Contact me
+
 1. Email: sunhao.java@gmail.com
 2. QQ: [867885140][]
 3. Blog: [Blog][] [OSChina][]
 
 ## License
-The `Lodsve Boot` is released under version 3.0 of the [GNU General Public License][].
+
+The `Lodsve Boot` is released under version 2.0 of the [Apache License][].
 
 ## Thanks
+
 The `Lodsve Boot` was created using awesome [JetBrains IDEA][].
 
 ![LOGO](.github/JetBrains.png "JetBrains")
 
-[GNU GENERAL PUBLIC LICENSE]: https://opensource.org/licenses/GPL-3.0
+[Apache License]: http://www.apache.org/licenses/LICENSE-2.0
+
 [Blog]: https://www.crazy-coder.cn
+
 [OSChina]: https://my.oschina.net/sunhaojava
+
 [867885140]: http://wpa.qq.com/msgrd?v=3&uin=867885140&site=qq&menu=yes
+
 [JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-framework
