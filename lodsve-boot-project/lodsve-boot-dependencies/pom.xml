@@ -341,6 +341,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-rabbitmq</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-rdbms</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>

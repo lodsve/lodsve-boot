@@ -189,5 +189,13 @@
             <optional>true</optional>
         </dependency>
         <!-- encryption end -->
+
+        <!-- RabbitMQ start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- RabbitMQ end -->
     </dependencies>
 </project>

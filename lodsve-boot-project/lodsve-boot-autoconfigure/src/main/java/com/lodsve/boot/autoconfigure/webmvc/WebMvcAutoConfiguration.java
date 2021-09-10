@@ -20,6 +20,7 @@ import com.fasterxml.classmate.TypeResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.lodsve.boot.json.JsonConverter;
+import com.lodsve.boot.webmvc.convert.EnumCodeConverterFactory;
 import com.lodsve.boot.webmvc.debug.DebugRequestAspect;
 import com.lodsve.boot.webmvc.resolver.WebInput;
 import com.lodsve.boot.webmvc.resolver.WebOutput;
@@ -51,6 +52,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 @ConditionalOnWebApplication
+@ConditionalOnClass(EnumCodeConverterFactory.class)
 @EnableConfigurationProperties(WebMvcProperties.class)
 @Configuration
 public class WebMvcAutoConfiguration {
