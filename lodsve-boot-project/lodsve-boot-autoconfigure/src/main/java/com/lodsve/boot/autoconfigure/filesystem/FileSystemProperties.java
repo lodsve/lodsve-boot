@@ -17,7 +17,7 @@
 package com.lodsve.boot.autoconfigure.filesystem;
 
 import com.aliyun.oss.common.comm.Protocol;
-import com.lodsve.boot.filesystem.enums.FileSystemTypeEnum;
+import com.lodsve.boot.component.filesystem.enums.FileSystemTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -18,7 +18,7 @@ package com.lodsve.boot.autoconfigure.redis;
 
 import com.google.common.collect.Maps;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.*;
-import com.lodsve.boot.redis.dynamic.DynamicLettuceConnectionFactory;
+import com.lodsve.boot.component.redis.dynamic.DynamicLettuceConnectionFactory;
 import io.lettuce.core.ClientOptions;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.TimeoutOptions;

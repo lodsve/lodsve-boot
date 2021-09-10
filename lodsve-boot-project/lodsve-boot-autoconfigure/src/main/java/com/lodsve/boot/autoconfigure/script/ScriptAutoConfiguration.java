@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.autoconfigure.script;
 
-import com.lodsve.boot.script.*;
+import com.lodsve.boot.component.script.*;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
 import org.jruby.embed.jsr223.JRubyEngineFactory;

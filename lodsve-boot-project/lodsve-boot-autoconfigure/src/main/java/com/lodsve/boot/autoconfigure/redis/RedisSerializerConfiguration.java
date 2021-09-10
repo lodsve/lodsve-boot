@@ -18,8 +18,8 @@ package com.lodsve.boot.autoconfigure.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.lodsve.boot.redis.gson.GsonRedisSerializer;
-import com.lodsve.boot.redis.jackson.Jackson2JsonObjectRedisSerializer;
+import com.lodsve.boot.component.redis.gson.GsonRedisSerializer;
+import com.lodsve.boot.component.redis.jackson.Jackson2JsonObjectRedisSerializer;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

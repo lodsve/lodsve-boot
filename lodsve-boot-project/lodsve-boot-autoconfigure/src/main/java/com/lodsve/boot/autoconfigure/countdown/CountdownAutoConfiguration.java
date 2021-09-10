@@ -16,7 +16,7 @@
  */
 package com.lodsve.boot.autoconfigure.countdown;
 
-import com.lodsve.boot.countdown.*;
+import com.lodsve.boot.component.countdown.*;
 import io.lettuce.core.RedisException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

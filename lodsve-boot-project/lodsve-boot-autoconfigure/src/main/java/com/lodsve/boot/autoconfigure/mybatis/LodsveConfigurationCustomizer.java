@@ -16,9 +16,9 @@
  */
 package com.lodsve.boot.autoconfigure.mybatis;
 
-import com.lodsve.boot.mybatis.plugins.pagination.PaginationInterceptor;
-import com.lodsve.boot.mybatis.plugins.repository.BaseRepositoryInterceptor;
-import com.lodsve.boot.mybatis.type.TypeHandlerScanner;
+import com.lodsve.boot.component.mybatis.plugins.pagination.PaginationInterceptor;
+import com.lodsve.boot.component.mybatis.plugins.repository.BaseRepositoryInterceptor;
+import com.lodsve.boot.component.mybatis.type.TypeHandlerScanner;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandler;

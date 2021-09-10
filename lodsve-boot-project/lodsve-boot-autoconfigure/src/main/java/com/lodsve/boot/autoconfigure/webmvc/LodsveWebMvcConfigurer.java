@@ -16,11 +16,11 @@
  */
 package com.lodsve.boot.autoconfigure.webmvc;
 
+import com.lodsve.boot.component.webmvc.convert.EnumCodeConverterFactory;
+import com.lodsve.boot.component.webmvc.convert.StringDateConvertFactory;
+import com.lodsve.boot.component.webmvc.resolver.BindDataHandlerMethodArgumentResolver;
+import com.lodsve.boot.component.webmvc.resolver.WebResourceDataHandlerMethodArgumentResolver;
 import com.lodsve.boot.json.JsonConverter;
-import com.lodsve.boot.webmvc.convert.EnumCodeConverterFactory;
-import com.lodsve.boot.webmvc.convert.StringDateConvertFactory;
-import com.lodsve.boot.webmvc.resolver.BindDataHandlerMethodArgumentResolver;
-import com.lodsve.boot.webmvc.resolver.WebResourceDataHandlerMethodArgumentResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

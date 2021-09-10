@@ -17,10 +17,10 @@
 package com.lodsve.boot.autoconfigure.mybatis;
 
 import com.google.common.collect.Lists;
-import com.lodsve.boot.mybatis.plugins.pagination.PaginationInterceptor;
-import com.lodsve.boot.mybatis.plugins.repository.BaseRepositoryInterceptor;
-import com.lodsve.boot.mybatis.repository.BaseRepository;
-import com.lodsve.boot.mybatis.type.TypeHandlerScanner;
+import com.lodsve.boot.component.mybatis.plugins.pagination.PaginationInterceptor;
+import com.lodsve.boot.component.mybatis.plugins.repository.BaseRepositoryInterceptor;
+import com.lodsve.boot.component.mybatis.repository.BaseRepository;
+import com.lodsve.boot.component.mybatis.type.TypeHandlerScanner;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.Configuration;

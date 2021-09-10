@@ -21,7 +21,7 @@ import com.lodsve.boot.autoconfigure.redis.RedisProperties.Cluster;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.Pool;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.Sentinel;
 import com.lodsve.boot.autoconfigure.redis.RedisProperties.Singleton;
-import com.lodsve.boot.redis.dynamic.DynamicJedisConnectionFactory;
+import com.lodsve.boot.component.redis.dynamic.DynamicJedisConnectionFactory;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
