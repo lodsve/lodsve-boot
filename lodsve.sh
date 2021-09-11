@@ -25,7 +25,6 @@ help(){
   echo ""
   echo "versions          Update lodsve-boot versions."
   echo "deployOss         Deploy lodsve-boot to maven repository"
-  echo "deployGithub      Deploy lodsve-boot to github repository"
   echo "deployThirdParty  Deploy lodsve-boot to Third-Party repository"
   echo ""
   echo "--------------------------------------------------------------------------"
@@ -40,9 +39,6 @@ case "$1" in
 	;;
   'deployOss')
     sh ./tools/deploy.sh release-oss $2
-	;;
-  'deployGithub')
-    sh ./tools/deploy.sh release-github $2
 	;;
   'deployThirdParty')
     sh ./tools/deploy.sh release-third-party $2
