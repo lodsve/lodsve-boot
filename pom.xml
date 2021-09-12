@@ -30,7 +30,7 @@
 
     <groupId>com.lodsve.boot</groupId>
     <artifactId>lodsve-boot-build</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
     <packaging>pom</packaging>
     <inceptionYear>2020</inceptionYear>
     <name>lodsve boot build</name>
