@@ -31,9 +31,18 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-      - name: Publish to Github
-        run: |
-          cat /home/runner/.m2/settings.xml
-          mvn clean deploy -Dmaven.test.skip=false -P release-github
+      - name: Create Tag
+        uses: actions/github-script@v3
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ steps.date.outputs.date }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const { TAG_NAME } = process.env
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${TAG_NAME}",
+              sha: context.sha
+            })
+
