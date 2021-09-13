@@ -18,3 +18,29 @@ jobs:
         run: |
           MVN_VERSION=$(mvn -q -N -Dexec.executable="echo"  -Dexec.args='${project.version}'  org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
           echo $VERSION | grep -q -E '\-SNAPSHOT$' && echo true || exit 1
+      # 设置Maven中央仓库配置
+      - name: Set up Apache Maven Central
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          server-id: oss-snapshots
+          # Nexus用户名环境变量
+          server-username: ${{ secrets.REPOSITORY_USERNAME }}
+          # Nexus密码环境变量
+          server-password: ${{ secrets.REPOSITORY_PASSWORD }}
+          # gpg短密码环境变量
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          # gpg私钥
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+      # 推送jar包至maven中央仓库
+      - name: Publish to Apache Maven Central
+        # 执行maven deploy命令
+        run: mvn clean deploy -Dmaven.test.skip=false -P release-oss
+        # 环境变量设置
+        env:
+          # Nexus用户名,如果觉得不想暴露也可以配置到secrets中
+          MAVEN_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
+          # Nexus密码
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.REPOSITORY_PASSWORD }}
+          # gpg短密码
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
