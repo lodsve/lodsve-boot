@@ -29,9 +29,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
       - name: Publish to Apache Maven Central
-        run: |
-          cat /home/runner/.m2/settings.xml
-          mvn clean deploy -Dmaven.test.skip=false -P release-oss-snapshot
+        run: cat /home/runner/.m2/settings.xml
         env:
           REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
           REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
