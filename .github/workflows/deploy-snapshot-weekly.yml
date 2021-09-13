@@ -30,7 +30,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
       - name: Publish to Apache Maven Central
         run: |
-          echo /home/runner/.m2/settings.xml
+          cat /home/runner/.m2/settings.xml
           mvn clean deploy -Dmaven.test.skip=false -P release-oss-snapshot
         env:
           REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
