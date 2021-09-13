@@ -16,8 +16,6 @@ jobs:
           java-version: 1.8
       - name: Get Version
         id: get_version
-        with:
-          result-encoding: string
         run: |
           MVN_VERSION=$(mvn -q -N -Dexec.executable="echo"  -Dexec.args='${project.version}'  org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
           echo "::set-output version=$MVN_VERSION"
