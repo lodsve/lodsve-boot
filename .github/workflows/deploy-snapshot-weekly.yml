@@ -24,13 +24,15 @@ jobs:
         with:
           java-version: 1.8
           server-id: oss-snapshots
-          server-username: REPOSITORY_USERNAME
-          server-password: REPOSITORY_PASSWORD
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_CENTRAL_TOKEN
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
       - name: Publish to Apache Maven Central
-        run: cat /home/runner/.m2/settings.xml
+        run: |
+          cat /home/runner/.m2/settings.xml
+          mvn clean deploy -Dmaven.test.skip=false -P release-oss-snapshot
         env:
-          REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
-          REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
