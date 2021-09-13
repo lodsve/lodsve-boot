@@ -39,7 +39,8 @@ jobs:
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.LODSVE_BOOT_TOKEN }}
           files: |
             README.md
-          tag_name: snapshot_${{ steps.get_version.outputs.version }}
+          tag_name: ${{ steps.get_version.outputs.version }}
 
