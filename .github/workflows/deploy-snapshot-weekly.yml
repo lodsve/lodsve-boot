@@ -31,10 +31,18 @@ jobs:
       #          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
       #          MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
       #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      - name: Get Timestamp
+        id: timestamp
+        uses: actions/github-script@v3.1
+        with:
+          result-encoding: string
+          script: |
+            core.setOutput('timestamp', new Date(Date.now()).toISOString().replace(/[^0-9]/g, ""));
+            return context.repo.repo;
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
           files: |
             README.md
-          tag_name: snapshot_${{ steps.date.outputs.date }}
+          tag_name: snapshot_${{ steps.timestamp.outputs.timestamp }}
 
