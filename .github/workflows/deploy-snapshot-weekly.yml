@@ -36,4 +36,5 @@ jobs:
         with:
           files: |
             README.md
+          tag_name: snapshot_${{ steps.date.outputs.date }}
 
