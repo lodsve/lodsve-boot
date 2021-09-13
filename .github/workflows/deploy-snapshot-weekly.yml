@@ -24,19 +24,13 @@ jobs:
         with:
           java-version: 1.8
           server-id: oss-snapshots
-          server-username: ${{ secrets.REPOSITORY_USERNAME }}
-          server-password: ${{ secrets.REPOSITORY_PASSWORD }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          server-username: REPOSITORY_USERNAME
+          server-password: REPOSITORY_PASSWORD
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-      # 推送jar包至maven中央仓库
       - name: Publish to Apache Maven Central
-        # 执行maven deploy命令
-        run: mvn clean deploy -Dmaven.test.skip=false -P release-oss
-        # 环境变量设置
+        run: mvn clean deploy -Dmaven.test.skip=false -P release-oss-snapshot
         env:
-          # Nexus用户名,如果觉得不想暴露也可以配置到secrets中
-          MAVEN_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
-          # Nexus密码
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.REPOSITORY_PASSWORD }}
-          # gpg短密码
+          REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
+          REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
