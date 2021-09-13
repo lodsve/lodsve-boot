@@ -40,7 +40,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.LODSVE_BOOT_TOKEN }}
-          files: |
-            README.md
           tag_name: ${{ steps.get_version.outputs.version }}
+          prerelease: true
 
