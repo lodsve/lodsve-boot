@@ -11,6 +11,69 @@
 \_____/\___/ \__,_|___/ \_/ \___| \____/ \___/ \___/ \__|
 ```
 
+## 如何使用
+1. 使用release版本
+
+        <parent>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-parent</artifactId>
+            <version>x.x.x.RELEASE</version>
+        </parent>
+        <dependency>
+            <groupId>com.lodsve</groupId>
+            <artifactId>lodsve-framework</artifactId>
+            <version>${lodsve.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+2. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
+
+        <parent>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-parent</artifactId>
+            <version>x.x.x-SNAPSHOT</version>
+        </parent>
+        <repositories>
+            <repository>
+                <id>maven-center-snapshot</id>
+                <name>Maven Center Snapshot</name>
+                <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+            </repository>
+        </repositories>
+
+## 关于发版
+1. 我每周都会通过Github Action自动发布一个快照版本！
+
+     构建版本号，如 `x.x.x-SNAPSHOT`。
+2. 不定时发布Release版本。
+
+     构建版本号，如 `x.x.x.RELEASE`。
+
+## 检出源码
+`git clone git@github.com:lodsve/lodsve-boot.git`
+
+## 导入到您的IDE中
+在项目根目录运行命令 `mvn idea:idea` 或者 `mvn eclipse:eclipse` 。
+> **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 8`，`Maven 3.3.X` 和 `Lombok插件` 。
+
+1. 配置Git
+
+        git config --global user.name "your name"
+        git config --global user.email "your email"
+        git config --global core.autocrlf false
+        git config --global core.safecrlf true
+2. 配置您的IDE
+    - Eclipse：打开 Settings-General-Workspace，修改 `New text file line delimiter` 为 `Unix`。
+    - Eclipse：打开 Settings-General-Workspace，修改 `Text file encoding` 为 `UTF-8`。
+    - IDE：打开 Setting-Editor-Code Style，修改 `line delimiter` 为 `Unix and OS X(\n)`。
+    - IDE：打开 Setting-Editor-File encoding，修改所有的 `Encoding` 为 `UTF-8` 和 `with NO BOM`。
+3. 必须要安装的IDE插件(Eclipse 和 Intellij IDEA):
+    - Alibaba Java Coding Guidelines
+    - Lombok plugin
+
 ## 联系我
 
 1. 邮箱: sunhao.java@gmail.com
