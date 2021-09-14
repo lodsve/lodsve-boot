@@ -21,6 +21,13 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
 \_____/\___/ \__,_|___/ \_/ \___| \____/ \___/ \___/ \__|
 ```
 
+## Simple Introduction
+
+1. Lodsve develop kits base on Spring-Boot and some opensource components!
+2. It consists of the following modules:
+
+   See [capability.md](capability.md)
+
 ## How To Use
 
 1. release version
