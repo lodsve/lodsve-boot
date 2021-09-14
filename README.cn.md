@@ -1,3 +1,13 @@
+[![Deploy Snapshot Weekly](https://github.com/lodsve/lodsve-boot/actions/workflows/deploy-snapshot-weekly.yml/badge.svg?branch=master)](https://github.com/lodsve/lodsve-boot/actions/workflows/deploy-snapshot-weekly.yml)
+[![Github Action Maven Verify](https://github.com/lodsve/lodsve-boot/actions/workflows/maven-verify.yml/badge.svg?branch=master)](https://github.com/lodsve/lodsve-boot/actions/workflows/maven-verify.yml)
+
+[![License](https://img.shields.io/badge/license-Apachev2-yellowgreen.svg)]()
+[![Maven Central](https://img.shields.io/maven-central/v/com.lodsve.boot/lodsve-boot.svg)](https://search.maven.org/artifact/com.lodsve.boot/lodsve-boot)
+[![GitHub stars](https://img.shields.io/github/stars/lodsve/lodsve-boot.svg)](https://github.com/lodsve/lodsve-boot/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/lodsve/lodsve-boot.svg)](https://github.com/lodsve/lodsve-boot/network)
+[![GitHub issues](https://img.shields.io/github/issues/lodsve/lodsve-boot.svg)](https://github.com/lodsve/lodsve-boot/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/lodsve/lodsve-boot.svg)](https://github.com/lodsve/lodsve-boot/pulls)
+
 # lodsve-boot
 
 基于Spring-Boot和一些开源组件的开发套件！
