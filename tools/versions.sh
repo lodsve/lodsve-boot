@@ -19,3 +19,16 @@
 
 mvn versions:set -DnewVersion=$1
 mvn versions:commit
+
+dependencies_pom=lodsve-boot-project/lodsve-boot-dependencies/pom.xml
+old_version_number=`awk '/<lodsve.boot.version>[^<]+<\/lodsve.boot.version>/{gsub(/<lodsve.boot.version>|<\/lodsve.boot.version>/,"",$1);print $1;exit;}' $dependencies_pom`
+
+old_version="<lodsve.boot.version>$old_version_number<\/lodsve.boot.version>"
+new_version="<lodsve.boot.version>$1<\/lodsve.boot.version>"
+
+os=$(uname -s)
+if [[ $os == Darwin ]]; then
+    sed -i "" "s/${old_version}/${new_version}/g" $dependencies_pom
+else
+    sed -i "s/${old_version}/${new_version}/g" $dependencies_pom
+fi
