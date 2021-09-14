@@ -16,16 +16,18 @@
  */
 package com.lodsve.boot.autoconfigure.rabbitmq;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lodsve.boot.autoconfigure.rabbitmq.binding.DirectQueueBinding;
 import com.lodsve.boot.autoconfigure.rabbitmq.binding.FanoutQueueBinding;
 import com.lodsve.boot.autoconfigure.rabbitmq.binding.TopicQueueBinding;
-import com.lodsve.boot.autoconfigure.rabbitmq.converter.RabbitJackson2JsonMessageConverter;
 import com.rabbitmq.client.Channel;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -59,8 +61,12 @@ public class RabbitAutoConfiguration implements ApplicationContextAware {
     }
 
     @Bean
-    public MessageConverter messageConverter() {
-        return new RabbitJackson2JsonMessageConverter();
+    public MessageConverter messageConverter(ObjectProvider<ObjectMapper> objectMapperProvider) {
+        ObjectMapper mapper = objectMapperProvider.getIfUnique(ObjectMapper::new);
+        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(mapper);
+        converter.setAlwaysConvertToInferredType(true);
+
+        return converter;
     }
 
     @Override
