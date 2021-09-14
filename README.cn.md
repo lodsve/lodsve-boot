@@ -22,6 +22,7 @@
 ```
 
 ## 如何使用
+
 1. 使用release版本
 
         <parent>
@@ -29,13 +30,6 @@
             <artifactId>lodsve-boot-parent</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
-        <dependency>
-            <groupId>com.lodsve</groupId>
-            <artifactId>lodsve-framework</artifactId>
-            <version>${lodsve.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
 2. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
 
         <parent>
@@ -55,17 +49,20 @@
         </repositories>
 
 ## 关于发版
+
 1. 我每周都会通过Github Action自动发布一个快照版本！
 
-     构建版本号，如 `x.x.x-SNAPSHOT`。
+   构建版本号，如 `x.x.x-SNAPSHOT`。
 2. 不定时发布Release版本。
 
-     构建版本号，如 `x.x.x.RELEASE`。
+   构建版本号，如 `x.x.x.RELEASE`。
 
 ## 检出源码
+
 `git clone git@github.com:lodsve/lodsve-boot.git`
 
 ## 导入到您的IDE中
+
 在项目根目录运行命令 `mvn idea:idea` 或者 `mvn eclipse:eclipse` 。
 > **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 8`，`Maven 3.3.X` 和 `Lombok插件` 。
 

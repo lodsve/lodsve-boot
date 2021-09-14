@@ -22,6 +22,7 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
 ```
 
 ## How To Use
+
 1. release version
 
         <parent>
@@ -29,14 +30,8 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
             <artifactId>lodsve-boot-parent</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
-        <dependency>
-            <groupId>com.lodsve</groupId>
-            <artifactId>lodsve-framework</artifactId>
-            <version>${lodsve.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-2. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in the issue.
+2. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in
+   the issue.
 
         <parent>
             <groupId>com.lodsve.boot</groupId>
@@ -55,22 +50,25 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
         </repositories>
 
 ## About release
+
 1. I will automatically publish a snapshot version every week through Github Action!
 
-    Artifact version number like `x.x.x-SNAPSHOT`.
+   Artifact version number like `x.x.x-SNAPSHOT`.
 2. Release a release version from time to time.
 
-    Artifact version number like `x.x.x.RELEASE`.
+   Artifact version number like `x.x.x.RELEASE`.
 
 ## Check out sources
+
 `git clone git@github.com:lodsve/lodsve-boot.git`
 
 ## Import sources into your IDE
+
 Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
 > **Note:** Per the prerequisites above, ensure that you have JDK 8 and Maven 3.3.X configured properly in your IDE.
 
-1. Config your Git 
-    
+1. Config your Git
+
         git config --global user.name "your name"
         git config --global user.email "your email"
         git config --global core.autocrlf false
