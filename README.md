@@ -70,6 +70,9 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
     - Eclipse: Open Settings-General-Workspace, modify `Text file encoding` as `UTF-8`
     - IDE: Open Setting-Editor-Code Style, modify `line delimiter` as `Unix and OS X(\n)`
     - IDE: Open Setting-Editor-File encoding, modify all `Encoding` as `UTF-8` and `with NO BOM`
+3. Required IDE Plugins(Both Eclipse and Intellij IDEA):
+    - Alibaba Java Coding Guidelines
+    - Lombok plugin
 
 ## Contact me
 
