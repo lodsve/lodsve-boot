@@ -26,7 +26,7 @@
 1. `Lodsve`基于Spring-Boot和一些开源组件的开发包！
 2. 包含了以下的模块：
 
-   参考 [能力.md](capability.md)
+   参考 [能力.md](capability_cn.md)
 
 ## 如何使用
 
