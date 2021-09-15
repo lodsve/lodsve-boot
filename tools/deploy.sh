@@ -16,4 +16,13 @@
 # limitations under the License.
 #
 
-mvn clean deploy -Dmaven.test.skip=false -P $1  -Dgpg.passphrase=$2
+profile=$1
+skip=false
+if [[ $profile == release-third-party ]]; then
+  # skip test
+  skip=true
+else
+  skip=false
+fi
+
+mvn clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=$skip

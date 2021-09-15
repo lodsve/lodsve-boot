@@ -30,7 +30,7 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           cat /home/runner/.m2/settings.xml
-          mvn clean deploy -Dmaven.test.skip=false -P release-oss-snapshot
+          mvn clean deploy -P release-oss-snapshot
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
