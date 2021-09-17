@@ -1,5 +1,6 @@
 [![Deploy Snapshot Weekly](https://github.com/lodsve/lodsve-boot/actions/workflows/deploy-snapshot-weekly.yml/badge.svg?branch=master)](https://github.com/lodsve/lodsve-boot/actions/workflows/deploy-snapshot-weekly.yml)
 [![Github Action Maven Verify](https://github.com/lodsve/lodsve-boot/actions/workflows/maven-verify.yml/badge.svg?branch=master)](https://github.com/lodsve/lodsve-boot/actions/workflows/maven-verify.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot?ref=badge_shield)
 
 [![LICENSE](https://img.shields.io/github/license/lodsve/lodsve-boot)](https://github.com/lodsve/lodsve-boot/blob/master/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/com.lodsve.boot/lodsve-boot.svg)](https://search.maven.org/artifact/com.lodsve.boot/lodsve-boot)
@@ -98,6 +99,9 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
 ## License
 
 The `Lodsve Boot` is released under version 2.0 of the [Apache License][].
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot?ref=badge_large)
 
 ## Thanks
 
