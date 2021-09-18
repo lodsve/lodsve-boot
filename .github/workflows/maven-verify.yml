@@ -3,9 +3,21 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**./*.java"
+      - "**./*.xml"
+      - "**/pom.xml"
+      - "**/additional-spring-configuration-metadata.json"
+      - "**/spring.factories"
   pull_request:
     branches:
       - master
+    paths:
+      - "**./*.java"
+      - "**./*.xml"
+      - "**/pom.xml"
+      - "**/additional-spring-configuration-metadata.json"
+      - "**/spring.factories"
 
 jobs:
   maven-verify:
