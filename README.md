@@ -27,7 +27,7 @@ Lodsve develop kits base on Spring-Boot and some opensource components!
 1. Lodsve develop kits base on Spring-Boot and some opensource components!
 2. It consists of the following modules:
 
-   See [capability.md](capability.md)
+   See [capability](capability.md)
 
 ## How To Use
 
