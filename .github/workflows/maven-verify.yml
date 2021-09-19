@@ -4,8 +4,8 @@ on:
     branches:
       - master
     paths:
-      - "**./*.java"
-      - "**./*.xml"
+      - "**/*.java"
+      - "**/*.xml"
       - "**/pom.xml"
       - "**/additional-spring-configuration-metadata.json"
       - "**/spring.factories"
