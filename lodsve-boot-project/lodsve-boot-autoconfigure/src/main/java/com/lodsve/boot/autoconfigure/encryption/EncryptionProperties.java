@@ -57,6 +57,10 @@ public class EncryptionProperties {
     }
 
     /**
+     * 是否启用
+     */
+    private boolean enabled = false;
+    /**
      * base64解密
      */
     private Base64 base64 = new Base64();
