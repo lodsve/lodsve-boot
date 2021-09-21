@@ -26,7 +26,6 @@ import java.util.Collections;
  * direct queue.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-08-02 13:49
  */
 public class DirectQueueBinding extends Binding {
     public DirectQueueBinding(DirectExchange exchange, Queue queue, String routingKey) {

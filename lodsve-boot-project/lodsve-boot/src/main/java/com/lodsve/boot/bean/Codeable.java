@@ -17,23 +17,22 @@
 package com.lodsve.boot.bean;
 
 /**
- * 枚举-->code.
+ * 枚举--code.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/12/29 下午2:47
  */
 public interface Codeable {
     /**
      * 获取在数据库中存储的值
      *
-     * @return
+     * @return the code
      */
     String getCode();
 
     /**
      * 枚举显示的值
      *
-     * @return
+     * @return the title
      */
     String getTitle();
 }

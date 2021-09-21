@@ -35,7 +35,6 @@ import java.util.*;
  * sql utils.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/6/12 下午8:27
  */
 public final class SqlUtils {
     public static final String KEEP_ORDER_BY = "/*keep orderby*/";
@@ -180,7 +179,8 @@ public final class SqlUtils {
     /**
      * 获取普通的Count-sql
      *
-     * @param sql 原查询sql
+     * @param sql  原查询sql
+     * @param name 字段名
      * @return 返回count查询sql
      */
     public static String getSimpleCountSql(@NonNull final String sql, @NonNull String name) {

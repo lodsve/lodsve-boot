@@ -17,8 +17,8 @@
 package com.lodsve.boot.component.redis.dynamic;
 
 /**
- * 多数据源保存选择的数据源.<p/>
- * 手动使用时，切记要在使用完释放ThreadLocal. 使用方法如下(try-with-resources):<p/>
+ * 多数据源保存选择的数据源.
+ * 手动使用时，切记要在使用完释放ThreadLocal. 使用方法如下(try-with-resources):
  * <pre>
  * try (RedisConnectionHolder dsh = RedisConnectionHolder.getInstance()) {
  *     dsh.set(dataSource);

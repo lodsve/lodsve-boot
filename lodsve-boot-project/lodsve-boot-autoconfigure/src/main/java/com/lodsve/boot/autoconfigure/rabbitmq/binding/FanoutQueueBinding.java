@@ -27,7 +27,6 @@ import java.util.Collections;
  * fanout queue.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-08-02 13:48
  */
 public class FanoutQueueBinding extends Binding {
     public FanoutQueueBinding(FanoutExchange exchange, Queue queue) {

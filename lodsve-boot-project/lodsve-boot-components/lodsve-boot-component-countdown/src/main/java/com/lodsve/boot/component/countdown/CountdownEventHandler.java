@@ -22,7 +22,6 @@ import java.io.Serializable;
  * redis事件处理.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/9/28 下午5:15
  */
 public interface CountdownEventHandler {
     /**

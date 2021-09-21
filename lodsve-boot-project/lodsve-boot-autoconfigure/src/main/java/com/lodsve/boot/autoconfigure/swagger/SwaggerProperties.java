@@ -97,7 +97,7 @@ public class SwaggerProperties {
          */
         private String description;
         /**
-         * 参数类型<p/>
+         * 参数类型
          * integer/string/boolean/number/object
          */
         private String type;

@@ -27,7 +27,6 @@ import java.util.Map;
  * 其实就是使用jdk自带的脚本引擎.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016/12/9 上午10:47
  */
 public abstract class AbstractScriptEngine implements com.lodsve.boot.component.script.ScriptEngine {
     /**

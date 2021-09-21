@@ -46,7 +46,6 @@ import java.util.Map;
  * xml工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2015-11-18 13:58
  */
 public final class XmlUtils {
     private static final SAXReader SAX_READER = new SAXReader();
@@ -57,8 +56,8 @@ public final class XmlUtils {
     /**
      * 解析xml
      *
-     * @param in
-     * @return
+     * @param in in
+     * @return 解析xml
      */
     public static Document parseXML(InputStream in) {
         Assert.notNull(in);
@@ -74,7 +73,7 @@ public final class XmlUtils {
      * xml 2 string
      *
      * @param document xml document
-     * @return
+     * @return string
      */
     public static String parseXMLToString(Document document) {
         Assert.notNull(document);
@@ -97,7 +96,7 @@ public final class XmlUtils {
      *
      * @param element 元素
      * @param tagName 子元素
-     * @return
+     * @return 子元素集合
      */
     @SuppressWarnings("unchecked")
     public static List<Element> getChildren(Element element, String tagName) {
@@ -112,7 +111,7 @@ public final class XmlUtils {
      *
      * @param element 元素
      * @param tagName 子元素
-     * @return
+     * @return 子元素
      */
     public static Element getChild(Element element, String tagName) {
         Assert.notNull(element);
@@ -125,7 +124,7 @@ public final class XmlUtils {
      * 获取元素下的全部子元素
      *
      * @param element 元素
-     * @return
+     * @return 全部子元素
      */
     @SuppressWarnings("unchecked")
     public static List<Element> getChildren(Element element) {
@@ -138,7 +137,7 @@ public final class XmlUtils {
      * 获取元素中包含的内容
      *
      * @param element 元素
-     * @return
+     * @return 包含的内容
      */
     public static String getElementBody(Element element) {
         Assert.notNull(element);
@@ -151,7 +150,7 @@ public final class XmlUtils {
      *
      * @param element 元素
      * @param attr    属性名
-     * @return
+     * @return 元素属性
      */
     public static String getElementAttr(Element element, String attr) {
         Assert.notNull(element);
@@ -164,8 +163,9 @@ public final class XmlUtils {
      * 获取元素下子元素的属性
      *
      * @param element 元素
+     * @param tagName 标签名
      * @param attr    属性名
-     * @return
+     * @return 子元素的属性
      */
     public static String getChildAttr(Element element, String tagName, String attr) {
         Assert.notNull(element);
@@ -181,7 +181,7 @@ public final class XmlUtils {
      *
      * @param root 根
      * @param path 路径（相对于给定的根元素）,eg: root/node1/node2...
-     * @return
+     * @return 路径节点
      */
     public static Element getElement(Element root, String path) {
         Assert.notNull(root);
@@ -201,7 +201,7 @@ public final class XmlUtils {
      *
      * @param root        根
      * @param pathAndAttr 路径（相对于给定的根元素）,eg: root/node1/node2/attr3:attrName
-     * @return
+     * @return 指定路径节点的属性
      */
     public static String getAttrValue(Element root, String pathAndAttr) {
         Assert.notNull(root);

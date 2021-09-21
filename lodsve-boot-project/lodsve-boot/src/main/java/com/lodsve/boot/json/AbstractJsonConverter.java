@@ -22,7 +22,6 @@ import com.lodsve.boot.utils.JsonFormatUtils;
  * .
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-07-09 10:35
  */
 public abstract class AbstractJsonConverter implements JsonConverter {
     @Override

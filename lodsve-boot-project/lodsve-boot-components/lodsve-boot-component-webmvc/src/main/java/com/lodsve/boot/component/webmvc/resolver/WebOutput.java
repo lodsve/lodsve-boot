@@ -28,7 +28,6 @@ import java.util.Map;
  * 封装HttpServletResponse
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012年1月19日
  */
 public class WebOutput {
     private final HttpServletResponse response;
@@ -37,8 +36,8 @@ public class WebOutput {
     /**
      * 构造函数
      *
-     * @param response
-     * @param jsonConverter
+     * @param response      response
+     * @param jsonConverter jsonConverter
      */
     public WebOutput(HttpServletResponse response, JsonConverter jsonConverter) {
         this.response = response;
@@ -80,7 +79,8 @@ public class WebOutput {
     /**
      * 返回json数据
      *
-     * @param params
+     * @param params params
+     * @throws Exception exception
      */
     public void toJson(Map<String, Object> params) throws Exception {
         this.response.setContentType("application/json;charset=UTF-8");
@@ -94,7 +94,9 @@ public class WebOutput {
     /**
      * 返回json数据
      *
-     * @param params
+     * @param params params
+     * @param <T>    类型
+     * @throws Exception exception
      */
     public <T extends Serializable> void toJson(T params) throws Exception {
         this.response.setContentType("application/json;charset=UTF-8");

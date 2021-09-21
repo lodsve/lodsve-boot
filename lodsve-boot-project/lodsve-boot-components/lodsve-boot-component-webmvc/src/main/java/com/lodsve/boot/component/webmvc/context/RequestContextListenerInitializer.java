@@ -32,7 +32,6 @@ import javax.servlet.ServletException;
  * </pre></blockquote>
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-4-24-0024 10:25
  */
 public class RequestContextListenerInitializer implements WebApplicationInitializer {
     @Override

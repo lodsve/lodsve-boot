@@ -34,7 +34,6 @@ import java.util.jar.Manifest;
  * 获取框架版本号，即maven中的version.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018/1/11 下午11:07
  */
 public final class LodsveBootVersion {
     private LodsveBootVersion() {

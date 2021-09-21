@@ -51,7 +51,7 @@ public class VersionUtils {
      *
      * @param mappedStatement mappedStatement
      * @param table           表对象
-     * @param keyMap          查询条件组合(property name in domain object -> value)
+     * @param keyMap          查询条件组合(property name in domain object -&gt; value)
      * @param <T>             版本号的类型
      * @return 当前版本号
      * @throws SQLException sql执行异常

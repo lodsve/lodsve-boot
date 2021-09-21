@@ -22,7 +22,6 @@ import com.lodsve.boot.exception.LodsveBootException;
  * mybatis异常.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 16/8/15 下午4:10
  */
 public class MyBatisException extends LodsveBootException {
     public MyBatisException(String message) {

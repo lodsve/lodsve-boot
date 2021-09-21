@@ -49,7 +49,9 @@ public class RedisCacheManagerConfiguration extends CachingConfigurerSupport {
     /**
      * cacheManager 根据是否有自定义有效时间来动态修改
      *
-     * @param redisConnectionFactory redisConnectionFactory
+     * @param redisConnectionFactory  redisConnectionFactory
+     * @param redisCacheConfiguration redisCacheConfiguration
+     * @param redisSerializer         redisSerializer
      * @return RedisCacheManager
      */
     @Bean
@@ -72,6 +74,7 @@ public class RedisCacheManagerConfiguration extends CachingConfigurerSupport {
      * 设置 redis 数据默认过期时间
      * 设置@cacheable 序列化方式
      *
+     * @param redisSerializer redisSerializer
      * @return RedisCacheConfiguration
      */
     @Bean

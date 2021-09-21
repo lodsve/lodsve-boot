@@ -35,6 +35,9 @@ public class LodsveBootExceptionHandler {
 
     /**
      * 捕获自定义异常
+     *
+     * @param exception exception
+     * @return 异常处理
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(LodsveBootException.class)
@@ -50,6 +53,9 @@ public class LodsveBootExceptionHandler {
 
     /**
      * 未被捕获的异常处理
+     *
+     * @param throwable exception
+     * @return 异常处理
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Throwable.class)

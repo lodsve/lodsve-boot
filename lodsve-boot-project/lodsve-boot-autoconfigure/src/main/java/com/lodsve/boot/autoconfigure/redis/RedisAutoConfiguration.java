@@ -53,7 +53,8 @@ public class RedisAutoConfiguration {
      * 在此我们将自己配置RedisTemplate并定义Serializer。
      *
      * @param redisConnectionFactory redisConnectionFactory
-     * @return RedisTemplate<String, Object>
+     * @param redisSerializer        redisSerializer
+     * @return RedisTemplate&lt;String, Object&gt;
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(ObjectProvider<RedisConnectionFactory> redisConnectionFactory, ObjectProvider<RedisSerializer<Object>> redisSerializer) {

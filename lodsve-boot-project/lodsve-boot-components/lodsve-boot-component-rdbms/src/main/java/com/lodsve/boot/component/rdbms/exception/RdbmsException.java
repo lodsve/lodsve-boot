@@ -22,7 +22,6 @@ import com.lodsve.boot.exception.LodsveBootException;
  * rdbms异常.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 16/8/15 下午4:10
  */
 public class RdbmsException extends LodsveBootException {
     public RdbmsException(String message) {

@@ -19,11 +19,10 @@ package com.lodsve.boot.component.webmvc.resolver;
 import java.lang.annotation.*;
 
 /**
- * 表单提交多个对象，且这些对象含有同名的字段，需要用此注解标注参数.<br/>
+ * 表单提交多个对象，且这些对象含有同名的字段，需要用此注解标注参数.
  * 解析类为{@link BindDataHandlerMethodArgumentResolver}
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2015-1-29 21:45
  */
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
@@ -32,7 +31,7 @@ public @interface Bind {
     /**
      * 表单提交时，字段前缀
      *
-     * @return
+     * @return 字段前缀
      */
     String value();
 }

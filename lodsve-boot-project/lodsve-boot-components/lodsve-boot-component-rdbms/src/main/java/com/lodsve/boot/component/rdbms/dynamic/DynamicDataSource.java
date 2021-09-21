@@ -30,7 +30,6 @@ import java.util.Map;
  * 动态数据源.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/12/14 下午6:23
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
     private final Map<String, DataSource> dataSourceMap;

@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
  * mybatis分页工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/6/29 下午2:55
  */
 public class PaginationUtils {
     private static final Pattern ORDER_BY = Pattern.compile(".*order\\s+by\\s+.*", Pattern.CASE_INSENSITIVE);
@@ -47,10 +46,10 @@ public class PaginationUtils {
     /**
      * 从MappedStatement的参数中指定类型的参数
      *
-     * @param parameter
-     * @param target
-     * @param <T>
-     * @return
+     * @param parameter parameter
+     * @param target    target
+     * @param <T>       类型
+     * @return 指定类型的参数
      */
     @SuppressWarnings("unchecked")
     public static <T> T findObjectFromParameter(Object parameter, Class<T> target) {

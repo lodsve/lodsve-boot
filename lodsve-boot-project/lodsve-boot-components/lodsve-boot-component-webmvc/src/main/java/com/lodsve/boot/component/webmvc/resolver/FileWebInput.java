@@ -33,7 +33,6 @@ import java.util.List;
  * 扩展WebInput，为文件类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-6-26 上午09:37:31
  */
 public class FileWebInput extends WebInput {
     private static final Log log = LogFactory.getLog(FileWebInput.class);
@@ -51,7 +50,7 @@ public class FileWebInput extends WebInput {
     /**
      * 获取所有的上传文件域的名称
      *
-     * @return
+     * @return 所有的上传文件域的名称
      */
     public String[] getNames() {
         List<String> list = new ArrayList<>();
@@ -73,8 +72,8 @@ public class FileWebInput extends WebInput {
      *
      * @param name 上传文件域的名称
      * @param file 保持的目标文件
-     * @throws IllegalStateException
-     * @throws IOException
+     * @throws IllegalStateException IllegalStateException
+     * @throws IOException           IOException
      */
     public void saveFile(String name, File file) throws IllegalStateException, IOException {
         if (StringUtils.isEmpty(name) || file == null || !file.exists()) {
@@ -90,8 +89,8 @@ public class FileWebInput extends WebInput {
      *
      * @param name     上传文件域的名称
      * @param fileName 保持的目标文件路径
-     * @throws IllegalStateException
-     * @throws IOException
+     * @throws IllegalStateException IllegalStateException
+     * @throws IOException           IOException
      */
     public void saveFile(String name, String fileName) throws IllegalStateException, IOException {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(fileName)) {
@@ -110,8 +109,8 @@ public class FileWebInput extends WebInput {
      * 获取文件域的输入流
      *
      * @param name 上传文件域的名称
-     * @return
-     * @throws IOException
+     * @return 文件域的输入流
+     * @throws IOException IOException
      */
     public InputStream getFileInputStream(String name) throws IOException {
         MultipartFile f = multipartRequest.getFile(name);
@@ -122,8 +121,8 @@ public class FileWebInput extends WebInput {
      * 获取文件域的字符数组
      *
      * @param name 上传文件域的名称
-     * @return
-     * @throws IOException
+     * @return 文件域的字符数组
+     * @throws IOException IOException
      */
     public byte[] getFileBytes(String name) throws IOException {
         MultipartFile f = multipartRequest.getFile(name);
@@ -134,7 +133,7 @@ public class FileWebInput extends WebInput {
      * 根据域的名称获取上传的文件
      *
      * @param name 上传文件域的名称
-     * @return
+     * @return 上传的文件
      */
     public MultipartFile getFile(String name) {
         return multipartRequest.getFile(name);
@@ -145,7 +144,7 @@ public class FileWebInput extends WebInput {
      *
      * @param name 上传文件域的名称
      * @param out  输出流
-     * @throws IOException
+     * @throws IOException IOException
      */
     public void copyFileTo(String name, OutputStream out) throws IOException {
         MultipartFile f = multipartRequest.getFile(name);
@@ -158,8 +157,8 @@ public class FileWebInput extends WebInput {
      *
      * @param name     上传文件域的名称
      * @param encoding 指定编码
-     * @return
-     * @throws IOException
+     * @return 字符串
+     * @throws IOException IOException
      */
     public String copyFileToString(String name, String encoding) throws IOException {
         MultipartFile f = multipartRequest.getFile(name);
@@ -174,7 +173,7 @@ public class FileWebInput extends WebInput {
      * @param name     上传文件域的名称
      * @param out      writer
      * @param encoding 指定编码
-     * @throws IOException
+     * @throws IOException IOException
      */
     public void copyFileToWriter(String name, Writer out, String encoding) throws IOException {
         MultipartFile f = multipartRequest.getFile(name);

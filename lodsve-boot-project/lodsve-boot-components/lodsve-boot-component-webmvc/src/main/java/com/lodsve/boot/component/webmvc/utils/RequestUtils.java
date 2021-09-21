@@ -30,7 +30,6 @@ import java.util.*;
  * HttpServletRequest的工具类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-2-15 下午10:12:52
  */
 public class RequestUtils {
     /**
@@ -47,8 +46,8 @@ public class RequestUtils {
     /**
      * 判断是否是AJAX请求
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return 是否是AJAX请求
      */
     public static boolean isAjaxRequest(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
@@ -100,8 +99,8 @@ public class RequestUtils {
     /**
      * 获得请求中所带的参数
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return 请求中所带的参数
      */
     public static List<String> getRequestParam(HttpServletRequest request) {
         List<String> urlParams = new ArrayList<>();
@@ -121,8 +120,8 @@ public class RequestUtils {
     /**
      * 获取contextPath
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return contextPath
      */
     public static String getContextPath(HttpServletRequest request) {
         String contextPath = (String) request.getAttribute(DEFAULT_CONTEXT_PATH);
@@ -187,7 +186,7 @@ public class RequestUtils {
      * 给定一段URL后面的参数,返回参数的map集合
      *
      * @param params 参数
-     * @return
+     * @return 参数的map集合
      */
     public static Map<String, Object> getParams(String params) {
         if (StringUtils.isEmpty(params)) {
@@ -217,7 +216,7 @@ public class RequestUtils {
      *
      * @param params 参数
      * @param key    key
-     * @return
+     * @return 返回key对应的值
      */
     public static String getParam(String params, String key) {
         if (StringUtils.isEmpty(params) || StringUtils.isEmpty(key)) {
@@ -248,7 +247,7 @@ public class RequestUtils {
      *
      * @param url url
      * @param key key
-     * @return
+     * @return 返回key对应的值
      */
     public static String getParamFromUrl(String url, String key) {
         if (StringUtils.isEmpty(url) || StringUtils.isEmpty(key)) {

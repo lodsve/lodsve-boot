@@ -29,7 +29,6 @@ import java.util.*;
  * object util class
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-6-26 上午09:44:13
  */
 public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 
@@ -40,8 +39,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
     /**
      * 判断是否为空
      *
-     * @param obj
-     * @return
+     * @param obj obj
+     * @return 是否为空
      */
     public static boolean isEmpty(Object obj) {
         return obj == null;
@@ -50,8 +49,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
     /**
      * 判断是否为非空
      *
-     * @param obj
-     * @return
+     * @param obj obj
+     * @return 是否为非空
      */
     public static boolean isNotEmpty(Object obj) {
         return !isEmpty(obj);
@@ -60,8 +59,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
     /**
      * 获取object的class
      *
-     * @param obj
-     * @return
+     * @param obj obj
+     * @return object的class
      */
     public static Class<?> getType(Object obj) {
         return isEmpty(obj) ? null : obj.getClass();
@@ -72,7 +71,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      *
      * @param obj1 包含的数组           为空返回false
      * @param obj2 被包含的数组          为空返回false
-     * @return
+     * @return 是否包含
      */
     public static boolean contain(Object[] obj1, Object[] obj2) {
         if (obj1 == null || obj1.length < 1) {
@@ -92,7 +91,7 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      *
      * @param destArray 目标数组        为空返回false
      * @param srcObj    源对象          为空返回false
-     * @return
+     * @return 是否包含
      */
     public static boolean contains(Object[] destArray, Object srcObj) {
         return contain(destArray, new Object[]{srcObj});
@@ -157,6 +156,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      *
      * @param first  第一个对象
      * @param second 第二个对象
+     * @return 合并obj2和obj2的值
+     * @throws IllegalAccessException field not exist!
      */
     public static Object mergerObject(Object first, Object second) throws IllegalAccessException {
         Assert.notNull(first);

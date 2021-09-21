@@ -34,7 +34,6 @@ import java.util.*;
  * Excel导入的工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 14-2-24 下午2:07
  * @see CheckExcel
  */
 public class ExcelUtils {
@@ -52,7 +51,7 @@ public class ExcelUtils {
      *
      * @param excel            excel
      * @param excelColumnNames excel中每个字段的英文名(应该与pojo对象的字段名一致,顺序与excel一致)
-     * @return excel每行是list一条记录，map是对应的"字段名-->值"
+     * @return excel每行是list一条记录，map是对应的"字段名--&gt;值"
      */
     public static List<Map<String, String>> evalData(InputStream excel, List<String> excelColumnNames) {
         Assert.notNull(excel, "execl不能为空！");

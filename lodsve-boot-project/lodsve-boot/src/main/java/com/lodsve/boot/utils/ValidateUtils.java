@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
  * 验证工具类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-7-12 下午04:09:14
  */
 public class ValidateUtils {
 
@@ -92,14 +91,14 @@ public class ValidateUtils {
      * 判断是否是邮箱地址
      *
      * @param email 待验证的邮箱地址
-     * @return
+     * @return 是否是邮箱地址
      */
     public static boolean isEmail(String email) {
         //不区分大小写
         Pattern pattern = Pattern.compile(REG_EMAIL, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
 
-        /**
+        /*
          * 注意find与matches()的区别
          * 调用find方法，只执行尽量匹配
          * 而调用matches方法，则执行严格的匹配
@@ -111,7 +110,7 @@ public class ValidateUtils {
      * 判断是否是电话号码,电话(固话)
      *
      * @param phone 固话号码
-     * @return
+     * @return 是否是电话号码, 电话(固话)
      */
     public static boolean isPhone(String phone) {
         Pattern patter = Pattern.compile(REG_PHONE, Pattern.CASE_INSENSITIVE);
@@ -124,7 +123,7 @@ public class ValidateUtils {
      * 判断是否是手机号码
      *
      * @param mobile 手机号码
-     * @return
+     * @return 是否是手机号码
      */
     public static boolean isMobile(String mobile) {
         Pattern patter = Pattern.compile(REG_MOBILE, Pattern.CASE_INSENSITIVE);
@@ -136,8 +135,8 @@ public class ValidateUtils {
     /**
      * 判断是否是正确的url
      *
-     * @param url
-     * @return
+     * @param url url
+     * @return 是否是正确的url
      */
     public static boolean isUrl(String url) {
         Pattern patter = Pattern.compile(REG_URL, Pattern.CASE_INSENSITIVE);
@@ -150,7 +149,7 @@ public class ValidateUtils {
      * 判断是否是合法的身份证号码
      *
      * @param idCard 身份证号码
-     * @return
+     * @return 是否是合法的身份证号码
      */
     public static boolean isIdCard(String idCard) {
         Pattern patter = Pattern.compile(REG_IDCARD, Pattern.CASE_INSENSITIVE);
@@ -163,7 +162,7 @@ public class ValidateUtils {
      * 判断是否是数字
      *
      * @param number 数字
-     * @return
+     * @return 是否是数字
      */
     public static boolean isNumber(String number) {
         Pattern patter = Pattern.compile(REG_NUMBER, Pattern.CASE_INSENSITIVE);
@@ -176,7 +175,7 @@ public class ValidateUtils {
      * 判断邮编是否合法
      *
      * @param zip 邮编
-     * @return
+     * @return 邮编是否合法
      */
     public static boolean isZip(String zip) {
         Pattern patter = Pattern.compile(REG_ZIP, Pattern.CASE_INSENSITIVE);
@@ -188,8 +187,8 @@ public class ValidateUtils {
     /**
      * 判断QQ号是否合法
      *
-     * @param qq
-     * @return
+     * @param qq qq
+     * @return QQ号是否合法
      */
     public static boolean isQq(String qq) {
         Pattern patter = Pattern.compile(REG_QQ, Pattern.CASE_INSENSITIVE);
@@ -201,8 +200,8 @@ public class ValidateUtils {
     /**
      * 判断是否是整数
      *
-     * @param integer
-     * @return
+     * @param integer integer
+     * @return 是否是整数
      */
     public static boolean isInteger(String integer) {
         Pattern patter = Pattern.compile(REG_INTEGER, Pattern.CASE_INSENSITIVE);
@@ -214,8 +213,8 @@ public class ValidateUtils {
     /**
      * 判断是否是小数
      *
-     * @param param
-     * @return
+     * @param param param
+     * @return 是否是小数
      */
     public static boolean isDouble(String param) {
         Pattern patter = Pattern.compile(REG_DOUBLE, Pattern.CASE_INSENSITIVE);
@@ -227,8 +226,8 @@ public class ValidateUtils {
     /**
      * 判断是否是英文
      *
-     * @param english
-     * @return
+     * @param english english
+     * @return 是否是英文
      */
     public static boolean isEnglish(String english) {
         Pattern patter = Pattern.compile(REG_ENGLISH, Pattern.CASE_INSENSITIVE);
@@ -238,10 +237,10 @@ public class ValidateUtils {
     }
 
     /**
-     * 判断QQ号是否合法
+     * 是否是中文
      *
-     * @param chinese
-     * @return
+     * @param chinese chinese
+     * @return 是否是中文
      */
     public static boolean isChinese(String chinese) {
         Pattern patter = Pattern.compile(REG_CHINESE, Pattern.CASE_INSENSITIVE);
@@ -253,8 +252,8 @@ public class ValidateUtils {
     /**
      * 判断IP是否合法
      *
-     * @param ip
-     * @return
+     * @param ip ip
+     * @return IP是否合法
      */
     public static boolean isIp(String ip) {
         Pattern patter = Pattern.compile(REG_IP, Pattern.CASE_INSENSITIVE);

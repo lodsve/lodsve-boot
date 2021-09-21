@@ -33,7 +33,6 @@ import java.util.*;
  * 操作ip的工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 13-12-10 下午11:37
  */
 public class IpUtils {
     private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);
@@ -50,9 +49,9 @@ public class IpUtils {
     }
 
     /**
-     * 根据给定IP获取IP地址的全部信息<br/>
-     * eg:<br/>
-     * give ip 222.94.109.17,you will receive a map.<br/>
+     * 根据给定IP获取IP地址的全部信息
+     * eg:
+     * give ip 222.94.109.17,you will receive a map.
      * map is {"region":"江苏省","area_id":"300000","country_id":"CN","isp":"电信","region_id":"320000","country":"中国","city":"南京市","isp_id":"100017","ip":"222.94.109.17","city_id":"320100","area":"华东","county":"","county_id":"-1"}
      *
      * @param ip ip

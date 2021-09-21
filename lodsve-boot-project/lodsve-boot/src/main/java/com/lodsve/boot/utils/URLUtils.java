@@ -27,41 +27,38 @@ import java.util.BitSet;
  * 对url的处理工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-4-30 下午01:48:01
  */
 public class URLUtils {
 
     /**
      * character which don't need encoding in url
      */
-    private static final BitSet unNeedEncoding;
+    private static final BitSet UN_NEED_ENCODING;
 
     static {
-        unNeedEncoding = new BitSet(256);
+        UN_NEED_ENCODING = new BitSet(256);
 
         int i;
-        /**
-         * [a-z],[A-Z],[0-9] in url not need encoding
-         */
+        // [a-z],[A-Z],[0-9] in url not need encoding
         for (i = 'a'; i <= 'z'; i++) {
-            unNeedEncoding.set(i);
+            UN_NEED_ENCODING.set(i);
         }
         for (i = 'A'; i <= 'Z'; i++) {
-            unNeedEncoding.set(i);
+            UN_NEED_ENCODING.set(i);
         }
         for (i = '0'; i <= '9'; i++) {
-            unNeedEncoding.set(i);
+            UN_NEED_ENCODING.set(i);
         }
 
-        /**for same special letter*/
-        unNeedEncoding.set(' ');
-        unNeedEncoding.set('-');
-        unNeedEncoding.set('_');
-        unNeedEncoding.set('.');
-        unNeedEncoding.set('*');
+        // for same special letter
+        UN_NEED_ENCODING.set(' ');
+        UN_NEED_ENCODING.set('-');
+        UN_NEED_ENCODING.set('_');
+        UN_NEED_ENCODING.set('.');
+        UN_NEED_ENCODING.set('*');
 
-        unNeedEncoding.set('+');
-        unNeedEncoding.set('%');
+        UN_NEED_ENCODING.set('+');
+        UN_NEED_ENCODING.set('%');
     }
 
     /**
@@ -87,7 +84,7 @@ public class URLUtils {
             if (Character.isWhitespace(ch)) {
                 return false;
             }
-            if (!unNeedEncoding.get(ch)) {
+            if (!UN_NEED_ENCODING.get(ch)) {
                 return false;
             }
             if (ch == '%') {
@@ -102,8 +99,8 @@ public class URLUtils {
      * encoding URL
      *
      * @param url url
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return encoding url
+     * @throws UnsupportedEncodingException error
      */
     public static String encodeURL(String url) throws UnsupportedEncodingException {
         return encodeURL(url, "UTF-8");
@@ -114,8 +111,8 @@ public class URLUtils {
      *
      * @param url   url
      * @param local character encoding
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return encoding url
+     * @throws UnsupportedEncodingException error
      */
     public static String encodeURL(String url, String local) throws UnsupportedEncodingException {
         return URLEncoder.encode(url, local);
@@ -125,8 +122,8 @@ public class URLUtils {
      * decoding URL
      *
      * @param url url
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return decoding url
+     * @throws UnsupportedEncodingException error
      */
     public static String decodeURL(String url) throws UnsupportedEncodingException {
         return decodeURL(url, "UTF-8");
@@ -137,8 +134,8 @@ public class URLUtils {
      *
      * @param url   url
      * @param local character encoding
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return url
+     * @throws UnsupportedEncodingException error
      */
     public static String decodeURL(String url, String local) throws UnsupportedEncodingException {
         return URLDecoder.decode(url, local);

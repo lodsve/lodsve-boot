@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
  * 封装HttpServletRequest
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012年1月19日
  */
 public class WebInput {
     /**
@@ -322,8 +321,8 @@ public class WebInput {
      * 从request中获取一个bean
      *
      * @param beanClass bean的class
-     * @param <T>
-     * @return
+     * @param <T>       bean 类型
+     * @return bean
      */
     @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> beanClass) {

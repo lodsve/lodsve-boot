@@ -29,10 +29,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
- * Jackson反序列化枚举时，将code或者枚举value变成枚举.<br/>
+ * Jackson反序列化枚举时，将code或者枚举value变成枚举.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016/11/3 下午2:56
  */
 @SuppressWarnings("all")
 public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {

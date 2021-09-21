@@ -60,8 +60,8 @@ public class MapperProvider extends BaseMapperProvider {
     }
 
     /**
-     * 根据实体中的id属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号<br/>
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 根据实体中的id属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link BaseRepository#findById(Serializable)}一致！
      *
      * @param ms MappedStatement
@@ -105,8 +105,8 @@ public class MapperProvider extends BaseMapperProvider {
     }
 
     /**
-     * 根据实体中的id属性进行查询，查询出对象的集合查询条件使用等号<br/>
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 根据实体中的id属性进行查询，查询出对象的集合查询条件使用等号
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link #findByIds(MappedStatement)} 一致！
      *
      * @param ms MappedStatement
@@ -240,7 +240,7 @@ public class MapperProvider extends BaseMapperProvider {
     }
 
     /**
-     * 根据主键字段进行删除，方法参数必须包含完整的主键属性！<p/>
+     * 根据主键字段进行删除，方法参数必须包含完整的主键属性！
      * 注意：这里是物理删除，慎用！
      *
      * @param ms MappedStatement
@@ -261,6 +261,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
+     * @throws SQLSyntaxErrorException SQLSyntaxErrorException
      * @see BaseRepository#logicDeleteById(Serializable)
      */
     public String logicDeleteById(MappedStatement ms) throws SQLSyntaxErrorException {
@@ -282,6 +283,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
+     * @throws SQLSyntaxErrorException SQLSyntaxErrorException
      * @see BaseRepository#logicDeleteByIdWithModifiedBy(Serializable, Long)
      */
     public String logicDeleteByIdWithModifiedBy(MappedStatement ms) throws SQLSyntaxErrorException {
@@ -332,7 +334,7 @@ public class MapperProvider extends BaseMapperProvider {
 
     /**
      * 查询总条数
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link #count(MappedStatement)}一致！
      *
      * @param ms MappedStatement

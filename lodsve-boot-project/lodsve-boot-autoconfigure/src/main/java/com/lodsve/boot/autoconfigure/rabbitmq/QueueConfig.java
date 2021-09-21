@@ -23,7 +23,6 @@ import lombok.Setter;
  * 配置queue.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-08-02 14:38
  */
 @Setter
 @Getter

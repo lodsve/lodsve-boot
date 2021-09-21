@@ -33,7 +33,6 @@ import java.lang.reflect.Proxy;
  * MyBatis utils.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016-2-18 16:03
  */
 public final class MyBatisUtils {
     private static final Logger logger = LoggerFactory.getLogger(MyBatisUtils.class);

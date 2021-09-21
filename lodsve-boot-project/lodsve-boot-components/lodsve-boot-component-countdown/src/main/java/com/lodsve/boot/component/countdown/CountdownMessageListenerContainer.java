@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
  * countdown MessageListenerContainer.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/12/17 上午12:34
  */
 public class CountdownMessageListenerContainer extends RedisMessageListenerContainer {
     public CountdownMessageListenerContainer(RedisConnectionFactory connectionFactory, CountdownListener listener, List<Integer> databases) {

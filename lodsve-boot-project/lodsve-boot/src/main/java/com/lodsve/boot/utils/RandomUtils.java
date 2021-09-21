@@ -25,7 +25,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * 随机生成数字或者字符串的工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-4-24 下午08:25:57
  */
 public class RandomUtils {
     private static final String LETTER_LOWER = "abcdefghijklmnopqrstuvwxyz";
@@ -92,6 +91,9 @@ public class RandomUtils {
      * 生成随机字符串
      *
      * @param length 生成的密码的总长度
+     * @param lower  是否包含小写
+     * @param upper  是否包含大写
+     * @param digit  是否包含数字
      * @return 字符串(大小写字母 + 数字)
      */
     public static String randomString(int length, boolean lower, boolean upper, boolean digit) {

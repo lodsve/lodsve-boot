@@ -20,7 +20,6 @@ package com.lodsve.boot.component.countdown;
  * redis事件类型.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/10/6 下午2:56
  */
 public interface CountdownEventType<T> {
     /**

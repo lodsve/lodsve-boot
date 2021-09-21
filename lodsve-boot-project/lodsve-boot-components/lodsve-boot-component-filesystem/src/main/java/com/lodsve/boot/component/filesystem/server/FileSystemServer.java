@@ -80,7 +80,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param file   上传文件
      * @param folder 文件夹名 如"lodsve-framework/"
@@ -91,7 +91,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param file          上传文件
      * @param folder        文件夹名 如"lodsve-framework/"
@@ -103,7 +103,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param file          上传文件
      * @param folder        文件夹名 如"lodsve-framework/"

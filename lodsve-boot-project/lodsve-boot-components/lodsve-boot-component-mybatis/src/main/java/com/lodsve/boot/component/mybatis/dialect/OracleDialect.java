@@ -20,7 +20,6 @@ package com.lodsve.boot.component.mybatis.dialect;
  * oracle.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016-2-18 15:49
  */
 public class OracleDialect extends AbstractDialect {
     @Override

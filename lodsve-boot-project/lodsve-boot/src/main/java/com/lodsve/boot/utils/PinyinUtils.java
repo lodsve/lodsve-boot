@@ -21,6 +21,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import java.util.Set;
  * 获取汉字拼音的工具类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-07-17 下午01:22
  */
 public class PinyinUtils {
 
@@ -97,12 +97,12 @@ public class PinyinUtils {
      *
      * @param src            汉字
      * @param separator      分隔符
-     * @param getFristLetter 是否获取单个字拼音的首字母
+     * @param getFirstLetter 是否获取单个字拼音的首字母
      * @param isSingle       是否获取多音字的所有拼音
-     * @return
-     * @throws Exception
+     * @return 汉字的拼音
+     * @throws BadHanyuPinyinOutputFormatCombination error pingyin
      */
-    public static List<StringBuffer> getPinyinList(String src, String separator, boolean getFristLetter, boolean isSingle) throws Exception {
+    public static List<StringBuffer> getPinyinList(String src, String separator, boolean getFirstLetter, boolean isSingle) throws BadHanyuPinyinOutputFormatCombination {
         if (StringUtils.isNotEmpty(src)) {
             char[] srcChar = src.toCharArray();
             //汉语拼音格式输出类
@@ -125,7 +125,7 @@ public class PinyinUtils {
                         //去除重复的
                         parray = removeRepeat(parray);
                     }
-                    if (getFristLetter) {
+                    if (getFirstLetter) {
                         temp[i] = getFristLetter(parray);
                     } else {
                         temp[i] = parray;

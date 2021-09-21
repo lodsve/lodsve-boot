@@ -26,10 +26,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Thymeleaf模板引擎生成的Resource<br/>
+ * Thymeleaf模板引擎生成的Resource
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 14-8-30 上午1:03
  */
 public class ThymeleafTemplateResource extends AbstractTemplateResource {
     private final TemplateMode templateMode;
@@ -37,8 +36,8 @@ public class ThymeleafTemplateResource extends AbstractTemplateResource {
     /**
      * templateMode default is html5
      *
-     * @param template
-     * @param context
+     * @param template template
+     * @param context  context
      */
     public ThymeleafTemplateResource(String template, Map<String, Object> context) {
         super(template, context, "resource load by Thymeleaf!");
@@ -59,9 +58,9 @@ public class ThymeleafTemplateResource extends AbstractTemplateResource {
      * <li>RAW</li>
      * </ul>
      *
-     * @param template
-     * @param context
-     * @param templateMode
+     * @param template     template
+     * @param context      context
+     * @param templateMode templateMode
      */
     public ThymeleafTemplateResource(String template, Map<String, Object> context, TemplateMode templateMode) {
         super(template, context, "resource load by Thymeleaf!");

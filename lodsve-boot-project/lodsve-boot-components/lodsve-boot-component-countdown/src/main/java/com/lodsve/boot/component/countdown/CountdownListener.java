@@ -26,12 +26,11 @@ import org.springframework.data.redis.connection.MessageListener;
 import java.io.Serializable;
 
 /**
- * redis定时器的监听.<br/>
- * redis必须在配置文件redis.conf中设置为:<code>notify-keyspace-events Ex</code><br/>
+ * redis定时器的监听.
+ * redis必须在配置文件redis.conf中设置为:<code>notify-keyspace-events Ex</code>
  * also see <a href="http://blog.csdn.net/chaijunkun/article/details/27361453">Redis的Keyspace notifications功能初探</a>
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/9/28 下午4:11
  */
 public class CountdownListener implements MessageListener {
     private static final Logger logger = LoggerFactory.getLogger(CountdownListener.class);

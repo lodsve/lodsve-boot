@@ -24,10 +24,9 @@ import com.lodsve.boot.bean.Codeable;
 import java.io.IOException;
 
 /**
- * Jackson序列化枚举时，将枚举变成{value: '', name: ''}.<br/>
+ * Jackson序列化枚举时，将枚举变成{value: '', name: ''}.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/6/24 下午9:31
  */
 public class CodeableEnumSerializer extends JsonSerializer<Enum> {
 

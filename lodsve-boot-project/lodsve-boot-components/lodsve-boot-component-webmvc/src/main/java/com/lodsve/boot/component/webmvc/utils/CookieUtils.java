@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletResponse;
  * cookie处理工具类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-7-10 下午02:41:14
  */
 public class CookieUtils {
 
@@ -40,10 +39,9 @@ public class CookieUtils {
     /**
      * 设置cookie
      *
-     * @param response
+     * @param response response
      * @param name     cookie的名称
      * @param value    cookie的值
-     * @throws Exception
      */
     public static void setCookie(final HttpServletResponse response, final String name, final String value) {
         setCookie(response, name, value, "/", "", "", -1);
@@ -52,9 +50,8 @@ public class CookieUtils {
     /**
      * 移除cookie
      *
-     * @param response
+     * @param response response
      * @param name     cookie的名称
-     * @throws Exception
      */
     public static void removeCookie(final HttpServletResponse response, final String name) {
         setCookie(response, name, "", "/", "", "", 0);
@@ -63,7 +60,7 @@ public class CookieUtils {
     /**
      * 设置cookie
      *
-     * @param response
+     * @param response response
      * @param name     cookie的名称
      * @param value    cookie的值
      * @param path     cookie的路径,不设置的话为当前路径
@@ -87,10 +84,9 @@ public class CookieUtils {
     /**
      * 获取cookie的值
      *
-     * @param request
+     * @param request request
      * @param name    cookie的名称
-     * @return
-     * @throws Exception
+     * @return cookie的值
      */
     public static String getCookieValue(final HttpServletRequest request, final String name) {
         if (ObjectUtils.isEmpty(request)) {

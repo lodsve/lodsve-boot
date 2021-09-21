@@ -29,7 +29,6 @@ import java.util.Enumeration;
  * 解压缩zip包.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-5-3 上午11:51:41
  */
 public class ZipUtils {
     private static final Logger logger = LoggerFactory.getLogger(ZipUtils.class);
@@ -45,8 +44,8 @@ public class ZipUtils {
      *
      * @param zipFilePath 需要解压的文件,绝对路径
      * @param zipPath     解压存储路径，相对路径
-     * @return
-     * @throws Exception
+     * @return 解压zip文件
+     * @throws Exception error
      */
     public static boolean unZip(String zipFilePath, String zipPath) throws Exception {
         if (StringUtils.isEmpty(zipFilePath) || StringUtils.isEmpty(zipPath)) {
@@ -103,7 +102,7 @@ public class ZipUtils {
      * @param zipFileName 打包后文件的名称,绝对路径
      * @param filePath    需要打包的文件夹或者文件的路径,绝对路径
      * @param pathName    打包到pathName文件夹下,文件夹名称
-     * @throws Exception
+     * @throws Exception error
      */
     public static void zip(String zipFileName, String filePath, String pathName) throws Exception {
         if (StringUtils.isEmpty(zipFileName) || StringUtils.isEmpty(filePath)) {

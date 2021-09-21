@@ -22,7 +22,6 @@ import org.springframework.core.NestedRuntimeException;
  * 系统中其他所有的异常均需要继承.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 15/8/14 下午12:27
  */
 public class LodsveBootException extends NestedRuntimeException {
     private static final Integer BAD_REQUEST_CODE = 400;

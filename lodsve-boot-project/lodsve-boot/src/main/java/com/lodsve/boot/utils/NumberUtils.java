@@ -22,7 +22,6 @@ import org.apache.commons.lang3.StringUtils;
  * 对于数字操作类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-4-28 上午10:36:12
  */
 public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
     /**

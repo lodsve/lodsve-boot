@@ -35,7 +35,6 @@ import java.util.List;
  * 文件操作的工具类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-3-16 下午08:25:56
  */
 public class FileUtils {
     private static final Logger logger = LoggerFactory.getLogger(FileUtils.class);
@@ -482,7 +481,7 @@ public class FileUtils {
      *
      * @param directory 文件夹
      * @param extName   扩展名
-     * @return
+     * @return 符合条件的文件集合
      */
     public static List<File> getFileUnderDirectory(String directory, String extName) {
         if (StringUtils.isEmpty(directory) || !new File(directory).exists()) {

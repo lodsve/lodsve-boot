@@ -21,11 +21,11 @@ import com.lodsve.boot.bean.WebResult;
 import java.lang.annotation.*;
 
 /**
- * 使用{@link WebResult}包装返回体.<p/>
- * 两种使用方式：<br/>
- * 1. 加在类头：表示整个类的所有api返回体都需要包装<br/>
- * 2. 加载方法上：表示该api需要包装<br/>
- * <p/>
+ * 使用{@link WebResult}包装返回体.
+ * 两种使用方式：
+ * 1. 加在类头：表示整个类的所有api返回体都需要包装
+ * 2. 加载方法上：表示该api需要包装
+ * <p>
  * 如果和{@link SkipWrapper} 共存，则优先认{@link SkipWrapper}.即忽略
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>

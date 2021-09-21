@@ -86,6 +86,7 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
      *
      * @param objectName 需要下载的文件
      * @return 文件真实名称
+     * @throws FileSystemException Object Metadata is NULL
      */
     public abstract String resolveRealName(String objectName) throws FileSystemException;
 

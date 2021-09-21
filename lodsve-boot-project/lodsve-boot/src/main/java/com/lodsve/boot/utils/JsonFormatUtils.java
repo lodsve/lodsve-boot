@@ -20,7 +20,6 @@ package com.lodsve.boot.utils;
  * json字符串格式化工具类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2018-07-09 10:31
  */
 public final class JsonFormatUtils {
     /**

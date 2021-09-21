@@ -22,7 +22,6 @@ import java.util.*;
  * 格式化sql.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/6/12 下午8:27
  */
 public class SqlFormatter {
     static final String WHITESPACE = " \n\r\f\t";

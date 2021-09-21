@@ -28,7 +28,7 @@ public interface EnvironmentCustomizer {
     /**
      * 返回需要定制化的配置
      *
-     * @return 配置（key -> value）
+     * @return 配置（key -&gt; value）
      */
     Map<String, Object> customizer();
 }

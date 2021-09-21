@@ -20,7 +20,6 @@ package com.lodsve.boot.component.mybatis.dialect;
  * mysql数据库方言.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016-2-18 15:42
  */
 public class MySqlDialect extends AbstractDialect {
     @Override

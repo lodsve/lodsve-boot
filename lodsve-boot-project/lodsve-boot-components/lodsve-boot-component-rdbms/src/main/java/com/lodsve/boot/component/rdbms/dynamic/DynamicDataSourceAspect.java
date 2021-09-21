@@ -29,7 +29,6 @@ import java.lang.reflect.Method;
  * aop动态切换数据源.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/12/14 下午6:16
  */
 @Aspect
 public class DynamicDataSourceAspect {

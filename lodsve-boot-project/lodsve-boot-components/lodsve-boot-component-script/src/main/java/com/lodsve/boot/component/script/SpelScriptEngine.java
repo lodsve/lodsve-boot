@@ -32,7 +32,6 @@ import java.util.Map;
  * spel script engine.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2016/12/10 上午12:01
  */
 public class SpelScriptEngine implements ScriptEngine {
     /**

@@ -17,7 +17,7 @@
 package com.lodsve.boot.component.mybatis.repository.provider;
 
 /**
- * 空方法Mapper接口默认MapperTemplate<br/>
+ * 空方法Mapper接口默认MapperTemplate
  * 如BaseSelectMapper，接口纯继承，不包含任何方法.
  *
  * @author sunhao(sunhao.java @ gmail.com)

@@ -26,12 +26,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 基础dao,将常用的数据库CRUD方法放在这里,需要用到时,只需直接继承此接口就好了.<br/>
- * 其中的方法与{@link MapperProvider}一一对应<br/>
- * eg:<br/>
+ * 基础dao,将常用的数据库CRUD方法放在这里,需要用到时,只需直接继承此接口就好了.
+ * 其中的方法与{@link MapperProvider}一一对应
+ * eg:
  * <pre>
  *  &#64;Repository
- *  public interface DemoDAO extends BaseRepository<Demo> {
+ *  public interface DemoDAO extends BaseRepository&lt;Demo&gt; {
  *  }
  * </pre>
  *
@@ -50,8 +50,8 @@ public interface BaseRepository<T> {
     T findById(Serializable id);
 
     /**
-     * 根据实体中的id属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号<br/>
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 根据实体中的id属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link #findById(Serializable)}一致！
      *
      * @param id 主键值
@@ -72,8 +72,8 @@ public interface BaseRepository<T> {
     List<T> findByIds(List<? extends Serializable> ids);
 
     /**
-     * 根据实体中的id属性进行查询，查询出对象的集合查询条件使用等号<br/>
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 根据实体中的id属性进行查询，查询出对象的集合查询条件使用等号
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link #findById(Serializable)}一致！
      *
      * @param ids 主键集合
@@ -167,7 +167,7 @@ public interface BaseRepository<T> {
 
     /**
      * 查询总条数
-     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录<br/>
+     * 这个方法只获取加了{@link LogicDelete}注解的字段值为{@link LogicDelete#nonDelete()}的记录
      * 如果没有加这个注解，这个方法的作用与{@link #count()}一致！
      *
      * @return 数据库记录总条数

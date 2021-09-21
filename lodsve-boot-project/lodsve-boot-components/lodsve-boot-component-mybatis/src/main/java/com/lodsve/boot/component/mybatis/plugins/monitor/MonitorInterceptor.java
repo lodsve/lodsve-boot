@@ -35,7 +35,6 @@ import java.util.Properties;
  * mybatis性能监控.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2017/6/12 下午8:23
  */
 @Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
     @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
