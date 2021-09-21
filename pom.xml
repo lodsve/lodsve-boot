@@ -42,16 +42,9 @@
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 
         <!-- 所有的插件版本 -->
-        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version>
-        <maven.dependency.plugin.version>2.8</maven.dependency.plugin.version>
-        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
-        <maven.source.plugin.version>2.4</maven.source.plugin.version>
-        <maven.clean.plugin.version>2.6.1</maven.clean.plugin.version>
-        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
-        <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
 
         <!-- 仓库地址配置 -->
         <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
@@ -146,102 +139,6 @@
         </repository>
     </repositories>
 
-    <build>
-        <plugins>
-            <!-- 编译 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <debuglevel>lines,vars,source</debuglevel>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <compilerArgs>
-                        <arg>-Xlint:unchecked</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <!-- clean -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>src/..</directory>
-                            <includes>
-                                <include>dependency-reduced-pom.xml</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-            <!-- build jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Built-By>${manifest.built.name}</Built-By>
-                        </manifestEntries>
-                        <addMavenDescriptor>true</addMavenDescriptor>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!-- copyright header -->
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${maven.copyright.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <quiet>false</quiet>
-                    <header>${main.user.dir}/tools/HEADER</header>
-                    <excludes>
-                        <exclude>.gitignore</exclude>
-                        <exclude>*.md</exclude>
-                        <exclude>.editorconfig</exclude>
-                        <exclude>LICENSE</exclude>
-                        <exclude>.github/**</exclude>
-                        <exclude>tools/HEADER</exclude>
-                    </excludes>
-                    <strictCheck>true</strictCheck>
-                    <mapping>
-                        <java>SLASHSTAR_STYLE</java>
-                        <factories>SCRIPT_STYLE</factories>
-                    </mapping>
-                </configuration>
-            </plugin>
-            <!-- 生成源代码的插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <profiles>
         <profile>
             <id>jdk-11</id>
@@ -298,6 +195,7 @@
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <additionalOptions>-source 8</additionalOptions>
                         </configuration>
                     </plugin>
                     <!-- 在maven仓库中自动close和release的插件 -->
@@ -372,6 +270,7 @@
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <additionalOptions>-source 8</additionalOptions>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -427,6 +326,8 @@
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <additionalOptions>-source 8</additionalOptions>
+                            <detectJavaApiLink>false</detectJavaApiLink>
                         </configuration>
                     </plugin>
                 </plugins>

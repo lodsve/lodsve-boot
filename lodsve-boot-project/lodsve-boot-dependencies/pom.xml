@@ -22,9 +22,9 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-build</artifactId>
+        <artifactId>lodsve-boot-project</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../../../lodsve-boot</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>lodsve-boot-dependencies</artifactId>
