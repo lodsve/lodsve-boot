@@ -19,7 +19,7 @@ package com.lodsve.boot.component.filesystem.enums;
 /**
  * OSS权限控制枚举.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum AccessControlEnum {
     /**

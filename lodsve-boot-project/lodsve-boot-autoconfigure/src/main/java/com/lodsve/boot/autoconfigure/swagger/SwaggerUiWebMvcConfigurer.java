@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * swagger ui注册到spring上下文.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
     @Override

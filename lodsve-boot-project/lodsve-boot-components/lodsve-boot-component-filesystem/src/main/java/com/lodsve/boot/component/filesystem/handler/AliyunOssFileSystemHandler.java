@@ -41,7 +41,7 @@ import java.util.Date;
 /**
  * 阿里云oss上传.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Slf4j
 public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {

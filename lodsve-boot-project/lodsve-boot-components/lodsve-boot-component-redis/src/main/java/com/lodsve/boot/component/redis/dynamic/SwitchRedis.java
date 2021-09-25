@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 切换数据源.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

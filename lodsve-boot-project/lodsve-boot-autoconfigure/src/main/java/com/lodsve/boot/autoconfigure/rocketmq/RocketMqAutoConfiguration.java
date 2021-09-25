@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConditionalOnClass({RocketMQListener.class, MQAdmin.class})
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)

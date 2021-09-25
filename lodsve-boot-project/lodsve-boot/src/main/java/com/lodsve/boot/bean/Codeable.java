@@ -19,7 +19,7 @@ package com.lodsve.boot.bean;
 /**
  * 枚举--code.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface Codeable {
     /**

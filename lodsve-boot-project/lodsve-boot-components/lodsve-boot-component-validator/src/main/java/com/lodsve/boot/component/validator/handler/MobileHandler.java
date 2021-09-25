@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 手机号码验证处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class MobileHandler extends AbstractValidateHandler<Mobile> {
     private static final Logger logger = LoggerFactory.getLogger(MobileHandler.class);

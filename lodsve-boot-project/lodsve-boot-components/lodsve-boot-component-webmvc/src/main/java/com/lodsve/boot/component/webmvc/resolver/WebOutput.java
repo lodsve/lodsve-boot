@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * 封装HttpServletResponse
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class WebOutput {
     private final HttpServletResponse response;

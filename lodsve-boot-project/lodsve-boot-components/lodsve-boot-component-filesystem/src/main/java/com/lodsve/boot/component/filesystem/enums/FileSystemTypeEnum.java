@@ -19,7 +19,7 @@ package com.lodsve.boot.component.filesystem.enums;
 /**
  * 使用的文件存储类型.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum FileSystemTypeEnum {
     /**

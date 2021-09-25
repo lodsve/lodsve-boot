@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * object util class
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 

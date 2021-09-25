@@ -25,7 +25,7 @@ import java.io.IOException;
 /**
  * 文件上传、下载操作.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface FileSystemHandler extends DisposableBean {
     /**

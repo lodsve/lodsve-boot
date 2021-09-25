@@ -24,7 +24,7 @@ import java.io.Serializable;
 /**
  * 返回结果集.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Data
 public class WebResult<T> implements Serializable {

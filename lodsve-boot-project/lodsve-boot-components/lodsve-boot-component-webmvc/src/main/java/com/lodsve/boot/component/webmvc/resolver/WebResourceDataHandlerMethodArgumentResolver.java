@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 为controller注入参数WebInput/WebOutput/FileWebInput
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class WebResourceDataHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     private final JsonConverter jsonConverter;

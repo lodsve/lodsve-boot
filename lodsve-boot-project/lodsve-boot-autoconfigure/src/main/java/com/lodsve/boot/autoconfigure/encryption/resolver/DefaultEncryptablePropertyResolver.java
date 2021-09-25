@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 默认的解密类--Base64.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DefaultEncryptablePropertyResolver extends BaseEncryptablePropertyResolver {
 

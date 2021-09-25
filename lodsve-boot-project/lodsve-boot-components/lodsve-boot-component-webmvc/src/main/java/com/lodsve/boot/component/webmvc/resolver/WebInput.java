@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 /**
  * 封装HttpServletRequest
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class WebInput {
     /**

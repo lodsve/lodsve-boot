@@ -26,7 +26,7 @@ import org.springframework.core.convert.converter.ConverterFactory;
 /**
  * spring mvc将传递的参数转换成枚举.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @SuppressWarnings({"all"})
 public class EnumCodeConverterFactory implements ConverterFactory<String, Enum<? extends Codeable>>, ConditionalConverter {

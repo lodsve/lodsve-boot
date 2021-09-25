@@ -54,7 +54,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * 多数据源配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(RedisClient.class)

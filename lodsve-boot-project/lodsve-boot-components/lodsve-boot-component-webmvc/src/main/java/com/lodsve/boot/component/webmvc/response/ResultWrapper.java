@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  * <p>
  * 如果和{@link SkipWrapper} 共存，则优先认{@link SkipWrapper}.即忽略
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see SkipWrapper
  */
 @Target({ElementType.METHOD, ElementType.TYPE})

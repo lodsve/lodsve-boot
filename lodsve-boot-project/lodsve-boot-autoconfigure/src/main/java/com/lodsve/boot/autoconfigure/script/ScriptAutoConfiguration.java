@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * 异构语言支持.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConditionalOnClass(DynamicScriptEngineFactory.class)
 @Configuration

@@ -25,7 +25,7 @@ import java.util.StringTokenizer;
 /**
  * 格式化sql.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class SqlFormatter {
     static final String WHITESPACE = " \n\r\f\t";

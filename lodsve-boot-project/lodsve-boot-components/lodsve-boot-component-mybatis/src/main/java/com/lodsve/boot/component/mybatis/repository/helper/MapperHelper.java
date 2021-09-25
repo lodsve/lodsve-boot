@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 处理主要逻辑，最关键的一个类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class MapperHelper {
     public static final String PROVIDER_METHOD_NAME = "dynamicSQL";

@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * redis cache manager config.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Configuration
 public class RedisCacheManagerConfiguration extends CachingConfigurerSupport {

@@ -30,7 +30,7 @@ import java.io.Serializable;
  * redis必须在配置文件redis.conf中设置为:<code>notify-keyspace-events Ex</code>
  * also see <a href="http://blog.csdn.net/chaijunkun/article/details/27361453">Redis的Keyspace notifications功能初探</a>
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownListener implements MessageListener {
     private static final Logger logger = LoggerFactory.getLogger(CountdownListener.class);

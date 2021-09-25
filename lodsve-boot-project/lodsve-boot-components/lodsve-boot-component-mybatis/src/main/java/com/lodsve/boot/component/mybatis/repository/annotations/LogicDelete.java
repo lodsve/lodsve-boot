@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 逻辑删除字段.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

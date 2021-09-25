@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * properties.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EncryptablePropertySourceWrapper<T> extends PropertySource<T> implements EncryptablePropertySource<T> {
     private final EncryptablePropertySource<T> encryptableDelegate;

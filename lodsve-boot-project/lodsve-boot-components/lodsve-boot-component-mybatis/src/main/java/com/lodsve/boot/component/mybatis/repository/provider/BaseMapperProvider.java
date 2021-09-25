@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * 通用Mapper模板类，扩展通用Mapper时需要继承该类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class BaseMapperProvider {
     private final XMLLanguageDriver languageDriver = new XMLLanguageDriver();

@@ -37,7 +37,7 @@ import java.util.Objects;
 /**
  * 检查环境变量中是否有值.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see ConditionalOnEnvironment
  */
 public class OnEnvironmentCondition extends SpringBootCondition {

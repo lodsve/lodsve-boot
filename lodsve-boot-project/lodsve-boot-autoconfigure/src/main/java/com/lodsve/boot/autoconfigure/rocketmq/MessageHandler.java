@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 标注这个类中含有注解{@link MessageListener}的方法都是消息的消费者.一个handle只能订阅一个topic.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

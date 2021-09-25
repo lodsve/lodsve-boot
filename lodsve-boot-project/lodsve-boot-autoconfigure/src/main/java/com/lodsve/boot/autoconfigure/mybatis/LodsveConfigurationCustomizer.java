@@ -33,7 +33,7 @@ import java.util.Arrays;
  * </ol>
  * 这样就可以省略mybatis的所有基本配置
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LodsveConfigurationCustomizer implements ConfigurationCustomizer {
     private final boolean mapUnderscoreToCamelCase;

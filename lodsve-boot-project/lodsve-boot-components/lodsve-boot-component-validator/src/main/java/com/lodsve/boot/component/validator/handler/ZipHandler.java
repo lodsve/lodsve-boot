@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 邮政编码的验证处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ZipHandler extends AbstractValidateHandler<Zip> {
     private static final Logger logger = LoggerFactory.getLogger(ZipHandler.class);

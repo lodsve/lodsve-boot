@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 异常处理类,如果要实现自定义异常,则全部继承这个类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class ExceptionHandler {
 

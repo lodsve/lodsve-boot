@@ -21,7 +21,7 @@ import com.lodsve.boot.bean.Codeable;
 /**
  * 客户端类型.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum ClientType implements Codeable {
     /**

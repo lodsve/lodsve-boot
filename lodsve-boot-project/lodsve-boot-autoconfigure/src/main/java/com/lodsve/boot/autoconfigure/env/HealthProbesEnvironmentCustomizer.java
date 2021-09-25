@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * 健康检查的两个端点（readiness、liveness）.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class HealthProbesEnvironmentCustomizer implements EnvironmentCustomizer {
     private static final String ENABLE_HEALTH_PROBES = "management.endpoint.health.probes.enabled";

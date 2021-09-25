@@ -51,7 +51,7 @@ import java.util.Set;
 /**
  * sql utils.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public final class SqlUtils {
     public static final String KEEP_ORDER_BY = "/*keep orderby*/";

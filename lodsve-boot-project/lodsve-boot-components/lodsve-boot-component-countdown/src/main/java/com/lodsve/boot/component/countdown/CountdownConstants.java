@@ -19,7 +19,7 @@ package com.lodsve.boot.component.countdown;
 /**
  * 常量.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownConstants {
     public static final String REDIS_KEY_SEPARATOR = "-";

@@ -23,7 +23,7 @@ import java.lang.annotation.Annotation;
 /**
  * 类似于map,放置验证注解和其对应的处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class BeanHandler {
     /**

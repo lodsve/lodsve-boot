@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Gson Utils.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class GsonConverter extends AbstractJsonConverter {
     private final Gson gson;

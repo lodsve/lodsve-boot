@@ -28,7 +28,7 @@ import java.sql.SQLException;
 /**
  * 基于mybatis的查询.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class MyBatisSqlQuery extends SqlQuery {
     private final MappedStatement mappedStatement;

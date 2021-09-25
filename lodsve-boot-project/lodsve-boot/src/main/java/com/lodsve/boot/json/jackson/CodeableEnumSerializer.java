@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * Jackson序列化枚举时，将枚举变成{value: '', name: ''}.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CodeableEnumSerializer extends JsonSerializer<Enum> {
 

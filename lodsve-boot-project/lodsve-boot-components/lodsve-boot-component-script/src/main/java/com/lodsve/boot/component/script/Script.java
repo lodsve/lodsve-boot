@@ -19,7 +19,7 @@ package com.lodsve.boot.component.script;
 /**
  * 语言类型.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum Script {
     /**

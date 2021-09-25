@@ -27,7 +27,7 @@ import java.lang.annotation.Annotation;
 /**
  * 所有验证条件的处理类必须继承这个抽象类,以实现各自的验证方法.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class AbstractValidateHandler<T extends Annotation> implements ValidateHandler<T> {
     private static final Logger logger = LoggerFactory.getLogger(AbstractValidateHandler.class);

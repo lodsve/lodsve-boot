@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * 表单提交多个对象，且这些对象含有同名的字段，需要用此注解标注参数.
  * 解析类为{@link BindDataHandlerMethodArgumentResolver}
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

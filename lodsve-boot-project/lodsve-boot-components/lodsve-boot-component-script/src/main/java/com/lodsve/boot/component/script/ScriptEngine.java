@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 脚本语言编译引擎.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface ScriptEngine {
     /**

@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * 解析加了注解{@link Bind}的参数.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class BindDataHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     private final JsonConverter jsonConverter;

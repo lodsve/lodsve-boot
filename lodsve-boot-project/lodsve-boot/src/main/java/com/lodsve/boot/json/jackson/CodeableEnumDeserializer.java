@@ -31,7 +31,7 @@ import java.lang.reflect.Field;
 /**
  * Jackson反序列化枚举时，将code或者枚举value变成枚举.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @SuppressWarnings("all")
 public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {

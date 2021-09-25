@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 /**
  * 乐观锁插件工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class VersionUtils {
     private static final Logger logger = LoggerFactory.getLogger(VersionUtils.class);

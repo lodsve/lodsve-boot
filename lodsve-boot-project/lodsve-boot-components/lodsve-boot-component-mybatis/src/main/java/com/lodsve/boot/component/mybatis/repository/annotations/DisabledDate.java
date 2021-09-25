@@ -25,7 +25,7 @@ import static java.lang.annotation.ElementType.FIELD;
 /**
  * Declares a field as the one representing the date the entity containing the field was recently disabled.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = FIELD)

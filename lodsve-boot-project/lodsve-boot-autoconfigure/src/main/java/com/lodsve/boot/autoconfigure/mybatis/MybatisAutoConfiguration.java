@@ -59,7 +59,7 @@ import java.util.List;
 /**
  * mybatis configuration.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConditionalOnClass({BaseRepository.class, SqlSessionFactory.class})
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)

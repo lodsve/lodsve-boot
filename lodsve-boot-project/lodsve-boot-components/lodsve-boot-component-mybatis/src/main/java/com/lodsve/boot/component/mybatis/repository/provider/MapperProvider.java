@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 /**
  * Mapper实现类，基础方法实现类.其中的方法与{@link BaseRepository}一一对应.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see BaseRepository
  */
 public class MapperProvider extends BaseMapperProvider {

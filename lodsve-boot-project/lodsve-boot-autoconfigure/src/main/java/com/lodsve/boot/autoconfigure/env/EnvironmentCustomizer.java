@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 配置定制化.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @FunctionalInterface
 public interface EnvironmentCustomizer {

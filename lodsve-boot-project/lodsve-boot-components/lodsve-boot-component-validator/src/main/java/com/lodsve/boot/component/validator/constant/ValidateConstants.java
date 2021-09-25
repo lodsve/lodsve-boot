@@ -27,7 +27,7 @@ import java.util.Locale;
 /**
  * 验证框架的静态常量类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ValidateConstants {
     public static String getMessage(String key, Object... args) {

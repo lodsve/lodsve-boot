@@ -42,7 +42,7 @@ import java.util.Date;
 /**
  * 亚马逊云s3.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AmazonS3FileSystemHandler.class);

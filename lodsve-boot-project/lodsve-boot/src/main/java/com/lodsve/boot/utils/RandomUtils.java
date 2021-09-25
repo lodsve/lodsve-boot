@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 随机生成数字或者字符串的工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class RandomUtils {
     private static final String LETTER_LOWER = "abcdefghijklmnopqrstuvwxyz";

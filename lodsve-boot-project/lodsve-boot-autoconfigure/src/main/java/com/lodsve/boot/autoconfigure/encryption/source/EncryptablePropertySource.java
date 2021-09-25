@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 可被解密的配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface EncryptablePropertySource<T> {
 

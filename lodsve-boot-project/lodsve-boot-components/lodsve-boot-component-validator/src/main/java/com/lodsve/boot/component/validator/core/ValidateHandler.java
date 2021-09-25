@@ -23,7 +23,7 @@ import java.lang.annotation.Annotation;
 /**
  * .
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface ValidateHandler<T extends Annotation> {
     /**

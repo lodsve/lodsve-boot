@@ -31,7 +31,7 @@ import javax.servlet.ServletException;
  * Locale locale = LocaleContextHolder.getLocale();
  * </pre></blockquote>
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class RequestContextListenerInitializer implements WebApplicationInitializer {
     @Override

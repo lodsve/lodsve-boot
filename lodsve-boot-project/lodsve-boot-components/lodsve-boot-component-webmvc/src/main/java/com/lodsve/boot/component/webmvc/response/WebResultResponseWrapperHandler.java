@@ -35,7 +35,7 @@ import java.lang.reflect.Method;
 /**
  * 通用返回值处理.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @RestControllerAdvice(annotations = RestController.class)
 public class WebResultResponseWrapperHandler implements ResponseBodyAdvice<Object> {

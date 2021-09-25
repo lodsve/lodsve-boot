@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 统一异常处理,这些异常说明是业务无法处理，区分statusCode供前端使用不同方式处理。
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ControllerAdvice(annotations = RestController.class)
 public class LodsveBootExceptionHandler {

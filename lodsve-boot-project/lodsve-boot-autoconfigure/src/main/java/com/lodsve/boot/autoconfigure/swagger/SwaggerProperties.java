@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * swagger配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConfigurationProperties(prefix = "lodsve.swagger")
 @Data

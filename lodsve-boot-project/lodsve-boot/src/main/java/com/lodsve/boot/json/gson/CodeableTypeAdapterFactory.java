@@ -30,7 +30,7 @@ import java.io.IOException;
 /**
  * gson对枚举类型的序列化、反序列化定制.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 public class CodeableTypeAdapterFactory implements TypeAdapterFactory {
     private final Class<? extends Codeable> clazz;

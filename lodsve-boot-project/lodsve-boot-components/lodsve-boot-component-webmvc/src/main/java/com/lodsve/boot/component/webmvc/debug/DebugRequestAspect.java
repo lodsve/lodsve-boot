@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
 /**
  * 打印请求参数.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Aspect
 public class DebugRequestAspect {

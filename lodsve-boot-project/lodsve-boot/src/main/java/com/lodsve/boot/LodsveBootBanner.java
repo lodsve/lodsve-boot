@@ -29,7 +29,7 @@ import java.io.PrintStream;
 /**
  * LODSVE BOOT BANNER.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LodsveBootBanner implements Banner {
     private static final String[] DEFAULT_BANNER = new String[]{

@@ -19,7 +19,7 @@ package com.lodsve.boot.autoconfigure.rabbitmq;
 /**
  * amqp exchange type.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum ExchangeType {
     /**

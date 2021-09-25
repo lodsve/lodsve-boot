@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * 动态数据源.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
     private final Map<String, DataSource> dataSourceMap;

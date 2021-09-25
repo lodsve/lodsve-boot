@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 方法上标注需要校验.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Documented
 @Target({ElementType.METHOD})

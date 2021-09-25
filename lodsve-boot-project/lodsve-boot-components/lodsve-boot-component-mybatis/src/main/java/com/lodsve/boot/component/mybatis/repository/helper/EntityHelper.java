@@ -51,7 +51,7 @@ import java.util.Set;
 /**
  * 实体类工具类 - 处理实体和数据库表以及字段关键的一个类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EntityHelper {
     /**

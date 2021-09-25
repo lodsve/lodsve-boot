@@ -25,8 +25,7 @@ import java.util.Locale;
 /**
  * 系统中获取i18n的工具类.
  *
- * @author 孙昊(Hulk)
- * @version V1.0, 15/8/14 上午11:57
+ * @author Hulk Sun
  */
 public class I18nMessageUtil implements MessageSourceAware {
 

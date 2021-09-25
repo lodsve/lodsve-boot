@@ -51,7 +51,7 @@ import java.util.Map;
 /**
  * RabbitMQ Auto Configuration.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Configuration
 @AutoConfigureAfter(org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration.class)

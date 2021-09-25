@@ -50,7 +50,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * jedis多数据源.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({GenericObjectPool.class, JedisConnection.class, Jedis.class})

@@ -38,7 +38,7 @@ import java.net.UnknownHostException;
 /**
  * Redis配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @Configuration
 @EnableConfigurationProperties(RedisProperties.class)

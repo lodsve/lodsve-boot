@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * 扩展WebInput，为文件类
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class FileWebInput extends WebInput {
     private static final Log log = LogFactory.getLog(FileWebInput.class);

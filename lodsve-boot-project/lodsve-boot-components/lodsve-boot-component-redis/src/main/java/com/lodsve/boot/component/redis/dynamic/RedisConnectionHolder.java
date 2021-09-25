@@ -26,7 +26,7 @@ package com.lodsve.boot.component.redis.dynamic;
  * }
  * </pre>
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class RedisConnectionHolder {
     private static final ThreadLocal<String> REDIS_CONNECTION_FACTORY_NAME = new ThreadLocal<>();

@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 忽略返回值转换.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see ResultWrapper
  */
 @Target(ElementType.METHOD)

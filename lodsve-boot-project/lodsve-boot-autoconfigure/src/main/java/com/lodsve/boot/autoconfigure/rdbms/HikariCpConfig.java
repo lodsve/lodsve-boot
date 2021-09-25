@@ -21,7 +21,7 @@ import com.zaxxer.hikari.HikariConfig;
 /**
  * Hikari连接池配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class HikariCpConfig extends HikariConfig {
 }

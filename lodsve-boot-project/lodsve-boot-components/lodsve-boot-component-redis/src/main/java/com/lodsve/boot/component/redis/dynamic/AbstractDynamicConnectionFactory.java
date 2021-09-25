@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 多数据源.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class AbstractDynamicConnectionFactory<T extends RedisConnectionFactory & DisposableBean> implements DisposableBean, InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(AbstractDynamicConnectionFactory.class);

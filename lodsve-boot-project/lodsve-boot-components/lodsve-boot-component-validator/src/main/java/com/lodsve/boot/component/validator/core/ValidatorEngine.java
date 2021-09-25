@@ -57,7 +57,7 @@ import java.util.Map;
 /**
  * 验证引擎核心组件.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Aspect
 public class ValidatorEngine {

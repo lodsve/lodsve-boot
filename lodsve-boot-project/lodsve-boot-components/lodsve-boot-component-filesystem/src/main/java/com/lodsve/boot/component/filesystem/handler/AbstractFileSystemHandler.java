@@ -26,7 +26,7 @@ import java.nio.file.FileSystemException;
 /**
  * 公共.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class AbstractFileSystemHandler implements FileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AbstractFileSystemHandler.class);

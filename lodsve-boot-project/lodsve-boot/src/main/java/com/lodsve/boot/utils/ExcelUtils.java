@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * Excel导入的工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see CheckExcel
  */
 public class ExcelUtils {

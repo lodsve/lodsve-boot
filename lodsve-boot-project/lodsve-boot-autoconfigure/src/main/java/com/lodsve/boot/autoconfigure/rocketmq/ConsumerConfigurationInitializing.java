@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 /**
  * 动态注册消费者.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ConsumerConfigurationInitializing implements ApplicationContextAware, SmartInitializingSingleton, DisposableBean, EnvironmentAware {
     private static final Logger logger = LoggerFactory.getLogger(ConsumerConfigurationInitializing.class);

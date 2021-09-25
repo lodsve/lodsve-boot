@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * 配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @ConfigurationProperties("lodsve.core")
 public class CoreProperties {

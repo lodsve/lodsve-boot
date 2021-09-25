@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * 事件处理.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownEventListener implements ApplicationListener<CountdownEvent> {
     private static final Logger logger = LoggerFactory.getLogger(CountdownEventListener.class);

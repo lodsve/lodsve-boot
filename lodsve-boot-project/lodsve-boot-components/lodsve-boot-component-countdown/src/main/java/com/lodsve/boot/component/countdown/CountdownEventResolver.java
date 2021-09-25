@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * 根据类名解析处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownEventResolver {
     private static final Map<String, CountdownEventHandler> HANDLERS = new HashMap<>();

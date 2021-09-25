@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义的message listener，加在方法上（这些方法需要在一个类中，并且这个类要有{@link MessageHandler}这个注解），用来标注消息处理方法.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

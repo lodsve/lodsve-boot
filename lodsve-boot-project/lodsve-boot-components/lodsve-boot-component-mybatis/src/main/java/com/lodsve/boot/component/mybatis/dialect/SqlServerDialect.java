@@ -19,7 +19,7 @@ package com.lodsve.boot.component.mybatis.dialect;
 /**
  * microsoft sql server.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class SqlServerDialect extends AbstractDialect {
 

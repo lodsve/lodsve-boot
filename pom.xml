@@ -56,7 +56,7 @@
 
         <!-- 自定义配置 -->
         <main.user.dir>${basedir}</main.user.dir>
-        <manifest.built.name>Sun.Hao</manifest.built.name>
+        <manifest.built.name>Hulk Sun</manifest.built.name>
     </properties>
 
     <modules>

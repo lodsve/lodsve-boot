@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 发起倒计时.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownPublisher {
     private final RedisTemplate<Serializable, Serializable> redisTemplate;

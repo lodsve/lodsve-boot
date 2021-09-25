@@ -45,7 +45,7 @@ import java.util.Map;
 /**
  * xml工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public final class XmlUtils {
     private static final SAXReader SAX_READER = new SAXReader();

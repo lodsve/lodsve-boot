@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * 指定这个entity需要校验.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

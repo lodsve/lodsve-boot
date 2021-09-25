@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * rabbit mq base properties.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Setter
 @Getter

@@ -35,7 +35,7 @@ import java.util.Enumeration;
 /**
  * 解压缩zip包.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ZipUtils {
     private static final Logger logger = LoggerFactory.getLogger(ZipUtils.class);

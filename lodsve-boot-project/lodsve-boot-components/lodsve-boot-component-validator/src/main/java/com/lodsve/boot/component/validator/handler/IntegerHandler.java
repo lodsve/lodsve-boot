@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 整数验证的处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class IntegerHandler extends AbstractValidateHandler<Integer> {
     private static final Logger logger = LoggerFactory.getLogger(IntegerHandler.class);

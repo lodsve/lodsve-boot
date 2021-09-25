@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  * countdown MessageListenerContainer.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownMessageListenerContainer extends RedisMessageListenerContainer {
     public CountdownMessageListenerContainer(RedisConnectionFactory connectionFactory, CountdownListener listener, List<Integer> databases) {

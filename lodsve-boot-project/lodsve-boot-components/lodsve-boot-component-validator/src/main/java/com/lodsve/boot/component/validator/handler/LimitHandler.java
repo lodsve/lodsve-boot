@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * 长度验证处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LimitHandler extends AbstractValidateHandler<Limit> {
     private static final Logger logger = LoggerFactory.getLogger(LimitHandler.class);

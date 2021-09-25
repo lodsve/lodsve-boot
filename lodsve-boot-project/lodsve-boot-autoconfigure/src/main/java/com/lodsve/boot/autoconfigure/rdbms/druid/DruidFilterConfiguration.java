@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * druid filter配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DruidFilterConfiguration {
     private static final String FILTER_STAT_PREFIX = "lodsve.rdbms.druid.filter.stat";

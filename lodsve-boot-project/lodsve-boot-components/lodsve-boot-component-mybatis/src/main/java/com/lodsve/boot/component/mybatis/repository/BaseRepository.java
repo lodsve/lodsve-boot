@@ -39,7 +39,7 @@ import java.util.List;
  *  }
  * </pre>
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see MapperProvider
  */
 public interface BaseRepository<T> {

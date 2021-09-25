@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 参数放入ThreadLocal中,同一线程中,不用传递参数,即可使用.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ParamsHolder {
     private static final ThreadLocal<Map<String, Object>> PARAMS_HOLDER = new ThreadLocal<>();

@@ -35,7 +35,7 @@ import java.lang.annotation.Annotation;
 /**
  * 解密配置文件的配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Data
 @ConfigurationProperties(prefix = "lodsve.encryption")

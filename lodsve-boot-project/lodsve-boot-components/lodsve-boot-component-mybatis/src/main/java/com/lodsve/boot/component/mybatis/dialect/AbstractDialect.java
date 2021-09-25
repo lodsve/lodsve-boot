@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 /**
  * 公用部分.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class AbstractDialect implements Dialect {
     @Override

@@ -25,7 +25,7 @@ import java.lang.reflect.Proxy;
 /**
  * 将代理类变成真实的类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ProxyUtils {
     /**

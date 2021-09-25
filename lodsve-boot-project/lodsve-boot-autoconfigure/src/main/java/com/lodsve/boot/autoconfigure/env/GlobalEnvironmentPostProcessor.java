@@ -28,7 +28,7 @@ import java.util.Properties;
 /**
  * 全局的配置定制.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class GlobalEnvironmentPostProcessor implements EnvironmentPostProcessor {
     public static final String LODSVE_PROPERTIES_SOURCE = "lodsveBootConfigurationProperties";

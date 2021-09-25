@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
 /**
  * 基于Jasypt的解密方案.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class JasyptEncryptablePropertyResolver extends BaseEncryptablePropertyResolver {
     private final PBEStringEncryptor encryptor;

@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * spring bean可以复写的开关.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class BeanAllowOverrideEnvironmentCustomizer implements EnvironmentCustomizer {
     private static final String ENABLE_ALLOW_BEAN_DEFINITION_OVERRIDING = "spring.main.allow-bean-definition-overriding";

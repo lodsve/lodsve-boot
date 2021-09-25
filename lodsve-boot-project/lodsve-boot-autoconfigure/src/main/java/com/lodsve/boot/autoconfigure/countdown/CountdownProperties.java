@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * .
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Data
 @ConfigurationProperties("lodsve.countdown")

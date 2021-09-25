@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * 验证框架:QQ限制注解.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

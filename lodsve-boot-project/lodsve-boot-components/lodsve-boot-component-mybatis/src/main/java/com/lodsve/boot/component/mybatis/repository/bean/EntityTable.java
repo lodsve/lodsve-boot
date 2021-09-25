@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * 实体对应表的配置信息.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EntityTable {
     /**

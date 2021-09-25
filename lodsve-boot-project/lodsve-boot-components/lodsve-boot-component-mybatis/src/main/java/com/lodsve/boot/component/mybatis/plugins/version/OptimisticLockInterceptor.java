@@ -56,7 +56,7 @@ import java.util.Properties;
 /**
  * 乐观锁插件
  *
- * @author sunhao
+ * @author Hulk Sun
  */
 @Intercepts({
     @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}),

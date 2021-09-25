@@ -19,7 +19,7 @@ package com.lodsve.boot.component.rdbms.dynamic;
 /**
  * 多数据源保存选择的数据源.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DataSourceHolder implements AutoCloseable {
     private static final ThreadLocal<String> DATA_SOURCE = new ThreadLocal<>();

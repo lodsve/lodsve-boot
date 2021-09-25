@@ -24,7 +24,7 @@ import java.sql.SQLException;
 /**
  * SQL查询，使用try-with-resource可以自动关闭连接.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class NativeSqlQuery extends SqlQuery {
     private PreparedStatement statement;

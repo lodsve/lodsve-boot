@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * spring mvc 配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LodsveWebMvcConfigurer implements WebMvcConfigurer {
     private final JsonConverter jsonConverter;

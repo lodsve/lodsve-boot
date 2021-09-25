@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * redis配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @Data
 @ConfigurationProperties("lodsve.redis")

@@ -19,7 +19,7 @@ package com.lodsve.boot.component.script;
 /**
  * javascript.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class JsScriptEngine extends AbstractScriptEngine {
     @Override

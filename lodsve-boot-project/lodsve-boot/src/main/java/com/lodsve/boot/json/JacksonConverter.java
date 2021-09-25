@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * jackson JsonUtils impl.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class JacksonConverter extends AbstractJsonConverter {
     private static final Logger logger = LoggerFactory.getLogger(JacksonConverter.class);

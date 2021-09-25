@@ -25,7 +25,7 @@ import java.util.Collections;
 /**
  * topic queue.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class TopicQueueBinding extends Binding {
 

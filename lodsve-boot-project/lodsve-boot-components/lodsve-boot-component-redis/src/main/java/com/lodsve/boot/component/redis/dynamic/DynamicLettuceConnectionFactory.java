@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * 多数据源对Lettuce的支持.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DynamicLettuceConnectionFactory extends AbstractDynamicConnectionFactory<LettuceConnectionFactory> implements RedisConnectionFactory, ReactiveRedisConnectionFactory {
     public DynamicLettuceConnectionFactory(String defaultConnectionFactoryName, Map<String, LettuceConnectionFactory> connectionFactories) {

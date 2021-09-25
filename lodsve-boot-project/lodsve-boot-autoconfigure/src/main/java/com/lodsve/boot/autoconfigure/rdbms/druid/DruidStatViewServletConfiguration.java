@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * druid监控页面servlet的配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConditionalOnWebApplication
 @ConditionalOnProperty(name = "lodsve.rdbms.druid.stat-view-servlet.enabled", havingValue = "true")

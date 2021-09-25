@@ -50,7 +50,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * 配置开始解密.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EncryptablePropertiesBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
     private static final Logger logger = LoggerFactory.getLogger(EncryptablePropertiesBeanFactoryPostProcessor.class);

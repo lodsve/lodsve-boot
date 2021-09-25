@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * Druid和Spring关联监控配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @ConditionalOnProperty("lodsve.rdbms.druid.aop-patterns")
 public class DruidSpringAopConfiguration {

@@ -25,7 +25,7 @@ import java.sql.SQLException;
 /**
  * sql query.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class SqlQuery implements AutoCloseable {
     final Connection connection;

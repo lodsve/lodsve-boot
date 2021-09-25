@@ -19,7 +19,7 @@ package com.lodsve.boot.component.mybatis.repository.bean;
 /**
  * 禁用时间，逻辑删除时间.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DisabledDateColumn extends ColumnBean {
     public DisabledDateColumn(ColumnBean column) {

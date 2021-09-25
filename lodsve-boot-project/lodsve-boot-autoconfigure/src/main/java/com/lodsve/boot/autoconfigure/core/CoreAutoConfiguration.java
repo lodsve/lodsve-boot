@@ -39,7 +39,7 @@ import java.util.Set;
 /**
  * core包的配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @Configuration
 @EnableConfigurationProperties({CoreProperties.class})

@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 文件类型枚举项.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public enum FileTypeEnum {
     /**

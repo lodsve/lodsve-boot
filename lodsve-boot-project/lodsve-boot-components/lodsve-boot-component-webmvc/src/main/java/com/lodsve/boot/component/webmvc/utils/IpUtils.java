@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * 操作ip的工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class IpUtils {
     private static final Logger logger = LoggerFactory.getLogger(IpUtils.class);

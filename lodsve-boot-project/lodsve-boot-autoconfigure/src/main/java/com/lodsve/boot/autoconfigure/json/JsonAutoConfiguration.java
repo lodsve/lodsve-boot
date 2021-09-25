@@ -73,7 +73,7 @@ import java.util.TimeZone;
 /**
  * json配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @Configuration
 public class JsonAutoConfiguration {

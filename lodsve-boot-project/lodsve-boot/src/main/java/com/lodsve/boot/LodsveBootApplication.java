@@ -22,7 +22,7 @@ import org.springframework.context.ApplicationContext;
 /**
  * LodsveBootApplication.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LodsveBootApplication {
     /**

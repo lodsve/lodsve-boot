@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * spring mvc默认使用jackson作为序列化工具.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class HttpMessageConverterEnvironmentCustomizer implements EnvironmentCustomizer {
     public static final String PREFERRED_JSON_MAPPER_NAME = "spring.mvc.converters.preferred-json-mapper";

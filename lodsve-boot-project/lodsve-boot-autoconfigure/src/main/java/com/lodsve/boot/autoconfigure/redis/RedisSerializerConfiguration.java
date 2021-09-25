@@ -33,7 +33,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * redis序列化配置.
  *
- * @author sunhao(hulk)
+ * @author Hulk Sun
  */
 @Configuration
 public class RedisSerializerConfiguration {

@@ -19,7 +19,7 @@ package com.lodsve.boot.component.mybatis.repository.bean;
 /**
  * version 字段.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class VersionColumn extends ColumnBean {
     public VersionColumn(ColumnBean column) {

@@ -19,7 +19,7 @@ package com.lodsve.boot.component.mybatis.repository.bean;
 /**
  * 实体字段对应数据库列的信息.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ColumnBean {
     /**

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 禁用springboot的redis配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DisabledSpringRedisAutoConfig implements EnvironmentCustomizer {
     private static final String DISABLED_AUTO_CONFIGURATION_EXCLUDE = "spring.autoconfigure.exclude";

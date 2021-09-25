@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 中文验证的处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ChineseHandler extends AbstractValidateHandler<Chinese> {
     private static final Logger logger = LoggerFactory.getLogger(ChineseHandler.class);

@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 电话号码验证处理类(固话).
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class TelephoneHandler extends AbstractValidateHandler<Telephone> {
     private static final Logger logger = LoggerFactory.getLogger(TelephoneHandler.class);

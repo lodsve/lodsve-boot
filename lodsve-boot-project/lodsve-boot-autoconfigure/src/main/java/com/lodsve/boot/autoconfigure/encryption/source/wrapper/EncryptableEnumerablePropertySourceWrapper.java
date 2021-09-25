@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 可枚举的.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EncryptableEnumerablePropertySourceWrapper<T> extends EnumerablePropertySource<T> implements EncryptablePropertySource<T> {
     private final EncryptablePropertySource<T> delegate;

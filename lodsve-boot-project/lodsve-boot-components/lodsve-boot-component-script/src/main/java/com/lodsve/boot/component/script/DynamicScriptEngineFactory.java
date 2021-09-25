@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 根据语言类型获取编译引擎的工厂.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DynamicScriptEngineFactory {
     private static final Map<String, ScriptEngine> SCRIPT_ENGINE = new HashMap<>();

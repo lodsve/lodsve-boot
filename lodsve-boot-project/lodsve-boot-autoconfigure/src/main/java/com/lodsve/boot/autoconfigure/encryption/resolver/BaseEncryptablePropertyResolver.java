@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
 /**
  * 解密公共部分.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public abstract class BaseEncryptablePropertyResolver implements EncryptablePropertyResolver {
     private final Environment environment;

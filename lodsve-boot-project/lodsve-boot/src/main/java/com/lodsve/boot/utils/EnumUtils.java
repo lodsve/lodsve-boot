@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 /**
  * 枚举相关工具类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EnumUtils {
     private EnumUtils() {

@@ -21,7 +21,7 @@ import org.apache.ibatis.session.Configuration;
 /**
  * Callback interface that can be customized a {@link Configuration} object generated on auto-configuration..
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @FunctionalInterface
 public interface ConfigurationCustomizer {

@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 根据操作系统的类型判断.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class OnOperatingSystemCondition extends SpringBootCondition {

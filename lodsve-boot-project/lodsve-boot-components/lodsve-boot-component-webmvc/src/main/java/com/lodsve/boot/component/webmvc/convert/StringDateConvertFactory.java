@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 /**
  * 时间类型转换器.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @SuppressWarnings({"all"})
 public class StringDateConvertFactory implements ConverterFactory<String, Date>, ConditionalConverter {

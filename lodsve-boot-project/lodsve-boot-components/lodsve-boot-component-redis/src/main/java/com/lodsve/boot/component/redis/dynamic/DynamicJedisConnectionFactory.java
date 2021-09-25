@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * 多数据源对jedis的支持.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class DynamicJedisConnectionFactory extends AbstractDynamicConnectionFactory<JedisConnectionFactory> implements RedisConnectionFactory {
     public DynamicJedisConnectionFactory(String defaultConnectionFactoryName, Map<String, JedisConnectionFactory> connectionFactories) {

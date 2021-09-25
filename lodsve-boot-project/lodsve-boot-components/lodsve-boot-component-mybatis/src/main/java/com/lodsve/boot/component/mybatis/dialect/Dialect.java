@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 /**
  * 数据库方言.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public interface Dialect {
     /**

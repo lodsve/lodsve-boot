@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 数字验证处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class NumberHandler extends AbstractValidateHandler<Number> {
     private static final Logger logger = LoggerFactory.getLogger(NumberHandler.class);

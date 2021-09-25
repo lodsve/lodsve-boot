@@ -26,7 +26,7 @@ import java.util.Optional;
 /**
  * Need a copy of the environment without the Enhanced property sources to avoid circular dependencies..
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class EnvCopy {
     private final StandardEnvironment copy;

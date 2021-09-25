@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
 /**
  * 文件系统对外客户端.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class FileSystemServer {
     private static final Logger logger = LoggerFactory.getLogger(FileSystemServer.class);

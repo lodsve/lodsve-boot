@@ -47,7 +47,7 @@ import java.util.List;
 /**
  * 扫描所有的MyBatis的TypeHandler.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class TypeHandlerScanner {
     private static final Logger logger = LoggerFactory.getLogger(TypeHandlerScanner.class);

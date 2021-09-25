@@ -23,7 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 /**
  * 不为空验证处理类.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class NotNullHandler extends AbstractValidateHandler<NotNull> {
     @Override

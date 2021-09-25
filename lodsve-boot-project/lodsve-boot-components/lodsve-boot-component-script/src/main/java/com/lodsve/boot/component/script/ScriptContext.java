@@ -23,7 +23,7 @@ import javax.script.CompiledScript;
 /**
  * 编译后自定义的上下文.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class ScriptContext {
     private final String id;

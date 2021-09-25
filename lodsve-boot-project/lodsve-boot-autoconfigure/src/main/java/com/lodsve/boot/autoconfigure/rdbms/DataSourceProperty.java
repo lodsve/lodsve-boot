@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 /**
  * 数据源配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Data
 public class DataSourceProperty {

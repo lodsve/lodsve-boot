@@ -24,7 +24,7 @@ import java.io.Serializable;
 /**
  * 上传图片返回DTO.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Data
 @ToString

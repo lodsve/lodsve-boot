@@ -48,8 +48,7 @@ import java.util.ServiceLoader;
 /**
  * 通用Mapper拦截器.
  *
- * @author sunhao(sunhao.java @ gmail.com)
- * @version V1.0, 15/7/13 下午4:31
+ * @author Hulk Sun
  */
 @Intercepts({
     @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),

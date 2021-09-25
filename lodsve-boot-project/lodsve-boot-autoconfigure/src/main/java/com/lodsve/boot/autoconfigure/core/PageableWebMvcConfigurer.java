@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * 分页参数.
  *
- * @author 孙昊(Hulk)
+ * @author Hulk Sun
  */
 public class PageableWebMvcConfigurer implements WebMvcConfigurer {
     private final List<PageableHandlerMethodArgumentResolverCustomizer> pageableResolverCustomizers;

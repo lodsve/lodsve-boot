@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 /**
  * 存储消费者相关信息的.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @Setter
 @Getter

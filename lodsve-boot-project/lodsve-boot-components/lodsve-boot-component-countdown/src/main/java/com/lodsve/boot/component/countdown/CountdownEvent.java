@@ -23,7 +23,7 @@ import java.io.Serializable;
 /**
  * redis事件.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class CountdownEvent extends ApplicationEvent {
     private final Serializable key;

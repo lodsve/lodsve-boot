@@ -19,7 +19,7 @@ package com.lodsve.boot.component.mybatis.repository.bean;
 /**
  * id字段.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class IdColumn extends ColumnBean {
     /**

@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * 解密配置文件的配置.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 @EnableConfigurationProperties(EncryptionProperties.class)
 @ConditionalOnProperty(prefix = "lodsve.encryption", name = "enabled")

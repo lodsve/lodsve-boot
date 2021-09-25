@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * 自定义一个BeanMapper用来做各种O的转换.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class BeanMapper {
     private static final Mapper MAPPER;

@@ -37,7 +37,7 @@ import java.io.IOException;
  * 重写jackson存储redis数据的序列化和反序列化.
  * 主要是为了保留原始对象的类型
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @see Jackson2JsonRedisSerializer
  */
 public class Jackson2JsonObjectRedisSerializer implements RedisSerializer<Object> {
