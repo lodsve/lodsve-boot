@@ -37,7 +37,7 @@
 
         <parent>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-parent</artifactId>
+            <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
 2. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in
@@ -45,7 +45,7 @@
 
         <parent>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-parent</artifactId>
+            <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x-SNAPSHOT</version>
         </parent>
         <repositories>

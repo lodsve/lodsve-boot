@@ -37,14 +37,14 @@
 
         <parent>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-parent</artifactId>
+            <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
 2. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
 
         <parent>
             <groupId>com.lodsve.boot</groupId>
-            <artifactId>lodsve-boot-parent</artifactId>
+            <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x-SNAPSHOT</version>
         </parent>
         <repositories>
