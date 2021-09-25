@@ -22,27 +22,43 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
+        <artifactId>lodsve-boot-components</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-components</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot components</name>
-
-    <modules>
-        <module>lodsve-boot-component-countdown</module>
-        <module>lodsve-boot-component-filesystem</module>
-        <module>lodsve-boot-component-mybatis</module>
-        <module>lodsve-boot-component-rdbms</module>
-        <module>lodsve-boot-component-redis</module>
-        <module>lodsve-boot-component-script</module>
-        <module>lodsve-boot-component-validator</module>
-        <module>lodsve-boot-component-webmvc</module>
-    </modules>
+    <artifactId>lodsve-boot-component-validator</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot component validator</name>
+    <description>validator support</description>
 
     <properties>
-        <main.user.dir>${basedir}/../..</main.user.dir>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
+
+    <dependencies>
+        <!-- required dependency -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <!-- optional dependency -->
+    </dependencies>
 </project>

@@ -56,6 +56,7 @@ public class CoreAutoConfiguration {
         i18nFolder.add("i18n.validatorMessage");
         i18nFolder.add("i18n.commonMessage");
         i18nFolder.add("i18n.i18nMessage");
+        i18nFolder.add("i18n.validatorError");
 
         messageSource.setBasenames(i18nFolder.toArray(new String[0]));
         messageSource.setDefaultEncoding("UTF-8");

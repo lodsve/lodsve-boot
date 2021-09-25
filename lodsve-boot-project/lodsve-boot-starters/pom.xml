@@ -43,6 +43,7 @@
         <module>lodsve-boot-starter-rocketmq</module>
         <module>lodsve-boot-starter-script</module>
         <module>lodsve-boot-starter-swagger</module>
+        <module>lodsve-boot-starter-validator</module>
         <module>lodsve-boot-starter-webmvc</module>
     </modules>
 

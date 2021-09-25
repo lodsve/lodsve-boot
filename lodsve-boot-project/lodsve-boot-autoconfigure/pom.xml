@@ -197,5 +197,12 @@
             <optional>true</optional>
         </dependency>
         <!-- RabbitMQ end -->
+        <!-- validator start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-validator</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- validator end -->
     </dependencies>
 </project>

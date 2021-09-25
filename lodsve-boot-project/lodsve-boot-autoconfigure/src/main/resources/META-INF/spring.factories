@@ -28,7 +28,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lodsve.boot.autoconfigure.rocketmq.RocketMqAutoConfiguration,\
   com.lodsve.boot.autoconfigure.script.ScriptAutoConfiguration,\
   com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration,\
-  com.lodsve.boot.autoconfigure.webmvc.WebMvcAutoConfiguration
+  com.lodsve.boot.autoconfigure.webmvc.WebMvcAutoConfiguration,\
+  com.lodsve.boot.autoconfigure.validator.ValidatorAutoConfiguration
 
 org.springframework.boot.env.EnvironmentPostProcessor=\
   com.lodsve.boot.autoconfigure.env.GlobalEnvironmentPostProcessor
