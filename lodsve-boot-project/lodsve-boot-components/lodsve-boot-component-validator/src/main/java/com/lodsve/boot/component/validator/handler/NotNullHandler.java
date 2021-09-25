@@ -24,7 +24,6 @@ import org.apache.commons.lang3.ObjectUtils;
  * 不为空验证处理类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 12-11-26 下午8:51
  */
 public class NotNullHandler extends AbstractValidateHandler<NotNull> {
     @Override

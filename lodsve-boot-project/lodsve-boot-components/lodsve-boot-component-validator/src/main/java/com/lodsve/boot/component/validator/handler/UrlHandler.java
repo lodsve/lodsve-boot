@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
  * url验证处理类.
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 12-11-26 下午9:49
  */
 public class UrlHandler extends AbstractValidateHandler<Url> {
     private static final Logger logger = LoggerFactory.getLogger(UrlHandler.class);
