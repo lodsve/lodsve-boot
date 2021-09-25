@@ -93,8 +93,6 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
         // 如果没有扩展名则填默认值application/octet-stream
         objectMetadata.setContentType(file.getContentType());
         objectMetadata.setContentDisposition("attachment;filename=\"" + SdkHttpUtils.urlEncode(fileName, false) + "\"");
-        // 设置访问权限
-        AccessControlEnum accessControl = file.getAccessControl();
         try {
             // 上传文件 (上传文件流的形式) 并设置未公开
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, file.getFinalFileName(), content, objectMetadata)

@@ -59,7 +59,7 @@ import java.util.stream.Collectors;
  */
 public class ConsumerConfigurationInitializing implements ApplicationContextAware, SmartInitializingSingleton, DisposableBean, EnvironmentAware {
     private static final Logger logger = LoggerFactory.getLogger(ConsumerConfigurationInitializing.class);
-    private final AtomicLong COUNTER = new AtomicLong(0);
+    private static final AtomicLong COUNTER = new AtomicLong(0);
     private ConfigurableApplicationContext applicationContext;
     private RocketMQProperties properties;
     private RocketMqConsumerProperties consumerProperties;

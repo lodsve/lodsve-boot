@@ -17,7 +17,13 @@
 package com.lodsve.boot.component.redis.dynamic;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.*;
+import org.springframework.data.redis.connection.ReactiveRedisClusterConnection;
+import org.springframework.data.redis.connection.ReactiveRedisConnection;
+import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisClusterConnection;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisSentinelConnection;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
 import java.util.Map;

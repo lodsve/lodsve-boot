@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.autoconfigure.rocketmq;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 标注这个类中含有注解{@link MessageListener}的方法都是消息的消费者.一个handle只能订阅一个topic.

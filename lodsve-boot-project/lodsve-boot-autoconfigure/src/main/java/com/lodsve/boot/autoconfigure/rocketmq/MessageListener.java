@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.autoconfigure.rocketmq;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 自定义的message listener，加在方法上（这些方法需要在一个类中，并且这个类要有{@link MessageHandler}这个注解），用来标注消息处理方法.

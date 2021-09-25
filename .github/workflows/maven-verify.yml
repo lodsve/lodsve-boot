@@ -31,5 +31,5 @@ jobs:
           distribution: 'adopt-hotspot'
           java-version: 11
           cache: 'maven'
-      - name: Run Maven Package
-        run: mvn clean package
+      - name: Run Maven Install
+        run: mvn clean install

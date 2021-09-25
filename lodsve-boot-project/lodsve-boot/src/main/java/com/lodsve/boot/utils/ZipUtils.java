@@ -16,13 +16,20 @@
  */
 package com.lodsve.boot.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tools.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
 
 /**
@@ -56,7 +63,7 @@ public class ZipUtils {
         //目标目录是否存在，存在不做任何动作，不存在则新建
         File destFile = new File(zipPath);
         if (!destFile.exists()) {
-            FileUtils.createFolder(destFile);
+            FileUtils.forceMkdir(destFile);
         }
 
         //源zip文件

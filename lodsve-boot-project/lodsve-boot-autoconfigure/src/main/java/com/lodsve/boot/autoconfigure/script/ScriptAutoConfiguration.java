@@ -16,7 +16,13 @@
  */
 package com.lodsve.boot.autoconfigure.script;
 
-import com.lodsve.boot.component.script.*;
+import com.lodsve.boot.component.script.DynamicScriptEngineFactory;
+import com.lodsve.boot.component.script.GroovyScriptEngine;
+import com.lodsve.boot.component.script.JsScriptEngine;
+import com.lodsve.boot.component.script.PythonScriptEngine;
+import com.lodsve.boot.component.script.RubyScriptEngine;
+import com.lodsve.boot.component.script.ScriptEngine;
+import com.lodsve.boot.component.script.SpelScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
 import org.jruby.embed.jsr223.JRubyEngineFactory;

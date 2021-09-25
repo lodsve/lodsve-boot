@@ -29,7 +29,7 @@ import java.util.List;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 public class BeanMapper {
-    private final static Mapper MAPPER;
+    private static final Mapper MAPPER;
 
     static {
         MAPPER = DozerBeanMapperBuilder.buildDefault();

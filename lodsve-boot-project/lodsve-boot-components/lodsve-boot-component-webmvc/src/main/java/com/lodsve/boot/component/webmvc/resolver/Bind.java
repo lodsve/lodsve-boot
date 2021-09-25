@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.component.webmvc.resolver;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 表单提交多个对象，且这些对象含有同名的字段，需要用此注解标注参数.

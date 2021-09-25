@@ -19,7 +19,11 @@ package com.lodsve.boot.component.mybatis.repository;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
 import com.lodsve.boot.component.mybatis.repository.helper.MapperHelper;
 import com.lodsve.boot.component.mybatis.repository.provider.MapperProvider;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.MappedStatement;
 
 import java.io.Serializable;

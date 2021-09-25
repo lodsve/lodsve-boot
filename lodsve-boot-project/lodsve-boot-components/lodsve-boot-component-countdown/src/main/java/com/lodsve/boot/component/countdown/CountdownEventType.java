@@ -35,5 +35,5 @@ public interface CountdownEventType<T> {
      * @param type type
      * @return 对象
      */
-    T eval(final String type);
+    T eval(String type);
 }

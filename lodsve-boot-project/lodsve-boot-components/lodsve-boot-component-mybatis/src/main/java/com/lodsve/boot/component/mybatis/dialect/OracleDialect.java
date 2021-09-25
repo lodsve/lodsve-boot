@@ -29,9 +29,9 @@ public class OracleDialect extends AbstractDialect {
         }
 
         int last = (int) (offset + limit);
-        String pageSql = "SELECT * FROM " +
-            "(SELECT temp.* ,ROWNUM num FROM (%s) temp where ROWNUM <= %d) " +
-            "WHERE num > %d";
+        String pageSql = "SELECT * FROM "
+            + "(SELECT temp.* ,ROWNUM num FROM (%s) temp where ROWNUM <= %d) "
+            + "WHERE num > %d";
 
         return String.format(pageSql, sql, last, offset);
     }

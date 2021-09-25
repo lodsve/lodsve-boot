@@ -52,7 +52,7 @@ public class WebInput {
     /**
      * 日期格式
      */
-    public static final String DATE_FORMAT_ = "HH:mm yyyy-MM-dd";
+    public static final String DATE_FORMAT_FULL = "HH:mm yyyy-MM-dd";
     /**
      * Default command name used for binding command objects: "command"
      */
@@ -110,8 +110,7 @@ public class WebInput {
     public Integer getInt(String name, Integer defaultValue) {
         Integer result = defaultValue;
         try {
-            result = this.request.getParameter(name) != null ?
-                Integer.valueOf(this.request.getParameter(name)) : defaultValue;
+            result = this.request.getParameter(name) != null ? Integer.valueOf(this.request.getParameter(name)) : defaultValue;
         } catch (NumberFormatException e) {
             return defaultValue;
         }
@@ -393,7 +392,7 @@ public class WebInput {
                 return DATE_FORMAT;
             }
             if (PATTERN_THREE.matcher(up).matches()) {
-                return DATE_FORMAT_;
+                return DATE_FORMAT_FULL;
             }
         }
 

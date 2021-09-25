@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.component.mybatis.utils.format;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * 格式化sql.

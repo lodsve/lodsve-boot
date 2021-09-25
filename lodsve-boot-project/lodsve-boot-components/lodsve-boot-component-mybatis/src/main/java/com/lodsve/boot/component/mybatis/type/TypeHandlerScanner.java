@@ -19,7 +19,11 @@ package com.lodsve.boot.component.mybatis.type;
 import com.google.common.collect.Lists;
 import com.lodsve.boot.bean.Codeable;
 import com.lodsve.boot.component.mybatis.exception.MyBatisException;
-import javassist.*;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtConstructor;
+import javassist.LoaderClassPath;
+import javassist.Modifier;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.type.TypeHandler;
 import org.slf4j.Logger;
@@ -133,8 +137,7 @@ public class TypeHandlerScanner {
     }
 
     private List<String> getEnumClasses(String basePackage) throws IOException {
-        String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
-            ClassUtils.convertClassNameToResourcePath(basePackage) + "/" + DEFAULT_RESOURCE_PATTERN;
+        String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(basePackage) + "/" + DEFAULT_RESOURCE_PATTERN;
 
         Resource[] resources = resourcePatternResolver.getResources(packageSearchPath);
         List<String> classes = new ArrayList<>(resources.length);

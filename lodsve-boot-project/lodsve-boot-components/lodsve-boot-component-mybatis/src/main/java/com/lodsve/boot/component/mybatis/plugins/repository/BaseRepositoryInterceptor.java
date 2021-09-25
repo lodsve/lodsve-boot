@@ -17,7 +17,12 @@
 package com.lodsve.boot.component.mybatis.plugins.repository;
 
 import com.lodsve.boot.component.mybatis.repository.BaseRepository;
-import com.lodsve.boot.component.mybatis.repository.bean.*;
+import com.lodsve.boot.component.mybatis.repository.bean.DeleteColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.DisabledDateColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.EntityTable;
+import com.lodsve.boot.component.mybatis.repository.bean.IdColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedByColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedDateColumn;
 import com.lodsve.boot.component.mybatis.repository.helper.EntityHelper;
 import com.lodsve.boot.component.mybatis.repository.helper.MapperHelper;
 import com.lodsve.boot.component.mybatis.repository.provider.BaseMapperProvider;
@@ -26,7 +31,11 @@ import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.apache.ibatis.builder.annotation.ProviderSqlSource;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.Assert;
@@ -47,7 +56,7 @@ import java.util.ServiceLoader;
     @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
 })
 public class BaseRepositoryInterceptor implements Interceptor {
-    private final static String LOGIC_DELETE_WITH_MODIFIED_BY_MAPPED_STATEMENT_ID = "logicDeleteByIdWithModifiedBy";
+    private static final String LOGIC_DELETE_WITH_MODIFIED_BY_MAPPED_STATEMENT_ID = "logicDeleteByIdWithModifiedBy";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

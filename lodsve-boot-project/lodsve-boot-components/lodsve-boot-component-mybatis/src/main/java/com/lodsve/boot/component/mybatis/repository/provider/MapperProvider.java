@@ -18,7 +18,14 @@ package com.lodsve.boot.component.mybatis.repository.provider;
 
 import com.lodsve.boot.component.mybatis.repository.BaseRepository;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
-import com.lodsve.boot.component.mybatis.repository.bean.*;
+import com.lodsve.boot.component.mybatis.repository.bean.ColumnBean;
+import com.lodsve.boot.component.mybatis.repository.bean.DeleteColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.DisabledDateColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.EntityTable;
+import com.lodsve.boot.component.mybatis.repository.bean.IdColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedByColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedDateColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.VersionColumn;
 import com.lodsve.boot.component.mybatis.repository.helper.EntityHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.mapping.MappedStatement;

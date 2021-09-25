@@ -18,16 +18,35 @@ package com.lodsve.boot.component.mybatis.repository.helper;
 
 import com.lodsve.boot.component.mybatis.repository.annotations.DisabledDate;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
-import com.lodsve.boot.component.mybatis.repository.bean.*;
+import com.lodsve.boot.component.mybatis.repository.bean.ColumnBean;
+import com.lodsve.boot.component.mybatis.repository.bean.DeleteColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.DisabledDateColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.EntityTable;
+import com.lodsve.boot.component.mybatis.repository.bean.IdColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedByColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.LastModifiedDateColumn;
+import com.lodsve.boot.component.mybatis.repository.bean.VersionColumn;
 import com.lodsve.boot.component.mybatis.utils.SqlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 实体类工具类 - 处理实体和数据库表以及字段关键的一个类.

@@ -203,9 +203,9 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 获取给定日期的星期数
      *
-     * @param prefix 前缀			eg.'星期'
-     * @param date   给定日期			eg.'2012-01-25 23:07:58'
-     * @return 前缀+(星期数)	ep.'星期三'
+     * @param prefix 前缀.eg.'星期'
+     * @param date   给定日期 eg.'2012-01-25 23:07:58'
+     * @return 前缀+(星期数) eg.'星期三'
      */
     public static String getDayOfWeek(String prefix, Date date) {
         final String[] dayNames = {"日", "一", "二", "三", "四", "五", "六"};

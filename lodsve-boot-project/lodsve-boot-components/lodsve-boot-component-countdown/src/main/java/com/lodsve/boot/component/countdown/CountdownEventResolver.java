@@ -29,7 +29,7 @@ import java.util.Map;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 public class CountdownEventResolver {
-    private final static Map<String, CountdownEventHandler> HANDLERS = new HashMap<>();
+    private static final Map<String, CountdownEventHandler> HANDLERS = new HashMap<>();
 
     public CountdownEventResolver(ObjectProvider<List<CountdownEventHandler>> provider) {
         List<CountdownEventHandler> handlers = provider.getIfAvailable();

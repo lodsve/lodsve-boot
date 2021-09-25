@@ -149,9 +149,8 @@ public class Snowflake {
                 //阻塞到下一个毫秒,获得新的时间戳
                 timestamp = tilNextMillis(lastTimestamp);
             }
-        }
-        //时间戳改变，毫秒内序列重置
-        else {
+        } else {
+            //时间戳改变，毫秒内序列重置
             sequence = 0L;
         }
 

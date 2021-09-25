@@ -20,7 +20,23 @@ import com.lodsve.boot.component.validator.annotations.ValidateEntity;
 import com.lodsve.boot.component.validator.exception.DefaultExceptionHandler;
 import com.lodsve.boot.component.validator.exception.ErrorMessage;
 import com.lodsve.boot.component.validator.exception.ExceptionHandler;
-import com.lodsve.boot.component.validator.handler.*;
+import com.lodsve.boot.component.validator.handler.ChineseHandler;
+import com.lodsve.boot.component.validator.handler.DoubleHandler;
+import com.lodsve.boot.component.validator.handler.EmailHandler;
+import com.lodsve.boot.component.validator.handler.EnglishHandler;
+import com.lodsve.boot.component.validator.handler.IdCardHandler;
+import com.lodsve.boot.component.validator.handler.IntegerHandler;
+import com.lodsve.boot.component.validator.handler.IpHandler;
+import com.lodsve.boot.component.validator.handler.LimitHandler;
+import com.lodsve.boot.component.validator.handler.MobileHandler;
+import com.lodsve.boot.component.validator.handler.NotNullHandler;
+import com.lodsve.boot.component.validator.handler.NumberHandler;
+import com.lodsve.boot.component.validator.handler.PasswordHandler;
+import com.lodsve.boot.component.validator.handler.QqHandler;
+import com.lodsve.boot.component.validator.handler.RegexHandler;
+import com.lodsve.boot.component.validator.handler.TelephoneHandler;
+import com.lodsve.boot.component.validator.handler.UrlHandler;
+import com.lodsve.boot.component.validator.handler.ZipHandler;
 import com.lodsve.boot.utils.GenericUtils;
 import com.lodsve.boot.utils.ObjectUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -32,7 +48,11 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 验证引擎核心组件.

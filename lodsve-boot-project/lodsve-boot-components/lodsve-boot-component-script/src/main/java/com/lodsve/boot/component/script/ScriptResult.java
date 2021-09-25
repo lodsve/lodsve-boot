@@ -39,7 +39,7 @@ public class ScriptResult {
     /**
      * 发生错误抛出的异常
      */
-    private transient final Throwable exception;
+    private final transient Throwable exception;
     /**
      * 执行时间
      */

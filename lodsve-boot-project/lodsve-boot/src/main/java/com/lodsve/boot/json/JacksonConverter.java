@@ -34,7 +34,7 @@ import java.util.Map;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 public class JacksonConverter extends AbstractJsonConverter {
-    private final static Logger logger = LoggerFactory.getLogger(JacksonConverter.class);
+    private static final Logger logger = LoggerFactory.getLogger(JacksonConverter.class);
     private final ObjectMapper objectMapper;
 
     public JacksonConverter(ObjectMapper objectMapper) {

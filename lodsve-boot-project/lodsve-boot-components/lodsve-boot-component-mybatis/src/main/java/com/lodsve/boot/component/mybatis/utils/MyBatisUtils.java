@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.component.mybatis.utils;
 
-import com.lodsve.boot.component.mybatis.dialect.*;
+import com.lodsve.boot.component.mybatis.dialect.Dialect;
+import com.lodsve.boot.component.mybatis.dialect.HsqlDialect;
+import com.lodsve.boot.component.mybatis.dialect.MySqlDialect;
+import com.lodsve.boot.component.mybatis.dialect.OracleDialect;
+import com.lodsve.boot.component.mybatis.dialect.SqlServerDialect;
 import com.lodsve.boot.component.mybatis.exception.MyBatisException;
 import com.lodsve.boot.component.mybatis.query.NativeSqlQuery;
 import org.apache.ibatis.reflection.MetaObject;
