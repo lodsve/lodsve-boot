@@ -94,7 +94,7 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
 
 ## Documentation
 
-See the master branch [JavaDocs][].
+See the master branch [JavaDoc][].
 
 ## Contact me
 
@@ -124,4 +124,4 @@ The `Lodsve Boot` was created using awesome [JetBrains IDEA][].
 
 [JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-framework
 
-[JavaDocs]: https://apidoc.lodsve.com
+[JavaDoc]: https://javadoc.lodsve.com

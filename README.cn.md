@@ -93,7 +93,7 @@
 
 ## 文档
 
-查看master分支的 [JavaDocs][].
+查看master分支的 [JavaDoc][].
 
 ## 联系我
 
@@ -123,4 +123,4 @@
 
 [JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-framework
 
-[JavaDocs]: https://apidoc.lodsve.com
+[JavaDoc]: https://javadoc.lodsve.com
