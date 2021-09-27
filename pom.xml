@@ -351,6 +351,7 @@
                             <docencoding>${project.build.sourceEncoding}</docencoding>
                             <doctitle>Lodsve Boot JavaDocs</doctitle>
                             <windowtitle>Lodsve Boot JavaDocs</windowtitle>
+                            <locale>zh_CN</locale>
                         </configuration>
                     </plugin>
                 </plugins>
