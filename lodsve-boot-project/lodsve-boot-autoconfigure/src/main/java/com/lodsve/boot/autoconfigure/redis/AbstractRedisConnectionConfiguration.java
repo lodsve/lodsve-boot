@@ -95,6 +95,7 @@ public abstract class AbstractRedisConnectionConfiguration {
     /**
      * Create a {@link RedisClusterConfiguration} if necessary.
      *
+     * @param clusterProperties cluster Properties
      * @return {@literal null} if no cluster settings are set.
      */
     protected final RedisClusterConfiguration getClusterConfiguration(Cluster clusterProperties) {

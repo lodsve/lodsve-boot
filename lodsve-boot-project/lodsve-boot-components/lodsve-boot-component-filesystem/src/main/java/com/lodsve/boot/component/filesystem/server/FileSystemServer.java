@@ -99,7 +99,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，lodsve.file-system.type来决定
      *
      * @param bucketName 桶的名称
      * @param file       上传文件
@@ -111,7 +111,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，lodsve.file-system.type来决定
      *
      * @param bucketName 桶的名称
      * @param input      文件流
@@ -124,7 +124,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param bucketName    桶的名称
      * @param file          上传文件
@@ -137,7 +137,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param bucketName    桶的名称
      * @param input         文件流
@@ -151,7 +151,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param bucketName    桶的名称
      * @param input         文件流
@@ -191,7 +191,7 @@ public class FileSystemServer {
     }
 
     /**
-     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定<p/>
+     * 上传至文件服务器，具体使用哪个文件服务器，由lodsve.file-system.type来决定
      *
      * @param bucketName    桶的名称
      * @param file          上传文件
@@ -293,7 +293,7 @@ public class FileSystemServer {
      *
      * @param bucketName  桶的名称
      * @param objectNames 返回值中的objectName
-     * @return 公开URL  objectName -> Open URL
+     * @return 公开URL  objectName -&gt; Open URL
      */
     public Map<String, String> getUrls(String bucketName, List<String> objectNames) {
         return fileSystemHandler.getUrls(bucketName, objectNames);
@@ -305,7 +305,7 @@ public class FileSystemServer {
      * @param bucketName  桶的名称
      * @param objectNames 返回值中的objectName
      * @param expireTime  失效时间，单位（毫秒）
-     * @return 公开URL  objectName -> Open URL
+     * @return 公开URL  objectName -&gt; Open URL
      */
     public Map<String, String> getUrls(String bucketName, List<String> objectNames, Long expireTime) {
         return fileSystemHandler.getUrls(bucketName, objectNames, expireTime);
