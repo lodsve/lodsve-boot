@@ -17,10 +17,12 @@
 package com.lodsve.boot.component.filesystem.handler;
 
 import com.lodsve.boot.component.filesystem.bean.FileBean;
-import com.lodsve.boot.component.filesystem.bean.Result;
+import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import org.springframework.beans.factory.DisposableBean;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 文件上传、下载操作.
@@ -29,53 +31,86 @@ import java.io.IOException;
  */
 public interface FileSystemHandler extends DisposableBean {
     /**
+     * 创建文件夹
+     *
+     * @param bucketName 桶的名称
+     * @param folder     文件夹名如"qj_nanjing/"
+     * @return 是否创建成功，如果文件夹已经存在，也会返回true，表示创建成功
+     */
+    boolean createFolder(String bucketName, String folder);
+
+    /**
      * 文件上传
      *
      * @param file 上传文件
      * @return Result
      * @throws IOException 文件流异常
      */
-    Result upload(FileBean file) throws IOException;
+    FileSystemResult upload(FileBean file) throws IOException;
 
     /**
      * 根据objectName删除服务器上的文件,objectName指上传时指定的folder+fileName
      *
+     * @param bucketName 桶的名称
      * @param objectName folder+fileName 如"test/test.txt"
      */
-    void deleteFile(String objectName);
+    void deleteFile(String bucketName, String objectName);
 
     /**
      * 判断文件是否存在,objectName指上传时指定的folder+fileName
      *
+     * @param bucketName 桶的名称
      * @param objectName folder+fileName 如"test/test.txt"
      * @return 是否存在
      */
-    boolean isExist(String objectName);
+    boolean isExist(String bucketName, String objectName);
 
     /**
      * 获取文件URL(私有桶),objectName指上传返回值中的objectName
      *
+     * @param bucketName 桶的名称
      * @param objectName 返回值中的objectName
      * @return 返回文件URL
      */
-    String getUrl(String objectName);
+    String getUrl(String bucketName, String objectName);
 
     /**
      * 获取文件URL(私有桶),objectName指上传返回值中的objectName
      *
+     * @param bucketName 桶的名称
      * @param objectName 返回值中的objectName
      * @param expireTime 失效时间，单位（毫秒）
      * @return 返回文件URL
      */
-    String getUrl(String objectName, Long expireTime);
+    String getUrl(String bucketName, String objectName, Long expireTime);
+
+    /**
+     * 批量获取存储文件的公开URL
+     *
+     * @param bucketName  桶的名称
+     * @param objectNames 返回值中的objectName
+     * @return 公开URL  objectName -> Open URL
+     */
+    Map<String, String> getUrls(String bucketName, List<String> objectNames);
+
+    /**
+     * 批量获取存储文件的公开URL
+     *
+     * @param bucketName  桶的名称
+     * @param objectNames 返回值中的objectName
+     * @param expireTime  失效时间，单位（毫秒）
+     * @return 公开URL  objectName -> Open URL
+     */
+    Map<String, String> getUrls(String bucketName, List<String> objectNames, Long expireTime);
 
     /**
      * 流式下载文件,objectName指上传时指定的folder+fileName
      *
+     * @param bucketName 桶的名称
      * @param objectName folder+fileName 如"test/test.txt"
      * @param targetDir  要下载到哪个目录下，操作系统文件系统绝对路径
      * @return 下载的文件路径(路径 + 文件名)
      * @throws IOException 创建目录失败
      */
-    String downloadFileForStream(String objectName, String targetDir) throws IOException;
+    String downloadFileForStream(String bucketName, String objectName, String targetDir) throws IOException;
 }

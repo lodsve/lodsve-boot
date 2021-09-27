@@ -20,6 +20,9 @@ import com.aliyun.oss.common.comm.Protocol;
 import com.lodsve.boot.component.filesystem.enums.FileSystemTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+
+import java.util.Map;
 
 /**
  * 文件上传组件配置.
@@ -32,7 +35,7 @@ public class FileSystemProperties {
     /**
      * 使用的文件上传类型
      */
-    private FileSystemTypeEnum type = FileSystemTypeEnum.OSS;
+    private FileSystemTypeEnum type = FileSystemTypeEnum.ALIYUN_OSS;
     /**
      * accessKeyId
      */
@@ -42,27 +45,41 @@ public class FileSystemProperties {
      */
     private String accessKeySecret;
     /**
-     * 使用的桶名称
+     * URL默认失效时间，单位是毫秒，默认10分钟
      */
-    private String bucketName;
+    private Long defaultExpire = 10 * 60 * 1000L;
+    /**
+     * 存储桶是否是公开的
+     * bucketName -&gt; true/false
+     */
+    @NestedConfigurationProperty
+    private Map<String, Boolean> bucketAcl;
     /**
      * 阿里云oss配置
      */
-    private OssProperties oss = new OssProperties();
+    @NestedConfigurationProperty
+    private AliyunOssProperties aliyunOss = new AliyunOssProperties();
     /**
      * 亚马逊云s3配置
      */
-    private AwsProperties aws = new AwsProperties();
+    @NestedConfigurationProperty
+    private AwsS3Properties awsS3 = new AwsS3Properties();
+    /**
+     * 腾讯云COS配置
+     */
+    @NestedConfigurationProperty
+    private TencentCosProperties tencentCos = new TencentCosProperties();
     /**
      * 客户端扩展配置
      */
+    @NestedConfigurationProperty
     private ClientExtendProperties client = new ClientExtendProperties();
 
     /**
      * AWS基本服務端屬性.
      */
     @Data
-    public static class AwsProperties {
+    public static class AwsS3Properties {
         /**
          * 区域
          */
@@ -73,11 +90,22 @@ public class FileSystemProperties {
      * OSS基本服務端屬性.
      */
     @Data
-    public static class OssProperties {
+    public static class AliyunOssProperties {
         /**
          * 上传目标地址
          */
         private String endpoint;
+    }
+
+    /**
+     * COS基本服務端屬性.
+     */
+    @Data
+    public static class TencentCosProperties {
+        /**
+         * 区域
+         */
+        private String region;
     }
 
     /**

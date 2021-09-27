@@ -70,6 +70,11 @@
             <artifactId>aws-java-sdk-s3</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- filesystem end -->
         <!-- mybatis start -->
         <dependency>

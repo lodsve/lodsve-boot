@@ -27,7 +27,11 @@ public enum FileSystemTypeEnum {
      */
     AMAZON_S3,
     /**
-     * 阿里云存储
+     * 阿里云OSS存储
      */
-    OSS
+    ALIYUN_OSS,
+    /**
+     * 腾讯云COS存储
+     */
+    TENCENT_COS
 }

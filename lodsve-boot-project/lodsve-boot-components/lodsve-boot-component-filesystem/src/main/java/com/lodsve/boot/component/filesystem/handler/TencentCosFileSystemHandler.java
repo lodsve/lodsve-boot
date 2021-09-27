@@ -16,19 +16,21 @@
  */
 package com.lodsve.boot.component.filesystem.handler;
 
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSException;
-import com.aliyun.oss.common.utils.BinaryUtil;
-import com.aliyun.oss.model.CannedAccessControlList;
-import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.ObjectMetadata;
-import com.aliyun.oss.model.PutObjectResult;
 import com.lodsve.boot.component.filesystem.bean.FileBean;
 import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import com.lodsve.boot.component.filesystem.enums.AccessControlEnum;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.exception.CosClientException;
+import com.qcloud.cos.http.HttpMethodName;
+import com.qcloud.cos.model.CannedAccessControlList;
+import com.qcloud.cos.model.GeneratePresignedUrlRequest;
+import com.qcloud.cos.model.GetObjectRequest;
+import com.qcloud.cos.model.ObjectMetadata;
+import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.model.PutObjectResult;
+import com.qcloud.cos.utils.IOUtils;
+import com.qcloud.cos.utils.Md5Utils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,22 +42,44 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileSystemException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 
 /**
- * 阿里云oss上传.
+ * 腾讯云存储实现.
  *
  * @author Hulk Sun
  */
-@Slf4j
-public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
-    private static final Logger logger = LoggerFactory.getLogger(AliyunOssFileSystemHandler.class);
-    private final OSS client;
+public class TencentCosFileSystemHandler extends AbstractFileSystemHandler {
+    private static final Logger logger = LoggerFactory.getLogger(TencentCosFileSystemHandler.class);
+    private final COSClient client;
 
-    public AliyunOssFileSystemHandler(OSS client, String endpoint, Long defaultExpire, Map<String, Boolean> bucketAcl) {
+    public TencentCosFileSystemHandler(COSClient client, String endpoint, Long defaultExpire, Map<String, Boolean> bucketAcl) {
         super(endpoint, defaultExpire, bucketAcl);
         this.client = client;
+    }
+
+    @Override
+    public void download(String bucketName, String objectName, File downloadFile) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        client.getObject(new GetObjectRequest(bucketName, objectName), downloadFile);
+    }
+
+    @Override
+    public String resolveRealName(String bucketName, String objectName) throws FileSystemException {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        ObjectMetadata metadata = client.getObjectMetadata(bucketName, objectName);
+        if (null == metadata) {
+            throw new FileSystemException(String.format("Object Metadata is NULL! Object name is [%s]!", objectName));
+        }
+
+        String disposition = metadata.getContentDisposition();
+        String realName = StringUtils.removeStart(disposition, "attachment;filename=\"");
+        realName = StringUtils.removeEnd(realName, "\"");
+        return realName;
     }
 
     @Override
@@ -66,16 +90,14 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
         }
 
         // 创建文件夹
-        PutObjectResult result = client.putObject(bucketName, folder, new ByteArrayInputStream(new byte[0]));
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(0);
+        PutObjectResult result = client.putObject(bucketName, folder, new ByteArrayInputStream(new byte[0]), metadata);
         return null != result && StringUtils.isNotBlank(result.getETag());
     }
 
     @Override
     public FileSystemResult upload(FileBean file) throws IOException {
-        if (StringUtils.isBlank(file.getBucketName())) {
-            throw new FileSystemException("bucket name can't be null!");
-        }
-
         FileSystemResult result = new FileSystemResult();
         String fileName = file.getFileName();
 
@@ -84,7 +106,7 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
         // 创建上传Object的MetadataBinaryUtil
         ObjectMetadata metadata = new ObjectMetadata();
         if (file.getValidatorMd5()) {
-            String md5 = BinaryUtil.toBase64String(BinaryUtil.calculateMd5(IOUtils.toByteArray(content)));
+            String md5 = Md5Utils.md5AsBase64(IOUtils.toByteArray(content));
             metadata.setContentMD5(md5);
             result.setMd5(md5);
         }
@@ -102,11 +124,11 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
         metadata.setContentType(file.getContentType());
         // 指定该Object被下载时的名称（指示MINME用户代理如何显示附加的文件，打开或下载，及文件名称）
         metadata.setContentDisposition("attachment;filename=\"" + fileName + "\"");
-        // 设置访问权限
-        metadata.setObjectAcl(evalAccessControlValue(file.getAccessControl()));
         try {
             // 上传文件 (上传文件流的形式)
-            PutObjectResult putResult = client.putObject(file.getBucketName(), file.getFinalFileName(), content, metadata);
+            PutObjectRequest request = new PutObjectRequest(file.getBucketName(), file.getFinalFileName(), content, metadata)
+                .withCannedAcl(evalAccessControlValue(file.getAccessControl()));
+            PutObjectResult putResult = client.putObject(request);
 
             // 解析结果
             result.setObjectName(file.getFinalFileName());
@@ -114,8 +136,10 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
             result.setFileName(fileName);
             result.setResult(StringUtils.isNotBlank(putResult.getETag()));
             return result;
-        } catch (OSSException | ClientException e) {
-            logger.error("上传阿里云OSS服务器异常." + e.getMessage(), e);
+        } catch (CosClientException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("上传腾讯云COS服务器异常." + e.getMessage(), e);
+            }
             throw e;
         }
     }
@@ -157,6 +181,13 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
         }
     }
 
+    @Override
+    public void destroy() throws Exception {
+        if (null != client) {
+            client.shutdown();
+        }
+    }
+
     /**
      * 获取公开地址
      *
@@ -183,51 +214,33 @@ public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
         // 设置URL过期时间
         Date expiration = new Date(System.currentTimeMillis() + expireTime);
         // 生成URL
-        URL url = client.generatePresignedUrl(bucketName, objectName, expiration);
+        GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, objectName, HttpMethodName.GET);
+        request.setExpiration(expiration);
+        URL url = client.generatePresignedUrl(request);
         return url.toString();
-    }
-
-    @Override
-    public void download(String bucketName, String objectName, File downloadFile) {
-        Assert.hasText(bucketName, "bucket name can't be null!");
-
-        client.getObject(new GetObjectRequest(bucketName, objectName), downloadFile);
-    }
-
-    @Override
-    public String resolveRealName(String bucketName, String objectName) throws FileSystemException {
-        Assert.hasText(bucketName, "bucket name can't be null!");
-
-        ObjectMetadata metadata = client.getObjectMetadata(bucketName, objectName);
-        if (null == metadata) {
-            throw new FileSystemException(String.format("Object Metadata is NULL! Object name is [%s]!", objectName));
-        }
-
-        String disposition = metadata.getContentDisposition();
-        String realName = StringUtils.removeStart(disposition, "attachment;filename=\"");
-        realName = StringUtils.removeEnd(realName, "\"");
-        return realName;
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        if (null != client) {
-            client.shutdown();
-        }
     }
 
     private CannedAccessControlList evalAccessControlValue(AccessControlEnum accessControlEnum) {
         accessControlEnum = (null == accessControlEnum ? AccessControlEnum.DEFAULT : accessControlEnum);
         switch (accessControlEnum) {
-            case PRIVATE:
-                return CannedAccessControlList.Private;
             case PUBLIC_READ:
                 return CannedAccessControlList.PublicRead;
+            case PRIVATE:
+                return CannedAccessControlList.Private;
             case PUBLIC_READ_WRITE:
                 return CannedAccessControlList.PublicReadWrite;
             case DEFAULT:
             default:
                 return CannedAccessControlList.Default;
         }
+    }
+
+    private static String getMd5(String str) {
+        return DigestUtils.md5Hex(str);
+    }
+
+    private static String base64Encode(byte[] key) {
+        final Base64.Encoder encoder = Base64.getEncoder();
+        return encoder.encodeToString(key);
     }
 }

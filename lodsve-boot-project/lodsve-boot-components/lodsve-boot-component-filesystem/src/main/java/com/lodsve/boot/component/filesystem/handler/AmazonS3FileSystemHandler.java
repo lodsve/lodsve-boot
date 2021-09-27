@@ -18,26 +18,31 @@ package com.lodsve.boot.component.filesystem.handler;
 
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.amazonaws.SdkClientException;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.util.SdkHttpUtils;
 import com.lodsve.boot.component.filesystem.bean.FileBean;
-import com.lodsve.boot.component.filesystem.bean.Result;
+import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import com.lodsve.boot.component.filesystem.enums.AccessControlEnum;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileSystemException;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 亚马逊云s3.
@@ -46,27 +51,60 @@ import java.util.Date;
  */
 public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AmazonS3FileSystemHandler.class);
-    private final String bucketName;
     private final AmazonS3 amazonS3Client;
 
-    public AmazonS3FileSystemHandler(AmazonS3 amazonS3Client, String bucketName) {
+    public AmazonS3FileSystemHandler(AmazonS3 amazonS3Client, String protocol, String region, Long defaultExpire, Map<String, Boolean> bucketAcl) {
+        super(protocol + "://s3." + StringUtils.lowerCase(Regions.fromName(region).getName()) + ".amazonaws.com", defaultExpire, bucketAcl);
         this.amazonS3Client = amazonS3Client;
-        this.bucketName = bucketName;
+    }
+
+    public AmazonS3FileSystemHandler(AmazonS3 amazonS3Client, String endpoint, Long defaultExpire, Map<String, Boolean> bucketAcl) {
+        super(endpoint, defaultExpire, bucketAcl);
+        this.amazonS3Client = amazonS3Client;
     }
 
     @Override
-    public void download(String objectName, File downloadFile) {
+    public void download(String bucketName, String objectName, File downloadFile) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
 
+        amazonS3Client.getObject(new GetObjectRequest(bucketName, objectName), downloadFile);
     }
 
     @Override
-    public String resolveRealName(String objectName) throws FileSystemException {
-        return null;
+    public String resolveRealName(String bucketName, String objectName) throws FileSystemException {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        ObjectMetadata metadata = amazonS3Client.getObjectMetadata(bucketName, objectName);
+        if (null == metadata) {
+            throw new FileSystemException(String.format("Object Metadata is NULL! Object name is [%s]!", objectName));
+        }
+
+        String disposition = metadata.getContentDisposition();
+        return StringUtils.removeEnd(StringUtils.removeStart(disposition, "attachment;filename=\""), "\"");
     }
 
     @Override
-    public Result upload(FileBean file) throws IOException {
-        Result result = new Result();
+    public boolean createFolder(String bucketName, String folder) {
+        // 判断文件夹是否存在，不存在则创建
+        if (amazonS3Client.doesObjectExist(bucketName, folder)) {
+            return true;
+        }
+
+        // 创建文件夹
+        // 创建文件夹
+        PutObjectRequest request = new PutObjectRequest(bucketName, folder, new ByteArrayInputStream(new byte[0]),
+            null).withCannedAcl(CannedAccessControlList.PublicRead);
+        PutObjectResult result = amazonS3Client.putObject(request);
+        return null != result && StringUtils.isNotBlank(result.getETag());
+    }
+
+    @Override
+    public FileSystemResult upload(FileBean file) throws IOException {
+        if (StringUtils.isBlank(file.getBucketName())) {
+            throw new FileSystemException("bucket name can't be null!");
+        }
+
+        FileSystemResult result = new FileSystemResult();
 
         // 以输入流的形式上传文件
         InputStream content = file.getContent();
@@ -95,7 +133,7 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
         objectMetadata.setContentDisposition("attachment;filename=\"" + SdkHttpUtils.urlEncode(fileName, false) + "\"");
         try {
             // 上传文件 (上传文件流的形式) 并设置未公开
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, file.getFinalFileName(), content, objectMetadata)
+            PutObjectRequest putObjectRequest = new PutObjectRequest(file.getBucketName(), file.getFinalFileName(), content, objectMetadata)
                 .withCannedAcl(evalAccessControlValue(file.getAccessControl()));
             PutObjectResult putResult = amazonS3Client.putObject(putObjectRequest);
 
@@ -112,28 +150,67 @@ public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
     }
 
     @Override
-    public void deleteFile(String objectName) {
+    public void deleteFile(String bucketName, String objectName) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
         amazonS3Client.deleteObject(bucketName, objectName);
         logger.info("删除" + bucketName + "下的文件" + objectName + "成功");
     }
 
     @Override
-    public boolean isExist(String objectName) {
+    public boolean isExist(String bucketName, String objectName) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
         boolean exist = amazonS3Client.doesObjectExist(bucketName, objectName);
         logger.info(bucketName + "下的文件" + objectName + "存在：" + exist);
         return exist;
     }
 
     @Override
-    public String getUrl(String objectName) {
-        URL url = amazonS3Client.getUrl(bucketName, objectName);
-        return url.toString();
+    public String getUrl(String bucketName, String objectName) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        return getUrl(bucketName, objectName, defaultExpire);
     }
 
     @Override
-    public String getUrl(String objectName, Long expireTime) {
+    public String getUrl(String bucketName, String objectName, Long expireTime) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        // 判断桶的权限
+        boolean isPublic = isPublic(bucketName);
+        if (isPublic) {
+            return getOpenUrl(bucketName, objectName);
+        } else {
+            return getPrivateUrl(bucketName, objectName, expireTime);
+        }
+    }
+
+    /**
+     * 获取公开地址
+     *
+     * @param bucketName 桶的名称
+     * @param objectName 对象名
+     * @return 公开地址
+     */
+    protected String getOpenUrl(String bucketName, String objectName) {
+        String[] temp = StringUtils.split(endpoint, "://");
+        return String.format("%s://%s.%s/%s", temp[0], bucketName, temp[1], objectName);
+
+    }
+
+    /**
+     * 获取私有地址
+     *
+     * @param bucketName 桶的名称
+     * @param objectName 返回值中的objectName
+     * @param expireTime 失效时间，单位（毫秒）
+     * @return 私有地址
+     */
+    private String getPrivateUrl(String bucketName, String objectName, Long expireTime) {
         // 设置URL过期时间
         Date expiration = new Date(System.currentTimeMillis() + expireTime);
+        // 生成URL
         URL url = amazonS3Client.generatePresignedUrl(bucketName, objectName, expiration);
         return url.toString();
     }

@@ -32,6 +32,10 @@ import java.io.Serializable;
 @ToString
 public class FileBean implements Serializable {
     /**
+     * 需要上传到哪个桶
+     */
+    private String bucketName;
+    /**
      * 文件名
      */
     private String fileName;

@@ -28,7 +28,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class Result implements Serializable {
+public class FileSystemResult implements Serializable {
     /**
      * 文件唯一标识
      */

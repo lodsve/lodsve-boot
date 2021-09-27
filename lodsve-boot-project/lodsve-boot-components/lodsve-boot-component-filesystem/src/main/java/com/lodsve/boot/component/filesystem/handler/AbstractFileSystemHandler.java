@@ -16,12 +16,19 @@
  */
 package com.lodsve.boot.component.filesystem.handler;
 
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystemException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 公共.
@@ -30,9 +37,25 @@ import java.nio.file.FileSystemException;
  */
 public abstract class AbstractFileSystemHandler implements FileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AbstractFileSystemHandler.class);
+    private static final Map<String, Boolean> BUCKET_ACCESS_CONTROL = new HashMap<>(16);
+    private static final String[] URL_PREFIX = new String[]{"http://", "https://"};
+
+    protected final Long defaultExpire;
+    protected final String endpoint;
+
+    public AbstractFileSystemHandler(String endpoint, Long defaultExpire, Map<String, Boolean> bucketAcl) {
+        this.defaultExpire = (null == defaultExpire ? 10 * 60 * 1000L : defaultExpire);
+        if (StringUtils.containsAny(endpoint, URL_PREFIX)) {
+            this.endpoint = endpoint;
+        } else {
+            this.endpoint = "http://" + endpoint;
+        }
+        BUCKET_ACCESS_CONTROL.putAll(MapUtils.isEmpty(bucketAcl) ? new HashMap<>(16) : bucketAcl);
+    }
 
     @Override
-    public String downloadFileForStream(String objectName, String targetDir) throws IOException {
+    public String downloadFileForStream(String bucketName, String objectName, String targetDir) throws IOException {
+        Assert.hasText(bucketName, "bucket name can't be null!");
         File tempFolder = createTempFolder(targetDir);
 
         if (logger.isInfoEnabled()) {
@@ -40,7 +63,7 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
         }
 
         // 获取文件真实名称
-        String realName = resolveRealName(objectName);
+        String realName = resolveRealName(bucketName, objectName);
 
         File fileTemp = new File(tempFolder, realName);
         File parentFolder = new File(fileTemp.getParent());
@@ -50,7 +73,7 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
             }
         }
 
-        download(objectName, fileTemp);
+        download(bucketName, objectName, fileTemp);
         return fileTemp.getAbsolutePath();
     }
 
@@ -73,21 +96,48 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
         return tempFolder;
     }
 
+    @Override
+    public Map<String, String> getUrls(String bucketName, List<String> objectNames) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        return objectNames.stream().collect(Collectors.toMap(ele -> ele, value -> getUrl(bucketName, value), (ele1, ele2) -> ele2));
+    }
+
+    @Override
+    public Map<String, String> getUrls(String bucketName, List<String> objectNames, Long expireTime) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        return objectNames.stream().collect(Collectors.toMap(ele -> ele, ele -> getUrl(bucketName, ele, expireTime), (ele1, ele2) -> ele2));
+    }
+
+    /**
+     * 判断存储桶是否是公开桶
+     *
+     * @param bucketName 桶的名称
+     * @return 是否是公开桶
+     */
+    protected Boolean isPublic(String bucketName) {
+        Boolean isPublic = BUCKET_ACCESS_CONTROL.get(bucketName);
+        return null != isPublic && isPublic;
+    }
+
     /**
      * 下载文件到指定位置
      *
+     * @param bucketName   桶的名称
      * @param objectName   需要下载的文件
      * @param downloadFile 指定位置
      */
-    public abstract void download(String objectName, File downloadFile);
+    public abstract void download(String bucketName, String objectName, File downloadFile);
 
     /**
      * 解析文件真实名称
      *
+     * @param bucketName 桶的名称
      * @param objectName 需要下载的文件
      * @return 文件真实名称
-     * @throws FileSystemException Object Metadata is NULL
+     * @throws FileSystemException file not exist!
      */
-    public abstract String resolveRealName(String objectName) throws FileSystemException;
+    public abstract String resolveRealName(String bucketName, String objectName) throws FileSystemException;
 
 }
