@@ -193,11 +193,11 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <show>public</show>
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <additionalOptions>-source 8</additionalOptions>
+                            <doctitle>Lodsve Boot ApiDoc</doctitle>
+                            <windowtitle>Lodsve Boot ApiDoc</windowtitle>
                         </configuration>
                     </plugin>
                     <!-- 在maven仓库中自动close和release的插件 -->
@@ -269,11 +269,11 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <show>public</show>
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <additionalOptions>-source 8</additionalOptions>
+                            <doctitle>Lodsve Boot JavaDocs</doctitle>
+                            <windowtitle>Lodsve Boot JavaDocs</windowtitle>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -326,12 +326,11 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <show>public</show>
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <additionalOptions>-source 8</additionalOptions>
-                            <detectJavaApiLink>false</detectJavaApiLink>
+                            <doctitle>Lodsve Boot JavaDocs</doctitle>
+                            <windowtitle>Lodsve Boot JavaDocs</windowtitle>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -346,21 +345,12 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${maven.javadoc.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                         <configuration>
                             <charset>${project.build.sourceEncoding}</charset>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <doctitle>Lodsve Boot ApiDoc</doctitle>
-                            <windowtitle>Lodsve Boot ApiDoc</windowtitle>
+                            <doctitle>Lodsve Boot JavaDocs</doctitle>
+                            <windowtitle>Lodsve Boot JavaDocs</windowtitle>
                         </configuration>
                     </plugin>
                 </plugins>
