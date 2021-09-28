@@ -18,7 +18,6 @@ package com.lodsve.boot.component.filesystem.handler;
 
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -52,11 +51,6 @@ import java.util.Map;
 public class AmazonS3FileSystemHandler extends AbstractFileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AmazonS3FileSystemHandler.class);
     private final AmazonS3 amazonS3Client;
-
-    public AmazonS3FileSystemHandler(AmazonS3 amazonS3Client, String protocol, String region, Long defaultExpire, Map<String, Boolean> bucketAcl) {
-        super(protocol + "://s3." + StringUtils.lowerCase(Regions.fromName(region).getName()) + ".amazonaws.com", defaultExpire, bucketAcl);
-        this.amazonS3Client = amazonS3Client;
-    }
 
     public AmazonS3FileSystemHandler(AmazonS3 amazonS3Client, String endpoint, Long defaultExpire, Map<String, Boolean> bucketAcl) {
         super(endpoint, defaultExpire, bucketAcl);

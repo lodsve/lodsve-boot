@@ -37,6 +37,7 @@ import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.region.Region;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -133,7 +134,7 @@ public class FileSystemAutoConfiguration {
         @ConditionalOnMissingBean
         public AmazonS3 amazonS3Client(ClientConfiguration configuration) {
             BasicAWSCredentials credentials = new BasicAWSCredentials(properties.getAccessKeyId(), properties.getAccessKeySecret());
-            return AmazonS3ClientBuilder.standard().withRegion(Regions.fromName(properties.getAwsS3().getRegion()))
+            return AmazonS3ClientBuilder.standard().withRegion(properties.getAwsS3().getRegion())
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withClientConfiguration(configuration)
                 .build();
@@ -142,7 +143,10 @@ public class FileSystemAutoConfiguration {
         @Bean
         @ConditionalOnMissingBean
         public FileSystemHandler fileSystemHandler(AmazonS3 amazonS3) {
-            return new AmazonS3FileSystemHandler(amazonS3, properties.getClient().getProtocol(), properties.getAwsS3().getRegion(), properties.getDefaultExpire(), properties.getBucketAcl());
+            Regions region = properties.getAwsS3().getRegion();
+            String protocol = properties.getClient().getProtocol();
+            String endpoint = String.format("%s://s3.%s.amazonaws.com", protocol, StringUtils.lowerCase(region.getName()));
+            return new AmazonS3FileSystemHandler(amazonS3, endpoint, properties.getDefaultExpire(), properties.getBucketAcl());
         }
     }
 

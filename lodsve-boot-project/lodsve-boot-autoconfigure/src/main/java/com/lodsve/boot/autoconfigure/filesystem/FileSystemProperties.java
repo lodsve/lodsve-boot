@@ -17,6 +17,7 @@
 package com.lodsve.boot.autoconfigure.filesystem;
 
 import com.aliyun.oss.common.comm.Protocol;
+import com.amazonaws.regions.Regions;
 import com.lodsve.boot.component.filesystem.enums.FileSystemTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -83,7 +84,7 @@ public class FileSystemProperties {
         /**
          * 区域
          */
-        private String region;
+        private Regions region = Regions.DEFAULT_REGION;
     }
 
     /**
