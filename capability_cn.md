@@ -10,6 +10,7 @@
 | lodsve-boot-starter-redis         | Redis                        | 动态数据源支持，以及增强的泛型序列化和反序列化。                  |
 | lodsve-boot-starter-rocketmq      | Apache RocketMQ                | 增强RocketMQ 消费者注册。                                    |
 | lodsve-boot-starter-script        | -                            | 实现在JVM中运行一些解释型语言，如Groovy、Python、JS、Ruby、SPEL等|
+| lodsve-boot-starter-security      | -                            | 简单的安全校验，包含身份验证和授权。                             |
 | lodsve-boot-starter-swagger       | Swagger / Springfox            | 改进对 swagger 和 springfox 中的分页、身份验证、通用参数等的支持。|
 | lodsve-boot-starter-validator     | -                            | 基于AOP对POJO进行校验。                                       |
 | lodsve-boot-starter-webmvc        | Spring WebMVC                | Spring WebMVC 的增强。                                     |

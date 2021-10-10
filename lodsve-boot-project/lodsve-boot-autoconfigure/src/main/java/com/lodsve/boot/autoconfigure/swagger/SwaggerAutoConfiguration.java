@@ -23,8 +23,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.lodsve.boot.autoconfigure.swagger.SwaggerAutoConfiguration.IgnoreAccountParamInSwaggerConfiguration;
 import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.AuthConfig;
 import com.lodsve.boot.autoconfigure.swagger.SwaggerProperties.GlobalParameter;
+import com.lodsve.boot.component.security.core.Account;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.collections.CollectionUtils;
@@ -32,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -89,7 +92,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @ConditionalOnProperty(name = "lodsve.swagger.enabled")
 @ConditionalOnClass(Docket.class)
 @EnableConfigurationProperties(SwaggerProperties.class)
-@Import({Swagger2DocumentationConfiguration.class})
+@Import({Swagger2DocumentationConfiguration.class, IgnoreAccountParamInSwaggerConfiguration.class})
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
     private static final String PREFERRED_MAPPER_PROPERTY = "spring.mvc.converters.preferred-json-mapper";
     private final SwaggerProperties swaggerProperties;
@@ -251,6 +254,21 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
             public JsonElement serialize(Json json, Type typeOfSrc, JsonSerializationContext context) {
                 return JsonParser.parseString(json.value());
             }
+        }
+    }
+
+    @Configuration
+    @ConditionalOnClass(Account.class)
+    public static class IgnoreAccountParamInSwaggerConfiguration implements InitializingBean {
+        private final Docket docket;
+
+        public IgnoreAccountParamInSwaggerConfiguration(Docket docket) {
+            this.docket = docket;
+        }
+
+        @Override
+        public void afterPropertiesSet() throws Exception {
+            docket.ignoredParameterTypes(Account.class);
         }
     }
 }

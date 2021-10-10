@@ -22,33 +22,28 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
+        <artifactId>lodsve-boot-starters</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-starters</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot starters</name>
-
-    <modules>
-        <module>lodsve-boot-starter-countdown</module>
-        <module>lodsve-boot-starter-encryption</module>
-        <module>lodsve-boot-starter-filesystem</module>
-        <module>lodsve-boot-starter-mybatis</module>
-        <module>lodsve-boot-starter-nacos</module>
-        <module>lodsve-boot-starter-rabbitmq</module>
-        <module>lodsve-boot-starter-rdbms</module>
-        <module>lodsve-boot-starter-redis</module>
-        <module>lodsve-boot-starter-rocketmq</module>
-        <module>lodsve-boot-starter-script</module>
-        <module>lodsve-boot-starter-security</module>
-        <module>lodsve-boot-starter-swagger</module>
-        <module>lodsve-boot-starter-validator</module>
-        <module>lodsve-boot-starter-webmvc</module>
-    </modules>
+    <artifactId>lodsve-boot-starter-security</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot starter security</name>
 
     <properties>
-        <main.user.dir>${basedir}/../..</main.user.dir>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-security</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

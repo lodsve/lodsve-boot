@@ -38,6 +38,7 @@
         <module>lodsve-boot-component-rdbms</module>
         <module>lodsve-boot-component-redis</module>
         <module>lodsve-boot-component-script</module>
+        <module>lodsve-boot-component-security</module>
         <module>lodsve-boot-component-validator</module>
         <module>lodsve-boot-component-webmvc</module>
     </modules>

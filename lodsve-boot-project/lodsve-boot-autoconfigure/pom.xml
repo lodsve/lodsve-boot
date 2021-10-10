@@ -209,5 +209,12 @@
             <optional>true</optional>
         </dependency>
         <!-- validator end -->
+
+        <!-- sample security start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-security</artifactId>
+        </dependency>
+        <!-- sample security end -->
     </dependencies>
 </project>
