@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.template;
+package com.lodsve.boot.io.template;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;

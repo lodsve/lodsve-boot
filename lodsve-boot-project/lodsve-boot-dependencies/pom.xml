@@ -62,6 +62,7 @@
         <jruby.version>1.7.26</jruby.version>
         <jyphon.version>2.7.1b3</jyphon.version>
         <jasypt.version>1.9.3</jasypt.version>
+        <zkclient.version>0.10</zkclient.version>
     </properties>
 
     <dependencyManagement>
@@ -276,6 +277,24 @@
                 <version>${jyphon.version}</version>
             </dependency>
             <!-- other languages end -->
+
+            <!-- zookeeper driver zkclient start -->
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- zookeeper driver zkclient end -->
 
             <!-- lodsve boot start -->
             <dependency>

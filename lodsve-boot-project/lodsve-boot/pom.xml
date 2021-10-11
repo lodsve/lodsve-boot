@@ -92,6 +92,12 @@
             <artifactId>gson</artifactId>
         </dependency>
         <!-- lodsve boot dependencies end -->
+
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

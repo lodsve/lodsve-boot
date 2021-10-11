@@ -92,6 +92,7 @@ public class ListUtils {
      * @param <T> key类型
      * @param <K> value类型
      */
+    @FunctionalInterface
     public interface KeyFinder<T, K> {
         /**
          * 根据key查询
@@ -107,6 +108,7 @@ public class ListUtils {
      *
      * @param <T> 集合元素类型
      */
+    @FunctionalInterface
     public interface Decide<T> {
         /**
          * 判断
@@ -123,6 +125,7 @@ public class ListUtils {
      * @param <K> 原集合元素类型
      * @param <T> 新集合元素类型
      */
+    @FunctionalInterface
     public interface Transform<K, T> {
         /**
          * 单个元素转换
