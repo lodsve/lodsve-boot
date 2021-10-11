@@ -81,7 +81,7 @@ public final class LodsveBootVersion {
                     continue;
                 }
 
-                inputStream = resources.nextElement().openStream();
+                inputStream = url.openStream();
                 Manifest manifest = new Manifest(inputStream);
                 String builter = manifest.getMainAttributes().getValue(name);
 
