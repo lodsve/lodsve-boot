@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.component.security.annotation;
+package com.lodsve.boot.component.event.listener;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.lodsve.boot.component.event.module.BaseEvent;
 
 /**
- * 鉴权:需要认证(authentication).
+ * 事件监听器.
  *
  * @author Hulk Sun
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Authn {
+public interface EventListener {
+    /**
+     * 处理事件
+     *
+     * @param baseEvent 事件
+     * @throws RuntimeException RuntimeException
+     */
+    void handleEvent(BaseEvent baseEvent) throws RuntimeException;
 }

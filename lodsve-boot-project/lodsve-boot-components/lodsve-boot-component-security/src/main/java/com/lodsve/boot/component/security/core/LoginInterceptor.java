@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 /**
  * 判断是否登录的拦截器.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
     private final Authorization authorization;

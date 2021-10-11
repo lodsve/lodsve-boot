@@ -16,6 +16,7 @@
  */
 package com.lodsve.boot;
 
+import com.lodsve.boot.context.ApplicationContextListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
@@ -36,6 +37,7 @@ public class LodsveBootApplication {
     public static SpringApplication run(Class<?> primarySource, String... args) {
         SpringApplication application = new SpringApplication(primarySource);
         application.setBanner(new LodsveBootBanner());
+        application.addListeners(new ApplicationContextListener());
         application.run(args);
 
         return application;

@@ -22,29 +22,28 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
+        <artifactId>lodsve-boot-starters</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-components</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot components</name>
-
-    <modules>
-        <module>lodsve-boot-component-countdown</module>
-        <module>lodsve-boot-component-event</module>
-        <module>lodsve-boot-component-filesystem</module>
-        <module>lodsve-boot-component-mybatis</module>
-        <module>lodsve-boot-component-rdbms</module>
-        <module>lodsve-boot-component-redis</module>
-        <module>lodsve-boot-component-script</module>
-        <module>lodsve-boot-component-security</module>
-        <module>lodsve-boot-component-validator</module>
-        <module>lodsve-boot-component-webmvc</module>
-    </modules>
+    <artifactId>lodsve-boot-starter-event</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot starter event</name>
 
     <properties>
-        <main.user.dir>${basedir}/../..</main.user.dir>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-event</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

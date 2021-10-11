@@ -28,7 +28,7 @@ import java.util.Collections;
 /**
  * Lodsve ResourceLoader.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @date 2018-1-2-0002 20:51
  */
 public class LodsveResourceLoader extends DefaultResourceLoader {

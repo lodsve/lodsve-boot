@@ -37,7 +37,7 @@ import static com.lodsve.boot.io.LodsveResourceLoader.RESOURCE_ZOOKEEPER_PREFIX;
 /**
  * 支持读取zookeeper里的数据，其他类型还是由{@link PathMatchingResourcePatternResolver}处理.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LodsvePathMatchingResourcePatternResolver extends PathMatchingResourcePatternResolver {
     public LodsvePathMatchingResourcePatternResolver() {

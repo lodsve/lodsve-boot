@@ -14,21 +14,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.component.security.annotation;
+package com.lodsve.boot.component.event.annotations;
+
+import com.lodsve.boot.component.event.module.BaseEvent;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 鉴权:需要认证(authentication).
+ * 异步事件.
  *
  * @author Hulk Sun
  */
-@Target({ElementType.METHOD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Authn {
+@Inherited
+public @interface AsyncEvent {
+    /**
+     * 事件中文名
+     *
+     * @return 事件中文名
+     */
+    String name();
+
+    /**
+     * 事件
+     *
+     * @return 事件
+     */
+    Class<? extends BaseEvent> event();
 }

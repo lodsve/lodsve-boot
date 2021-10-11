@@ -314,6 +314,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-component-event</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-component-filesystem</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
@@ -360,6 +365,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-encryption</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-event</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
             <dependency>

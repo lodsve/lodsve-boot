@@ -21,7 +21,7 @@ import com.lodsve.boot.exception.LodsveBootException;
 /**
  * 认证异常.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class AuthException extends LodsveBootException {
     public AuthException(String content) {

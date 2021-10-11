@@ -29,7 +29,7 @@ import java.io.InputStream;
 /**
  * zookeeper中读取InputStream.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  * @date 2018-1-2-0002 14:37
  */
 public class InputStreamSerializer implements ZkSerializer {

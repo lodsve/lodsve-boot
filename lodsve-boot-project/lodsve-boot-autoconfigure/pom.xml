@@ -214,7 +214,16 @@
         <dependency>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-component-security</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- simple security end -->
+
+        <!-- simple event start -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-event</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- simple event end -->
     </dependencies>
 </project>

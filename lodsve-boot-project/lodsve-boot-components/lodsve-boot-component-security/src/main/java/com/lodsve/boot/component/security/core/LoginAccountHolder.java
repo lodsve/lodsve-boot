@@ -19,7 +19,7 @@ package com.lodsve.boot.component.security.core;
 /**
  * 在当前请求（即一个线程中）中保存当前登录者.
  *
- * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
+ * @author Hulk Sun
  */
 public class LoginAccountHolder {
     private static final ThreadLocal<Account> ACCOUNT_THREAD_LOCAL = new ThreadLocal<>();

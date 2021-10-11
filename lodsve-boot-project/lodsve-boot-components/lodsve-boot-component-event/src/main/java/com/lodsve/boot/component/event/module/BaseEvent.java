@@ -14,21 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.component.security.annotation;
+package com.lodsve.boot.component.event.module;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.EventObject;
 
 /**
- * 鉴权:需要认证(authentication).
+ * 事件的基类.
  *
  * @author Hulk Sun
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Authn {
+public class BaseEvent extends EventObject implements Serializable {
+    private Date eventTime;
+
+    /**
+     * Constructs a prototypical Event.
+     *
+     * @param source The object on which the Event initially occurred.
+     * @throws IllegalArgumentException if source is null.
+     */
+    public BaseEvent(Object source, Date eventTime) {
+        super(source);
+        this.eventTime = eventTime;
+    }
+
+    public Date getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(Date eventTime) {
+        this.eventTime = eventTime;
+    }
 }

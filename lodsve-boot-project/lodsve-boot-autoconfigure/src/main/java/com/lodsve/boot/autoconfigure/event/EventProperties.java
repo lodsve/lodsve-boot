@@ -14,21 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.component.security.annotation;
+package com.lodsve.boot.autoconfigure.event;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 鉴权:需要认证(authentication).
+ * event config properties for thread.
  *
  * @author Hulk Sun
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface Authn {
+@Data
+@ConfigurationProperties(prefix = "lodsve.event")
+public class EventProperties {
+    /**
+     * core pool size
+     */
+    private int corePoolSize = 1;
+    /**
+     * max pool size
+     */
+    private int maxPoolSize = Integer.MAX_VALUE;
+    /**
+     * time to keep alive in second
+     */
+    private int keepAliveSeconds = 60;
+    /**
+     * is allow core thread timeout
+     */
+    private boolean allowCoreThreadTimeOut = false;
+    /**
+     * queue capacity
+     */
+    private int queueCapacity = Integer.MAX_VALUE;
+    /**
+     * is expose the Executor which is not configurable
+     */
+    private boolean exposeUnconfigurableExecutor = false;
 }
