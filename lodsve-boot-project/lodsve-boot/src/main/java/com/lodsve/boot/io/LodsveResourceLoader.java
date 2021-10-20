@@ -29,7 +29,6 @@ import java.util.Collections;
  * Lodsve ResourceLoader.
  *
  * @author Hulk Sun
- * @date 2018-1-2-0002 20:51
  */
 public class LodsveResourceLoader extends DefaultResourceLoader {
     public static final String RESOURCE_ZOOKEEPER_PREFIX = "zookeeper:";

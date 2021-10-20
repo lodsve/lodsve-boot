@@ -51,14 +51,4 @@ public class EventPublisher {
             logger.debug("****************execute module '{}' stop!", baseEvent);
         }
     }
-
-    /**
-     * 解析中文名
-     *
-     * @param event 事件
-     * @return 中文名
-     */
-    public String evalName(Class<? extends BaseEvent> event) {
-        return eventExecutor.evalName(event);
-    }
 }

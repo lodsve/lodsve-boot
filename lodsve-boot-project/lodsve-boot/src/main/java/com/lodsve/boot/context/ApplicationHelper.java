@@ -29,7 +29,6 @@ import java.util.Set;
  * applicationContext的辅助类
  *
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
- * @date 2012-3-8 下午09:56:58
  */
 public class ApplicationHelper {
     private static final ApplicationHelper INSTANCE = new ApplicationHelper();
@@ -64,6 +63,7 @@ public class ApplicationHelper {
      * 根据bean的名称获取bean
      *
      * @param name the name of the bean to retrieve
+     * @param <T>  指定类型
      * @return an instance of the bean
      */
     @SuppressWarnings("unchecked")
@@ -82,6 +82,7 @@ public class ApplicationHelper {
      * 获取spring上下文中的所有指定类型的bean
      *
      * @param clazz the class or interface to match, or null for all concrete beans
+     * @param <T>   指定类型
      * @return a Map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     public <T> Map<String, T> getBeansByType(Class<T> clazz) {

@@ -29,7 +29,7 @@
 
     <artifactId>lodsve-boot-component-security</artifactId>
     <packaging>jar</packaging>
-    <name>lodsve boot component validator</name>
+    <name>lodsve boot component security</name>
     <description>Authentication and certification For Spring MVC</description>
 
     <properties>

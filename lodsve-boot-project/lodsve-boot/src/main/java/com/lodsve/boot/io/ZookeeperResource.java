@@ -34,7 +34,6 @@ import java.util.Map;
  * Zookeeper Resource.
  *
  * @author Hulk Sun
- * @date 2018-1-2-0002 12:58
  */
 public class ZookeeperResource extends AbstractResource {
     private static final Map<String, ZkClient> ZK_CLIENTS = new HashMap<>(16);

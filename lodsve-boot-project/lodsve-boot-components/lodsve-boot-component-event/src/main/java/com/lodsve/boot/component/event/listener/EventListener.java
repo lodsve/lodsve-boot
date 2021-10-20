@@ -23,12 +23,20 @@ import com.lodsve.boot.component.event.module.BaseEvent;
  *
  * @author Hulk Sun
  */
-public interface EventListener {
+public interface EventListener<E extends BaseEvent> {
     /**
      * 处理事件
      *
-     * @param baseEvent 事件
-     * @throws RuntimeException RuntimeException
+     * @param event 事件
      */
-    void handleEvent(BaseEvent baseEvent) throws RuntimeException;
+    void onEvent(E event);
+
+    /**
+     * 是否是同步事件
+     *
+     * @return 是否是同步事件
+     */
+    default boolean isSync() {
+        return false;
+    }
 }

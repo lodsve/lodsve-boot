@@ -16,18 +16,18 @@
  */
 package com.lodsve.boot.component.event;
 
-import com.lodsve.boot.component.event.annotations.AsyncEvent;
-import com.lodsve.boot.component.event.annotations.Events;
-import com.lodsve.boot.component.event.annotations.SyncEvent;
 import com.lodsve.boot.component.event.listener.EventListener;
 import com.lodsve.boot.component.event.module.BaseEvent;
 import com.lodsve.boot.context.ApplicationHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author Hulk Sun
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class EventExecutor {
     private static final Logger logger = LoggerFactory.getLogger(EventExecutor.class);
 
@@ -68,37 +69,45 @@ public class EventExecutor {
 
     private void init() {
         Collection<EventListener> eventListeners = ApplicationHelper.getInstance().getBeansByType(EventListener.class).values();
-
-        for (EventListener listener : eventListeners) {
-            Class<?> clazz = listener.getClass();
-            List<SyncEvent> syncEvents = new ArrayList<>(16);
-            List<AsyncEvent> asyncEvents = new ArrayList<>(16);
-
-            Events events = clazz.getAnnotation(Events.class);
-            SyncEvent syncEvent = clazz.getAnnotation(SyncEvent.class);
-            AsyncEvent asyncEvent = clazz.getAnnotation(AsyncEvent.class);
-
-            syncEvents.add(syncEvent);
-            syncEvents.addAll(Arrays.asList(events.sync()));
-            asyncEvents.add(asyncEvent);
-            asyncEvents.addAll(Arrays.asList(events.async()));
-
-            for (SyncEvent event : syncEvents) {
-                if (event == null) {
-                    continue;
-                }
-                registerListener(event.event(), listener, event.name(), true);
-            }
-
-            for (AsyncEvent event : asyncEvents) {
-                if (event == null) {
-                    continue;
-                }
-                registerListener(event.event(), listener, event.name(), false);
-            }
-        }
+        eventListeners.forEach(this::initListener);
 
         INIT_ALREADY.set(true);
+    }
+
+    private void initListener(EventListener listener) {
+        Type[] clazz = listener.getClass().getGenericInterfaces();
+        if (0 == clazz.length) {
+            if (logger.isWarnEnabled()) {
+                logger.warn("listener {} has no event type!", listener);
+            }
+            return;
+        }
+
+        if (!(clazz[0] instanceof ParameterizedType)) {
+            if (logger.isWarnEnabled()) {
+                logger.warn("listener {} has no event type!", listener);
+            }
+            return;
+        }
+        Type type = ((ParameterizedType) clazz[0]).getActualTypeArguments()[0];
+        Class<? extends BaseEvent> eventType;
+        if (type instanceof Class) {
+            eventType = (Class<? extends BaseEvent>) type;
+        } else {
+            if (logger.isWarnEnabled()) {
+                logger.warn("listener {} has no event type!", listener);
+            }
+            return;
+        }
+        boolean isSync = listener.isSync();
+
+        try {
+            registerListener(eventType, listener, isSync);
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 
     /**
@@ -108,7 +117,7 @@ public class EventExecutor {
      * @param listener  监听器
      * @param isSync    是否是同步执行
      */
-    private void registerListener(Class<? extends BaseEvent> eventType, EventListener listener, String name, boolean isSync) {
+    private void registerListener(Class<? extends BaseEvent> eventType, EventListener listener, boolean isSync) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         synchronized (REGISTER_LOCK_OBJECT) {
             if (eventType == null) {
                 logger.warn("module types is null!");
@@ -129,7 +138,9 @@ public class EventExecutor {
             listeners.add(listener);
             eventListeners.put(eventType, listeners);
 
-            OPERATION_EVENTS.put(eventType, name);
+            BaseEvent tmpEventObject = eventType.getDeclaredConstructor(Object.class).newInstance(new Object());
+            String name = tmpEventObject.getName();
+            OPERATION_EVENTS.put(eventType, StringUtils.isBlank(name) ? eventType.getSimpleName() : name);
         }
     }
 
@@ -184,13 +195,7 @@ public class EventExecutor {
                 logger.debug("execute module '{}' use listener '{}'!", event, listener);
             }
             //执行
-            try {
-                listener.handleEvent(event);
-            } catch (RuntimeException e) {
-                if (logger.isErrorEnabled()) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
+            listener.onEvent(event);
         }
     }
 }

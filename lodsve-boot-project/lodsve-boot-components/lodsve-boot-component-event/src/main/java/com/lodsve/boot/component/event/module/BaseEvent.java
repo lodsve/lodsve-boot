@@ -16,8 +16,6 @@
  */
 package com.lodsve.boot.component.event.module;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.EventObject;
 
 /**
@@ -25,8 +23,11 @@ import java.util.EventObject;
  *
  * @author Hulk Sun
  */
-public class BaseEvent extends EventObject implements Serializable {
-    private Date eventTime;
+public abstract class BaseEvent extends EventObject {
+    /**
+     * System time when the event happened.
+     */
+    private final long timestamp;
 
     /**
      * Constructs a prototypical Event.
@@ -34,16 +35,19 @@ public class BaseEvent extends EventObject implements Serializable {
      * @param source The object on which the Event initially occurred.
      * @throws IllegalArgumentException if source is null.
      */
-    public BaseEvent(Object source, Date eventTime) {
+    public BaseEvent(Object source) {
         super(source);
-        this.eventTime = eventTime;
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public Date getEventTime() {
-        return eventTime;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setEventTime(Date eventTime) {
-        this.eventTime = eventTime;
-    }
+    /**
+     * return event display name
+     *
+     * @return event display name
+     */
+    public abstract String getName();
 }
