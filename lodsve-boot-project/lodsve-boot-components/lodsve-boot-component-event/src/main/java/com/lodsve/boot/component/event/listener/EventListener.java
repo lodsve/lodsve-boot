@@ -32,11 +32,11 @@ public interface EventListener<E extends BaseEvent> {
     void onEvent(E event);
 
     /**
-     * 是否是同步事件
+     * 是否是同步事件.默认是同步事件
      *
      * @return 是否是同步事件
      */
     default boolean isSync() {
-        return false;
+        return true;
     }
 }

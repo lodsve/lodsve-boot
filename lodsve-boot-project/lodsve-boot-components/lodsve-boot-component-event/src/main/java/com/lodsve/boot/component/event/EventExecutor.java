@@ -18,22 +18,21 @@ package com.lodsve.boot.component.event;
 
 import com.lodsve.boot.component.event.listener.EventListener;
 import com.lodsve.boot.component.event.module.BaseEvent;
-import com.lodsve.boot.context.ApplicationHelper;
+import com.lodsve.boot.exception.LodsveBootException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 事件执行器.
@@ -41,11 +40,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author Hulk Sun
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class EventExecutor {
+public class EventExecutor implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(EventExecutor.class);
 
-    private static final AtomicBoolean INIT_ALREADY = new AtomicBoolean(false);
     private final ExecutorService executorService;
+    private final List<EventListener> listeners;
 
     /**
      * 同步事件Map.
@@ -63,15 +62,9 @@ public class EventExecutor {
 
     private static final Object REGISTER_LOCK_OBJECT = new Object();
 
-    public EventExecutor(ExecutorService executorService) {
+    public EventExecutor(ExecutorService executorService, List<EventListener> listeners) {
         this.executorService = executorService;
-    }
-
-    private void init() {
-        Collection<EventListener> eventListeners = ApplicationHelper.getInstance().getBeansByType(EventListener.class).values();
-        eventListeners.forEach(this::initListener);
-
-        INIT_ALREADY.set(true);
+        this.listeners = listeners;
     }
 
     private void initListener(EventListener listener) {
@@ -101,13 +94,7 @@ public class EventExecutor {
         }
         boolean isSync = listener.isSync();
 
-        try {
-            registerListener(eventType, listener, isSync);
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            if (logger.isErrorEnabled()) {
-                logger.error(e.getMessage(), e);
-            }
-        }
+        registerListener(eventType, listener, isSync);
     }
 
     /**
@@ -117,7 +104,7 @@ public class EventExecutor {
      * @param listener  监听器
      * @param isSync    是否是同步执行
      */
-    private void registerListener(Class<? extends BaseEvent> eventType, EventListener listener, boolean isSync) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private void registerListener(Class<? extends BaseEvent> eventType, EventListener listener, boolean isSync) {
         synchronized (REGISTER_LOCK_OBJECT) {
             if (eventType == null) {
                 logger.warn("module types is null!");
@@ -138,7 +125,13 @@ public class EventExecutor {
             listeners.add(listener);
             eventListeners.put(eventType, listeners);
 
-            BaseEvent tmpEventObject = eventType.getDeclaredConstructor(Object.class).newInstance(new Object());
+            BaseEvent tmpEventObject;
+            try {
+                tmpEventObject = eventType.getDeclaredConstructor(Object.class).newInstance(new Object());
+            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+                throw new LodsveBootException("The event type {" + eventType.getName() + "} must have a constructor with parameter java.lang.Object!");
+            }
+
             String name = tmpEventObject.getName();
             OPERATION_EVENTS.put(eventType, StringUtils.isBlank(name) ? eventType.getSimpleName() : name);
         }
@@ -150,11 +143,6 @@ public class EventExecutor {
      * @param event 事件
      */
     protected <T extends BaseEvent> void executeEvent(T event) throws RuntimeException {
-        // 初始化
-        if (!INIT_ALREADY.get()) {
-            init();
-        }
-
         //1.先执行同步事件
         List<EventListener> syncListeners = SYNC_EVENT_LISTENERS.get(event.getClass());
         if (syncListeners != null && !syncListeners.isEmpty()) {
@@ -197,5 +185,13 @@ public class EventExecutor {
             //执行
             listener.onEvent(event);
         }
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (null == listeners) {
+            return;
+        }
+        listeners.forEach(this::initListener);
     }
 }

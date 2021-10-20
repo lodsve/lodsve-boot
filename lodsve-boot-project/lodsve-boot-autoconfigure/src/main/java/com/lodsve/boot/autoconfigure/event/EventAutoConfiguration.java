@@ -18,6 +18,7 @@ package com.lodsve.boot.autoconfigure.event;
 
 import com.lodsve.boot.component.event.EventExecutor;
 import com.lodsve.boot.component.event.EventPublisher;
+import com.lodsve.boot.component.event.listener.EventListener;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -51,8 +53,9 @@ public class EventAutoConfiguration {
     }
 
     @Bean
-    public EventExecutor eventExecutor(ExecutorService executorService) {
-        return new EventExecutor(executorService);
+    @SuppressWarnings("rawtypes")
+    public EventExecutor eventExecutor(ExecutorService executorService, List<EventListener> listeners) {
+        return new EventExecutor(executorService, listeners);
     }
 
     @Bean
