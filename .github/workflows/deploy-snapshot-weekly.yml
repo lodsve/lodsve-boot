@@ -41,8 +41,11 @@ jobs:
           token: ${{ secrets.LODSVE_BOOT_TOKEN }}
           tag_name: ${{ steps.get_version.outputs.version }}
           prerelease: true
-          body: This is a pre-release. Just to try new features! Please use with caution. If you have any questions, please contact me in the issue.
+          body: |
+            This is a pre-release. Just to try new features! Please use with caution. If you have any questions, please contact me in the issue.
+            1. JavaDoc: [https://javadoc.lodsve.com][]
+            2. MyBlog: [https://www.crazy-coder.cn][]
       - name: Reset code
         id: reset_code
         run: |
-          git reset --hard HEAD^
+          git reset --hard HEAD~1
