@@ -44,8 +44,8 @@ jobs:
           prerelease: true
           body: |
             This is a pre-release. Just to try new features! Please use with caution. If you have any questions, please contact me in the issue.
-            1. JavaDoc: [https://javadoc.lodsve.com][]
-            2. MyBlog: [https://www.crazy-coder.cn][]
+            1. JavaDoc: [https://javadoc.lodsve.com](https://javadoc.lodsve.com)
+            2. MyBlog: [https://www.crazy-coder.cn](https://www.crazy-coder.cn)
       - name: Reset code
         id: reset_code
         env:
