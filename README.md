@@ -63,7 +63,7 @@
 
 1. I will automatically publish a snapshot version every week through Github Action!
 
-   Artifact version number like `x.x.x-SNAPSHOT`.
+   Artifact version number like `x.x.x-YYYYMMDD-SNAPSHOT`.
 2. Release a release version from time to time.
 
    Artifact version number like `x.x.x.RELEASE`.
