@@ -62,7 +62,7 @@
 
 1. 我每周都会通过Github Action自动发布一个快照版本！
 
-   构建版本号，如 `x.x.x-SNAPSHOT`。
+   构建版本号，如 `x.x.x-YYYYMMDD-SNAPSHOT`。
 2. 不定时发布Release版本。
 
    构建版本号，如 `x.x.x.RELEASE`。
