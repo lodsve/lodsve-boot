@@ -14,25 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.actuator.version;
+package com.lodsve.boot.actuator.dependencies;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
- * versions.
+ * read all Dependencies.
  *
  * @author Hulk Sun
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-public class Versions implements Serializable {
-    private String name;
-    private String version;
+@WebEndpoint(id = "dependencies")
+public class DependenciesEndpoint {
+    @ReadOperation
+    public List<Dependency> loadDependencies() {
+        // if run as java -jar xxx.jar -> load info from BOOT-INF/classpath.idx
+        // if run as java -classpath ... -> load info via System.getProperties()
+        return null;
+    }
 }

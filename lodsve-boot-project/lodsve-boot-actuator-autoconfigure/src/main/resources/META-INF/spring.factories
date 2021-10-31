@@ -16,4 +16,5 @@
 #
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lodsve.boot.actuator.autoconfigure.version.LodsveBootVersionsAutoConfiguration
+  com.lodsve.boot.actuator.autoconfigure.version.LodsveBootVersionsAutoConfiguration,\
+  com.lodsve.boot.actuator.autoconfigure.dependencies.DependenciesEndpointAutoConfiguration

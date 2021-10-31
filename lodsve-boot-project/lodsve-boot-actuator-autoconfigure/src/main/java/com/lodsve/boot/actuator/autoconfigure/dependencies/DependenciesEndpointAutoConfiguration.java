@@ -14,25 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.actuator.version;
+package com.lodsve.boot.actuator.autoconfigure.dependencies;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.io.Serializable;
+import com.lodsve.boot.actuator.dependencies.DependenciesEndpoint;
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * versions.
+ * auto configuration for DependenciesEndpoint.
  *
  * @author Hulk Sun
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-public class Versions implements Serializable {
-    private String name;
-    private String version;
+@Configuration
+@ConditionalOnAvailableEndpoint(endpoint = DependenciesEndpoint.class)
+public class DependenciesEndpointAutoConfiguration {
+    @Bean
+    public DependenciesEndpoint dependenciesEndpoint() {
+        return new DependenciesEndpoint();
+    }
 }

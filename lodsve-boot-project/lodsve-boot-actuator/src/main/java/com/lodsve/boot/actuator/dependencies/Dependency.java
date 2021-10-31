@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.actuator.version;
+package com.lodsve.boot.actuator.dependencies;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,15 +24,16 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * versions.
+ * .
  *
  * @author Hulk Sun
  */
-@NoArgsConstructor
-@AllArgsConstructor
 @Setter
 @Getter
-public class Versions implements Serializable {
-    private String name;
+@AllArgsConstructor
+@NoArgsConstructor
+public class Dependency implements Serializable {
+    private String groupId;
+    private String artifactId;
     private String version;
 }
