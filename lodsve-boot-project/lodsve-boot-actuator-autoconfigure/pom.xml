@@ -22,27 +22,33 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-build</artifactId>
+        <artifactId>lodsve-boot-parent</artifactId>
         <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../lodsve-boot-parent</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-project</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot project</name>
+    <artifactId>lodsve-boot-actuator-autoconfigure</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot actuator autoconfigure</name>
 
     <properties>
-        <main.user.dir>${basedir}/..</main.user.dir>
+        <main.user.dir>${basedir}/../..</main.user.dir>
     </properties>
 
-    <modules>
-        <module>lodsve-boot</module>
-        <module>lodsve-boot-actuator</module>
-        <module>lodsve-boot-actuator-autoconfigure</module>
-        <module>lodsve-boot-autoconfigure</module>
-        <module>lodsve-boot-components</module>
-        <module>lodsve-boot-dependencies</module>
-        <module>lodsve-boot-parent</module>
-        <module>lodsve-boot-starters</module>
-    </modules>
+    <dependencies>
+        <!-- spring dependencies begin -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+        </dependency>
+        <!-- spring dependencies end -->
+
+        <!-- lodsve boot dependencies begin -->
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-actuator</artifactId>
+        </dependency>
+        <!-- lodsve boot dependencies end -->
+    </dependencies>
+
 </project>

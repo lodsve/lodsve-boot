@@ -304,6 +304,16 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-actuator</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-actuator-autoconfigure</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-autoconfigure</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
