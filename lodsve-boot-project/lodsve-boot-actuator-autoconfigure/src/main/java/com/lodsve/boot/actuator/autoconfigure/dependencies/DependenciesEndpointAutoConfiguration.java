@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Hulk Sun
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnAvailableEndpoint(endpoint = DependenciesEndpoint.class)
 public class DependenciesEndpointAutoConfiguration {
     @Bean

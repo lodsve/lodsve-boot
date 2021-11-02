@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * .
@@ -32,8 +33,16 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Dependency implements Serializable {
-    private String groupId;
-    private String artifactId;
-    private String version;
+public class Dependencies implements Serializable {
+    private List<Dependency> dependencies;
+    private Integer length;
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Dependency {
+        private String name;
+        private String version;
+    }
 }
