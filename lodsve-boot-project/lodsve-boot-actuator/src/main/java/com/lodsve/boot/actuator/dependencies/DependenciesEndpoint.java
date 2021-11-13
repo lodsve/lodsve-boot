@@ -27,6 +27,7 @@ import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,19 +40,24 @@ import java.util.stream.Collectors;
  */
 @WebEndpoint(id = "dependencies")
 public class DependenciesEndpoint {
-    public static final Logger logger = LoggerFactory.getLogger(DependenciesEndpoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(DependenciesEndpoint.class);
     private static final String DEFAULT_CLASSPATH_INDEX_PATH = "BOOT-INF/classpath.idx";
+    private static final List<Dependency> DEPENDENCY_CACHE = new ArrayList<>(10);
 
     @ReadOperation
     public Dependencies loadDependencies() {
-        // if run as java -jar xxx.jar -> load info from BOOT-INF/classpath.idx
-        // if run as java -classpath ... -> load info via System.getProperties()
-        List<Dependency> dependencies = loadDependenciesFromIdxFile();
-        if (CollectionUtils.isEmpty(dependencies)) {
-            dependencies = loadDependenciesFromClasspath();
+        if (DEPENDENCY_CACHE.isEmpty()) {
+            // if run as java -jar xxx.jar -> load info from BOOT-INF/classpath.idx
+            // if run as java -classpath ... -> load info via System.getProperties()
+            List<Dependency> dependencies = loadDependenciesFromIdxFile();
+            if (CollectionUtils.isEmpty(dependencies)) {
+                dependencies = loadDependenciesFromClasspath();
+            }
+
+            DEPENDENCY_CACHE.addAll(dependencies);
         }
 
-        return new Dependencies(dependencies, dependencies.size());
+        return new Dependencies(DEPENDENCY_CACHE, DEPENDENCY_CACHE.size());
     }
 
     private List<Dependency> loadDependenciesFromClasspath() {
