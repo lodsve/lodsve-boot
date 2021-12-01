@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * .
+ * dependency object.
  *
  * @author Hulk Sun
  */
