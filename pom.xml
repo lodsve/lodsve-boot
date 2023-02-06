@@ -29,7 +29,7 @@
 
     <groupId>com.lodsve.boot</groupId>
     <artifactId>lodsve-boot-build</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <inceptionYear>2020</inceptionYear>
     <name>lodsve boot build</name>
@@ -37,6 +37,9 @@
     <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
+        <revision>1.0.2-SNAPSHOT</revision>
+        <lodsve.boot.version>${revision}</lodsve.boot.version>
+
         <!-- 基本属性 -->
         <project.encoding>UTF-8</project.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -139,6 +142,35 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>

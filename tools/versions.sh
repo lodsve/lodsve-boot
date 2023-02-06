@@ -16,19 +16,15 @@
 # limitations under the License.
 #
 
+parent_pom="./pom.xml"
+old_version_number=`awk '/<revision>[^<]+<\/revision>/{gsub(/<revision>|<\/revision>/,"",$1);print $1;exit;}' $parent_pom`
 
-mvn versions:set -DnewVersion=$1
-mvn versions:commit
-
-dependencies_pom=lodsve-boot-project/lodsve-boot-dependencies/pom.xml
-old_version_number=`awk '/<lodsve.boot.version>[^<]+<\/lodsve.boot.version>/{gsub(/<lodsve.boot.version>|<\/lodsve.boot.version>/,"",$1);print $1;exit;}' $dependencies_pom`
-
-old_version="<lodsve.boot.version>$old_version_number<\/lodsve.boot.version>"
-new_version="<lodsve.boot.version>$1<\/lodsve.boot.version>"
+old_version="<revision>$old_version_number<\/revision>"
+new_version="<revision>$1<\/revision>"
 
 os=$(uname -s)
 if [[ $os == Darwin ]]; then
-    sed -i "" "s/${old_version}/${new_version}/g" $dependencies_pom
+    sed -i "" "s/${old_version}/${new_version}/g" $parent_pom
 else
-    sed -i "s/${old_version}/${new_version}/g" $dependencies_pom
+    sed -i "s/${old_version}/${new_version}/g" $parent_pom
 fi

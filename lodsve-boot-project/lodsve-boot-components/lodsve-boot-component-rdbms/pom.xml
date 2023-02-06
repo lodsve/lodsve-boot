@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.lodsve.boot</groupId>
         <artifactId>lodsve-boot-components</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../../lodsve-boot-components</relativePath>
     </parent>
 
