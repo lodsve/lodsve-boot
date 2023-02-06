@@ -31,6 +31,7 @@ jobs:
           echo "oldVersion=$MVN_VERSION" >> $GITHUB_ENV
       - name: Publish to Apache Maven Central
         run: |
+          cat ~/.m2/settings.xml
           mvn clean deploy -P release-oss-snapshot
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
