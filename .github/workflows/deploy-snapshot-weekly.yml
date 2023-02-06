@@ -31,10 +31,8 @@ jobs:
           echo "oldVersion=$MVN_VERSION" >> $GITHUB_ENV
       - name: Publish to Apache Maven Central
         run: |
-          echo {% raw %}${{secrets.MAVEN_USERNAME }}{% endraw %} | sed 's/./& /g'
-          echo {% raw %}${{secrets.MAVEN_CENTRAL_TOKEN }}{% endraw %} | sed 's/./& /g'
-          echo {% raw %}${{secrets.MAVEN_GPG_PASSPHRASE }}{% endraw %} | sed 's/./& /g'
           mvn clean deploy -P release-oss-snapshot
+          cat ./.flattened-pom.xml
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
