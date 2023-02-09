@@ -35,13 +35,13 @@ help(){
 sh ./tools/logo.sh
 case "$1" in
   'versions')
-    sh ./tools/versions.sh $2
+    bash ./tools/versions.sh $2
 	;;
   'deployOss')
-    sh ./tools/deploy.sh release-oss $2
+    bash ./tools/deploy.sh release-oss $2
 	;;
   'deployThirdParty')
-    sh ./tools/deploy.sh release-third-party $2
+    bash ./tools/deploy.sh release-third-party $2
 	;;
   *)
     help
