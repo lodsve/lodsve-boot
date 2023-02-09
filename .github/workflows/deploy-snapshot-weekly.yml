@@ -53,5 +53,5 @@ jobs:
         env:
           OLD_VERSION: ${{ steps.get_version.outputs.oldVersion }}
         run: |
-          echo oldVersion is ${env.OLD_VERSION}
-          ./lodsve.sh versions ${env.OLD_VERSION}
+          echo oldVersion is ${OLD_VERSION}
+          ./lodsve.sh versions ${OLD_VERSION}          
