@@ -23,7 +23,7 @@ old_version="<revision>$old_version_number<\/revision>"
 new_version="<revision>$1<\/revision>"
 
 os=$(uname -s)
-if [ $os == Darwin ]; then
+if [[ $os == Darwin ]]; then
     sed -i "" "s/${old_version}/${new_version}/g" $parent_pom
 else
     sed -i "s/${old_version}/${new_version}/g" $parent_pom

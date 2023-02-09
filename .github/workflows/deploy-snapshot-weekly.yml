@@ -18,9 +18,7 @@ jobs:
           cache: 'maven'
           server-id: oss-snapshots
           server-username: MAVEN_USERNAME
-          server-password: MAVEN_CENTRAL_TOKEN
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          server-password: MAVEN_PASSWORD
       - name: Get And Set Version
         id: get_version
         run: |
@@ -29,14 +27,17 @@ jobs:
           ./lodsve.sh versions ${NEW_VERSION}
           echo "newVersion=$NEW_VERSION" >> $GITHUB_ENV
           echo "oldVersion=$MVN_VERSION" >> $GITHUB_ENV
+      - id: install-secret-key
+        name: Install Secret Key
+        run: |
+          cat <(echo -e "${{ secrets.LODSVE_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
       - name: Publish to Apache Maven Central
         run: |
-          mvn clean deploy -P release-oss-snapshot
-          cat ./.flattened-pom.xml
+          mvn --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
