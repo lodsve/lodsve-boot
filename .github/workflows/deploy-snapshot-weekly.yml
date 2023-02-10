@@ -39,6 +39,7 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
       - name: Upload Release Asset
+        id: upload_release_asset
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.LODSVE_BOOT_TOKEN }}
@@ -55,3 +56,16 @@ jobs:
         run: |
           echo oldVersion is ${OLD_VERSION}
           bash ./lodsve.sh versions ${OLD_VERSION}          
+      - name: Send DingDing Notify
+        uses: zcong1993/actions-ding@master
+        with:
+         dingToken: ${{ secrets.DING_TOKEN }}
+         body: |
+           {
+             "msgtype": "link",
+             "link": {
+               "text": "已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击消息即可查看！",
+               "title": "Lodsve-Boot",
+               "messageUrl": "${{ steps.upload_release_asset.outputs.url }}"
+             }
+           }          
