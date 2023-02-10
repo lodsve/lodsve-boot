@@ -64,6 +64,7 @@ jobs:
            {
              "msgtype": "link",
              "link": {
+               "picUrl": "https://www.gitbook.com/cdn-cgi/image/width=256,height=40,fit=contain,dpr=1,format=auto/https%3A%2F%2F1978062287-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-legacy-files%2Fo%2Fspaces%252F-LI6IFYne1nz5hKJG9KV%252Favatar-rectangle.png%3Fgeneration%3D1569591536803744%26alt%3Dmedia",
                "text": "已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击消息即可查看！",
                "title": "Lodsve-Boot",
                "messageUrl": "${{ steps.upload_release_asset.outputs.url }}"
