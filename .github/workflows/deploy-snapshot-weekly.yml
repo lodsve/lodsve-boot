@@ -35,7 +35,7 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           mvn --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
-          mkdir dist & find ./ -name "lodsve-boot-*.jar" | xargs -i cp {} ./archives/
+          mkdir archives & find ./ -name "lodsve-boot-*.jar" | xargs -i cp {} ./archives/
           zip lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -47,7 +47,7 @@ jobs:
           token: ${{ secrets.LODSVE_BOOT_TOKEN }}
           tag_name: ${{ steps.get_version.outputs.newVersion }}
           prerelease: true
-          files: dist.zip
+          files: lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip
           body: |
             This is a pre-release. Just to try new features! Please use with caution. If you have any questions, please contact me in the issue.
             1. JavaDoc: [https://javadoc.lodsve.com](https://javadoc.lodsve.com)
