@@ -87,12 +87,13 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
 2. For a more standard git commit message
 
        # commit message template
-       git config commit.template ./git/template/commit-message-template
+       git config commit.template ./git/templates/commit-message-template
        # git hook to check commit message
        # windows
        fsutil hardlink create .git\hooks\commit-msg git\hooks\check-commit-msg
        # linux
-       ln -s ./git/hooks/check-commit-msg ./.git/hooks/commit-msg
+       cd ./.git/hooks/
+       ln -s ../../git/hooks/check-commit-msg commit-msg
 
 3. Config your IDE
     - Eclipse: Open Settings-General-Workspace, modify `New text file line delimiter` as `Unix`

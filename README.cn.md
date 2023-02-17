@@ -86,12 +86,13 @@
 2. 为了更标准的git提交信息
 
        # commit message template
-       git config commit.template ./git/template/commit-message-template
+       git config commit.template ./git/templates/commit-message-template
        # git hook to check commit message
        # windows
        fsutil hardlink create .git\hooks\commit-msg git\hooks\check-commit-msg
        # linux
-       ln -s ./git/hooks/check-commit-msg ./.git/hooks/commit-msg
+       cd ./.git/hooks
+       ln -s ../../git/hooks/check-commit-msg commit-msg
 
 3. 配置您的IDE
     - Eclipse：打开 Settings-General-Workspace，修改 `New text file line delimiter` 为 `Unix`。
