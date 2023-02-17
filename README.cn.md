@@ -82,12 +82,23 @@
         git config --global user.email "your email"
         git config --global core.autocrlf false
         git config --global core.safecrlf true
-2. 配置您的IDE
+
+2. 为了更标准的git提交信息
+
+       # commit message template
+       git config commit.template ./git/template/commit-message-template
+       # git hook to check commit message
+       # windows
+       fsutil hardlink create .git\hooks\commit-msg git\hooks\check-commit-msg
+       # linux
+       ln -s ./git/hooks/check-commit-msg ./.git/hooks/commit-msg
+
+3. 配置您的IDE
     - Eclipse：打开 Settings-General-Workspace，修改 `New text file line delimiter` 为 `Unix`。
     - Eclipse：打开 Settings-General-Workspace，修改 `Text file encoding` 为 `UTF-8`。
     - IDE：打开 Setting-Editor-Code Style，修改 `line delimiter` 为 `Unix and OS X(\n)`。
     - IDE：打开 Setting-Editor-File encoding，修改所有的 `Encoding` 为 `UTF-8` 和 `with NO BOM`。
-3. 必须要安装的IDE插件(Eclipse 和 Intellij IDEA):
+4. 必须要安装的IDE插件(Eclipse 和 Intellij IDEA):
     - Alibaba Java Coding Guidelines
     - Lombok plugin
 

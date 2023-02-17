@@ -83,12 +83,23 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
         git config --global user.email "your email"
         git config --global core.autocrlf false
         git config --global core.safecrlf true
-2. Config your IDE
+
+2. For a more standard git commit message
+
+       # commit message template
+       git config commit.template ./git/template/commit-message-template
+       # git hook to check commit message
+       # windows
+       fsutil hardlink create .git\hooks\commit-msg git\hooks\check-commit-msg
+       # linux
+       ln -s ./git/hooks/check-commit-msg ./.git/hooks/commit-msg
+
+3. Config your IDE
     - Eclipse: Open Settings-General-Workspace, modify `New text file line delimiter` as `Unix`
     - Eclipse: Open Settings-General-Workspace, modify `Text file encoding` as `UTF-8`
     - IDE: Open Setting-Editor-Code Style, modify `line delimiter` as `Unix and OS X(\n)`
     - IDE: Open Setting-Editor-File encoding, modify all `Encoding` as `UTF-8` and `with NO BOM`
-3. Required IDE Plugins(Both Eclipse and Intellij IDEA):
+4. Required IDE Plugins(Both Eclipse and Intellij IDEA):
     - Alibaba Java Coding Guidelines
     - Lombok plugin
 
