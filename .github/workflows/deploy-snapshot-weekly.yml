@@ -56,8 +56,10 @@ jobs:
         id: reset_code
         env:
           OLD_VERSION: ${{ steps.get_version.outputs.oldVersion }}
+          NEW_VERSION: ${{ steps.get_version.outputs.newVersion }}
         run: |
           echo oldVersion is ${OLD_VERSION}
+          mvn clean & rm -rf lodsve-boot-${NEW_VERSION}-archives.zip archives
           bash ./lodsve.sh versions ${OLD_VERSION}          
       - name: Send DingDing Notify
         uses: zcong1993/actions-ding@master
