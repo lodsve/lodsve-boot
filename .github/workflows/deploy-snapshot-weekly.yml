@@ -35,9 +35,9 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           mvn --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
-          find ./ -name "lodsve-boot-*.jar"
-          mkdir archives & rm -rf archives/* & find ./ -name "lodsve-boot-*.jar" | xargs -i cp {} ./archives/
-          zip lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
+          kdir archives & ll archives & rm -rf archives/* & find ./ -name "lodsve-boot-*.jar" | xargs -i cp {} ./archives/
+          ll archives
+          zip -r lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
