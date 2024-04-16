@@ -41,4 +41,4 @@ com.lodsve.boot.autoconfigure.env.EnvironmentCustomizer=\
   com.lodsve.boot.autoconfigure.env.DisabledSpringRedisAutoConfig,\
   com.lodsve.boot.autoconfigure.env.HealthProbesEnvironmentCustomizer,\
   com.lodsve.boot.autoconfigure.env.HttpMessageConverterEnvironmentCustomizer,\
-  com.weilan.boot.autoconfigure.swagger.UseAntPathMatcher
+  com.lodsve.boot.autoconfigure.swagger.UseAntPathMatcher

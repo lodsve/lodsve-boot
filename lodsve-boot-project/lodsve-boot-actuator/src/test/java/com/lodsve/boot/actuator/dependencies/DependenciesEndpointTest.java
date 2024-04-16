@@ -14,10 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.weilan.boot.actuator.dependencies;
+package com.lodsve.boot.actuator.dependencies;
 
-import com.lodsve.boot.actuator.dependencies.Dependencies;
-import com.lodsve.boot.actuator.dependencies.DependenciesEndpoint;
 import org.junit.Assert;
 import org.junit.Test;
 
