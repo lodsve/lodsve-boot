@@ -14,36 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.actuator.dependencies;
+package com.weilan.boot.actuator.dependencies;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.io.Serializable;
-import java.util.List;
+import com.lodsve.boot.actuator.dependencies.Dependencies;
+import com.lodsve.boot.actuator.dependencies.DependenciesEndpoint;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
- * dependency object.
+ * .
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Dependencies implements Serializable {
-    private List<Dependency> dependencies;
-    private Integer length;
-
-    @Setter
-    @Getter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Dependency {
-        private String name;
-        private String version;
-        private String path;
+public class DependenciesEndpointTest {
+    @Test
+    public void testLoadDependencies() {
+        DependenciesEndpoint endpoint = new DependenciesEndpoint();
+        Dependencies dependencies = endpoint.loadDependencies();
+        Assert.assertNotNull("dependencies is null!", dependencies);
     }
 }

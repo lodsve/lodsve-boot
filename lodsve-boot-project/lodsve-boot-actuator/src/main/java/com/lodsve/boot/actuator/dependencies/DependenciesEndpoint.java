@@ -67,11 +67,11 @@ public class DependenciesEndpoint {
     }
 
     private Dependency parseClasspath(String classpath) {
-        String[] temp = StringUtils.split(classpath, "/");
-        classpath = temp[temp.length - 1];
-        classpath = StringUtils.removeEnd(classpath, ".jar\"");
+        File file = new File(classpath);
+        String fileName = file.getName();
 
-        return evalDependency(classpath);
+        fileName = StringUtils.removeEnd(fileName, ".jar\"");
+        return evalDependency(fileName, classpath);
     }
 
     private List<Dependency> loadDependenciesFromIdxFile() {
@@ -94,17 +94,24 @@ public class DependenciesEndpoint {
     private Dependency parseLine(String line) {
         // line like [- "spring-boot-starter-2.3.4.RELEASE.jar"]
         // remove begin
-        line = StringUtils.removeStart(line, "- \"");
+        String path = StringUtils.removeStart(line, "- \"");
         // remove end
-        line = StringUtils.removeEnd(line, ".jar\"");
+        path = StringUtils.removeEnd(path, "\"");
+        path = "classpath:/" + path;
 
-        return evalDependency(line);
+        File temp = new File(path);
+        String fileName = temp.getName();
+        fileName = StringUtils.removeEnd(fileName, ".jar\"");
+
+        return evalDependency(fileName, path);
     }
 
-    private Dependency evalDependency(String nameAndVersion) {
+    private Dependency evalDependency(String nameAndVersion, String path) {
         String[] nameAndVersionArray = StringUtils.split(nameAndVersion, "-");
         String version = StringUtils.removeEnd(nameAndVersionArray[nameAndVersionArray.length - 1], ".jar");
+
         String name = StringUtils.removeEnd(nameAndVersion, "-" + version + ".jar");
-        return new Dependency(name, version);
+
+        return new Dependency(name, version, path);
     }
 }
