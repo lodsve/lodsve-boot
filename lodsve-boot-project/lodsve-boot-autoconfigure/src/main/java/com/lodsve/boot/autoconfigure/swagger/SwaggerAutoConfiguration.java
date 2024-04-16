@@ -36,6 +36,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -50,6 +51,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.ReflectionUtils;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -70,10 +73,13 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.json.Json;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.spring.web.plugins.WebFluxRequestHandlerProvider;
+import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.Predicate;
@@ -92,7 +98,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @ConditionalOnProperty(name = "lodsve.swagger.enabled")
 @ConditionalOnClass(Docket.class)
 @EnableConfigurationProperties(SwaggerProperties.class)
-@Import({Swagger2DocumentationConfiguration.class, IgnoreAccountParamInSwaggerConfiguration.class})
+@Import({Swagger2DocumentationConfiguration.class, IgnoreAccountParamInSwaggerConfiguration.class, SwaggerAutoConfiguration.CompatibleSpringBootAndSwagger.class})
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
     private static final String PREFERRED_MAPPER_PROPERTY = "spring.mvc.converters.preferred-json-mapper";
     private final SwaggerProperties swaggerProperties;
@@ -271,4 +277,45 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
             docket.ignoredParameterTypes(Account.class);
         }
     }
+
+    /**
+     * 兼容spring boot2.6.3与springfox
+     * springboot2.6.x以及上版本默认使用的PATH_PATTERN_PARSER而knife4j的springfox使用的是ANT_PATH_MATCHER导致的，springboot的yml文件配置url匹配规则
+     */
+    @Configuration
+    public static class CompatibleSpringBootAndSwagger {
+        @Bean
+        public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
+            return new BeanPostProcessor() {
+
+                @Override
+                public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+                    if (bean instanceof WebMvcRequestHandlerProvider || bean instanceof WebFluxRequestHandlerProvider) {
+                        customizeSpringfoxHandlerMappings(getHandlerMappings(bean));
+                    }
+                    return bean;
+                }
+
+                private <T extends RequestMappingInfoHandlerMapping> void customizeSpringfoxHandlerMappings(List<T> mappings) {
+                    List<T> copy = mappings.stream()
+                        .filter(mapping -> mapping.getPatternParser() == null)
+                        .collect(Collectors.toList());
+                    mappings.clear();
+                    mappings.addAll(copy);
+                }
+
+                @SuppressWarnings("unchecked")
+                private List<RequestMappingInfoHandlerMapping> getHandlerMappings(Object bean) {
+                    try {
+                        Field field = ReflectionUtils.findField(bean.getClass(), "handlerMappings");
+                        field.setAccessible(true);
+                        return (List<RequestMappingInfoHandlerMapping>) field.get(bean);
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        throw new IllegalStateException(e);
+                    }
+                }
+            };
+        }
+    }
+
 }
