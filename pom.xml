@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.6.3</version>
         <relativePath/>
     </parent>
 
@@ -42,13 +42,15 @@
 
         <!-- 基本属性 -->
         <project.encoding>UTF-8</project.encoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 
         <!-- 所有的插件版本 -->
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
-        <maven.javadoc.plugin.version>3.2.0</maven.javadoc.plugin.version>
+        <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
+        <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
 
         <!-- 仓库地址配置 -->
         <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
@@ -148,6 +150,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten.maven.plugin.version}</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
