@@ -14,42 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.autoconfigure.rdbms;
+package com.lodsve.boot.pojo;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import com.google.gson.Gson;
 
-import javax.sql.DataSource;
+import java.io.Serializable;
 
 /**
- * 数据源配置.
+ * 显示层对象，通常是 Web 向模板渲染引擎层传输的对象
  *
  * @author Hulk Sun
  */
-@Data
-public class DataSourceProperty {
-    /**
-     * 连接池名称(只是一个名称标识)</br> 默认是配置文件上的名称
-     */
-    private String poolName;
-    /**
-     * JDBC driver
-     */
-    private String driverClassName;
-    /**
-     * JDBC url 地址
-     */
-    private String url;
-    /**
-     * JDBC 用户名
-     */
-    private String username;
-    /**
-     * JDBC 密码
-     */
-    private String password;
-    /**
-     * 连接池参数配置
-     */
-    private PoolSetting poolSetting;
+public class BaseVO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

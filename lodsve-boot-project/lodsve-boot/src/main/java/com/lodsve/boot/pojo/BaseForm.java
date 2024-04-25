@@ -14,14 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.autoconfigure.rdbms;
+package com.lodsve.boot.pojo;
 
-import com.zaxxer.hikari.HikariConfig;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
- * Hikari连接池配置.
+ * 数据查询对象，各层接收上层的查询请求。注意超过2 个参数的查询封装，禁止
+ * 使用Map 类来传输
  *
  * @author Hulk Sun
  */
-public class HikariCpConfig extends HikariConfig {
+@Setter
+@Getter
+public class BaseForm implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 表单提交的主键,用来
+     */
+    private Long id;
+
+    /**
+     * 用来区分是修改还是新增
+     */
+    @JsonIgnore
+    public Boolean isCreate() {
+        return null == id;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

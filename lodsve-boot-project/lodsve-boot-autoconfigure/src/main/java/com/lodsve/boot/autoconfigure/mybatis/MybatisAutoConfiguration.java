@@ -70,10 +70,18 @@ public class MybatisAutoConfiguration {
 
     private final Interceptor[] interceptors;
     private final MybatisProperties mybatisProperties;
+    private final DataSource dataSource;
 
-    public MybatisAutoConfiguration(ObjectProvider<Interceptor[]> interceptors, ObjectProvider<MybatisProperties> mybatisProperties) {
+
+    public MybatisAutoConfiguration(ObjectProvider<Interceptor[]> interceptors, ObjectProvider<MybatisProperties> mybatisProperties, DataSource dataSource) {
         this.interceptors = interceptors.getIfAvailable();
         this.mybatisProperties = mybatisProperties.getIfUnique();
+        this.dataSource = dataSource;
+    }
+
+    @Bean
+    public ConfigurationCustomizer mybatisConfigurationCustomizer() {
+        return new LodsveConfigurationCustomizer(mybatisProperties, dataSource);
     }
 
     @Bean
@@ -87,25 +95,9 @@ public class MybatisAutoConfiguration {
 
         Configuration configuration = new Configuration();
         customizers.getIfAvailable(Lists::newArrayList).forEach(c -> c.customize(configuration));
-        // 默认的配置
-        defaultCustomizer().customize(configuration);
         factory.setConfiguration(configuration);
 
         return factory.getObject();
-    }
-
-    private ConfigurationCustomizer defaultCustomizer() {
-        return c -> {
-            c.setMapUnderscoreToCamelCase(mybatisProperties.isMapUnderscoreToCamelCase());
-
-            c.addInterceptor(new PaginationInterceptor());
-            c.addInterceptor(new BaseRepositoryInterceptor());
-
-            if (ArrayUtils.isNotEmpty(mybatisProperties.getEnumsLocations())) {
-                TypeHandler<?>[] handlers = new TypeHandlerScanner().find(mybatisProperties.getEnumsLocations());
-                Arrays.stream(handlers).forEach(c.getTypeHandlerRegistry()::register);
-            }
-        };
     }
 
     @Bean

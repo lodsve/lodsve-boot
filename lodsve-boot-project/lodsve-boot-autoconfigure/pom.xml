@@ -225,5 +225,10 @@
             <optional>true</optional>
         </dependency>
         <!-- simple event end -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 </project>

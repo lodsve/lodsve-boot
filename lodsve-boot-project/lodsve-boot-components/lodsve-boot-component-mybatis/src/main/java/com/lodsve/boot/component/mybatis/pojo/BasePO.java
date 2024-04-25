@@ -14,15 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lodsve.boot.autoconfigure.rdbms;
+package com.lodsve.boot.component.mybatis.pojo;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.google.gson.Gson;
+
+import java.io.Serializable;
 
 /**
- * Druid连接池配置.
+ * DB单表的映射对象
  *
  * @author Hulk Sun
  */
-public class DruidCpConfig extends DruidDataSource {
+public class BasePO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

@@ -29,11 +29,16 @@
 
     <artifactId>lodsve-boot-dependencies</artifactId>
     <packaging>pom</packaging>
+    <inceptionYear>2020</inceptionYear>
     <name>lodsve boot dependencies</name>
+    <description>Lodsve develop kits base on Spring-Boot and some opensource components!</description>
+    <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
+        <manifest.built.name>Hulk Sun</manifest.built.name>
 
+        <spring.cloud.dependencies.version>2021.0.8</spring.cloud.dependencies.version>
         <dozer.version>6.5.0</dozer.version>
         <guava.version>28.2-jre</guava.version>
         <jxl.version>2.6.12</jxl.version>
@@ -55,7 +60,7 @@
         <druid.version>1.2.1</druid.version>
         <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
-        <spring.cloud.starter.alibaba.nacos.config.version>2.2.3.RELEASE
+        <spring.cloud.starter.alibaba.nacos.config.version>2021.0.1.0
         </spring.cloud.starter.alibaba.nacos.config.version>
         <groovy.all.version>2.4.15</groovy.all.version>
         <jruby.version>1.7.26</jruby.version>
@@ -64,8 +69,58 @@
         <zkclient.version>0.10</zkclient.version>
     </properties>
 
+    <organization>
+        <name>lodsve</name>
+        <url>https://github.com/lodsve</url>
+    </organization>
+
+    <!-- license -->
+    <licenses>
+        <license>
+            <name>GNU General Public License version 3</name>
+            <url>https://opensource.org/licenses/GPL-3.0</url>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <id>sunhao</id>
+            <name>孙昊</name>
+            <email>sunhao.java@gmail.com</email>
+            <roles>
+                <role>creator</role>
+                <role>manager</role>
+                <role>developer</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <!-- issue -->
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/lodsve/lodsve-boot/issues</url>
+    </issueManagement>
+
+    <!-- 代码库 -->
+    <scm>
+        <connection>scm:git:git@github.com:lodsve/lodsve-boot.git</connection>
+        <developerConnection>scm:git:git@github.com:lodsve/lodsve-boot.git</developerConnection>
+        <url>https://github.com/lodsve/lodsve-boot</url>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
+            <!-- spring cloud 2021.0.8 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.github.dozermapper</groupId>
                 <artifactId>dozer-core</artifactId>
@@ -114,6 +169,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
             <!-- lombok start -->
             <!-- 模板引擎 start -->

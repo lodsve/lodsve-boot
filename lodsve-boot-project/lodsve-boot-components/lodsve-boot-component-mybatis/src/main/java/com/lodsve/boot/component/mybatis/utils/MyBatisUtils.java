@@ -23,6 +23,7 @@ import com.lodsve.boot.component.mybatis.dialect.OracleDialect;
 import com.lodsve.boot.component.mybatis.dialect.SqlServerDialect;
 import com.lodsve.boot.component.mybatis.exception.MyBatisException;
 import com.lodsve.boot.component.mybatis.query.NativeSqlQuery;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.slf4j.Logger;
@@ -62,6 +63,32 @@ public final class MyBatisUtils {
         }
 
         throw new MyBatisException("can't find DbType!");
+    }
+
+    /**
+     * 根据数据源中的databaseProductName来判断是哪种类型数据库
+     *
+     * @param dbName databaseProductName
+     */
+    public static void setDbType(String dbName) {
+        if (StringUtils.equalsIgnoreCase(dbName, "")) {
+            throw new MyBatisException("When setting the database type, the database product name is empty.");
+        }
+
+        DbType dbType;
+        if (StringUtils.containsIgnoreCase(dbName, "mysql")) {
+            dbType = DbType.DB_MYSQL;
+        } else if (StringUtils.containsIgnoreCase(dbName, "oracle")) {
+            dbType = DbType.DB_ORACLE;
+        } else if (StringUtils.containsIgnoreCase(dbName, "sqlserver")) {
+            dbType = DbType.DB_SQL_SERVER;
+        } else if (StringUtils.containsIgnoreCase(dbName, "hsqldb")) {
+            dbType = DbType.DB_HSQL;
+        } else {
+            dbType = DbType.DB_MYSQL;
+        }
+
+        setDbType(dbType);
     }
 
     /**

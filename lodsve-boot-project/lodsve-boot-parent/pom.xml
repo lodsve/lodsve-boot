@@ -33,7 +33,6 @@
 
     <properties>
         <!-- 所有的插件版本 -->
-        <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
         <maven.clean.plugin.version>3.3.2</maven.clean.plugin.version>
@@ -110,37 +109,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- copyright header -->
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${maven.copyright.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <quiet>false</quiet>
-                    <header>${main.user.dir}/tools/HEADER</header>
-                    <excludes>
-                        <exclude>.gitignore</exclude>
-                        <exclude>*.md</exclude>
-                        <exclude>.editorconfig</exclude>
-                        <exclude>LICENSE</exclude>
-                        <exclude>.github/**</exclude>
-                        <exclude>tools/HEADER</exclude>
-                    </excludes>
-                    <strictCheck>true</strictCheck>
-                    <mapping>
-                        <java>SLASHSTAR_STYLE</java>
-                        <factories>SCRIPT_STYLE</factories>
-                    </mapping>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

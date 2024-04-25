@@ -16,13 +16,17 @@
  */
 package com.lodsve.boot.autoconfigure.mybatis;
 
+import com.lodsve.boot.component.mybatis.exception.MyBatisException;
 import com.lodsve.boot.component.mybatis.plugins.pagination.PaginationInterceptor;
 import com.lodsve.boot.component.mybatis.plugins.repository.BaseRepositoryInterceptor;
 import com.lodsve.boot.component.mybatis.type.TypeHandlerScanner;
+import com.lodsve.boot.component.mybatis.utils.MyBatisUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandler;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.Arrays;
 
 /**
@@ -36,24 +40,32 @@ import java.util.Arrays;
  * @author Hulk Sun
  */
 public class LodsveConfigurationCustomizer implements ConfigurationCustomizer {
-    private final boolean mapUnderscoreToCamelCase;
-    private final String[] enumsLocations;
+    private final MybatisProperties properties;
+    private final DataSource dataSource;
 
-    public LodsveConfigurationCustomizer(boolean mapUnderscoreToCamelCase, String[] enumsLocations) {
-        this.mapUnderscoreToCamelCase = mapUnderscoreToCamelCase;
-        this.enumsLocations = enumsLocations;
+    public LodsveConfigurationCustomizer(MybatisProperties properties, DataSource dataSource) {
+        this.properties = properties;
+        this.dataSource = dataSource;
     }
 
     @Override
     public void customize(Configuration configuration) {
-        configuration.setMapUnderscoreToCamelCase(mapUnderscoreToCamelCase);
+        configuration.setMapUnderscoreToCamelCase(properties.isMapUnderscoreToCamelCase());
 
         configuration.addInterceptor(new PaginationInterceptor());
         configuration.addInterceptor(new BaseRepositoryInterceptor());
 
-        if (ArrayUtils.isNotEmpty(enumsLocations)) {
-            TypeHandler<?>[] handlers = new TypeHandlerScanner().find(enumsLocations);
+        if (ArrayUtils.isNotEmpty(properties.getEnumsLocations())) {
+            TypeHandler<?>[] handlers = new TypeHandlerScanner().find(properties.getEnumsLocations());
             Arrays.stream(handlers).forEach(configuration.getTypeHandlerRegistry()::register);
+        }
+
+        // 目前仅支持默认数据库，后续再优化
+        try (Connection connection = dataSource.getConnection()) {
+            String dbName = connection.getMetaData().getDatabaseProductName().toLowerCase();
+            MyBatisUtils.setDbType(dbName);
+        } catch (Exception e) {
+            throw new MyBatisException("When setting the database type, the database product name is empty.");
         }
     }
 }

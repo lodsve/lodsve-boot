@@ -33,12 +33,18 @@ import java.util.Map;
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
     private final Map<String, DataSource> dataSourceMap;
-    private final String defaultDataSource;
+    private DataSource defaultDataSource;
 
-    public DynamicDataSource(Map<String, DataSource> dataSourceMap, String defaultDataSource) {
-        super.setDefaultTargetDataSource(defaultDataSource);
+    public DynamicDataSource(Map<String, DataSource> dataSourceMap, String defaultDataSourceName) {
         this.dataSourceMap = dataSourceMap;
-        this.defaultDataSource = defaultDataSource;
+
+        Collection<DataSource> values = dataSourceMap.values();
+        defaultDataSource = Lists.newArrayList(values).get(0);
+        if (StringUtils.isBlank(defaultDataSourceName)) {
+            defaultDataSource = Lists.newArrayList(values).get(0);
+        } else {
+            defaultDataSource = dataSourceMap.get(defaultDataSourceName);
+        }
     }
 
     @Override
@@ -53,14 +59,12 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         }
 
         Map<Object, Object> targetDataSources = Maps.newHashMap();
-        dataSourceMap.forEach(targetDataSources::put);
+        targetDataSources.putAll(dataSourceMap);
 
         super.setTargetDataSources(targetDataSources);
 
-        if (StringUtils.isNotBlank(defaultDataSource)) {
-            Collection<DataSource> values = dataSourceMap.values();
-            super.setDefaultTargetDataSource(Lists.newArrayList(values).get(0));
-        }
+        super.setTargetDataSources(targetDataSources);
+        super.setDefaultTargetDataSource(defaultDataSource);
 
         super.afterPropertiesSet();
     }
