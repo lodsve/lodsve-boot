@@ -17,9 +17,6 @@
 package com.lodsve.boot.autoconfigure.rdbms;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
-
-import javax.sql.DataSource;
 
 /**
  * 数据源配置.

@@ -374,19 +374,19 @@
             </distributionManagement>
         </profile>
         <profile>
-            <id>release-third-party</id>
+            <id>release-lodsve</id>
             <!-- 第三方发布仓库 -->
             <distributionManagement>
                 <snapshotRepository>
-                    <id>third-party-snapshots</id>
-                    <name>Third Party SNAPSHOTS</name>
-                    <url>${third.party.snapshots.repository.url}</url>
+                    <id>lodsve-snapshots</id>
+                    <name>lodsve SNAPSHOTS</name>
+                    <url>${lodsve.snapshots.repository.url}</url>
                 </snapshotRepository>
 
                 <repository>
-                    <id>third-party-releases</id>
-                    <name>Third Party releases</name>
-                    <url>${third.party.releases.repository.url}</url>
+                    <id>lodsve-releases</id>
+                    <name>lodsve releases</name>
+                    <url>${lodsve.releases.repository.url}</url>
                 </repository>
             </distributionManagement>
             <build>

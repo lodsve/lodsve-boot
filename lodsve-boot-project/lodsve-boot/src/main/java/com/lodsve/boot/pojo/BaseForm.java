@@ -41,6 +41,8 @@ public class BaseForm implements Serializable {
 
     /**
      * 用来区分是修改还是新增
+     *
+     * @return 是否是新建
      */
     @JsonIgnore
     public Boolean isCreate() {

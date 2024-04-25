@@ -17,15 +17,11 @@
 package com.lodsve.boot.autoconfigure.mybatis;
 
 import com.google.common.collect.Lists;
-import com.lodsve.boot.component.mybatis.plugins.pagination.PaginationInterceptor;
-import com.lodsve.boot.component.mybatis.plugins.repository.BaseRepositoryInterceptor;
 import com.lodsve.boot.component.mybatis.repository.BaseRepository;
-import com.lodsve.boot.component.mybatis.type.TypeHandlerScanner;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperFactoryBean;
@@ -53,7 +49,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
 import java.util.List;
 
 /**
