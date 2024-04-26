@@ -33,14 +33,12 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.Assert;
 
-import java.net.UnknownHostException;
-
 /**
  * Redis配置.
  *
  * @author Hulk Sun
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RedisProperties.class)
 @ConditionalOnClass({RedisOperations.class, DynamicLettuceConnectionFactory.class})
 @Import({DynamicLettuceConnectionConfiguration.class, DynamicJedisConnectionConfiguration.class, RedisSerializerConfiguration.class, RedisCacheManagerConfiguration.class})
@@ -76,7 +74,7 @@ public class RedisAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate template = new StringRedisTemplate();
         template.setConnectionFactory(redisConnectionFactory);
         return template;

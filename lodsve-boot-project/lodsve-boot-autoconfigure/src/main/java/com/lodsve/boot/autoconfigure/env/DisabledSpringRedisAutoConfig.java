@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class DisabledSpringRedisAutoConfig implements EnvironmentCustomizer {
     private static final String DISABLED_AUTO_CONFIGURATION_EXCLUDE = "spring.autoconfigure.exclude";
-    private static final String DYNAMIC_CONNECTION_FACTORY_CLASS_NAME = "com.lodsve.boot.redis.dynamic.DynamicLettuceConnectionFactory";
+    private static final String DYNAMIC_CONNECTION_FACTORY_CLASS_NAME = "com.lodsve.boot.component.redis.dynamic.DynamicLettuceConnectionFactory";
 
     @Override
     public Map<String, Object> customizer() {
