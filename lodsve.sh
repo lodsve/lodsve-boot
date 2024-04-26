@@ -21,7 +21,7 @@
 help(){
   echo "--------------------------------------------------------------------------"
   echo ""
-  echo "usage: ./lodsve.sh [versions | deployOss | deployGithub | deployThirdParty]"
+  echo "usage: ./lodsve.sh [versions | deployOss | deployThirdParty]"
   echo ""
   echo "versions          Update lodsve-boot versions."
   echo "deployOss         Deploy lodsve-boot to maven repository"

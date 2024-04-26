@@ -17,12 +17,14 @@
 #
 
 profile=$1
-skip=false
 if [[ $profile == release-third-party ]]; then
   # skip test
-  skip=true
+  mvn clean deploy -P $1 -Dmaven.test.skip=true
 else
-  skip=false
+  if [ -z "$2" ]; then
+    echo "The password for the gpg key to publish the maven repository cannot be empty."
+    exit 1
+  fi
+  mvn clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
 fi
 
-mvn clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=$skip
