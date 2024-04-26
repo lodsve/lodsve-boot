@@ -168,7 +168,7 @@
                         <excludes>
                             <exclude>.github/**</exclude>
                             <exclude>.mvn/**</exclude>
-                            <exclude>.git/**</exclude>
+                            <exclude>git/**</exclude>
                             <exclude>.toos/*.xml</exclude>
                             <exclude>tools/HEADER</exclude>
                             <exclude>.editorconfig</exclude>
