@@ -19,12 +19,12 @@
 
 set profile=%1
 
-if "%profile%"=="release-third-party" (
-  mvn clean deploy -P %1 -Dmaven.test.skip=true
+if "%profile%"=="release-lodsve" (
+  ../mvnw.cmd clean deploy -P %1 -Dmaven.test.skip=true
 ) else (
   if "%2"=="" (
     echo The password for the gpg key to publish the maven repository cannot be empty.
     exit /b 1
   )
-  mvn clean deploy -P %1 -Dgpg.passphrase=%2 -Dmaven.test.skip=false
+  ../mvnw.cmd clean deploy -P %1 -Dgpg.passphrase=%2 -Dmaven.test.skip=false
 )

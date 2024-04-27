@@ -24,16 +24,16 @@ if "%1" == "versions" (
   call tools\versions.cmd %2
 ) else if "%1" == "deployOss" (
   call tools\deploy.cmd release-oss %2
-) else if "%1" == "deployThirdParty" (
-  call tools\deploy.cmd release-third-party %2
+) else if "%1" == "deployLodsve" (
+  call tools\deploy.cmd release-lodsve %2
 ) else (
   echo --------------------------------------------------------------------------
   echo.
-  echo usage: lodsve.cmd [versions ^| deployOss ^| deployThirdParty]
+  echo usage: lodsve.cmd [versions ^| deployOss ^| deployLodsve]
   echo.
   echo versions          Update lodsve-boot versions.
   echo deployOss         Deploy lodsve-boot to maven repository.
-  echo deployThirdParty  Deploy lodsve-boot to Third-Party repository.
+  echo deployLodsve      Deploy lodsve-boot to Lodsve repository.
   echo.
   echo --------------------------------------------------------------------------
 )
