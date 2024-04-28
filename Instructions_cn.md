@@ -42,7 +42,7 @@
        ```yaml
        # 加密因子
        # 通常来说，这里的password，需要放在启动变量中传入，或者使用占位符，然后用环境变量传入，例如:
-       # password: ${WEILAN_PASSWORD}
+       # password: ${LODSVE_PASSWORD}
        password: lodsve
        # 解密算法
        algorithm: PBEWithMD5AndDES
