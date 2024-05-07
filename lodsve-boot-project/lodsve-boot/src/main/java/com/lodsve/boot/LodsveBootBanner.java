@@ -75,7 +75,7 @@ public class LodsveBootBanner implements Banner {
 
     private String formatVersion(String version) {
         if (StringUtils.isBlank(version)) {
-            return "(" + UNKNOWN_VERSION + ")";
+            return UNKNOWN_VERSION;
         }
 
         return "(v" + version + ")";
