@@ -186,15 +186,15 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>templating-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <groupId>com.lodsve.maven.plugins</groupId>
+                    <artifactId>lodsve-javatemplate-maven-plugin</artifactId>
+                    <version>1.0.3-SNAPSHOT</version>
                     <executions>
                         <execution>
-                            <id>filter-src</id>
+                            <id>generate-sources</id>
                             <phase>generate-sources</phase>
                             <goals>
-                                <goal>filter-sources</goal>
+                                <goal>generate-sources</goal>
                             </goals>
                         </execution>
                     </executions>

@@ -102,8 +102,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>templating-maven-plugin</artifactId>
+                <groupId>com.lodsve.maven.plugins</groupId>
+                <artifactId>lodsve-javatemplate-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
