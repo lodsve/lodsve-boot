@@ -30,6 +30,13 @@
 2. 包含了以下的模块：
 
    参考 [能力.md](capability_cn.md)
+3. **注意**：由于优化了获取版本号的方式，在首次导入到idea中，或者执行过`mvn clean`命令后，都需要在根目录执行一下以下命令：
+   ```
+   # Linux or MacOS
+   ./mvnw org.codehaus.mojo:templating-maven-plugin:3.0.0:filter-sources
+   # Windows
+   ./mvnw.cmd org.codehaus.mojo:templating-maven-plugin:3.0.0:filter-sources
+   ```
 
 ## 如何使用
 
