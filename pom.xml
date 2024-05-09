@@ -52,6 +52,7 @@
         <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
         <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
+        <lodsve.javatemplate.maven.plugins.version>1.0.3-SNAPSHOT</lodsve.javatemplate.maven.plugins.version>
 
         <!-- 仓库地址配置 -->
         <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
@@ -188,7 +189,7 @@
                 <plugin>
                     <groupId>com.lodsve.maven.plugins</groupId>
                     <artifactId>lodsve-javatemplate-maven-plugin</artifactId>
-                    <version>1.0.3-SNAPSHOT</version>
+                    <version>${lodsve.javatemplate.maven.plugins.version}</version>
                     <executions>
                         <execution>
                             <id>generate-sources</id>

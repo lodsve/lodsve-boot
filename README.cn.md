@@ -33,9 +33,9 @@
 3. **注意**：由于优化了获取版本号的方式，在首次导入到idea中，或者执行过`mvn clean`命令后，都需要在根目录执行一下以下命令：
    ```
    # Linux or MacOS
-   ./mvnw org.codehaus.mojo:templating-maven-plugin:3.0.0:filter-sources
+   ./mvnw com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:filter-sources
    # Windows
-   ./mvnw.cmd org.codehaus.mojo:templating-maven-plugin:3.0.0:filter-sources
+   ./mvnw.cmd com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:filter-sources
    ```
 
 ## 如何使用
