@@ -33,9 +33,9 @@
 3. **Note**: Due to the optimized way of retrieving the version number, after importing into IntelliJ IDEA for the first time or executing the `mvn clean` command, it is necessary to run the following command in the root directory:
    ```
    # Linux or MacOS
-   ./mvnw com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:filter-sources
+   ./mvnw com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:generate-sources
    # Windows
-   ./mvnw.cmd com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:filter-sources
+   ./mvnw.cmd com.lodsve.maven.plugins:lodsve-javatemplate-maven-plugin:1.0.3-SNAPSHOT:generate-sources
    ```
 
 ## How To Use
