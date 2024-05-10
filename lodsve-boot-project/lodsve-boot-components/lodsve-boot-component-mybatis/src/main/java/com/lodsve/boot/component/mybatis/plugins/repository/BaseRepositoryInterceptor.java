@@ -56,6 +56,7 @@ import java.util.ServiceLoader;
 })
 public class BaseRepositoryInterceptor implements Interceptor {
     private static final String LOGIC_DELETE_WITH_MODIFIED_BY_MAPPED_STATEMENT_ID = "logicDeleteByIdWithModifiedBy";
+    private static final String LOGIC_DELETE_BY_ID_MAPPED_STATEMENT_ID = "logicDeleteById";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -76,8 +77,40 @@ public class BaseRepositoryInterceptor implements Interceptor {
         if (msId.contains(LOGIC_DELETE_WITH_MODIFIED_BY_MAPPED_STATEMENT_ID)) {
             handleParams(ms, parameter);
         }
+        if (msId.contains(LOGIC_DELETE_BY_ID_MAPPED_STATEMENT_ID)) {
+            // 逻辑删除方法，需要处理更新时间、禁用时间参数
+            // 因为拦截了特定的方法，而且，此方法入参仅为id
+            // 所以以下代码的设想：objects[1]为传入的待软删除对象id
+            // ParamMap为空
+            // 所以只要将，id=objects[1]; 更新时间=now(); 禁用时间=now() 三个参数组成成一个新的ParamMap
+            // 并将拦截方法的args第2个参数替换成这个新的ParamMap即可
+            ParamMap<Object> params = handleLogicDeleteByIdParams(ms, objects[1]);
+            objects[1] = params;
+        }
 
         return invocation.proceed();
+    }
+
+    private ParamMap<Object> handleLogicDeleteByIdParams(MappedStatement ms, Object param) {
+        ParamMap<Object> parameter = new ParamMap<>();
+        BaseMapperProvider mapperProvider = MapperHelper.getMapperProvider(ms.getId());
+
+        Class<?> entityClass = mapperProvider.getSelectReturnType(ms);
+        EntityTable table = EntityHelper.getEntityTable(entityClass);
+        IdColumn idColumn = table.getIdColumn();
+        LastModifiedDateColumn modifiedDateColumn = table.getModifiedDateColumn();
+        DisabledDateColumn disabledDateColumn = table.getDisabledDateColumn();
+
+        // 这里的param必为id
+        parameter.put(idColumn.getProperty(), param);
+        if (null != modifiedDateColumn) {
+            parameter.put(modifiedDateColumn.getProperty(), LocalDateTime.now());
+        }
+        if (null != disabledDateColumn) {
+            parameter.put(disabledDateColumn.getProperty(), LocalDateTime.now());
+        }
+
+        return parameter;
     }
 
     @Override

@@ -110,7 +110,7 @@ public interface BaseRepository<T> {
     int batchSave(List<T> entities);
 
     /**
-     * 根据主键更新属性不为null的值。
+     * 根据主键更新所有属性的值。
      *
      * @param entity 需要更新的对象,必须含有主键值
      * @return 操作后影响的数据库记录数量(一般情况为1)
@@ -120,7 +120,7 @@ public interface BaseRepository<T> {
     int updateAll(T entity);
 
     /**
-     * 根据主键更新属性不为null的值。
+     * 根据主键更新属性不为null的值（String类型，应该还不为空字符串）。
      *
      * @param entity 需要更新的对象,必须含有主键值
      * @return 操作后影响的数据库记录数量(一般情况为1)

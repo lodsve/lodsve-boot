@@ -32,6 +32,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 
 import java.io.Serializable;
 import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -280,9 +281,21 @@ public class MapperProvider extends BaseMapperProvider {
             throw new SQLSyntaxErrorException("不支持逻辑删除！没有@LogicDelete注解");
         }
         IdColumn idColumn = table.getIdColumn();
+        LastModifiedDateColumn modifiedDateColumn = table.getModifiedDateColumn();
+        DisabledDateColumn disabledDateColumn = table.getDisabledDateColumn();
 
         String sql = "UPDATE %s SET %s WHERE %s";
-        return String.format(sql, table.getName(), deleteColumn.getColumn() + " = " + deleteColumn.getDelete(), idColumn.getColumn() + " = #{" + idColumn.getProperty() + "}");
+        List<String> sqlList = new ArrayList<>(3);
+        sqlList.add(deleteColumn.getColumn() + " = " + deleteColumn.getDelete());
+
+        // 更新时间、禁用时间
+        if (modifiedDateColumn != null) {
+            sqlList.add(modifiedDateColumn.getColumn() + " =  #{" + modifiedDateColumn.getProperty() + "}");
+        }
+        if (disabledDateColumn != null) {
+            sqlList.add(disabledDateColumn.getColumn() + " =  #{" + disabledDateColumn.getProperty() + "}");
+        }
+        return String.format(sql, table.getName(), StringUtils.join(sqlList.toArray(), ", "), idColumn.getColumn() + " = #{" + idColumn.getProperty() + "}");
     }
 
     /**

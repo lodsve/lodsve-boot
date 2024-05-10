@@ -16,9 +16,14 @@
  */
 package com.lodsve.boot.component.mybatis.pojo;
 
+import com.lodsve.boot.component.mybatis.repository.annotations.DisabledDate;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -48,21 +53,25 @@ public class BasePropertyPO extends BasePO {
     /**
      * 创建人
      */
+    @CreatedBy
     @Column(name = "created_by")
     private Long createdBy;
     /**
      * 创建时间
      */
+    @CreatedDate
     @Column(name = "created_date")
     private LocalDateTime createdDate;
     /**
      * 上一次更新人
      */
+    @LastModifiedBy
     @Column(name = "last_modified_by")
     private Long lastModifiedBy;
     /**
      * 上一次更新时间
      */
+    @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
     /**
@@ -85,6 +94,7 @@ public class BasePropertyPO extends BasePO {
     /**
      * 禁用时间
      */
+    @DisabledDate
     @Column(name = "disabled_date")
     private LocalDateTime disabledDate;
 
