@@ -34,6 +34,10 @@ public class WebMvcProperties {
      * Debug Config
      */
     private DebugConfig debug = new DebugConfig();
+    /**
+     * rest config
+     */
+    private RestConfig rest = new RestConfig();
 
     @Data
     public static class DebugConfig {
@@ -45,5 +49,17 @@ public class WebMvcProperties {
          * 需要忽略的ip/address
          */
         private List<String> excludeAddress = Lists.newArrayList();
+    }
+
+    @Data
+    public static class RestConfig {
+        /**
+         * 连接超时时间
+         */
+        private int connectTimeout = 15000;
+        /**
+         * 读超时时间
+         */
+        private int readTimeout = 15000;
     }
 }

@@ -87,4 +87,13 @@ public class WebResult<T> implements Serializable {
 
         return result;
     }
+
+    public static <T> WebResult<T> of(boolean result) {
+        return result ? WebResult.ok(null) : WebResult.error();
+    }
+
+    @Override
+    public String toString() {
+        return "WebResult [result=" + result + ", code=" + code + ", message=" + message + ", data=" + data + "]";
+    }
 }

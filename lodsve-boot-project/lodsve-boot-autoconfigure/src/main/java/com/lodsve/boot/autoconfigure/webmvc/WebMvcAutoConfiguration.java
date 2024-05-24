@@ -25,17 +25,24 @@ import com.lodsve.boot.component.webmvc.resolver.WebInput;
 import com.lodsve.boot.component.webmvc.resolver.WebOutput;
 import com.lodsve.boot.component.webmvc.response.LodsveBootExceptionHandler;
 import com.lodsve.boot.component.webmvc.response.WebResultResponseWrapperHandler;
+import com.lodsve.boot.component.webmvc.utils.RestUtils;
 import com.lodsve.boot.json.JsonConverter;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.schema.AlternateTypeRuleConvention;
@@ -69,6 +76,28 @@ public class WebMvcAutoConfiguration {
     @Bean
     public LodsveBootExceptionHandler exceptionHandler() {
         return new LodsveBootExceptionHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean({RestTemplate.class})
+    public RestTemplate restTemplate(ClientHttpRequestFactory factory, HttpMessageConverters messageConverters) {
+        RestTemplate restTemplate = new RestTemplate(messageConverters.getConverters());
+        restTemplate.setRequestFactory(factory);
+        return restTemplate;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean({ClientHttpRequestFactory.class})
+    public ClientHttpRequestFactory requestFactory(WebMvcProperties properties) {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(properties.getRest().getConnectTimeout());
+        factory.setReadTimeout(properties.getRest().getReadTimeout());
+        return factory;
+    }
+
+    @Bean
+    public InitializingBean initRestUtil(RestTemplate restTemplate) {
+        return () -> RestUtils.setRestTemplate(restTemplate);
     }
 
     @Configuration

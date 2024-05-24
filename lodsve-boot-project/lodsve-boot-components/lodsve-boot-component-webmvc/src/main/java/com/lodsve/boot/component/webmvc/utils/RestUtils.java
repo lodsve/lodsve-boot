@@ -32,6 +32,9 @@ import java.util.Set;
  * @author Hulk Sun
  */
 public class RestUtils {
+    private RestUtils() {
+    }
+
     private static RestTemplate restTemplate;
 
     public static RestTemplate getRestTemplate() {
