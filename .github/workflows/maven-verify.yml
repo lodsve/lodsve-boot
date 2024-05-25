@@ -32,4 +32,4 @@ jobs:
           java-version: 11
           cache: 'maven'
       - name: Run Maven Install
-        run: mvn clean install
+        run: mvn clean install -Dlodsve.nexus.url=${LODSVE_NEXUS_URL}
