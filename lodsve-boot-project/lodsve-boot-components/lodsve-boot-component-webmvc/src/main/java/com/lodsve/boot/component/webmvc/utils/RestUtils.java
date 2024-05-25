@@ -44,7 +44,6 @@ public class RestUtils {
     public static void setRestTemplate(RestTemplate restTemplate) {
         RestUtils.restTemplate = restTemplate;
     }
-// GET
 
     public static <T> T get(URI url, Class<T> responseType) {
         Assert.notNull(url);
@@ -69,8 +68,6 @@ public class RestUtils {
         return get(expand(url, urlVariables), responseType);
     }
 
-    // POST
-
     public static <T> T post(URI url, Object request, Class<T> responseType) {
         Assert.notNull(url);
         Assert.notNull(responseType);
@@ -94,8 +91,6 @@ public class RestUtils {
         return post(expand(url, urlVariables), request, responseType);
     }
 
-    // HEAD
-
     public static HttpHeaders head(String url, Object... urlVariables) throws RestClientException {
         return head(expand(url, urlVariables));
     }
@@ -107,8 +102,6 @@ public class RestUtils {
     public static HttpHeaders head(URI url) throws RestClientException {
         return restTemplate.headForHeaders(url);
     }
-
-    // PUT
 
     public static void put(String url, Object request, Object... urlVariables) throws RestClientException {
         put(expand(url, urlVariables), request);
@@ -123,8 +116,6 @@ public class RestUtils {
         restTemplate.put(url, request);
     }
 
-    // DELETE
-
     public static void delete(String url, Object... urlVariables) throws RestClientException {
         delete(expand(url, urlVariables));
     }
@@ -137,8 +128,6 @@ public class RestUtils {
         restTemplate.delete(url);
     }
 
-    // OPTIONS
-
     public static Set<HttpMethod> options(String url, Object... urlVariables) throws RestClientException {
         return options(expand(url, urlVariables));
     }
@@ -150,8 +139,6 @@ public class RestUtils {
     public static Set<HttpMethod> options(URI url) throws RestClientException {
         return restTemplate.optionsForAllow(url);
     }
-
-    // COMMONS
 
     private static URI expand(String url, Object... uriVariables) {
         Assert.hasText(url);
