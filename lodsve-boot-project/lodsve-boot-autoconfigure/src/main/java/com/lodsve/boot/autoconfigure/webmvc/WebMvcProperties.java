@@ -54,11 +54,11 @@ public class WebMvcProperties {
     @Data
     public static class RestConfig {
         /**
-         * 连接超时时间
+         * 连接超时时间，单位：毫秒
          */
         private int connectTimeout = 15000;
         /**
-         * 读超时时间
+         * 读超时时间，单位：毫秒
          */
         private int readTimeout = 15000;
     }
