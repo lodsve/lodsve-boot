@@ -1,4 +1,4 @@
-<type>: <subject>
+['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']: subject
 
 <body>
 

@@ -12,7 +12,7 @@ valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore
 commit_file = sys.argv[1]
 help_address = 'https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#'
 
-with open(commit_file) as commit:
+with open(commit_file, 'r', encoding='utf-8') as commit:
     lines = commit.readlines()
     if len(lines) == 0:
         sys.stderr.write("\nEmpty commit message\n")

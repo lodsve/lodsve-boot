@@ -83,9 +83,7 @@ public class LodsveBootBanner implements Banner {
 
     private void fillBlank(int nowLength, StringBuilder blank) {
         if (nowLength < LINE_WIDTH) {
-            for (int i = 0; i < LINE_WIDTH - nowLength; i++) {
-                blank.append(" ");
-            }
+            blank.append(" ".repeat(Math.max(0, LINE_WIDTH - nowLength)));
         }
     }
 }
