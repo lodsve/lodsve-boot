@@ -127,6 +127,16 @@
             </snapshots>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>lodsve-nexus</id>
+            <name>Lodsve Nexus</name>
+            <url>${lodsve.nexus.url}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <pluginManagement>
