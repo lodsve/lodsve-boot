@@ -119,24 +119,14 @@
             <url>https://repo1.maven.org/maven2</url>
         </repository>
         <repository>
-            <id>lodsve-nexus</id>
-            <name>Lodsve Nexus</name>
-            <url>${lodsve.nexus.url}</url>
+            <id>maven-center-snapshot</id>
+            <name>Maven Center Snapshot</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>lodsve-nexus</id>
-            <name>Lodsve Nexus</name>
-            <url>${lodsve.nexus.url}</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
     <build>
         <pluginManagement>
