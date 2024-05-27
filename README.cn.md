@@ -29,7 +29,7 @@
 1. `Lodsve`基于Spring-Boot和一些开源组件的开发包！
 2. 包含了以下的模块：
 
-   参考 [能力.md](capability_cn.md)
+   参考 [提供的能力](capability_cn.md)
 3. **注意**：由于优化了获取版本号的方式，在首次导入到idea中，或者执行过`mvn clean`命令后，都需要在根目录执行一下以下命令：
    ```
    # Linux or MacOS
@@ -47,7 +47,8 @@
             <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
-2. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
+2. 部分插件的使用方式，可参考[组件介绍](Instructions_cn.md)
+3. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
 
         <parent>
             <groupId>com.lodsve.boot</groupId>

@@ -47,7 +47,8 @@
             <artifactId>lodsve-boot-dependencies</artifactId>
             <version>x.x.x.RELEASE</version>
         </parent>
-2. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in
+2. You can refer to the [Component Introduction](Instructions.md) for the usage of some plugins.
+3. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in
    the issue.
 
         <parent>
