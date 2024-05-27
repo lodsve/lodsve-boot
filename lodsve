@@ -43,6 +43,7 @@ case "$1" in
 	;;
   'deployOssSnapshot')
     bash ./tools/deploy.sh release-oss-snapshot $2
+    ;;
   'deployLodsve')
     bash ./tools/deploy.sh release-lodsve $2
 	;;
