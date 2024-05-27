@@ -24,8 +24,9 @@ help(){
   echo "usage: ./lodsve.sh [versions | deployOss | deployLodsve]"
   echo ""
   echo "versions          Update lodsve-boot versions."
-  echo "deployOss         Deploy lodsve-boot to maven repository"
-  echo "deployLodsve      Deploy lodsve-boot to Lodsve repository"
+  echo "deployOss         Deploy lodsve-boot to maven repository."
+  echo "deployOssSnapshot Deploy lodsve-boot to maven snapshot repository."
+  echo "deployLodsve      Deploy lodsve-boot to Lodsve repository."
   echo ""
   echo "--------------------------------------------------------------------------"
 }
@@ -40,6 +41,8 @@ case "$1" in
   'deployOss')
     bash ./tools/deploy.sh release-oss $2
 	;;
+  'deployOssSnapshot')
+    bash ./tools/deploy.sh release-oss-snapshot $2
   'deployLodsve')
     bash ./tools/deploy.sh release-lodsve $2
 	;;

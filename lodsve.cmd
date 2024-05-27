@@ -24,7 +24,9 @@ if "%1" == "versions" (
   call tools\versions.cmd %2
 ) else if "%1" == "deployOss" (
   call tools\deploy.cmd release-oss %2
-) else if "%1" == "deployLodsve" (
+) else if "%1" == "deployOssSnapshot" (
+    call tools\deploy.cmd release-oss-snapshot %2
+  ) else if "%1" == "deployLodsve" (
   call tools\deploy.cmd release-lodsve %2
 ) else (
   echo --------------------------------------------------------------------------
@@ -33,6 +35,7 @@ if "%1" == "versions" (
   echo.
   echo versions          Update lodsve-boot versions.
   echo deployOss         Deploy lodsve-boot to maven repository.
+  echo deployOssSnapshot Deploy lodsve-boot to maven snapshot repository.
   echo deployLodsve      Deploy lodsve-boot to Lodsve repository.
   echo.
   echo --------------------------------------------------------------------------

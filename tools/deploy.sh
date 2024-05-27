@@ -25,6 +25,11 @@ else
     echo "The password for the gpg key to publish the maven repository cannot be empty."
     exit 1
   fi
-  ./mvnw clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
+
+  if [[ "release-oss-snapshot" != "$profile" ]]; then
+    # publish snapshot
+    args="-Dgpg.passphrase=$2 -Dmaven.test.skip=false"
+  fi
+  ./mvnw clean deploy -P $1 $args
 fi
 
