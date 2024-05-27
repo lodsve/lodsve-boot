@@ -6,3 +6,6 @@
 
 # Set the line endings to LF for all files
 * eol=lf
+
+# Set line endings to CRLF for files with .cmd extension
+*.cmd crlf
