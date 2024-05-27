@@ -33,11 +33,5 @@ jobs:
           distribution: 'adopt-hotspot'
           java-version: 11
           cache: 'maven'
-          server-id: lodsve-nexus
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
       - name: Run Maven Install
         run: mvn clean install -Dlodsve.nexus.url=${{ secrets.LODSVE_NEXUS_URL }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.LODSVE_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.LODSVE_PASSWORD }}
