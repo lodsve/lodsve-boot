@@ -22,7 +22,7 @@ jobs:
       - name: Get And Set Version
         id: get_version
         run: |
-          MVN_VERSION=$(mvn -q -N -Dexec.executable="echo"  -Dexec.args='${project.version}'  org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
+          MVN_VERSION=$(./mvnw -q -N -Dexec.executable="echo"  -Dexec.args='${project.version}'  org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
           NEW_VERSION=${MVN_VERSION%-*}-$(date "+%Y%m%d")-SNAPSHOT
           bash ./lodsve versions ${NEW_VERSION}
           echo "newVersion=$NEW_VERSION" >> $GITHUB_OUTPUT
@@ -34,7 +34,7 @@ jobs:
           gpg --list-secret-keys --keyid-format LONG
       - name: Publish to Apache Maven Central
         run: |
-          mvn --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
+          ./mvnw --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
           mkdir archives & rm -rf archives/* & find ./ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
           zip -r lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
         env:
@@ -59,7 +59,7 @@ jobs:
           NEW_VERSION: ${{ steps.get_version.outputs.newVersion }}
         run: |
           echo oldVersion is ${OLD_VERSION}
-          mvn clean & rm -rf lodsve-boot-${NEW_VERSION}-archives.zip archives
+          ./mvnw clean & rm -rf lodsve-boot-${NEW_VERSION}-archives.zip archives
           bash ./lodsve versions ${OLD_VERSION}
       - name: Send DingDing Notify
         uses: zcong1993/actions-ding@master
