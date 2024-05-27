@@ -1,0 +1,8 @@
+# Set all files as binary files, no text processing
+* -text
+
+# Set the line endings to LF for all files with extensions
+*.* eol=lf
+
+# Set the line endings to LF for all files
+* eol=lf

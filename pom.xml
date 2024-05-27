@@ -51,7 +51,6 @@
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
-        <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
         <lodsve.javatemplate.maven.plugins.version>1.0.3-SNAPSHOT</lodsve.javatemplate.maven.plugins.version>
 
         <!-- 仓库地址配置 -->
@@ -133,42 +132,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- copyright header -->
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>${maven.copyright.plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <quiet>false</quiet>
-                        <header>${main.user.dir}/tools/HEADER</header>
-                        <excludes>
-                            <exclude>.github/**</exclude>
-                            <exclude>.mvn/**</exclude>
-                            <exclude>git/**</exclude>
-                            <exclude>.toos/*.xml</exclude>
-                            <exclude>tools/HEADER</exclude>
-                            <exclude>.editorconfig</exclude>
-                            <exclude>.gitignore</exclude>
-                            <exclude>LICENSE</exclude>
-                            <exclude>mvnw</exclude>
-                            <exclude>mvnw.cmd</exclude>
-                            <exclude>*.md</exclude>
-                        </excludes>
-                        <strictCheck>true</strictCheck>
-                        <mapping>
-                            <java>SLASHSTAR_STYLE</java>
-                            <factories>SCRIPT_STYLE</factories>
-                        </mapping>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>com.lodsve.maven.plugins</groupId>
                     <artifactId>lodsve-javatemplate-maven-plugin</artifactId>
@@ -186,10 +149,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>

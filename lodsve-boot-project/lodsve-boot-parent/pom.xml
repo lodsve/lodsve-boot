@@ -40,6 +40,7 @@
         <maven.javadoc.plugin.version>3.2.0</maven.javadoc.plugin.version>
         <maven.checkstyle.plugin.version>3.3.1</maven.checkstyle.plugin.version>
         <maven.pmd.plugin.version>3.13.0</maven.pmd.plugin.version>
+        <maven.copyright.plugin.version>3.0</maven.copyright.plugin.version>
 
         <main.user.dir>${basedir}/../..</main.user.dir>
     </properties>
@@ -158,6 +159,42 @@
                 </executions>
                 <configuration>
                     <configLocation>${main.user.dir}/tools/check-style.xml</configLocation>
+                </configuration>
+            </plugin>
+            <!-- copyright header -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${maven.copyright.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <quiet>false</quiet>
+                    <header>${main.user.dir}/tools/HEADER</header>
+                    <excludes>
+                        <exclude>.github/**</exclude>
+                        <exclude>.mvn/**</exclude>
+                        <exclude>git/**</exclude>
+                        <exclude>.toos/*.xml</exclude>
+                        <exclude>tools/HEADER</exclude>
+                        <exclude>.editorconfig</exclude>
+                        <exclude>.gitignore</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>mvnw</exclude>
+                        <exclude>mvnw.cmd</exclude>
+                        <exclude>*.md</exclude>
+                    </excludes>
+                    <strictCheck>true</strictCheck>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                        <factories>SCRIPT_STYLE</factories>
+                    </mapping>
                 </configuration>
             </plugin>
         </plugins>
