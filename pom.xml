@@ -51,7 +51,7 @@
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
-        <lodsve.javatemplate.maven.plugins.version>1.0.3-SNAPSHOT</lodsve.javatemplate.maven.plugins.version>
+        <lodsve.javatemplate.maven.plugins.version>1.0.3</lodsve.javatemplate.maven.plugins.version>
 
         <!-- 仓库地址配置 -->
         <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
