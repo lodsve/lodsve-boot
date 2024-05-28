@@ -1,6 +1,6 @@
 package com.lodsve.boot.example;
 
-import com.lodsve.boot.component.filesystem.bean.Result;
+import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import com.lodsve.boot.component.filesystem.enums.AccessControlEnum;
 import com.lodsve.boot.component.filesystem.server.FileSystemServer;
 import org.springframework.boot.SpringApplication;
@@ -31,42 +31,42 @@ public class FileSystemApplication {
     }
 
     @GetMapping("/upload")
-    public Result testUploadFile() throws IOException {
+    public FileSystemResult testUploadFile() throws IOException {
         File f = new File(new ClassPathResource("META-INF/test.txt").getURI());
 
-        return fileSystemServer.uploadFile(f, "test");
+        return fileSystemServer.uploadFile("test", f, "test");
     }
 
     @GetMapping("/upload2")
-    public Result testTestUploadFile() throws IOException {
+    public FileSystemResult testTestUploadFile() throws IOException {
         File f = new File(new ClassPathResource("META-INF/test.txt").getURI());
 
-        return fileSystemServer.uploadFile(f, "test", AccessControlEnum.PUBLIC_READ);
+        return fileSystemServer.uploadFile("test", f, "test", AccessControlEnum.PUBLIC_READ);
     }
 
     @GetMapping("/url")
     public String testGetUrl(String name) {
-        return fileSystemServer.getUrl("test/" + name);
+        return fileSystemServer.getUrl("test", "test/" + name);
     }
 
     @GetMapping("/url2")
     public String testTestGetUrl(String name) {
-        return fileSystemServer.getUrl("test/" + name, 1000L);
+        return fileSystemServer.getUrl("test", "test/" + name, 1000L);
     }
 
     @GetMapping("/download")
     public String testDownloadFileForStream(String name) throws IOException {
-        return fileSystemServer.downloadFileForStream("test/" + name, "/Users/sunhao/Downloads/downloads");
+        return fileSystemServer.downloadFileForStream("test", "test/" + name, "/Users/sunhao/Downloads/downloads");
     }
 
     @GetMapping("/delete")
     public void testDeleteFile(String name) {
-        fileSystemServer.deleteFile("test/" + name);
+        fileSystemServer.deleteFile("test", "test/" + name);
     }
 
     @GetMapping("/exist")
     public boolean testIsExist(String name) {
-        return fileSystemServer.isExist("test/" + name);
+        return fileSystemServer.isExist("test", "test/" + name);
     }
 
 }
