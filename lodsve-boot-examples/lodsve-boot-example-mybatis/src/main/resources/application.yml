@@ -1,0 +1,81 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mybatis
+
+lodsve:
+  rdbms:
+    default-data-source-name: demo
+    data-source:
+      demo:
+        pool-name: demo-datasource
+        url: jdbc:mysql://127.0.0.1:3306/demo
+        username: root
+        password:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        pool-setting:
+          type: Hikari
+          max-active: 10
+      test:
+        pool-name: test-datasource
+        url: jdbc:mysql://127.0.0.1:3306/test
+        username: root
+        password:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        pool-setting:
+          type: Druid
+          max-active: 10
+    druid:
+      filter:
+        #监控统计用的filter
+        stat:
+          enabled: true
+          merge-sql: true
+          slow-sql-millis: 5000
+        #防御sql注入的filter
+        wall:
+          enabled: true
+          config:
+            multi-statement-allow: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+      stat-view-servlet:
+        enabled: true
+        login-username: druid
+        login-password: druid
+  mybatis:
+    map-underscore-to-camel-case: true
+    enums-locations: com.lodsve.boot.example.enums
+  swagger:
+    enabled: true
+    title: Mybatis示例工程接口文档
+    description: 这是一个Mybatis示例工程，用来展示如何使用Mybatis
+    license: GPL-3.0
+    license-url: https://opensource.org/licenses/GPL-3.0
+    terms-of-service-url: https://www.crazy-coder.cn
+    version: V1.0.0-SNAPSHOT
+    contact:
+      name: 孙昊
+      url: https://www.crazy-coder.cn
+      email: sunhao.java@gmail.com
+  encryption:
+    enabled: true
+    jasypt:
+      prefix: "ENC{"
+      suffix: "}"
+      password: lodsve
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include:
+          - versions
+          - enums
+          - dependencies
+  endpoint:
+    health:
+      show-details: always
+

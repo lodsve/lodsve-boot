@@ -1,0 +1,20 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lodsve.boot.example</groupId>
+        <artifactId>lodsve-boot-examples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lodsve-boot-example-rocketmq</artifactId>
+    <packaging>pom</packaging>
+    <name>lodsve boot examples for rocketmq</name>
+
+    <modules>
+        <module>lodsve-boot-example-rocketmq-consumer</module>
+        <module>lodsve-boot-example-rocketmq-producer</module>
+    </modules>
+
+</project>

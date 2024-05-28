@@ -1,0 +1,29 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: lodsve-example-sample
+  cloud:
+    nacos:
+      config:
+        # 是否启用nacos
+        enabled: true
+        # 是否自动刷新
+        refresh-enabled: false
+        # nacos配置服务器地址。
+        server-addr: xxx
+        # 用户名
+        username: xxx
+        # 密码
+        password: xxx
+        # nacos配置组，组是配置数据元信息。
+        group: example
+        # nacos config dataId的后缀，也是config内容的文件扩展名。
+        file-extension: yml
+        # 命名空间，不同环境的分离配置。
+        namespace: lodsve-example
+
+key: BBB(dGhpcyBpcyBhIGV4YW1wbGU=)

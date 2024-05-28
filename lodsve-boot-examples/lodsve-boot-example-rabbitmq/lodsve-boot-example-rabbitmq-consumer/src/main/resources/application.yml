@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /consumer
+
+spring:
+  rabbitmq:
+    host: 192.168.1.101
+    port: 5672
+    username: root
+    password: root123
+
+lodsve:
+  rabbit:
+    queues:
+      queue1:
+        auto-delete: false
+        durable: true
+        exchange-name: lodsve_boot_example_exchange1
+        exchange-type: DIRECT
+        exclusive: false
+        routing-key: queue1.routing-key
+      queue2:
+        auto-delete: false
+        durable: true
+        exchange-name: lodsve_boot_example_exchange2
+        exchange-type: DIRECT
+        exclusive: false
+        routing-key: queue2.routing-key
+      queue3:
+        auto-delete: false
+        durable: true
+        exchange-name: lodsve_boot_example_exchange3
+        exchange-type: DIRECT
+        exclusive: false
+        routing-key: queue3.routing-key
+      queue4:
+        auto-delete: false
+        durable: true
+        exchange-name: lodsve_boot_example_exchange4
+        exchange-type: DIRECT
+        exclusive: false
+        routing-key: queue4.routing-key
+      queue5:
+        auto-delete: false
+        durable: true
+        exchange-name: lodsve_boot_example_exchange5
+        exchange-type: DIRECT
+        exclusive: false
+        routing-key: queue5.routing-key

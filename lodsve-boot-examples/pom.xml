@@ -1,0 +1,49 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lodsve.boot</groupId>
+        <artifactId>lodsve-boot-dependencies</artifactId>
+        <version>${revision}</version>
+        <relativePath>../lodsve-boot-project/lodsve-boot-dependencies/pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.lodsve.boot.example</groupId>
+    <artifactId>lodsve-boot-examples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>lodsve boot examples</name>
+
+    <properties>
+        <!-- 基本属性 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!--<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-dependencies</artifactId>
+                <version>1.0.0.SNAPSHOT</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>-->
+
+    <modules>
+       <!-- <module>lodsve-boot-example-filesystem</module>
+        <module>lodsve-boot-example-rabbitmq</module>
+        <module>lodsve-boot-example-countdown</module>
+        <module>lodsve-boot-example-rocketmq</module>
+        <module>lodsve-boot-example-sample</module>
+        <module>lodsve-boot-example-mongodb</module>
+        <module>lodsve-boot-example-script</module>
+        <module>lodsve-boot-example-webmvc</module>
+        <module>lodsve-boot-example-mybatis</module>-->
+        <module>lodsve-boot-example-redis</module>
+    </modules>
+
+</project>

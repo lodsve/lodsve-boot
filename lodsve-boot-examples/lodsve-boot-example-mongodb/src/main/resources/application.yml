@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mongo
+
+lodsve:
+  swagger:
+    enabled: true
+
+spring:
+  data:
+    mongodb:
+      username: 
+      password: 
+      host: 
+      port: 
+      database: 

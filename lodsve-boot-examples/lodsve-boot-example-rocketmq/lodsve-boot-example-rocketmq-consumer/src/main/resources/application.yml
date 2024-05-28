@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /consumer
+
+rocketmq:
+  name-server: 192.168.1.101:9009;192.168.1.101:9010
+
+lodsve:
+  rocketmq:
+    consumer:
+      group: lodsve-boot-example-rocketmq-consumer-group

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /redis
+
+lodsve:
+  swagger:
+    enabled: true
+  web-mvc:
+    is-debug: true
+  redis:
+    singleton:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+
+logging:
+  level:
+    com.lodsve: DEBUG
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include:
+          - versions
+          - enums
+          - dependencies
+  endpoint:
+    health:
+      show-details: always
