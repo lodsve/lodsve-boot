@@ -45,7 +45,7 @@
         <parent>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-dependencies</artifactId>
-            <version>x.x.x.RELEASE</version>
+            <version>x.x.x</version>
         </parent>
 2. 部分插件的使用方式，可参考[组件介绍](Instructions_cn.md)
 3. 如果您只是想尝试新功能，请尝试预发布版本。 如果您有任何问题，请在 issue 中与我联系。
@@ -73,7 +73,7 @@
    构建版本号，如 `x.x.x-YYYYMMDD-SNAPSHOT`。
 2. 不定时发布Release版本。
 
-   构建版本号，如 `x.x.x.RELEASE`。
+   构建版本号，如 `x.x.x`。
 
 ## 检出源码
 

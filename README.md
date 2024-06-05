@@ -45,7 +45,7 @@
         <parent>
             <groupId>com.lodsve.boot</groupId>
             <artifactId>lodsve-boot-dependencies</artifactId>
-            <version>x.x.x.RELEASE</version>
+            <version>x.x.x</version>
         </parent>
 2. You can refer to the [Component Introduction](Instructions.md) for the usage of some plugins.
 3. If you just to try new feature, please try the pre-release version. If you have any questions, please contact me in
@@ -74,7 +74,7 @@
    Artifact version number like `x.x.x-YYYYMMDD-SNAPSHOT`.
 2. Release a release version from time to time.
 
-   Artifact version number like `x.x.x.RELEASE`.
+   Artifact version number like `x.x.x`.
 
 ## Check out sources
 
