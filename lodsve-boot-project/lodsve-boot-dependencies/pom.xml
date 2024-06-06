@@ -29,14 +29,11 @@
 
     <artifactId>lodsve-boot-dependencies</artifactId>
     <packaging>pom</packaging>
-    <inceptionYear>2020</inceptionYear>
     <name>lodsve boot dependencies</name>
     <description>Lodsve develop kits base on Spring-Boot and some opensource components!</description>
-    <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
-        <manifest.built.name>Hulk Sun</manifest.built.name>
 
         <spring.cloud.dependencies.version>2021.0.8</spring.cloud.dependencies.version>
         <dozer.version>6.5.0</dozer.version>
@@ -68,47 +65,6 @@
         <jasypt.version>1.9.3</jasypt.version>
         <zkclient.version>0.10</zkclient.version>
     </properties>
-
-    <organization>
-        <name>lodsve</name>
-        <url>https://github.com/lodsve</url>
-    </organization>
-
-    <!-- license -->
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <!-- 开发者 -->
-    <developers>
-        <developer>
-            <id>sunhao</id>
-            <name>孙昊</name>
-            <email>sunhao.java@gmail.com</email>
-            <roles>
-                <role>creator</role>
-                <role>manager</role>
-                <role>developer</role>
-                <role>committer</role>
-            </roles>
-        </developer>
-    </developers>
-
-    <!-- issue -->
-    <issueManagement>
-        <system>Github Issue</system>
-        <url>https://github.com/lodsve/lodsve-boot/issues</url>
-    </issueManagement>
-
-    <!-- 代码库 -->
-    <scm>
-        <connection>scm:git:git@github.com:lodsve/lodsve-boot.git</connection>
-        <developerConnection>scm:git:git@github.com:lodsve/lodsve-boot.git</developerConnection>
-        <url>https://github.com/lodsve/lodsve-boot</url>
-    </scm>
 
     <dependencyManagement>
         <dependencies>

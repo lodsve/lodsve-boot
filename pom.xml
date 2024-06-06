@@ -107,27 +107,8 @@
     <scm>
         <connection>scm:git:git@github.com:lodsve/lodsve-boot.git</connection>
         <developerConnection>scm:git:git@github.com:lodsve/lodsve-boot.git</developerConnection>
-        <url>https://github.com/lodsve/lodsve-boot</url>
+        <url>https://github.com/lodsve/lodsve-boot/tree/master</url>
     </scm>
-
-    <!-- 仓库 -->
-    <repositories>
-        <repository>
-            <id>default-center</id>
-            <name>default center</name>
-            <url>https://repo1.maven.org/maven2</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven-center-snapshot</id>
-            <name>Maven Center Snapshot</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
     <build>
         <pluginManagement>
