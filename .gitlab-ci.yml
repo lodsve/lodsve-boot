@@ -29,6 +29,9 @@ before_script:
 
 deploy-job: # This job runs in the build stage, which runs first.
   stage: deploy
+  image:
+    name: maven:3.9.7-eclipse-temurin-11
+    pull_policy: if-not-present
   tags:
     - centos
   script:
