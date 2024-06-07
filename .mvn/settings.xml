@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <pluginGroups></pluginGroups>
+
+    <mirrors>
+        <mirror>
+            <id>mirror-all</id>
+            <mirrorOf>*</mirrorOf>
+            <name>mirror</name>
+            <url>${env.LODSVE_REPO_PREFIX}/repository/maven-public/</url>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>release-lodsve</id>
+            <properties>
+                <lodsve.snapshots.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-snapshot/
+                </lodsve.snapshots.repository.url>
+                <lodsve.releases.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-release/
+                </lodsve.releases.repository.url>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+    </activeProfiles>
+</settings>

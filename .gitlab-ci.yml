@@ -15,14 +15,25 @@
 # https://docs.gitlab.com/ee/development/cicd/templates.html
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  MAVEN_SETTINGS_XML: "$CI_PROJECT_DIR/.m2/settings.xml"
 
-stages:          # List of stages for jobs, and their order of execution
+cache:
+  paths:
+    - .m2/repository
+
+stages: # List of stages for jobs, and their order of execution
   - deploy
 
-deploy-job:       # This job runs in the build stage, which runs first.
+before_script:
+  - mkdir -p $CI_PROJECT_DIR/.m2
+  - cp $CI_PROJECT_DIR/.mvn/settings.xml $MAVEN_SETTINGS_XML
+
+deploy-job: # This job runs in the build stage, which runs first.
   stage: deploy
   tags:
     - centos
   script:
     - echo "Start deploy lodsve-boot to lodsve nexus repository..."
-    - ./lodsve deployLodsve
+    - ./mvnw clean deploy -P release-oss -s $MAVEN_SETTINGS_XML -Dmaven.test.skip=true
