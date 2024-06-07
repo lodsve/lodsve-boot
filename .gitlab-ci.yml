@@ -33,4 +33,4 @@ deploy-job: # This job runs in the build stage, which runs first.
     - centos
   script:
     - echo "Start deploy lodsve-boot to lodsve nexus repository..."
-    - ./mvnw clean deploy -P release-oss -Dmaven.test.skip=true
+    - mvn clean deploy -P release-oss -Dmaven.test.skip=true
