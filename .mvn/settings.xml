@@ -4,6 +4,15 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
     <localRepository>~/.m2/repository</localRepository>
 
+    <servers>
+        <!-- 本地镜像仓库的认证 -->
+        <server>
+            <id>mirror-all</id>
+            <username>${env.LODSVE_REPO_USERNAME}</username>
+            <password>${env.LODSVE_REPO_PASSWORD}</password>
+        </server>
+    </servers>
+
     <mirrors>
         <mirror>
             <id>mirror-all</id>
