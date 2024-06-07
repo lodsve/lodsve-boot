@@ -21,6 +21,8 @@ stages:          # List of stages for jobs, and their order of execution
 
 deploy-job:       # This job runs in the build stage, which runs first.
   stage: deploy
+  tags:
+    - global
   script:
     - echo "Start deploy lodsve-boot to lodsve nexus repository..."
     - ./lodsve deployLodsve
