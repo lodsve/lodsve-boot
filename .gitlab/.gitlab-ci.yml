@@ -54,9 +54,9 @@ send_notification:
   script:
     - |
       if [ -f "build_result.txt" ]; then
-        bash notify.sh true
+        bash .gitlab/notify.sh true
       else
-        bash notify.sh false
+        bash .gitlab/notify.sh false
       fi
   when: always
   dependencies:
