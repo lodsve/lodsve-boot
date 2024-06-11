@@ -43,6 +43,9 @@ deploy_job: # This job runs in the build stage, which runs first.
 
 send_notification:
   stage: notify
+  only:
+    - schedules
+    - web
   script:
     - |
       RESULT="Job failed"
