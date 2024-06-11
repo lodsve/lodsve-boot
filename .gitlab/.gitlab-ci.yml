@@ -56,7 +56,7 @@ send_notification:
       fi
     - |
       curl -H "Content-Type: application/json" -X POST \
-        -d '{"msgtype": "text", "text": {"content": "GitLab CI/CD pipeline completed ${RESULT}"}}' \
+        -d '{"msgtype": "text", "text": {"content": "Lodsve GitLab CI/CD pipeline completed ${RESULT}"}}' \
         https://oapi.dingtalk.com/robot/send?access_token=$DING_TOKEN
   when: always
   needs:
