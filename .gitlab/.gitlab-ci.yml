@@ -54,7 +54,7 @@ send_notification:
       if [ "$CI_JOB_STATUS" == "success" ]; then
         RESULT="Job succeeded"
       fi
-    - |
+
       curl -H "Content-Type: application/json" -X POST \
         -d '{"msgtype": "text", "text": {"content": "Lodsve GitLab CI/CD pipeline completed ${RESULT}"}}' \
         https://oapi.dingtalk.com/robot/send?access_token=$DING_TOKEN
