@@ -29,6 +29,9 @@ before_script:
 
 deploy-job: # This job runs in the build stage, which runs first.
   stage: deploy
+  only:
+    - schedules
+    - web
   tags:
     - centos
   script:
