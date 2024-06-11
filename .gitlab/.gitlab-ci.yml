@@ -39,9 +39,12 @@ deploy_job: # This job runs in the build stage, which runs first.
     - web
   script:
     - echo "Start deploy lodsve-boot to lodsve nexus repository..."
-    # - mvn clean deploy -P release-lodsve
+    - mvn clean deploy -P release-lodsve
   after_script:
-    - echo "Deployment successful!"
+    - echo "Deployment successful!" > build_result.txt
+  artifacts:
+    paths:
+      - build_result.txt
 
 send_notification:
   stage: notify
@@ -50,15 +53,11 @@ send_notification:
     - web
   script:
     - |
-      RESULT="Job failed"
-      if [ "$CI_JOB_STATUS" == "success" ]; then
-        RESULT="Job succeeded"
+      if [ -f "build_result.txt" ]; then
+        bash notify.sh true
+      else
+        bash notify.sh false
       fi
-
-      curl -H "Content-Type: application/json" -X POST \
-        -d '{"msgtype": "text", "text": {"content": "Lodsve GitLab CI/CD pipeline completed ${RESULT}"}}' \
-        https://oapi.dingtalk.com/robot/send?access_token=$DING_TOKEN
   when: always
-  needs:
-    - job: deploy_job
-      artifacts: false
+  dependencies:
+    - deploy_job
