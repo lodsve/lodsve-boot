@@ -21,14 +21,15 @@ cache:
     - .m2/repository
 
 stages: # List of stages for jobs, and their order of execution
-  - deploy_and_notify
+  - deploy
+  - notify
 
 before_script:
   - mkdir -p ~/.m2
   - cp -n $CI_PROJECT_DIR/.mvn/settings.xml ~/.m2
 
 deploy_job: # This job runs in the build stage, which runs first.
-  stage: deploy_and_notify
+  stage: deploy
   only:
     - schedules
     - web
@@ -41,7 +42,7 @@ deploy_job: # This job runs in the build stage, which runs first.
     - echo "Deployment successful!"
 
 send_notification:
-  stage: deploy_and_notify
+  stage: notify
   script:
     - |
       RESULT="Job failed"
@@ -58,5 +59,6 @@ send_notification:
           }
       }'
   when: always
-  dependencies:
-    - deploy_job
+  needs:
+    - job: deploy_job
+      artifacts: false
