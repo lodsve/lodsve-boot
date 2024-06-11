@@ -27,7 +27,7 @@ before_script:
   - mkdir -p ~/.m2
   - cp -n $CI_PROJECT_DIR/.mvn/settings.xml ~/.m2
 
-deploy-job: # This job runs in the build stage, which runs first.
+deploy_job: # This job runs in the build stage, which runs first.
   stage: deploy_and_notify
   only:
     - schedules
@@ -59,4 +59,4 @@ send_notification:
       }'
   when: always
   dependencies:
-    - deploy-job
+    - deploy_job
