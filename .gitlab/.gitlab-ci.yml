@@ -22,7 +22,7 @@ cache:
 
 default:
   tags:
-    - centos
+    - lodsve
 
 stages: # List of stages for jobs, and their order of execution
   - deploy
