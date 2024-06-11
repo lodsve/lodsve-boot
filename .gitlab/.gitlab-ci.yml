@@ -55,14 +55,9 @@ send_notification:
         RESULT="Job succeeded"
       fi
     - |
-      curl --location 'https://oapi.dingtalk.com/robot/send?access_token=$DING_TOKEN' \
-      --header 'Content-Type: application/json' \
-      --data '{
-          "msgtype": "text",
-          "text": {
-              "content": "Lodsve GitLab CI/CD pipeline completed ${RESULT}"
-          }
-      }'
+      curl -H "Content-Type: application/json" -X POST \
+        -d '{"msgtype": "text", "text": {"content": "GitLab CI/CD pipeline completed ${RESULT}"}}' \
+        https://oapi.dingtalk.com/robot/send?access_token=$DING_TOKEN
   when: always
   needs:
     - job: deploy_job
