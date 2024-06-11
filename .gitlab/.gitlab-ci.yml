@@ -22,6 +22,7 @@ cache:
 
 stages: # List of stages for jobs, and their order of execution
   - deploy
+  - notify
 
 before_script:
   - mkdir -p ~/.m2
@@ -37,3 +38,22 @@ deploy-job: # This job runs in the build stage, which runs first.
   script:
     - echo "Start deploy lodsve-boot to lodsve nexus repository..."
     - mvn clean deploy -P release-lodsve -Dmaven.test.skip=true
+
+send_notification:
+  stage: notify
+  script:
+    - |
+      RESULT="Job failed"
+      if [ "$CI_JOB_STATUS" == "success" ]; then
+        RESULT="Job succeeded"
+      fi
+    - |
+      curl --location 'https://oapi.dingtalk.com/robot/send?access_token=${env.DING_TOKEN}' \
+      --header 'Content-Type: application/json' \
+      --data '{
+          "msgtype": "text",
+          "text": {
+              "content": "Lodsve GitLab CI/CD pipeline completed ${RESULT}"
+          }
+      }'
+  when: always
