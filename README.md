@@ -132,7 +132,7 @@ The `Lodsve Boot` is released under version 2.0 of the [Apache License][].
 
 The `Lodsve Boot` was created using awesome [JetBrains IDEA][].
 
-![LOGO](.github/JetBrains.png "JetBrains")
+![JetBrains logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)
 
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
 
@@ -142,6 +142,6 @@ The `Lodsve Boot` was created using awesome [JetBrains IDEA][].
 
 [867885140]: http://wpa.qq.com/msgrd?v=3&uin=867885140&site=qq&menu=yes
 
-[JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-framework
+[JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-boot
 
 [JavaDoc]: https://javadoc.lodsve.com

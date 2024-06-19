@@ -131,7 +131,7 @@
 
 `Lodsve Boot` 是基于 [JetBrains IDEA][] 创建的。
 
-![LOGO](.github/JetBrains.png "JetBrains")
+![JetBrains logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)
 
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
 
@@ -141,6 +141,6 @@
 
 [867885140]: http://wpa.qq.com/msgrd?v=3&uin=867885140&site=qq&menu=yes
 
-[JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-framework
+[JetBrains IDEA]: https://www.jetbrains.com/?from=lodsve-boot
 
 [JavaDoc]: https://javadoc.lodsve.com
