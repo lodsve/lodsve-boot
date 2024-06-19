@@ -22,35 +22,38 @@
 
     <parent>
         <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
+        <artifactId>lodsve-boot-starters</artifactId>
         <version>${revision}</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <relativePath>../../lodsve-boot-starters</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-starters</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot starters</name>
-
-    <modules>
-        <module>lodsve-boot-starter-countdown</module>
-        <module>lodsve-boot-starter-encryption</module>
-        <module>lodsve-boot-starter-event</module>
-        <module>lodsve-boot-starter-filesystem</module>
-        <module>lodsve-boot-starter-mybatis</module>
-        <module>lodsve-boot-starter-nacos</module>
-        <module>lodsve-boot-starter-openfeign</module>
-        <module>lodsve-boot-starter-rabbitmq</module>
-        <module>lodsve-boot-starter-rdbms</module>
-        <module>lodsve-boot-starter-redis</module>
-        <module>lodsve-boot-starter-rocketmq</module>
-        <module>lodsve-boot-starter-script</module>
-        <module>lodsve-boot-starter-security</module>
-        <module>lodsve-boot-starter-swagger</module>
-        <module>lodsve-boot-starter-validator</module>
-        <module>lodsve-boot-starter-webmvc</module>
-    </modules>
+    <artifactId>lodsve-boot-starter-openfeign</artifactId>
+    <packaging>jar</packaging>
+    <name>lodsve boot starter open feign</name>
 
     <properties>
-        <main.user.dir>${basedir}/../..</main.user.dir>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- spring默认使用loadbalancer作为负载均衡，已弃用ribbon -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!-- 默认使用nacos作为服务注册中心，如有需要，可将此组件排除 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

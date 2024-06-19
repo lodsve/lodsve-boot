@@ -59,6 +59,8 @@
         <springfox.swagger.version>3.0.0</springfox.swagger.version>
         <spring.cloud.starter.alibaba.nacos.config.version>2021.0.1.0
         </spring.cloud.starter.alibaba.nacos.config.version>
+        <spring.cloud.starter.alibaba.nacos.discovery.version>2021.0.1.0
+        </spring.cloud.starter.alibaba.nacos.discovery.version>
         <groovy.all.version>2.4.15</groovy.all.version>
         <jruby.version>1.7.26</jruby.version>
         <jyphon.version>2.7.1b3</jyphon.version>
@@ -271,6 +273,12 @@
                 <version>${spring.cloud.starter.alibaba.nacos.config.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring.cloud.starter.alibaba.nacos.discovery.version}</version>
+            </dependency>
+
             <!-- other languages start -->
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
@@ -350,6 +358,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-component-openfeign-client</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-component-rdbms</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
@@ -406,6 +419,11 @@
             <dependency>
                 <groupId>com.lodsve.boot</groupId>
                 <artifactId>lodsve-boot-starter-nacos</artifactId>
+                <version>${lodsve.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lodsve.boot</groupId>
+                <artifactId>lodsve-boot-starter-openfeign</artifactId>
                 <version>${lodsve.boot.version}</version>
             </dependency>
             <dependency>

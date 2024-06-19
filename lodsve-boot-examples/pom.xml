@@ -59,6 +59,7 @@
         <module>lodsve-boot-example-rabbitmq</module>
         <module>lodsve-boot-example-countdown</module>
         <module>lodsve-boot-example-rocketmq</module>
+        <module>lodsve-boot-example-rpc</module>
         <module>lodsve-boot-example-mongodb</module>
         <module>lodsve-boot-example-sample</module>
         <module>lodsve-boot-example-script</module>

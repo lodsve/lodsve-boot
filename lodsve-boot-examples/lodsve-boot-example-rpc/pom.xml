@@ -21,36 +21,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
-        <version>${revision}</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <groupId>com.lodsve.boot.example</groupId>
+        <artifactId>lodsve-boot-examples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>lodsve-boot-starters</artifactId>
+    <artifactId>lodsve-boot-example-rpc</artifactId>
     <packaging>pom</packaging>
-    <name>lodsve boot starters</name>
-
-    <modules>
-        <module>lodsve-boot-starter-countdown</module>
-        <module>lodsve-boot-starter-encryption</module>
-        <module>lodsve-boot-starter-event</module>
-        <module>lodsve-boot-starter-filesystem</module>
-        <module>lodsve-boot-starter-mybatis</module>
-        <module>lodsve-boot-starter-nacos</module>
-        <module>lodsve-boot-starter-openfeign</module>
-        <module>lodsve-boot-starter-rabbitmq</module>
-        <module>lodsve-boot-starter-rdbms</module>
-        <module>lodsve-boot-starter-redis</module>
-        <module>lodsve-boot-starter-rocketmq</module>
-        <module>lodsve-boot-starter-script</module>
-        <module>lodsve-boot-starter-security</module>
-        <module>lodsve-boot-starter-swagger</module>
-        <module>lodsve-boot-starter-validator</module>
-        <module>lodsve-boot-starter-webmvc</module>
-    </modules>
+    <name>lodsve boot examples for rpc</name>
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
     </properties>
+
+    <modules>
+        <module>lodsve-boot-example-rpc-api</module>
+        <module>lodsve-boot-example-rpc-client</module>
+        <module>lodsve-boot-example-rpc-server</module>
+    </modules>
+
 </project>

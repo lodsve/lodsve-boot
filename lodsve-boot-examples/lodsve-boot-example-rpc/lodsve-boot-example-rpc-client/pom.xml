@@ -21,31 +21,37 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.lodsve.boot</groupId>
-        <artifactId>lodsve-boot-parent</artifactId>
-        <version>${revision}</version>
-        <relativePath>../lodsve-boot-parent</relativePath>
+        <groupId>com.lodsve.boot.example</groupId>
+        <artifactId>lodsve-boot-example-rpc</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>lodsve-boot-components</artifactId>
-    <packaging>pom</packaging>
-    <name>lodsve boot components</name>
-
-    <modules>
-        <module>lodsve-boot-component-countdown</module>
-        <module>lodsve-boot-component-event</module>
-        <module>lodsve-boot-component-filesystem</module>
-        <module>lodsve-boot-component-mybatis</module>
-        <module>lodsve-boot-component-openfeign-client</module>
-        <module>lodsve-boot-component-rdbms</module>
-        <module>lodsve-boot-component-redis</module>
-        <module>lodsve-boot-component-script</module>
-        <module>lodsve-boot-component-security</module>
-        <module>lodsve-boot-component-validator</module>
-        <module>lodsve-boot-component-webmvc</module>
-    </modules>
+    <artifactId>lodsve-boot-example-rpc-client</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
-        <main.user.dir>${basedir}/../..</main.user.dir>
+        <main.user.dir>${basedir}/../../..</main.user.dir>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-starter-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-starter-swagger</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lodsve.boot.example</groupId>
+            <artifactId>lodsve-boot-example-rpc-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
