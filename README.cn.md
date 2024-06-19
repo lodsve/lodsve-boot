@@ -127,7 +127,7 @@
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flodsve%2Flodsve-boot?ref=badge_large)
 
-## Thanks
+## 特别鸣谢
 
 `Lodsve Boot` 是基于 [JetBrains IDEA][] 创建的。
 
