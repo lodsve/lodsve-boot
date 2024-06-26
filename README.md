@@ -116,6 +116,12 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
 
 See the master branch [JavaDoc][].
 
+## Contributing Members
+
+<a href="https://github.com/lodsve/lodsve-boot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=lodsve/lodsve-boot" />
+</a>
+
 ## Contact me
 
 1. Email: sunhao.java@gmail.com

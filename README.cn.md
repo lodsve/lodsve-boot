@@ -115,6 +115,12 @@
 
 查看master分支的 [JavaDoc][].
 
+## 贡献成员
+
+<a href="https://github.com/lodsve/lodsve-boot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=lodsve/lodsve-boot" />
+</a>
+
 ## 联系我
 
 1. 邮箱: sunhao.java@gmail.com
