@@ -23,18 +23,23 @@ import com.alibaba.druid.filter.logging.Log4j2Filter;
 import com.alibaba.druid.filter.logging.Log4jFilter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * druid filter配置.
  *
  * @author Hulk Sun
  */
+@Configuration
+@ConditionalOnClass(DruidDataSource.class)
 public class DruidFilterConfiguration {
     private static final String FILTER_STAT_PREFIX = "lodsve.rdbms.druid.filter.stat";
     private static final String FILTER_CONFIG_PREFIX = "lodsve.rdbms.druid.filter.config";

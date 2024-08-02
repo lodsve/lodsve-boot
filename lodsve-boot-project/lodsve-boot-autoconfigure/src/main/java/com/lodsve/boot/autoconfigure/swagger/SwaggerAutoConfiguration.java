@@ -187,7 +187,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
         this.beanFactory = beanFactory;
     }
 
-    @ConditionalOnClass(Pageable.class)
+    @ConditionalOnClass({Pageable.class, Docket.class})
     @Configuration
     public static class SpringDataPageableSupportConfiguration {
         @Bean
