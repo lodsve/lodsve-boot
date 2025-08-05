@@ -17,7 +17,7 @@
 #
 
 profile=$1
-if [[ $profile == release-lodsve ]]; then
+if [[ $profile == release-third ]]; then
   # skip test
   ./mvnw clean deploy -P $1 -Dmaven.test.skip=true
 else
@@ -26,10 +26,6 @@ else
     exit 1
   fi
 
-  if [[ "release-oss-snapshot" != "$profile" ]]; then
-    # publish snapshot
-    args="-Dgpg.passphrase=$2 -Dmaven.test.skip=false"
-  fi
-  ./mvnw clean deploy -P $1 $args
+  ./mvnw clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
 fi
 

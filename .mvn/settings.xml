@@ -7,12 +7,7 @@
     <servers>
         <!-- for lodsve maven repository -->
         <server>
-            <id>lodsve-snapshots</id>
-            <username>${env.LODSVE_REPO_DEPLOY_USERNAME}</username>
-            <password>${env.LODSVE_REPO_DEPLOY_PASSWORD}</password>
-        </server>
-        <server>
-            <id>lodsve-releases</id>
+            <id>third-repository</id>
             <username>${env.LODSVE_REPO_DEPLOY_USERNAME}</username>
             <password>${env.LODSVE_REPO_DEPLOY_PASSWORD}</password>
         </server>

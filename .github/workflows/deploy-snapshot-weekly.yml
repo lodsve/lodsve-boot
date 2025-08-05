@@ -16,7 +16,7 @@ jobs:
           distribution: 'adopt-hotspot'
           java-version: 11
           cache: 'maven'
-          server-id: oss-snapshots
+          server-id: oss-central
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Get And Set Version
@@ -34,8 +34,8 @@ jobs:
           gpg --list-secret-keys --keyid-format LONG
       - name: Publish to Apache Maven Central
         run: |
-          ./mvnw --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss-snapshot
-          mkdir archives & rm -rf archives/* & find ./ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
+          ./mvnw --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss
+          mkdir archives & rm -rf archives/* & find ./target/central-deferred/ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
           zip -r lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
@@ -64,14 +64,14 @@ jobs:
       - name: Send DingDing Notify
         uses: zcong1993/actions-ding@master
         with:
-         dingToken: ${{ secrets.DING_TOKEN }}
-         body: |
-           {
-             "msgtype": "link",
-             "link": {
-               "picUrl": "https://www.gitbook.com/cdn-cgi/image/width=256,height=40,fit=contain,dpr=1,format=auto/https%3A%2F%2F1978062287-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-legacy-files%2Fo%2Fspaces%252F-LI6IFYne1nz5hKJG9KV%252Favatar-rectangle.png%3Fgeneration%3D1569591536803744%26alt%3Dmedia",
-               "text": "已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击消息即可查看！",
-               "title": "Lodsve-Boot",
-               "messageUrl": "${{ steps.upload_release_asset.outputs.url }}"
-             }
-           }
+          dingToken: ${{ secrets.DING_TOKEN }}
+          body: |
+            {
+              "msgtype": "link",
+              "link": {
+                "picUrl": "https://www.gitbook.com/cdn-cgi/image/width=256,height=40,fit=contain,dpr=1,format=auto/https%3A%2F%2F1978062287-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-legacy-files%2Fo%2Fspaces%252F-LI6IFYne1nz5hKJG9KV%252Favatar-rectangle.png%3Fgeneration%3D1569591536803744%26alt%3Dmedia",
+                "text": "已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击消息即可查看！",
+                "title": "Lodsve-Boot",
+                "messageUrl": "${{ steps.upload_release_asset.outputs.url }}"
+              }
+            }

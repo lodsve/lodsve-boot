@@ -47,17 +47,12 @@
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 
         <!-- 所有的插件版本 -->
+        <central.publishing.maven.plugin.version>0.8.0</central.publishing.maven.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
-        <nexus.staging.maven.plugin.version>1.6.5</nexus.staging.maven.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
         <lodsve.javatemplate.maven.plugins.version>1.0.3</lodsve.javatemplate.maven.plugins.version>
 
-        <!-- 仓库地址配置 -->
-        <oss.snapshots.repository.url>https://oss.sonatype.org/content/repositories/snapshots/
-        </oss.snapshots.repository.url>
-        <oss.releases.repository.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
-        </oss.releases.repository.url>
         <github.repository.url>https://maven.pkg.github.com/lodsve/lodsve-boot</github.repository.url>
 
         <!-- 自定义配置 -->
@@ -175,27 +170,6 @@
             <id>release-oss</id>
             <build>
                 <plugins>
-                    <!-- GPG,发布maven中央仓库用 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven.gpg.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <!-- 这个configuration必须配置，用于gpg非交互式密码输入 -->
-                            <gpgArguments>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
-                        </configuration>
-                    </plugin>
                     <!-- 生成javadoc的插件 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -219,39 +193,15 @@
                             <locale>zh_CN</locale>
                         </configuration>
                     </plugin>
-                    <!-- 在maven仓库中自动close和release的插件 -->
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${nexus.staging.maven.plugin.version}</version>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central.publishing.maven.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>oss-releases</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <publishingServerId>oss-central</publishingServerId>
                         </configuration>
                     </plugin>
-                </plugins>
-            </build>
-            <!-- 发布仓库 -->
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>oss-snapshots</id>
-                    <name>oss SNAPSHOTS</name>
-                    <url>${oss.snapshots.repository.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>oss-releases</id>
-                    <name>oss releases</name>
-                    <url>${oss.releases.repository.url}</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-        <profile>
-            <id>release-oss-snapshot</id>
-            <build>
-                <plugins>
                     <!-- GPG,发布maven中央仓库用 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -273,60 +223,23 @@
                             </gpgArguments>
                         </configuration>
                     </plugin>
-                    <!-- 生成javadoc的插件 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${maven.javadoc.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <charset>${project.build.sourceEncoding}</charset>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <doctitle>Lodsve Boot JavaDocs</doctitle>
-                            <windowtitle>Lodsve Boot JavaDocs</windowtitle>
-                            <locale>zh_CN</locale>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
-            <!-- 发布仓库 -->
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>oss-snapshots</id>
-                    <name>oss SNAPSHOTS</name>
-                    <url>${oss.snapshots.repository.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>oss-releases</id>
-                    <name>oss releases</name>
-                    <url>${oss.releases.repository.url}</url>
-                </repository>
-            </distributionManagement>
         </profile>
         <profile>
-            <id>release-lodsve</id>
+            <id>release-third</id>
             <!-- 第三方发布仓库 -->
             <distributionManagement>
                 <snapshotRepository>
-                    <id>lodsve-snapshots</id>
-                    <name>lodsve SNAPSHOTS</name>
-                    <url>${lodsve.snapshots.repository.url}</url>
+                    <id>third-repository</id>
+                    <name>third repository snapshots</name>
+                    <url>${third.snapshots.repository.url}</url>
                 </snapshotRepository>
 
                 <repository>
-                    <id>lodsve-releases</id>
-                    <name>lodsve releases</name>
-                    <url>${lodsve.releases.repository.url}</url>
+                    <id>third-repository</id>
+                    <name>third repository releases</name>
+                    <url>${third.releases.repository.url}</url>
                 </repository>
             </distributionManagement>
             <build>
