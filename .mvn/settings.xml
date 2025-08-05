@@ -31,12 +31,12 @@
 
     <profiles>
         <profile>
-            <id>release-lodsve</id>
+            <id>release-third</id>
             <properties>
-                <lodsve.snapshots.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-snapshot/
-                </lodsve.snapshots.repository.url>
-                <lodsve.releases.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-release/
-                </lodsve.releases.repository.url>
+                <third.snapshots.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-snapshot/
+                </third.snapshots.repository.url>
+                <third.releases.repository.url>${env.LODSVE_REPO_PREFIX}/repository/lodsve-release/
+                </third.releases.repository.url>
             </properties>
         </profile>
     </profiles>
