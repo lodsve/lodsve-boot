@@ -26,6 +26,6 @@ else
     exit 1
   fi
 
-  ./mvnw clean deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
+  ./mvnw deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
 fi
 

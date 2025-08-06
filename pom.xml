@@ -47,7 +47,7 @@
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 
         <!-- 所有的插件版本 -->
-        <central.publishing.maven.plugin.version>0.8.0</central.publishing.maven.plugin.version>
+        <maven.staging.maven.plugin.version>1.7.0</maven.staging.maven.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
@@ -194,12 +194,14 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${central.publishing.maven.plugin.version}</version>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${maven.staging.maven.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <publishingServerId>oss-central</publishingServerId>
+                            <serverId>oss-central</serverId>
+                            <nexusUrl>https://ossrh-staging-api.central.sonatype.com/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                     <!-- GPG,发布maven中央仓库用 -->
@@ -225,6 +227,17 @@
                     </plugin>
                 </plugins>
             </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss-central</id>
+                    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>oss-central</id>
+                    <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+
         </profile>
         <profile>
             <id>release-third</id>
