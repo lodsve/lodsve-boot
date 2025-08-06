@@ -25,7 +25,7 @@ help(){
   echo ""
   echo "versions          Update lodsve-boot versions."
   echo "deploy-oss        Deploy lodsve-boot to maven repository."
-  echo "deploy-third      Deploy lodsve-boot to Lodsve repository."
+  echo "deploy-third      Deploy lodsve-boot to Third repository."
   echo ""
   echo "--------------------------------------------------------------------------"
 }
