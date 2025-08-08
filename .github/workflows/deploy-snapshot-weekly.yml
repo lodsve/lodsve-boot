@@ -63,7 +63,7 @@ jobs:
         uses: foxundermoon/feishu-action@v2
         with:
           url: https://open.feishu.cn/open-apis/bot/v2/hook/${{ secrets.FEISHU_BOT_TOKEN }}
-          msg_type: text
+          msg_type: post
           content: |
             post:
               zh_cn:
