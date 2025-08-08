@@ -19,13 +19,13 @@
 profile=$1
 if [[ $profile == release-third ]]; then
   # skip test
-  ./mvnw clean deploy -P $1 -Dmaven.test.skip=true
+  ./mvnw clean deploy -P javadoc,$1 -Dmaven.test.skip=true
 else
   if [ -z "$2" ]; then
     echo "The password for the gpg key to publish the maven repository cannot be empty."
     exit 1
   fi
 
-  ./mvnw deploy -P $1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
+  ./mvnw deploy -P javadoc,sign,$1 -Dgpg.passphrase=$2 -Dmaven.test.skip=false
 fi
 

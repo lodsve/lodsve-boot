@@ -47,7 +47,7 @@
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 
         <!-- 所有的插件版本 -->
-        <maven.staging.maven.plugin.version>1.7.0</maven.staging.maven.plugin.version>
+        <central.publishing-maven.plugin.version>0.8.0</central.publishing-maven.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
@@ -170,40 +170,51 @@
             <id>release-oss</id>
             <build>
                 <plugins>
-                    <!-- 生成javadoc的插件 -->
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${maven.javadoc.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <charset>${project.build.sourceEncoding}</charset>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <docencoding>${project.build.sourceEncoding}</docencoding>
-                            <doctitle>Lodsve Boot ApiDoc</doctitle>
-                            <windowtitle>Lodsve Boot ApiDoc</windowtitle>
-                            <locale>zh_CN</locale>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${maven.staging.maven.plugin.version}</version>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central.publishing-maven.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>oss-central</serverId>
-                            <nexusUrl>https://ossrh-staging-api.central.sonatype.com/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <publishingServerId>central</publishingServerId>
+                            <!-- 自动发布 -->
+                            <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss-central</id>
+                    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>oss-central</id>
+                    <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release-third</id>
+            <!-- 第三方发布仓库 -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>third-repository</id>
+                    <name>third repository snapshots</name>
+                    <url>${third.snapshots.repository.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>third-repository</id>
+                    <name>third repository releases</name>
+                    <url>${third.releases.repository.url}</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
                     <!-- GPG,发布maven中央仓库用 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -227,34 +238,9 @@
                     </plugin>
                 </plugins>
             </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>oss-central</id>
-                    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>oss-central</id>
-                    <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
-
         </profile>
         <profile>
-            <id>release-third</id>
-            <!-- 第三方发布仓库 -->
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>third-repository</id>
-                    <name>third repository snapshots</name>
-                    <url>${third.snapshots.repository.url}</url>
-                </snapshotRepository>
-
-                <repository>
-                    <id>third-repository</id>
-                    <name>third repository releases</name>
-                    <url>${third.releases.repository.url}</url>
-                </repository>
-            </distributionManagement>
+            <id>javadoc</id>
             <build>
                 <plugins>
                     <!-- 生成javadoc的插件 -->

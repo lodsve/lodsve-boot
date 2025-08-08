@@ -20,12 +20,12 @@
 set profile=%1
 
 if "%profile%"=="release-third" (
-  ..\mvnw.cmd clean deploy -P %1 -Dmaven.test.skip=true
+  ..\mvnw.cmd clean deploy -P javadoc,%1 -Dmaven.test.skip=true
 ) else (
   if "%2"=="" (
     echo The password for the gpg key to publish the maven repository cannot be empty.
     exit /b 1
   )
 
-  ..\mvnw.cmd clean deploy -P %1 %args% -Dgpg.passphrase=$2 -Dmaven.test.skip=false
+  ..\mvnw.cmd clean deploy -P javadoc,sign,%1 %args% -Dgpg.passphrase=$2 -Dmaven.test.skip=false
 )
