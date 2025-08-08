@@ -37,7 +37,7 @@
     <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
-        <revision>1.0.2-SNAPSHOT</revision>
+        <revision>1.0.2</revision>
         <lodsve.boot.version>${revision}</lodsve.boot.version>
 
         <!-- 基本属性 -->
@@ -176,7 +176,7 @@
                         <version>${central.publishing-maven.plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <publishingServerId>central</publishingServerId>
+                            <publishingServerId>oss-central</publishingServerId>
                             <!-- 自动发布 -->
                             <autoPublish>false</autoPublish>
                         </configuration>
@@ -186,11 +186,11 @@
             <distributionManagement>
                 <snapshotRepository>
                     <id>oss-central</id>
-                    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                 </snapshotRepository>
                 <repository>
                     <id>oss-central</id>
-                    <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
         </profile>
