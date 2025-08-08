@@ -69,10 +69,10 @@ jobs:
               zh_cn:
                 title: lodsve-boot每周快照构建通知
                 content:
-                  - - tag: text
-                      un_escape: true
-                      text: '已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击下方链接即可查看！:'
-                    - tag: a
-                      text: ${{ steps.get_version.outputs.newVersion }}
-                      href: ${{ steps.upload_release_asset.outputs.url }}
+                - - tag: text
+                    un_escape: true
+                    text: '已发布新的快照预览版本【${{ steps.get_version.outputs.newVersion }}】，点击下方链接即可查看！:'
+                  - tag: a
+                    text: ${{ steps.get_version.outputs.newVersion }}
+                    href: ${{ steps.upload_release_asset.outputs.url }}
 
