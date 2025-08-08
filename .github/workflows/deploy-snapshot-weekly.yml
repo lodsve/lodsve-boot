@@ -35,7 +35,7 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           ./mvnw --batch-mode -Dgpg.passphrase=${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }} clean deploy -P release-oss
-          mkdir archives & rm -rf archives/* & find ./target/nexus-staging/ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
+          mkdir -p archives & rm -rf archives/* & find ./target/central-deferred/ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
           zip -r lodsve-boot-${{ steps.get_version.outputs.newVersion }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
