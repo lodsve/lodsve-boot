@@ -1,0 +1,92 @@
+name: Check Version And Deploy Release
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  deploy-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧾 Checkout Code
+        uses: actions/checkout@master
+      - name: 🧾 Setup JDK11 And Apache Maven Central
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt-hotspot'
+          java-version: 11
+          cache: 'maven'
+          server-id: oss-central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: 🔍 Check Revision in pom.xml
+        id: check_revision
+        run: |
+          # 提取 revision 值
+          REVISION=$(grep -A1 '<revision>' pom.xml | grep -oP '(?<=<revision>).*?(?=</revision>)' | tr -d ' ')
+
+          # 判断是否以 -SNAPSHOT 结尾
+          if [[ "$REVISION" == *-SNAPSHOT ]]; then
+            echo "❌ Error: Revision is a SNAPSHOT version ($REVISION)"
+            echo "::set-output name=is_snapshot::true"
+            echo "::error::Revision is a SNAPSHOT version ($REVISION)"
+            exit 1
+          else
+            echo "✅ Revision is valid: $REVISION"
+            echo "::set-output name=is_snapshot::false"
+            echo "release_version=$REVISION" >> $GITHUB_OUTPUT
+          fi
+      - name: 🚨 Send Feishu Notification on SNAPSHOT
+        uses: foxundermoon/feishu-action@v2
+        with:
+          url: https://open.feishu.cn/open-apis/bot/v2/hook/${{ secrets.FEISHU_BOT_TOKEN }}
+          msg_type: post
+          content: |
+            post:
+              zh_cn:
+                title: lodsve-boot Release构建通知
+                content:
+                - - tag: text
+                    text: '🚨 发布失败：检测到 SNAPSHOT 版本\n请检查 pom.xml 中的 <revision> 值，不能包含 -SNAPSHOT 后缀。'
+      - id: install-secret-key
+        name: Install Secret Key
+        run: |
+          cat <(echo -e "${{ secrets.LODSVE_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+      - name: Publish to Apache Maven Central
+        run: |
+          bash ./lodsve release-oss ${{ secrets.LODSVE_GPG_SECRET_KEY_PASSWORD }}
+          mkdir -p archives & rm -rf archives/* & find ./target/central-deferred/ -name "lodsve-boot-*.jar" -type f -not -path "./archives/*" | xargs -i cp {} ./archives/
+          zip -r lodsve-boot-${{ steps.check_revision.outputs.release_version }}-archives.zip ./archives/* LICENSE README.md README.cn.md capability.md capability_cn.md CHANGELOG.md
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+      - name: Upload Release Asset
+        id: upload_release_asset
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.LODSVE_BOOT_TOKEN }}
+          tag_name: ${{ steps.check_revision.outputs.release_version }}
+          prerelease: true
+          files: lodsve-boot-${{ steps.check_revision.outputs.release_version }}-archives.zip
+          body: |
+            This is a release version. Enjoy it! If you have any questions, please contact me in the issue.
+            1. JavaDoc: [https://javadoc.lodsve.com](https://javadoc.lodsve.com)
+            2. MyBlog: [https://www.crazy-coder.cn](https://www.crazy-coder.cn)
+      - name: Send FeiShu Notify
+        uses: foxundermoon/feishu-action@v2
+        with:
+          url: https://open.feishu.cn/open-apis/bot/v2/hook/${{ secrets.FEISHU_BOT_TOKEN }}
+          msg_type: post
+          content: |
+            post:
+              zh_cn:
+                title: lodsve-boot Release构建通知
+                content:
+                - - tag: text
+                    text: '已发布新的稳定版本【${{ steps.check_revision.outputs.release_version }}】，点击下方链接即可查看！'
+                - - tag: a
+                    text: ${{ steps.check_revision.outputs.release_version }}
+                    href: ${{ steps.upload_release_asset.outputs.url }}
+
