@@ -48,7 +48,7 @@ jobs:
                 title: lodsve-boot Release构建通知
                 content:
                 - - tag: text
-                    text: '🚨 发布失败：检测到 SNAPSHOT 版本\n请检查 pom.xml 中的 <revision> 值，不能包含 -SNAPSHOT 后缀。'
+                    text: '🚨 发布失败：检测到 SNAPSHOT 版本；请检查 pom.xml 中的 <revision> 值，不能包含 -SNAPSHOT 后缀。'
       - name: 🚫 Fail Job if SNAPSHOT
         if: ${{ steps.check_revision.outputs.is_snapshot == 'true' }}
         run: |
