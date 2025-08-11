@@ -37,7 +37,7 @@
     <url>https://github.com/lodsve/lodsve-boot</url>
 
     <properties>
-        <revision>1.0.3-SNAPSHOT</revision>
+        <revision>1.0.3</revision>
         <lodsve.boot.version>${revision}</lodsve.boot.version>
 
         <!-- 基本属性 -->
