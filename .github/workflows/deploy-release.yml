@@ -29,15 +29,15 @@ jobs:
           # 判断是否以 -SNAPSHOT 结尾
           if [[ "$REVISION" == *-SNAPSHOT ]]; then
             echo "❌ Error: Revision is a SNAPSHOT version ($REVISION)"
-            echo "::set-output name=is_snapshot::true"
+            echo "is_snapshot=true" >> $GITHUB_OUTPUT
             echo "::error::Revision is a SNAPSHOT version ($REVISION)"
-            exit 1
           else
             echo "✅ Revision is valid: $REVISION"
-            echo "::set-output name=is_snapshot::false"
+            echo "is_snapshot=false" >> $GITHUB_OUTPUT
             echo "release_version=$REVISION" >> $GITHUB_OUTPUT
           fi
       - name: 🚨 Send Feishu Notification on SNAPSHOT
+        if: ${{ steps.check_revision.outputs.is_snapshot == 'true' }}
         uses: foxundermoon/feishu-action@v2
         with:
           url: https://open.feishu.cn/open-apis/bot/v2/hook/${{ secrets.FEISHU_BOT_TOKEN }}
@@ -49,6 +49,11 @@ jobs:
                 content:
                 - - tag: text
                     text: '🚨 发布失败：检测到 SNAPSHOT 版本\n请检查 pom.xml 中的 <revision> 值，不能包含 -SNAPSHOT 后缀。'
+      - name: 🚫 Fail Job if SNAPSHOT
+        if: ${{ steps.check_revision.outputs.is_snapshot == 'true' }}
+        run: |
+          echo "::error::Detected SNAPSHOT version in <revision>. Aborting release."
+          exit 1
       - id: install-secret-key
         name: Install Secret Key
         run: |
