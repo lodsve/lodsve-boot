@@ -1,43 +1,243 @@
 #!/usr/bin/env python3
 """
-Git commit hook:
- .git/hooks/commit-msg
- Check commit message according to angularjs guidelines:
-  * https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
+Git commit hook: .git/hooks/commit-msg
+Check commit message according to Conventional Commits guidelines:
+https://www.conventionalcommits.org/
+
+Format: <type>(<scope>): <subject>
+        <BLANK LINE>
+        <body>
+        <BLANK LINE>
+        <footer>
 """
+
 import sys
 import re
+import os
+from typing import List, Tuple
 
-valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', ]
-commit_file = sys.argv[1]
-help_address = 'https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#'
+# Configuration
+VALID_COMMIT_TYPES = [
+    'feat',      # 新功能
+    'fix',       # 修复bug
+    'docs',      # 文档更新
+    'style',     # 代码格式调整
+    'refactor',  # 代码重构
+    'perf',      # 性能优化
+    'test',      # 测试相关
+    'chore',     # 构建工具变动
+    'revert',    # 回滚操作
+    'build',     # 构建系统相关
+    'ci',        # CI配置相关
+]
 
-with open(commit_file, 'r', encoding='utf-8') as commit:
-    lines = commit.readlines()
-    if len(lines) == 0:
-        sys.stderr.write("\nEmpty commit message\n")
-        sys.stderr.write("\n - Refer commit guide: %s\n\n" % help_address)
-        sys.exit(1)
+MAX_SUBJECT_LENGTH = 50
+MAX_BODY_LINE_LENGTH = 72
+HELP_URL = 'https://www.conventionalcommits.org/'
 
-    # first line
-    line = lines[0]
-    m = re.search('^(.*): (.*)$', line)
-    if not m or len(m.groups()) != 2:
-        sys.stderr.write("\nFirst commit message line (header) does not follow format: type: message\n")
-        sys.stderr.write("\n - Refer commit guide: %s\n\n" % help_address)
-        sys.exit(1)
+class CommitMessageValidator:
+    def __init__(self, commit_file: str):
+        self.commit_file = commit_file
+        self.lines: List[str] = []
+        self.errors: List[str] = []
+        self.warnings: List[str] = []
 
-    commit_type, commit_message = m.groups()
-    if commit_type not in valid_commit_types:
-        sys.stderr.write("\nCommit type not in valid ones: %s\n" % ", ".join(valid_commit_types))
-        sys.stderr.write("\n - Refer commit guide: %s\n\n" % help_address)
-        sys.exit(1)
-    if len(lines) > 1 and lines[1].strip():
-        sys.stderr.write("\nSecond commit message line must be empty\n")
-        sys.stderr.write("\n - Refer commit guide: %s\n\n" % help_address)
-        sys.exit(1)
-    if len(lines) > 2 and not lines[2].strip():
-        sys.stderr.write("\nThird commit message line (body) must not be empty\n")
-        sys.stderr.write("\n - Refer commit guide: %s\n\n" % help_address)
-        sys.exit(1)
-sys.exit(0)
+    def read_commit_message(self) -> bool:
+        """读取提交消息内容"""
+        try:
+            with open(self.commit_file, 'r', encoding='utf-8') as f:
+                self.lines = [line.rstrip('\n') for line in f.readlines()]
+            return True
+        except Exception as e:
+            self.errors.append(f"无法读取提交消息文件: {e}")
+            return False
+
+    def is_empty_commit(self) -> bool:
+        """检查是否为空提交"""
+        # 过滤掉注释行和空行
+        content_lines = [line for line in self.lines
+                        if line.strip() and not line.startswith('#')]
+        return len(content_lines) == 0
+
+    def parse_header(self, header: str) -> Tuple[str, str, str]:
+        """解析提交消息头部"""
+        # 支持带作用域的格式: type(scope): subject
+        pattern_with_scope = r'^([a-z]+)\(([^)]+)\):\s*(.+)$'
+        match_with_scope = re.match(pattern_with_scope, header.strip())
+
+        if match_with_scope:
+            return match_with_scope.group(1), match_with_scope.group(2), match_with_scope.group(3)
+
+        # 支持不带作用域的格式: type: subject
+        pattern_without_scope = r'^([a-z]+):\s*(.+)$'
+        match_without_scope = re.match(pattern_without_scope, header.strip())
+
+        if match_without_scope:
+            return match_without_scope.group(1), '', match_without_scope.group(2)
+
+        return '', '', ''
+
+    def validate_header_format(self, header: str) -> bool:
+        """验证头部格式"""
+        commit_type, scope, subject = self.parse_header(header)
+
+        if not commit_type:
+            self.errors.append("提交消息头部格式错误")
+            self.errors.append("正确格式: type(scope): subject 或 type: subject")
+            return False
+
+        # 验证类型
+        if commit_type not in VALID_COMMIT_TYPES:
+            self.errors.append(f"无效的提交类型: {commit_type}")
+            self.errors.append(f"有效的类型: {', '.join(VALID_COMMIT_TYPES)}")
+            return False
+
+        # 验证主题长度
+        if len(subject) > MAX_SUBJECT_LENGTH:
+            self.warnings.append(f"提交消息主题建议不超过{MAX_SUBJECT_LENGTH}字符 "
+                               f"(当前: {len(subject)}字符)")
+
+        # 验证主题不能以句号结尾
+        if subject.endswith('.'):
+            self.warnings.append("提交消息主题不应该以句号结尾")
+
+        # 验证主题首字母小写（可选）
+        if subject and subject[0].isupper():
+            self.warnings.append("提交消息主题建议使用小写字母开头")
+
+        return True
+
+    def validate_structure(self) -> bool:
+        """验证整体结构"""
+        if len(self.lines) == 0:
+            self.errors.append("提交消息为空")
+            return False
+
+        # 获取非注释内容
+        content_lines = [line for line in self.lines
+                        if not line.startswith('#')]
+
+        if len(content_lines) == 0:
+            self.errors.append("提交消息为空")
+            return False
+
+        # 验证头部
+        header = content_lines[0]
+        if not self.validate_header_format(header):
+            return False
+
+        # 如果只有一行，可以接受
+        if len(content_lines) == 1:
+            return True
+
+        # 验证第二行必须为空行
+        if len(content_lines) > 1 and content_lines[1].strip():
+            self.errors.append("第二行必须为空行（分隔头部和正文）")
+            return False
+
+        # 验证正文行长度
+        for i, line in enumerate(content_lines[2:], start=2):
+            if line.strip() and len(line) > MAX_BODY_LINE_LENGTH:
+                self.warnings.append(f"第{i+1}行建议不超过{MAX_BODY_LINE_LENGTH}字符 "
+                                   f"(当前: {len(line)}字符)")
+
+        return True
+
+    def validate_breaking_change(self) -> None:
+        """验证重大变更标记"""
+        content = '\n'.join(self.lines).lower()
+
+        # 检查是否包含重大变更标记
+        if 'breaking change' in content or 'breaking-change' in content:
+            # 检查是否在 footer 中正确标记
+            footer_section = False
+            for line in reversed(self.lines):
+                if line.startswith('breaking'):
+                    return  # 找到正确的标记
+                if not line.strip():
+                    footer_section = True
+                elif footer_section and ':' in line:
+                    # 可能是 footer 中的标记
+                    if 'break' in line.lower():
+                        return
+
+            self.warnings.append("检测到重大变更，请在 footer 中使用 'BREAKING CHANGE:' 标记")
+
+    def print_help(self) -> None:
+        """打印帮助信息"""
+        help_text = f"""
+提交消息格式规范:
+  <type>(<scope>): <subject>
+
+  <body>
+
+  <footer>
+
+有效的提交类型:
+  {', '.join(VALID_COMMIT_TYPES)}
+
+示例:
+  feat(user): 添加用户登录功能
+  fix(api): 修复订单查询超时问题
+  docs(readme): 更新安装说明
+  style: 格式化代码
+  refactor: 重构用户服务模块
+  test: 添加用户登录测试用例
+  chore: 更新构建脚本
+
+详细规范请参考: {HELP_URL}
+        """
+        sys.stderr.write(help_text)
+
+    def run_validation(self) -> int:
+        """运行验证"""
+        if not self.read_commit_message():
+            return 1
+
+        if self.is_empty_commit():
+            self.errors.append("提交消息不能为空")
+            self.print_help()
+            return 1
+
+        if not self.validate_structure():
+            self.print_help()
+            return 1
+
+        self.validate_breaking_change()
+
+        # 输出警告信息
+        if self.warnings:
+            sys.stderr.write("\n警告:\n")
+            for warning in self.warnings:
+                sys.stderr.write(f"  ⚠️  {warning}\n")
+            sys.stderr.write("\n")
+
+        # 输出错误信息
+        if self.errors:
+            sys.stderr.write("\n错误:\n")
+            for error in self.errors:
+                sys.stderr.write(f"  ❌ {error}\n")
+            sys.stderr.write("\n")
+            self.print_help()
+            return 1
+
+        return 0
+
+def main():
+    """主函数"""
+    if len(sys.argv) != 2:
+        sys.stderr.write("用法: commit-msg <commit-file>\n")
+        return 1
+
+    commit_file = sys.argv[1]
+
+    # 检查文件是否存在
+    if not os.path.exists(commit_file):
+        sys.stderr.write(f"错误: 提交消息文件不存在: {commit_file}\n")
+        return 1
+
+    validator = CommitMessageValidator(commit_file)
+    return validator.run_validation()
+
+if __name__ == '__main__':
+    sys.exit(main())
