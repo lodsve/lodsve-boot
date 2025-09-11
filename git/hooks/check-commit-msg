@@ -35,6 +35,20 @@ MAX_SUBJECT_LENGTH = 50
 MAX_BODY_LINE_LENGTH = 72
 HELP_URL = 'https://www.conventionalcommits.org/'
 
+# 解决 IDEA Git 控制台中文乱码问题
+def setup_encoding():
+    """设置正确的编码以避免中文乱码"""
+    if os.name == 'nt':  # Windows 系统
+        import io
+        # 强制设置 stderr 和 stdout 的编码
+        if hasattr(sys.stderr, 'buffer'):
+            sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+        if hasattr(sys.stdout, 'buffer'):
+            sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+    # 设置环境变量
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
+
 class CommitMessageValidator:
     def __init__(self, commit_file: str):
         self.commit_file = commit_file
@@ -225,6 +239,9 @@ class CommitMessageValidator:
 
 def main():
     """主函数"""
+    # 设置编码以解决中文乱码问题
+    setup_encoding()
+
     if len(sys.argv) != 2:
         sys.stderr.write("用法: commit-msg <commit-file>\n")
         return 1

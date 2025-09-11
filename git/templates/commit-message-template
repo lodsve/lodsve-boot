@@ -1,6 +1,39 @@
-['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']: subject
-
+<type>(<scope>): <subject>
+<BLANK LINE>
 <body>
-
+<BLANK LINE>
 <footer>
 
+# ------------------------
+# 类型说明:
+# feat:     新功能 (feature)
+# fix:      修复bug (bug fix)
+# docs:     文档更新 (documentation)
+# style:    代码格式调整 (white-space, formatting, missing semi-colons, etc)
+# refactor: 代码重构 (refactoring production code, eg. renaming a variable)
+# perf:     性能优化 (performance improvement)
+# test:     测试相关 (adding missing tests, refactoring tests)
+# build:    构建系统 (changes to build process, dependencies, project structure)
+# ci:       持续集成 (changes to CI configuration files and scripts)
+# chore:    构建工具变动 (updating grunt tasks etc)
+# revert:   回滚操作 (reverts a previous commit)
+# ------------------------
+# 范例:
+# feat(user): 添加用户登录功能
+# fix(order): 修复订单查询超时问题
+# docs(api): 更新接口文档说明
+# refactor(payment): 重构支付模块代码结构
+# test(auth): 添加用户认证测试用例
+# chore(deps): 升级依赖包版本
+# ------------------------
+# 格式要求:
+# 1. 主题行不超过50字符
+# 2. 主题行使用小写字母开头
+# 3. 主题行不要以句号结尾
+# 4. 正文每行不超过72字符
+# 5. 正文使用 imperative mood (命令语气)
+# ------------------------
+# 重大变更标记:
+# BREAKING CHANGE: <description>
+# Closes #123
+# Refs #456
