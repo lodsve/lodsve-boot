@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.countdown;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -26,11 +25,18 @@ import java.util.List;
  *
  * @author Hulk Sun
  */
-@Data
 @ConfigurationProperties("lodsve.countdown")
 public class CountdownProperties {
     /**
      * 需要监听的redis数据库
      */
     private List<Integer> database;
+
+    public List<Integer> getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(List<Integer> database) {
+        this.database = database;
+    }
 }

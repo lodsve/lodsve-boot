@@ -27,7 +27,6 @@ import com.lodsve.boot.component.rdbms.dynamic.DynamicDataSourceAspect;
 import com.lodsve.boot.component.rdbms.exception.RdbmsException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +54,6 @@ import java.util.Properties;
 @EnableConfigurationProperties({RdbmsProperties.class, DruidStatProperties.class})
 @ConditionalOnClass(DynamicDataSource.class)
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@Slf4j
 @Configuration
 @Import({
     DruidFilterConfiguration.class,
@@ -181,8 +179,8 @@ public class RdbmsAutoConfiguration {
         try {
             config.init();
         } catch (SQLException e) {
-            if (log.isErrorEnabled()) {
-                log.error(e.getMessage(), e);
+            if (logger.isErrorEnabled()) {
+                logger.error(e.getMessage(), e);
             }
             throw new RdbmsException("build druid datasource error!");
         }

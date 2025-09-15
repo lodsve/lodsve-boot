@@ -27,7 +27,6 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.lodsve.boot.component.filesystem.bean.FileBean;
 import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import com.lodsve.boot.component.filesystem.enums.AccessControlEnum;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -48,7 +47,6 @@ import java.util.Map;
  *
  * @author Hulk Sun
  */
-@Slf4j
 public class AliyunOssFileSystemHandler extends AbstractFileSystemHandler {
     private static final Logger logger = LoggerFactory.getLogger(AliyunOssFileSystemHandler.class);
     private final OSS client;

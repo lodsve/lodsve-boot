@@ -16,8 +16,6 @@
  */
 package com.lodsve.boot.example.domain;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,10 +25,41 @@ import java.util.Date;
  * @author sunhao(sunhao.java @ gmail.com)
  * @version V1.0, 16/1/18 下午6:41
  */
-@Data
 public class User implements Serializable {
     private Long id;
     private String userName;
     private String telNo;
     private Date createAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getTelNo() {
+        return telNo;
+    }
+
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 }

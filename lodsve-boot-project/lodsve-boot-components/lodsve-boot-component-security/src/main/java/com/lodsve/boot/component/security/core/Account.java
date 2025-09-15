@@ -16,9 +16,6 @@
  */
 package com.lodsve.boot.component.security.core;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**
@@ -26,8 +23,6 @@ import java.io.Serializable;
  *
  * @author Hulk Sun
  */
-@Data
-@AllArgsConstructor
 public class Account implements Serializable {
     /**
      * 主键
@@ -48,5 +43,35 @@ public class Account implements Serializable {
     public Account(Long id, String loginName) {
         this.id = id;
         this.loginName = loginName;
+    }
+
+    public Account(Long id, String loginName, Object source) {
+        this.id = id;
+        this.loginName = loginName;
+        this.source = source;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public Object getSource() {
+        return source;
+    }
+
+    public void setSource(Object source) {
+        this.source = source;
     }
 }

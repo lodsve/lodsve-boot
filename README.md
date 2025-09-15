@@ -110,7 +110,6 @@ Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
     - IDE: Open Setting-Editor-File encoding, modify all `Encoding` as `UTF-8` and `with NO BOM`
 4. Required IDE Plugins(Both Eclipse and Intellij IDEA):
     - Alibaba Java Coding Guidelines
-    - Lombok plugin
 
 ## Documentation
 

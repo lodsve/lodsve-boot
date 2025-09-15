@@ -22,12 +22,36 @@ package com.lodsve.boot.example.pojo;
  * @author <a href="mailto:sunhao.java@gmail.com">sunhao(sunhao.java@gmail.com)</a>
  */
 
-import lombok.Data;
-import lombok.ToString;
-
-@ToString
-@Data
 public class UserDTO {
     private String id;
     private String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder json = new StringBuilder("{");
+        json.append("\"id\":\"")
+            .append(id).append('\"');
+
+        json.append(",\"name\":\"")
+            .append(name).append('\"');
+
+        json.append('}');
+        return json.toString();
+    }
 }

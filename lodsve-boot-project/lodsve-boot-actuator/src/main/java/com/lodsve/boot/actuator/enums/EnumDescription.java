@@ -16,10 +16,6 @@
  */
 package com.lodsve.boot.actuator.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,20 +24,80 @@ import java.util.List;
  *
  * @author Hulk Sun
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EnumDescription implements Serializable {
     private String shortName;
     private String name;
     private String description;
     private List<EnumDetail> details;
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
+    public EnumDescription() {
+    }
+
+    public EnumDescription(String shortName, String name, String description, List<EnumDetail> details) {
+        this.shortName = shortName;
+        this.name = name;
+        this.description = description;
+        this.details = details;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<EnumDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<EnumDetail> details) {
+        this.details = details;
+    }
+
     public static class EnumDetail implements Serializable {
         private String code;
         private String title;
+
+        public EnumDetail() {
+        }
+
+        public EnumDetail(String code, String title) {
+            this.code = code;
+            this.title = title;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
     }
 }

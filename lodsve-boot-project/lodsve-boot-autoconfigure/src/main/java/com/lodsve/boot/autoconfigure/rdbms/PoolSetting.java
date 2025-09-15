@@ -16,9 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.rdbms;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Properties;
 
 /**
@@ -26,8 +23,6 @@ import java.util.Properties;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
 public class PoolSetting {
     /**
      * 使用哪种连接池，目前仅Hikari和Druid
@@ -103,6 +98,126 @@ public class PoolSetting {
      * 数据库连接的其他属性
      */
     private Properties extProperties;
+
+    public PoolType getType() {
+        return type;
+    }
+
+    public void setType(PoolType type) {
+        this.type = type;
+    }
+
+    public int getInitSize() {
+        return initSize;
+    }
+
+    public void setInitSize(int initSize) {
+        this.initSize = initSize;
+    }
+
+    public int getMaxActive() {
+        return maxActive;
+    }
+
+    public void setMaxActive(int maxActive) {
+        this.maxActive = maxActive;
+    }
+
+    public int getMinIdle() {
+        return minIdle;
+    }
+
+    public void setMinIdle(int minIdle) {
+        this.minIdle = minIdle;
+    }
+
+    public int getMaxWait() {
+        return maxWait;
+    }
+
+    public void setMaxWait(int maxWait) {
+        this.maxWait = maxWait;
+    }
+
+    public String getValidationQuery() {
+        return validationQuery;
+    }
+
+    public void setValidationQuery(String validationQuery) {
+        this.validationQuery = validationQuery;
+    }
+
+    public boolean isTestOnBorrow() {
+        return testOnBorrow;
+    }
+
+    public void setTestOnBorrow(boolean testOnBorrow) {
+        this.testOnBorrow = testOnBorrow;
+    }
+
+    public boolean isTestOnReturn() {
+        return testOnReturn;
+    }
+
+    public void setTestOnReturn(boolean testOnReturn) {
+        this.testOnReturn = testOnReturn;
+    }
+
+    public boolean isTestWhileIdle() {
+        return testWhileIdle;
+    }
+
+    public void setTestWhileIdle(boolean testWhileIdle) {
+        this.testWhileIdle = testWhileIdle;
+    }
+
+    public int getTimeBetweenEvictionRunsMillis() {
+        return timeBetweenEvictionRunsMillis;
+    }
+
+    public void setTimeBetweenEvictionRunsMillis(int timeBetweenEvictionRunsMillis) {
+        this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+    }
+
+    public int getMinEvictableIdleTimeMillis() {
+        return minEvictableIdleTimeMillis;
+    }
+
+    public void setMinEvictableIdleTimeMillis(int minEvictableIdleTimeMillis) {
+        this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
+    }
+
+    public boolean isRemoveAbandoned() {
+        return removeAbandoned;
+    }
+
+    public void setRemoveAbandoned(boolean removeAbandoned) {
+        this.removeAbandoned = removeAbandoned;
+    }
+
+    public int getRemoveAbandonedTimeout() {
+        return removeAbandonedTimeout;
+    }
+
+    public void setRemoveAbandonedTimeout(int removeAbandonedTimeout) {
+        this.removeAbandonedTimeout = removeAbandonedTimeout;
+    }
+
+    public boolean isLogAbandoned() {
+        return logAbandoned;
+    }
+
+    public void setLogAbandoned(boolean logAbandoned) {
+        this.logAbandoned = logAbandoned;
+    }
+
+    public Properties getExtProperties() {
+        return extProperties;
+    }
+
+    public void setExtProperties(Properties extProperties) {
+        this.extProperties = extProperties;
+    }
 
     public enum PoolType {
         /**

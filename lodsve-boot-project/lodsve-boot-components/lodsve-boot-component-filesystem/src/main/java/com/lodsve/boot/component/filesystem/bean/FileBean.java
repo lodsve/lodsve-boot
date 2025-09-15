@@ -17,8 +17,6 @@
 package com.lodsve.boot.component.filesystem.bean;
 
 import com.lodsve.boot.component.filesystem.enums.AccessControlEnum;
-import lombok.Data;
-import lombok.ToString;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -28,8 +26,6 @@ import java.io.Serializable;
  *
  * @author Hulk Sun
  */
-@Data
-@ToString
 public class FileBean implements Serializable {
     /**
      * 需要上传到哪个桶
@@ -67,4 +63,110 @@ public class FileBean implements Serializable {
      * 文件访问权限，详见{@link AccessControlEnum}
      */
     private AccessControlEnum accessControl;
+
+    public String getBucketName() {
+        return bucketName;
+    }
+
+    public void setBucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public InputStream getContent() {
+        return content;
+    }
+
+    public void setContent(InputStream content) {
+        this.content = content;
+    }
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public Boolean getValidatorMd5() {
+        return validatorMd5;
+    }
+
+    public void setValidatorMd5(Boolean validatorMd5) {
+        this.validatorMd5 = validatorMd5;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getFolder() {
+        return folder;
+    }
+
+    public void setFolder(String folder) {
+        this.folder = folder;
+    }
+
+    public String getFinalFileName() {
+        return finalFileName;
+    }
+
+    public void setFinalFileName(String finalFileName) {
+        this.finalFileName = finalFileName;
+    }
+
+    public AccessControlEnum getAccessControl() {
+        return accessControl;
+    }
+
+    public void setAccessControl(AccessControlEnum accessControl) {
+        this.accessControl = accessControl;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder json = new StringBuilder("{");
+        json.append("\"bucketName\":\"")
+            .append(bucketName).append('\"');
+
+        json.append(",\"fileName\":\"")
+            .append(fileName).append('\"');
+
+        json.append(",\"content\":")
+            .append(content);
+
+        json.append(",\"fileSize\":")
+            .append(fileSize);
+
+        json.append(",\"validatorMd5\":")
+            .append(validatorMd5);
+
+        json.append(",\"contentType\":\"")
+            .append(contentType).append('\"');
+
+        json.append(",\"folder\":\"")
+            .append(folder).append('\"');
+
+        json.append(",\"finalFileName\":\"")
+            .append(finalFileName).append('\"');
+
+        json.append(",\"accessControl\":")
+            .append(accessControl);
+
+        json.append('}');
+        return json.toString();
+    }
 }

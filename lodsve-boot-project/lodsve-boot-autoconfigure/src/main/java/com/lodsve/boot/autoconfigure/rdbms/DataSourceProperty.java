@@ -16,14 +16,11 @@
  */
 package com.lodsve.boot.autoconfigure.rdbms;
 
-import lombok.Data;
-
 /**
  * 数据源配置.
  *
  * @author Hulk Sun
  */
-@Data
 public class DataSourceProperty {
     /**
      * 连接池名称(只是一个名称标识)</br> 默认是配置文件上的名称
@@ -49,4 +46,52 @@ public class DataSourceProperty {
      * 连接池参数配置
      */
     private PoolSetting poolSetting;
+
+    public String getPoolName() {
+        return poolName;
+    }
+
+    public void setPoolName(String poolName) {
+        this.poolName = poolName;
+    }
+
+    public String getDriverClassName() {
+        return driverClassName;
+    }
+
+    public void setDriverClassName(String driverClassName) {
+        this.driverClassName = driverClassName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public PoolSetting getPoolSetting() {
+        return poolSetting;
+    }
+
+    public void setPoolSetting(PoolSetting poolSetting) {
+        this.poolSetting = poolSetting;
+    }
 }

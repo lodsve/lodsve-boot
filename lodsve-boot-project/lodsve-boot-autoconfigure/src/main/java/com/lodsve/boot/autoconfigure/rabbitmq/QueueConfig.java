@@ -16,16 +16,11 @@
  */
 package com.lodsve.boot.autoconfigure.rabbitmq;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * 配置queue.
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
 public class QueueConfig {
     /**
      * exchange type
@@ -41,4 +36,52 @@ public class QueueConfig {
     private boolean durable = true;
     private boolean exclusive = false;
     private boolean autoDelete = false;
+
+    public ExchangeType getExchangeType() {
+        return exchangeType;
+    }
+
+    public void setExchangeType(ExchangeType exchangeType) {
+        this.exchangeType = exchangeType;
+    }
+
+    public String getExchangeName() {
+        return exchangeName;
+    }
+
+    public void setExchangeName(String exchangeName) {
+        this.exchangeName = exchangeName;
+    }
+
+    public String getRoutingKey() {
+        return routingKey;
+    }
+
+    public void setRoutingKey(String routingKey) {
+        this.routingKey = routingKey;
+    }
+
+    public boolean isDurable() {
+        return durable;
+    }
+
+    public void setDurable(boolean durable) {
+        this.durable = durable;
+    }
+
+    public boolean isExclusive() {
+        return exclusive;
+    }
+
+    public void setExclusive(boolean exclusive) {
+        this.exclusive = exclusive;
+    }
+
+    public boolean isAutoDelete() {
+        return autoDelete;
+    }
+
+    public void setAutoDelete(boolean autoDelete) {
+        this.autoDelete = autoDelete;
+    }
 }

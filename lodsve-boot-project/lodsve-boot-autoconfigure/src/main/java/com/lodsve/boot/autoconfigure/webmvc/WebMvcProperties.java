@@ -17,7 +17,6 @@
 package com.lodsve.boot.autoconfigure.webmvc;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.List;
  * @author Hulk Sun
  */
 @ConfigurationProperties(prefix = "lodsve.web-mvc")
-@Data
 public class WebMvcProperties {
     /**
      * Debug Config
@@ -39,7 +37,22 @@ public class WebMvcProperties {
      */
     private RestConfig rest = new RestConfig();
 
-    @Data
+    public DebugConfig getDebug() {
+        return debug;
+    }
+
+    public void setDebug(DebugConfig debug) {
+        this.debug = debug;
+    }
+
+    public RestConfig getRest() {
+        return rest;
+    }
+
+    public void setRest(RestConfig rest) {
+        this.rest = rest;
+    }
+
     public static class DebugConfig {
         /**
          * 需要忽略的url
@@ -49,9 +62,24 @@ public class WebMvcProperties {
          * 需要忽略的ip/address
          */
         private List<String> excludeAddress = Lists.newArrayList();
+
+        public List<String> getExcludeUrl() {
+            return excludeUrl;
+        }
+
+        public void setExcludeUrl(List<String> excludeUrl) {
+            this.excludeUrl = excludeUrl;
+        }
+
+        public List<String> getExcludeAddress() {
+            return excludeAddress;
+        }
+
+        public void setExcludeAddress(List<String> excludeAddress) {
+            this.excludeAddress = excludeAddress;
+        }
     }
 
-    @Data
     public static class RestConfig {
         /**
          * 连接超时时间，单位：毫秒
@@ -61,5 +89,21 @@ public class WebMvcProperties {
          * 读超时时间，单位：毫秒
          */
         private int readTimeout = 15000;
+
+        public int getConnectTimeout() {
+            return connectTimeout;
+        }
+
+        public void setConnectTimeout(int connectTimeout) {
+            this.connectTimeout = connectTimeout;
+        }
+
+        public int getReadTimeout() {
+            return readTimeout;
+        }
+
+        public void setReadTimeout(int readTimeout) {
+            this.readTimeout = readTimeout;
+        }
     }
 }

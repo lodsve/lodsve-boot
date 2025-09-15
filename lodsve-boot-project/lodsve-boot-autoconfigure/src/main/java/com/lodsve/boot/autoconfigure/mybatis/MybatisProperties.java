@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.mybatis;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -24,7 +23,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author Hulk Sun
  */
-@Data
 @ConfigurationProperties(prefix = "lodsve.mybatis")
 public class MybatisProperties {
 
@@ -37,4 +35,20 @@ public class MybatisProperties {
      * 是否要匹配驼峰规则
      */
     private boolean mapUnderscoreToCamelCase = true;
+
+    public String[] getEnumsLocations() {
+        return enumsLocations;
+    }
+
+    public void setEnumsLocations(String[] enumsLocations) {
+        this.enumsLocations = enumsLocations;
+    }
+
+    public boolean isMapUnderscoreToCamelCase() {
+        return mapUnderscoreToCamelCase;
+    }
+
+    public void setMapUnderscoreToCamelCase(boolean mapUnderscoreToCamelCase) {
+        this.mapUnderscoreToCamelCase = mapUnderscoreToCamelCase;
+    }
 }

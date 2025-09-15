@@ -233,10 +233,5 @@
             <optional>true</optional>
         </dependency>
         <!-- open feign end -->
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
     </dependencies>
 </project>

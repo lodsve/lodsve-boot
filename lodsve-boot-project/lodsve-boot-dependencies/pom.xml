@@ -42,7 +42,6 @@
         <pinyin4j.version>2.5.0</pinyin4j.version>
         <dom4j.version>1.6.1</dom4j.version>
         <ant.version>1.7.0</ant.version>
-        <lombok.version>1.18.2</lombok.version>
         <beetl.version>2.9.8</beetl.version>
         <aliyun.sdk.oss.version>3.11.1</aliyun.sdk.oss.version>
         <aws.java.sdk.s3.version>1.11.868</aws.java.sdk.s3.version>
@@ -52,7 +51,7 @@
         <mybatis.spring.version>1.3.2</mybatis.spring.version>
         <jsqlparser.version>1.2</jsqlparser.version>
         <persistence.version>1.0</persistence.version>
-        <javassist.version>3.20.0-GA</javassist.version>
+        <javassist.version>3.23.1-GA</javassist.version>
         <vjkit.version>1.0.5</vjkit.version>
         <druid.version>1.2.1</druid.version>
         <rocketmq.spring.boot.starter.version>2.1.1</rocketmq.spring.boot.starter.version>
@@ -122,14 +121,6 @@
                 </exclusions>
             </dependency>
             <!-- ant end -->
-            <!-- lombok start -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <!-- lombok start -->
             <!-- 模板引擎 start -->
             <dependency>
                 <groupId>com.ibeetl</groupId>

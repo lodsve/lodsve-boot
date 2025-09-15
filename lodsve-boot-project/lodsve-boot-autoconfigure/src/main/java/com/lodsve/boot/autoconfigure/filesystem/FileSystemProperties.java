@@ -19,7 +19,6 @@ package com.lodsve.boot.autoconfigure.filesystem;
 import com.aliyun.oss.common.comm.Protocol;
 import com.amazonaws.regions.Regions;
 import com.lodsve.boot.component.filesystem.enums.FileSystemTypeEnum;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -31,7 +30,6 @@ import java.util.Map;
  * @author Hulk Sun
  */
 @ConfigurationProperties(prefix = "lodsve.file-system")
-@Data
 public class FileSystemProperties {
     /**
      * 使用的文件上传类型
@@ -76,43 +74,135 @@ public class FileSystemProperties {
     @NestedConfigurationProperty
     private ClientExtendProperties client = new ClientExtendProperties();
 
+    public FileSystemTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(FileSystemTypeEnum type) {
+        this.type = type;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getAccessKeySecret() {
+        return accessKeySecret;
+    }
+
+    public void setAccessKeySecret(String accessKeySecret) {
+        this.accessKeySecret = accessKeySecret;
+    }
+
+    public Long getDefaultExpire() {
+        return defaultExpire;
+    }
+
+    public void setDefaultExpire(Long defaultExpire) {
+        this.defaultExpire = defaultExpire;
+    }
+
+    public Map<String, Boolean> getBucketAcl() {
+        return bucketAcl;
+    }
+
+    public void setBucketAcl(Map<String, Boolean> bucketAcl) {
+        this.bucketAcl = bucketAcl;
+    }
+
+    public AliyunOssProperties getAliyunOss() {
+        return aliyunOss;
+    }
+
+    public void setAliyunOss(AliyunOssProperties aliyunOss) {
+        this.aliyunOss = aliyunOss;
+    }
+
+    public AwsS3Properties getAwsS3() {
+        return awsS3;
+    }
+
+    public void setAwsS3(AwsS3Properties awsS3) {
+        this.awsS3 = awsS3;
+    }
+
+    public TencentCosProperties getTencentCos() {
+        return tencentCos;
+    }
+
+    public void setTencentCos(TencentCosProperties tencentCos) {
+        this.tencentCos = tencentCos;
+    }
+
+    public ClientExtendProperties getClient() {
+        return client;
+    }
+
+    public void setClient(ClientExtendProperties client) {
+        this.client = client;
+    }
+
     /**
      * AWS基本服務端屬性.
      */
-    @Data
     public static class AwsS3Properties {
         /**
          * 区域
          */
         private Regions region = Regions.DEFAULT_REGION;
+
+        public Regions getRegion() {
+            return region;
+        }
+
+        public void setRegion(Regions region) {
+            this.region = region;
+        }
     }
 
     /**
      * OSS基本服務端屬性.
      */
-    @Data
     public static class AliyunOssProperties {
         /**
          * 上传目标地址
          */
         private String endpoint;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
     }
 
     /**
      * COS基本服務端屬性.
      */
-    @Data
     public static class TencentCosProperties {
         /**
          * 区域
          */
         private String region;
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
     }
 
     /**
      * 客户端扩展配置
      */
-    @Data
     public static class ClientExtendProperties {
         /**
          * 允许打开的最大HTTP连接数。默认为1024
@@ -154,6 +244,86 @@ public class FileSystemProperties {
          * 用户代理，指HTTP的User-Agent头。默认为”aliyun-sdk-java”
          */
         private String userAgent = "aliyun-sdk-java";
+
+        public int getMaxConnections() {
+            return maxConnections;
+        }
+
+        public void setMaxConnections(int maxConnections) {
+            this.maxConnections = maxConnections;
+        }
+
+        public int getSocketTimeout() {
+            return socketTimeout;
+        }
+
+        public void setSocketTimeout(int socketTimeout) {
+            this.socketTimeout = socketTimeout;
+        }
+
+        public int getConnectionTimeout() {
+            return connectionTimeout;
+        }
+
+        public void setConnectionTimeout(int connectionTimeout) {
+            this.connectionTimeout = connectionTimeout;
+        }
+
+        public int getConnectionRequestTimeout() {
+            return connectionRequestTimeout;
+        }
+
+        public void setConnectionRequestTimeout(int connectionRequestTimeout) {
+            this.connectionRequestTimeout = connectionRequestTimeout;
+        }
+
+        public long getIdleConnectionTime() {
+            return idleConnectionTime;
+        }
+
+        public void setIdleConnectionTime(long idleConnectionTime) {
+            this.idleConnectionTime = idleConnectionTime;
+        }
+
+        public int getMaxErrorRetry() {
+            return maxErrorRetry;
+        }
+
+        public void setMaxErrorRetry(int maxErrorRetry) {
+            this.maxErrorRetry = maxErrorRetry;
+        }
+
+        public boolean isSupportCname() {
+            return supportCname;
+        }
+
+        public void setSupportCname(boolean supportCname) {
+            this.supportCname = supportCname;
+        }
+
+        public boolean isSldEnabled() {
+            return sldEnabled;
+        }
+
+        public void setSldEnabled(boolean sldEnabled) {
+            this.sldEnabled = sldEnabled;
+        }
+
+        public String getProtocol() {
+            return protocol;
+        }
+
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        public String getUserAgent() {
+            return userAgent;
+        }
+
+        public void setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+        }
     }
 
 }

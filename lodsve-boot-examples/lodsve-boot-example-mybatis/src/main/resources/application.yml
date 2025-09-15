@@ -28,7 +28,7 @@ lodsve:
         pool-name: demo-datasource
         url: jdbc:mysql://127.0.0.1:3306/demo
         username: root
-        password:
+        password: 123456
         driver-class-name: com.mysql.cj.jdbc.Driver
         pool-setting:
           type: Hikari
@@ -37,7 +37,7 @@ lodsve:
         pool-name: test-datasource
         url: jdbc:mysql://127.0.0.1:3306/test
         username: root
-        password:
+        password: 123456
         driver-class-name: com.mysql.cj.jdbc.Driver
         pool-setting:
           type: Druid

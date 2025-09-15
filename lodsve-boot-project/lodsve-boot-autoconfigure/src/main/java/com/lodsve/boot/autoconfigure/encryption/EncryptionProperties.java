@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.encryption;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.BindHandler;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -37,7 +36,6 @@ import java.lang.annotation.Annotation;
  *
  * @author Hulk Sun
  */
-@Data
 @ConfigurationProperties(prefix = "lodsve.encryption")
 public class EncryptionProperties {
     public static EncryptionProperties bindConfigProps(ConfigurableEnvironment environment) {
@@ -69,7 +67,30 @@ public class EncryptionProperties {
      */
     private Jasypt jasypt = new Jasypt();
 
-    @Data
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Base64 getBase64() {
+        return base64;
+    }
+
+    public void setBase64(Base64 base64) {
+        this.base64 = base64;
+    }
+
+    public Jasypt getJasypt() {
+        return jasypt;
+    }
+
+    public void setJasypt(Jasypt jasypt) {
+        this.jasypt = jasypt;
+    }
+
     public static class Base64 {
         /**
          * 加密字符串的前缀
@@ -79,9 +100,24 @@ public class EncryptionProperties {
          * 加密字符串的后缀
          */
         private String suffix = ")";
+
+        public String getPrefix() {
+            return prefix;
+        }
+
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
+
+        public void setSuffix(String suffix) {
+            this.suffix = suffix;
+        }
     }
 
-    @Data
     public static class Jasypt {
         /**
          * 加密字符串的前缀
@@ -127,5 +163,93 @@ public class EncryptionProperties {
          * 指定将String输出编码的形式.{@code "base64"} or {@code "hexadecimal"}.默认值为{@code "base64"}
          */
         private String stringOutputType = "base64";
+
+        public String getPrefix() {
+            return prefix;
+        }
+
+        public void setPrefix(String prefix) {
+            this.prefix = prefix;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
+
+        public void setSuffix(String suffix) {
+            this.suffix = suffix;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getAlgorithm() {
+            return algorithm;
+        }
+
+        public void setAlgorithm(String algorithm) {
+            this.algorithm = algorithm;
+        }
+
+        public String getKeyObtentionIterations() {
+            return keyObtentionIterations;
+        }
+
+        public void setKeyObtentionIterations(String keyObtentionIterations) {
+            this.keyObtentionIterations = keyObtentionIterations;
+        }
+
+        public String getPoolSize() {
+            return poolSize;
+        }
+
+        public void setPoolSize(String poolSize) {
+            this.poolSize = poolSize;
+        }
+
+        public String getProviderName() {
+            return providerName;
+        }
+
+        public void setProviderName(String providerName) {
+            this.providerName = providerName;
+        }
+
+        public String getProviderClassName() {
+            return providerClassName;
+        }
+
+        public void setProviderClassName(String providerClassName) {
+            this.providerClassName = providerClassName;
+        }
+
+        public String getSaltGeneratorClassname() {
+            return saltGeneratorClassname;
+        }
+
+        public void setSaltGeneratorClassname(String saltGeneratorClassname) {
+            this.saltGeneratorClassname = saltGeneratorClassname;
+        }
+
+        public String getIvGeneratorClassname() {
+            return ivGeneratorClassname;
+        }
+
+        public void setIvGeneratorClassname(String ivGeneratorClassname) {
+            this.ivGeneratorClassname = ivGeneratorClassname;
+        }
+
+        public String getStringOutputType() {
+            return stringOutputType;
+        }
+
+        public void setStringOutputType(String stringOutputType) {
+            this.stringOutputType = stringOutputType;
+        }
     }
 }

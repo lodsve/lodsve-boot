@@ -44,7 +44,6 @@
 - "BOOT-INF/lib/dom4j-1.6.1.jar"
 - "BOOT-INF/lib/xml-apis-1.0.b2.jar"
 - "BOOT-INF/lib/ant-1.7.0.jar"
-- "BOOT-INF/lib/lombok-1.18.2.jar"
 - "BOOT-INF/lib/gson-2.8.9.jar"
 - "BOOT-INF/lib/guava-28.2-jre.jar"
 - "BOOT-INF/lib/failureaccess-1.0.1.jar"

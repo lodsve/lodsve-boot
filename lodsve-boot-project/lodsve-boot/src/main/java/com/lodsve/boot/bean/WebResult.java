@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.bean;
 
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -26,7 +25,6 @@ import java.io.Serializable;
  *
  * @author Hulk Sun
  */
-@Data
 public class WebResult<T> implements Serializable {
     private static final Integer SUCCESS = 200;
     private static final Integer ERROR = 500;
@@ -37,6 +35,38 @@ public class WebResult<T> implements Serializable {
     private Integer code;
     private T data;
     private String message;
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public static <T> WebResult<T> ok(T data) {
         WebResult<T> result = new WebResult<>();

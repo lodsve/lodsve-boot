@@ -18,9 +18,6 @@ package com.lodsve.boot.example.pojo.po;
 
 import com.lodsve.boot.component.mybatis.pojo.BasePropertyPO;
 import com.lodsve.boot.example.enums.Gender;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Table;
 
@@ -29,12 +26,38 @@ import javax.persistence.Table;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@ToString(callSuper = true)
 @Table(name = "t_demo")
 public class DemoPO extends BasePropertyPO {
     private String name;
     private Long age;
     private Gender sex;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public Gender getSex() {
+        return sex;
+    }
+
+    public void setSex(Gender sex) {
+        this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

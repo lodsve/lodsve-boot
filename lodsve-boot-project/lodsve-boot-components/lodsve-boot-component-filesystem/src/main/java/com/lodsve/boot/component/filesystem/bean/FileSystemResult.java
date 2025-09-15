@@ -16,9 +16,6 @@
  */
 package com.lodsve.boot.component.filesystem.bean;
 
-import lombok.Data;
-import lombok.ToString;
-
 import java.io.Serializable;
 
 /**
@@ -26,8 +23,6 @@ import java.io.Serializable;
  *
  * @author Hulk Sun
  */
-@Data
-@ToString
 public class FileSystemResult implements Serializable {
     /**
      * 文件唯一标识
@@ -51,4 +46,66 @@ public class FileSystemResult implements Serializable {
      * 上传结果
      */
     private Boolean result;
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public String getEtag() {
+        return etag;
+    }
+
+    public void setEtag(String etag) {
+        this.etag = etag;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder json = new StringBuilder("{");
+        json.append("\"objectName\":\"")
+            .append(objectName).append('\"');
+
+        json.append(",\"etag\":\"")
+            .append(etag).append('\"');
+
+        json.append(",\"fileName\":\"")
+            .append(fileName).append('\"');
+
+        json.append(",\"md5\":\"")
+            .append(md5).append('\"');
+
+        json.append(",\"result\":")
+            .append(result);
+
+        json.append('}');
+        return json.toString();
+    }
 }

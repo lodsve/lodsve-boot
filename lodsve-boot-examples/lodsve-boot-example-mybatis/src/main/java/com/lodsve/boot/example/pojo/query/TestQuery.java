@@ -17,18 +17,25 @@
 package com.lodsve.boot.example.pojo.query;
 
 import com.lodsve.boot.pojo.BaseQuery;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * .
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@ToString(callSuper = true)
 public class TestQuery extends BaseQuery {
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

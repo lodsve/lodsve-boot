@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.redis;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -29,7 +28,6 @@ import java.util.Map;
  *
  * @author Hulk Sun
  */
-@Data
 @ConfigurationProperties("lodsve.redis")
 public class RedisProperties {
     /**
@@ -94,10 +92,113 @@ public class RedisProperties {
      */
     private long defaultExpiration = 0;
 
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
+    }
+
+    public boolean isSsl() {
+        return ssl;
+    }
+
+    public void setSsl(boolean ssl) {
+        this.ssl = ssl;
+    }
+
+    public Duration getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Duration timeout) {
+        this.timeout = timeout;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public Singleton getSingleton() {
+        return singleton;
+    }
+
+    public void setSingleton(Singleton singleton) {
+        this.singleton = singleton;
+    }
+
+    public Sentinel getSentinel() {
+        return sentinel;
+    }
+
+    public void setSentinel(Sentinel sentinel) {
+        this.sentinel = sentinel;
+    }
+
+    public Cluster getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(Cluster cluster) {
+        this.cluster = cluster;
+    }
+
+    public Map<String, Singleton> getSingletons() {
+        return singletons;
+    }
+
+    public void setSingletons(Map<String, Singleton> singletons) {
+        this.singletons = singletons;
+    }
+
+    public Map<String, Sentinel> getSentinels() {
+        return sentinels;
+    }
+
+    public void setSentinels(Map<String, Sentinel> sentinels) {
+        this.sentinels = sentinels;
+    }
+
+    public Map<String, Cluster> getClusters() {
+        return clusters;
+    }
+
+    public void setClusters(Map<String, Cluster> clusters) {
+        this.clusters = clusters;
+    }
+
+    public Jedis getJedis() {
+        return jedis;
+    }
+
+    public Lettuce getLettuce() {
+        return lettuce;
+    }
+
+    public Map<String, Long> getKeyTtl() {
+        return keyTtl;
+    }
+
+    public void setKeyTtl(Map<String, Long> keyTtl) {
+        this.keyTtl = keyTtl;
+    }
+
+    public long getDefaultExpiration() {
+        return defaultExpiration;
+    }
+
+    public void setDefaultExpiration(long defaultExpiration) {
+        this.defaultExpiration = defaultExpiration;
+    }
+
     /**
      * Pool properties.
      */
-    @Data
     public static class Pool {
         /**
          * Maximum number of "idle" connections in the pool. Use a negative value to
@@ -126,12 +227,51 @@ public class RedisProperties {
          * object evictor thread starts, otherwise no idle object eviction is performed.
          */
         private Duration timeBetweenEvictionRuns;
+
+        public int getMaxIdle() {
+            return maxIdle;
+        }
+
+        public void setMaxIdle(int maxIdle) {
+            this.maxIdle = maxIdle;
+        }
+
+        public int getMinIdle() {
+            return minIdle;
+        }
+
+        public void setMinIdle(int minIdle) {
+            this.minIdle = minIdle;
+        }
+
+        public int getMaxActive() {
+            return maxActive;
+        }
+
+        public void setMaxActive(int maxActive) {
+            this.maxActive = maxActive;
+        }
+
+        public Duration getMaxWait() {
+            return maxWait;
+        }
+
+        public void setMaxWait(Duration maxWait) {
+            this.maxWait = maxWait;
+        }
+
+        public Duration getTimeBetweenEvictionRuns() {
+            return timeBetweenEvictionRuns;
+        }
+
+        public void setTimeBetweenEvictionRuns(Duration timeBetweenEvictionRuns) {
+            this.timeBetweenEvictionRuns = timeBetweenEvictionRuns;
+        }
     }
 
     /**
      * singleton redis
      */
-    @Data
     public static class Singleton {
         /**
          * Redis server host.
@@ -151,12 +291,43 @@ public class RedisProperties {
          * 数据库索引
          */
         private int database = 0;
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
+
+        public int getDatabase() {
+            return database;
+        }
+
+        public void setDatabase(int database) {
+            this.database = database;
+        }
     }
 
     /**
      * Cluster properties.
      */
-    @Data
     public static class Cluster {
         /**
          * Comma-separated list of "host:port" pairs to bootstrap from. This represents an
@@ -174,12 +345,35 @@ public class RedisProperties {
          * cluster.
          */
         private Integer maxRedirects;
+
+        public List<String> getNodes() {
+            return nodes;
+        }
+
+        public void setNodes(List<String> nodes) {
+            this.nodes = nodes;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public Integer getMaxRedirects() {
+            return maxRedirects;
+        }
+
+        public void setMaxRedirects(Integer maxRedirects) {
+            this.maxRedirects = maxRedirects;
+        }
     }
 
     /**
      * Redis sentinel properties.
      */
-    @Data
     public static class Sentinel {
         /**
          * Name of the Redis server.
@@ -204,23 +398,69 @@ public class RedisProperties {
          * 数据库索引
          */
         private int database = 0;
+
+        public String getMaster() {
+            return master;
+        }
+
+        public void setMaster(String master) {
+            this.master = master;
+        }
+
+        public List<String> getNodes() {
+            return nodes;
+        }
+
+        public void setNodes(List<String> nodes) {
+            this.nodes = nodes;
+        }
+
+        public String getSentinelPassword() {
+            return sentinelPassword;
+        }
+
+        public void setSentinelPassword(String sentinelPassword) {
+            this.sentinelPassword = sentinelPassword;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public int getDatabase() {
+            return database;
+        }
+
+        public void setDatabase(int database) {
+            this.database = database;
+        }
     }
 
     /**
      * Jedis client properties.
      */
-    @Data
     public static class Jedis {
         /**
          * Jedis pool configuration.
          */
         private Pool pool;
+
+        public Pool getPool() {
+            return pool;
+        }
+
+        public void setPool(Pool pool) {
+            this.pool = pool;
+        }
     }
 
     /**
      * Lettuce client properties.
      */
-    @Data
     public static class Lettuce {
         /**
          * 表示多个LettuceConnection将共享一个native connection
@@ -236,11 +476,41 @@ public class RedisProperties {
         private Pool pool;
         private final Cluster cluster = new Cluster();
 
-        @Data
+        public boolean isShareNativeConnection() {
+            return shareNativeConnection;
+        }
+
+        public void setShareNativeConnection(boolean shareNativeConnection) {
+            this.shareNativeConnection = shareNativeConnection;
+        }
+
+        public Duration getShutdownTimeout() {
+            return shutdownTimeout;
+        }
+
+        public void setShutdownTimeout(Duration shutdownTimeout) {
+            this.shutdownTimeout = shutdownTimeout;
+        }
+
+        public Pool getPool() {
+            return pool;
+        }
+
+        public void setPool(Pool pool) {
+            this.pool = pool;
+        }
+
+        public Cluster getCluster() {
+            return cluster;
+        }
+
         public static class Cluster {
             private final Refresh refresh = new Refresh();
 
-            @Data
+            public Refresh getRefresh() {
+                return refresh;
+            }
+
             public static class Refresh {
 
                 /**
@@ -253,6 +523,22 @@ public class RedisProperties {
                  * triggers should be used.
                  */
                 private boolean adaptive;
+
+                public Duration getPeriod() {
+                    return period;
+                }
+
+                public void setPeriod(Duration period) {
+                    this.period = period;
+                }
+
+                public boolean isAdaptive() {
+                    return adaptive;
+                }
+
+                public void setAdaptive(boolean adaptive) {
+                    this.adaptive = adaptive;
+                }
             }
         }
     }

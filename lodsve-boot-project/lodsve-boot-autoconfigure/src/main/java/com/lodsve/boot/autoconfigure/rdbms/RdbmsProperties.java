@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.rdbms;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
@@ -27,7 +26,6 @@ import java.util.Map;
  * @author Hulk Sun
  */
 @ConfigurationProperties(prefix = "lodsve.rdbms")
-@Data
 public class RdbmsProperties {
     /**
      * 默认数据源名称，不填为{@link #dataSource}的第一个值
@@ -38,4 +36,20 @@ public class RdbmsProperties {
      * 数据源名称 -> 数据源配置
      */
     private Map<String, DataSourceProperty> dataSource;
+
+    public String getDefaultDataSourceName() {
+        return defaultDataSourceName;
+    }
+
+    public void setDefaultDataSourceName(String defaultDataSourceName) {
+        this.defaultDataSourceName = defaultDataSourceName;
+    }
+
+    public Map<String, DataSourceProperty> getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(Map<String, DataSourceProperty> dataSource) {
+        this.dataSource = dataSource;
+    }
 }

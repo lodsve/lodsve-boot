@@ -18,22 +18,61 @@ package com.lodsve.boot.example.pojo.bo;
 
 import com.lodsve.boot.example.enums.Gender;
 import com.lodsve.boot.pojo.BaseBO;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * .
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@ToString(callSuper = true)
 public class TestBO extends BaseBO {
     private Long id;
     private String name;
     private Long age;
     private Gender sex;
     private String remarks;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public Gender getSex() {
+        return sex;
+    }
+
+    public void setSex(Gender sex) {
+        this.sex = sex;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

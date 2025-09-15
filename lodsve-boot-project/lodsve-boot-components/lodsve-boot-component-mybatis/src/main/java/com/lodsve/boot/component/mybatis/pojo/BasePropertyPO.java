@@ -18,8 +18,6 @@ package com.lodsve.boot.component.mybatis.pojo;
 
 import com.lodsve.boot.component.mybatis.repository.annotations.DisabledDate;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -38,8 +36,6 @@ import java.time.LocalDateTime;
  *
  * @author Hulk Sun
  */
-@Getter
-@Setter
 public class BasePropertyPO extends BasePO {
 
     private static final long serialVersionUID = 5529749202040239279L;
@@ -97,6 +93,78 @@ public class BasePropertyPO extends BasePO {
     @DisabledDate
     @Column(name = "disabled_date")
     private LocalDateTime disabledDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Long getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(Long lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public LocalDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public LocalDateTime getDisabledDate() {
+        return disabledDate;
+    }
+
+    public void setDisabledDate(LocalDateTime disabledDate) {
+        this.disabledDate = disabledDate;
+    }
 
     @Override
     public String toString() {

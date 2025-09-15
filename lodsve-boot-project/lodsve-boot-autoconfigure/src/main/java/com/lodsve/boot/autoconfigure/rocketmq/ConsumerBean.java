@@ -16,9 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.rocketmq;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.lang.reflect.Method;
 
 /**
@@ -26,8 +23,6 @@ import java.lang.reflect.Method;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
 public class ConsumerBean {
     /**
      * tag
@@ -41,4 +36,28 @@ public class ConsumerBean {
      * 处理方法
      */
     private Method method;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public Object getTarget() {
+        return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
+    }
 }

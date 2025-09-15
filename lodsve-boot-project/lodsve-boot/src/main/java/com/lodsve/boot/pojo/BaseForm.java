@@ -18,8 +18,6 @@ package com.lodsve.boot.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.Gson;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -29,8 +27,6 @@ import java.io.Serializable;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
 public class BaseForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -38,6 +34,14 @@ public class BaseForm implements Serializable {
      * 表单提交的主键,用来
      */
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * 用来区分是修改还是新增

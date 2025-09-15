@@ -82,7 +82,7 @@
 ## 导入到您的IDE中
 
 在项目根目录运行命令 `mvn idea:idea` 或者 `mvn eclipse:eclipse` 。
-> **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 8`，`Maven 3.3.X` 和 `Lombok插件` 。
+> **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 8`，`Maven 3.3.X` 。
 
 1. 配置Git
 
@@ -109,7 +109,6 @@
     - IDE：打开 Setting-Editor-File encoding，修改所有的 `Encoding` 为 `UTF-8` 和 `with NO BOM`。
 4. 必须要安装的IDE插件(Eclipse 和 Intellij IDEA):
     - Alibaba Java Coding Guidelines
-    - Lombok plugin
 
 ## 文档
 

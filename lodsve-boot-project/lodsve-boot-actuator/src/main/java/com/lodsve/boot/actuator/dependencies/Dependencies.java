@@ -16,11 +16,6 @@
  */
 package com.lodsve.boot.actuator.dependencies;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,21 +24,70 @@ import java.util.List;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Dependencies implements Serializable {
     private List<Dependency> dependencies;
     private Integer length;
 
-    @Setter
-    @Getter
-    @AllArgsConstructor
-    @NoArgsConstructor
+    public Dependencies() {
+    }
+
+    public Dependencies(List<Dependency> dependencies, Integer length) {
+        this.dependencies = dependencies;
+        this.length = length;
+    }
+
+    public List<Dependency> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<Dependency> dependencies) {
+        this.dependencies = dependencies;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
     public static class Dependency {
         private String name;
         private String version;
         private String path;
+
+        public Dependency() {
+        }
+
+        public Dependency(String name, String version, String path) {
+            this.name = name;
+            this.version = version;
+            this.path = path;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
     }
 }

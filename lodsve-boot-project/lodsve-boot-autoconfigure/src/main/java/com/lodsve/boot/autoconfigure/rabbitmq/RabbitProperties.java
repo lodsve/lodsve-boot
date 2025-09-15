@@ -16,8 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.rabbitmq;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
@@ -27,12 +25,18 @@ import java.util.Map;
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
 @ConfigurationProperties(prefix = "lodsve.rabbit")
 public class RabbitProperties {
     /**
      * 定义队列
      */
     private Map<String, QueueConfig> queues;
+
+    public Map<String, QueueConfig> getQueues() {
+        return queues;
+    }
+
+    public void setQueues(Map<String, QueueConfig> queues) {
+        this.queues = queues;
+    }
 }

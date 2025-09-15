@@ -16,7 +16,6 @@
  */
 package com.lodsve.boot.autoconfigure.swagger;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -28,7 +27,6 @@ import java.util.List;
  * @author Hulk Sun
  */
 @ConfigurationProperties(prefix = "lodsve.swagger")
-@Data
 public class SwaggerProperties {
     /**
      * 接口版本号
@@ -70,7 +68,78 @@ public class SwaggerProperties {
     @NestedConfigurationProperty
     private AuthConfig auth;
 
-    @Data
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTermsOfServiceUrl() {
+        return termsOfServiceUrl;
+    }
+
+    public void setTermsOfServiceUrl(String termsOfServiceUrl) {
+        this.termsOfServiceUrl = termsOfServiceUrl;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public String getLicenseUrl() {
+        return licenseUrl;
+    }
+
+    public void setLicenseUrl(String licenseUrl) {
+        this.licenseUrl = licenseUrl;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public List<GlobalParameter> getGlobalParameters() {
+        return globalParameters;
+    }
+
+    public void setGlobalParameters(List<GlobalParameter> globalParameters) {
+        this.globalParameters = globalParameters;
+    }
+
+    public AuthConfig getAuth() {
+        return auth;
+    }
+
+    public void setAuth(AuthConfig auth) {
+        this.auth = auth;
+    }
+
     public static class Contact {
         /**
          * 项目联系人
@@ -84,9 +153,32 @@ public class SwaggerProperties {
          * 项目联系人邮箱
          */
         private String email;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
     }
 
-    @Data
     public static class GlobalParameter {
         /**
          * 参数名称
@@ -109,9 +201,48 @@ public class SwaggerProperties {
          * 是否必填
          */
         private boolean required;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getScope() {
+            return scope;
+        }
+
+        public void setScope(String scope) {
+            this.scope = scope;
+        }
+
+        public boolean isRequired() {
+            return required;
+        }
+
+        public void setRequired(boolean required) {
+            this.required = required;
+        }
     }
 
-    @Data
     public static class AuthConfig {
         /**
          * 是否启用认证
@@ -121,5 +252,21 @@ public class SwaggerProperties {
          * 认证的key名称
          */
         private String key;
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
     }
 }

@@ -18,20 +18,43 @@ package com.lodsve.boot.example.pojo.form;
 
 import com.lodsve.boot.example.enums.Gender;
 import com.lodsve.boot.pojo.BaseForm;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * .
  *
  * @author Hulk Sun
  */
-@Setter
-@Getter
-@ToString(callSuper = true)
 public class DemoForm extends BaseForm {
     private String name;
     private Long age;
     private Gender sex;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public Gender getSex() {
+        return sex;
+    }
+
+    public void setSex(Gender sex) {
+        this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
