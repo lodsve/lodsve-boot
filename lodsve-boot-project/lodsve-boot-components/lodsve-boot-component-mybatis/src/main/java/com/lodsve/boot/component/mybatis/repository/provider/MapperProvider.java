@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.component.mybatis.repository.provider;
 
+import com.lodsve.boot.component.mybatis.repository.BaseBatchUpdateRepository;
+import com.lodsve.boot.component.mybatis.repository.BaseDeleteRepository;
+import com.lodsve.boot.component.mybatis.repository.BaseQueryRepository;
 import com.lodsve.boot.component.mybatis.repository.BaseRepository;
+import com.lodsve.boot.component.mybatis.repository.BaseUpdateRepository;
 import com.lodsve.boot.component.mybatis.repository.annotations.LogicDelete;
 import com.lodsve.boot.component.mybatis.repository.bean.ColumnBean;
 import com.lodsve.boot.component.mybatis.repository.bean.DeleteColumn;
@@ -54,7 +58,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 根据实体中的id属性进行查询Sql
-     * @see BaseRepository#findById(Serializable)
+     * @see BaseQueryRepository#findById(Serializable)
      */
     public String findById(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -74,7 +78,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#findEnabledById(Serializable)
+     * @see BaseQueryRepository#findEnabledById(Serializable)
      */
     public String findEnabledById(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -98,7 +102,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#findByIds(List)
+     * @see BaseQueryRepository#findByIds(List)
      */
     public String findByIds(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -119,7 +123,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#findEnabledByIds(List)
+     * @see BaseQueryRepository#findEnabledByIds(List)
      */
     public String findEnabledByIds(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -144,7 +148,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#save(Object)
+     * @see BaseUpdateRepository#save(Object)
      */
     public String save(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -165,7 +169,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#batchSave(List)
+     * @see BaseBatchUpdateRepository#batchSave(List)
      */
     public String batchSave(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -187,7 +191,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#updateAll(Object)
+     * @see BaseUpdateRepository#updateAll(Object)
      */
     public String updateAll(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -213,7 +217,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#update(Object)
+     * @see BaseUpdateRepository#update(Object)
      */
     public String update(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -253,7 +257,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#deleteById(Serializable)
+     * @see BaseDeleteRepository#deleteById(Serializable)
      */
     public String deleteById(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -270,7 +274,7 @@ public class MapperProvider extends BaseMapperProvider {
      * @param ms MappedStatement
      * @return 生成的SQL语句
      * @throws SQLSyntaxErrorException SQLSyntaxErrorException
-     * @see BaseRepository#logicDeleteById(Serializable)
+     * @see BaseDeleteRepository#logicDeleteById(Serializable)
      */
     public String logicDeleteById(MappedStatement ms) throws SQLSyntaxErrorException {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -304,7 +308,7 @@ public class MapperProvider extends BaseMapperProvider {
      * @param ms MappedStatement
      * @return 生成的SQL语句
      * @throws SQLSyntaxErrorException SQLSyntaxErrorException
-     * @see BaseRepository#logicDeleteByIdWithModifiedBy(Serializable, Long)
+     * @see BaseDeleteRepository#logicDeleteByIdWithModifiedBy(Serializable, Long)
      */
     public String logicDeleteByIdWithModifiedBy(MappedStatement ms) throws SQLSyntaxErrorException {
         EntityTable table = EntityHelper.getEntityTable(getSelectReturnType(ms));
@@ -343,7 +347,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#count()
+     * @see BaseQueryRepository#count()
      */
     public String count(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -359,7 +363,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#countEnabled()
+     * @see BaseQueryRepository#countEnabled()
      */
     public String countEnabled(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -374,7 +378,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#isExist(Serializable)
+     * @see BaseQueryRepository#isExist(Serializable)
      */
     public String isExist(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -389,7 +393,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseRepository#isExistEnabled(Serializable)
+     * @see BaseQueryRepository#isExistEnabled(Serializable)
      */
     public String isExistEnabled(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);

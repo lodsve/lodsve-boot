@@ -131,10 +131,8 @@ public class MapperHelper {
         }
         //自动注册继承的接口
         Class<?>[] interfaces = mapperClass.getInterfaces();
-        if (interfaces != null && interfaces.length > 0) {
-            for (Class<?> anInterface : interfaces) {
-                registerMapper(anInterface);
-            }
+        for (Class<?> anInterface : interfaces) {
+            registerMapper(anInterface);
         }
     }
 

@@ -121,7 +121,7 @@ public class MybatisAutoConfiguration {
                 return;
             }
 
-            logger.debug("Searching for mappers annotated with @Mapper");
+            logger.debug("Searching for mappers annotated with @Repository");
 
             List<String> packages = AutoConfigurationPackages.get(this.beanFactory);
             if (logger.isDebugEnabled()) {
