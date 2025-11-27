@@ -29,6 +29,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.lodsve.boot.component.filesystem.handler.AliyunOssFileSystemHandler;
 import com.lodsve.boot.component.filesystem.handler.AmazonS3FileSystemHandler;
 import com.lodsve.boot.component.filesystem.handler.FileSystemHandler;
+import com.lodsve.boot.component.filesystem.handler.MinioFileSystemHandler;
 import com.lodsve.boot.component.filesystem.handler.TencentCosFileSystemHandler;
 import com.lodsve.boot.component.filesystem.server.FileSystemServer;
 import com.qcloud.cos.COSClient;
@@ -37,6 +38,7 @@ import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.region.Region;
+import io.minio.MinioClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -190,6 +192,26 @@ public class FileSystemAutoConfiguration {
         @ConditionalOnMissingBean
         public FileSystemHandler fileSystemHandler(COSClient cosClient) {
             return new TencentCosFileSystemHandler(cosClient, properties.getClient().getProtocol(), properties.getDefaultExpire(), properties.getBucketAcl());
+        }
+    }
+
+    @Configuration
+    @ConditionalOnClass(MinioClient.class)
+    @ConditionalOnProperty(name = "lodsve.file-system.type", havingValue = "MINIO")
+    public static class MinioConfiguration {
+        @Bean
+        @ConditionalOnMissingBean
+        public MinioClient minioClient() {
+            return MinioClient.builder()
+                .endpoint(properties.getMinio().getEndpoint())
+                .credentials(properties.getAccessKeyId(), properties.getAccessKeySecret())
+                .build();
+        }
+
+        @Bean
+        @ConditionalOnMissingBean
+        public FileSystemHandler fileSystemHandler(MinioClient minioClient) {
+            return new MinioFileSystemHandler(minioClient, properties.getMinio().getEndpoint(), properties.getDefaultExpire(), properties.getBucketAcl());
         }
     }
 }

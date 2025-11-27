@@ -33,5 +33,6 @@ public enum FileSystemTypeEnum {
     /**
      * 腾讯云COS存储
      */
-    TENCENT_COS
+    TENCENT_COS,
+    MINIO
 }

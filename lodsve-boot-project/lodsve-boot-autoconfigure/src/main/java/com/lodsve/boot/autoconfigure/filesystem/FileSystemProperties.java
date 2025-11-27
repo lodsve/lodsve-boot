@@ -69,6 +69,11 @@ public class FileSystemProperties {
     @NestedConfigurationProperty
     private TencentCosProperties tencentCos = new TencentCosProperties();
     /**
+     * Minio 配置
+     */
+    @NestedConfigurationProperty
+    private MinioProperties minio = new MinioProperties();
+    /**
      * 客户端扩展配置
      */
     @NestedConfigurationProperty
@@ -138,6 +143,14 @@ public class FileSystemProperties {
         this.tencentCos = tencentCos;
     }
 
+    public MinioProperties getMinio() {
+        return minio;
+    }
+
+    public void setMinio(MinioProperties minio) {
+        this.minio = minio;
+    }
+
     public ClientExtendProperties getClient() {
         return client;
     }
@@ -197,6 +210,24 @@ public class FileSystemProperties {
 
         public void setRegion(String region) {
             this.region = region;
+        }
+    }
+
+    /**
+     * Minio 基本服務端屬性.
+     */
+    public static class MinioProperties {
+        /**
+         * 服務端 endpoint，如 http://localhost:9000
+         */
+        private String endpoint;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
         }
     }
 
