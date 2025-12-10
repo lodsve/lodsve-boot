@@ -33,7 +33,7 @@ import java.lang.reflect.Field;
  *
  * @author Hulk Sun
  */
-@SuppressWarnings("all")
+@SuppressWarnings({"type", "rawtypes", "unchecked"})
 public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {
     @Override
     public Enum deserialize(JsonParser p, DeserializationContext context) throws IOException {
@@ -59,7 +59,6 @@ public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {
         return getEnumFromCodeable(clazz, value);
     }
 
-    @SuppressWarnings("unchecked")
     private <T extends Enum<T>> Class<T> getType(JsonParser p) throws IOException {
         Object object = p.getCurrentValue();
         Class<?> clazz = object.getClass();
@@ -76,7 +75,7 @@ public class CodeableEnumDeserializer extends JsonDeserializer<Enum> {
     }
 
     private boolean support(Class<?> clazz) {
-        return clazz != null && Enum.class.isAssignableFrom(clazz) && Enum.class.isAssignableFrom(clazz);
+        return clazz != null && Codeable.class.isAssignableFrom(clazz) && Enum.class.isAssignableFrom(clazz);
     }
 
     private Enum<?> getEnumFromCodeable(Class<? extends Enum> clazz, String value) {
