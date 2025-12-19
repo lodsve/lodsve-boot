@@ -1,0 +1,5 @@
+description = 'lodsve boot parent'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+}

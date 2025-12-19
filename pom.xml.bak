@@ -1,0 +1,269 @@
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.lodsve.boot</groupId>
+    <artifactId>lodsve-boot-build</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2020</inceptionYear>
+    <name>lodsve boot build</name>
+    <description>Lodsve develop kits base on Spring-Boot and some opensource components!</description>
+    <url>https://github.com/lodsve/lodsve-boot</url>
+
+    <properties>
+        <revision>1.0.3-SNAPSHOT</revision>
+        <lodsve.boot.version>${revision}</lodsve.boot.version>
+
+        <!-- 基本属性 -->
+        <project.encoding>UTF-8</project.encoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+
+        <!-- 所有的插件版本 -->
+        <central.publishing-maven.plugin.version>0.8.0</central.publishing-maven.plugin.version>
+        <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+        <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
+        <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
+        <lodsve.javatemplate.maven.plugins.version>1.0.3</lodsve.javatemplate.maven.plugins.version>
+
+        <github.repository.url>https://maven.pkg.github.com/lodsve/lodsve-boot</github.repository.url>
+
+        <!-- 自定义配置 -->
+        <main.user.dir>${basedir}</main.user.dir>
+        <manifest.built.name>Hulk Sun</manifest.built.name>
+    </properties>
+
+    <modules>
+        <module>lodsve-boot-project</module>
+    </modules>
+
+    <organization>
+        <name>lodsve</name>
+        <url>https://github.com/lodsve</url>
+    </organization>
+
+    <!-- license -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <id>sunhao</id>
+            <name>孙昊</name>
+            <email>sunhao.java@gmail.com</email>
+            <roles>
+                <role>creator</role>
+                <role>manager</role>
+                <role>developer</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <!-- issue -->
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/lodsve/lodsve-boot/issues</url>
+    </issueManagement>
+
+    <!-- 代码库 -->
+    <scm>
+        <connection>scm:git:git@github.com:lodsve/lodsve-boot.git</connection>
+        <developerConnection>scm:git:git@github.com:lodsve/lodsve-boot.git</developerConnection>
+        <url>https://github.com/lodsve/lodsve-boot/tree/master</url>
+    </scm>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.lodsve.maven.plugins</groupId>
+                    <artifactId>lodsve-javatemplate-maven-plugin</artifactId>
+                    <version>${lodsve.javatemplate.maven.plugins.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-sources</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>generate-sources</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten.maven.plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>jdk-11</id>
+            <activation>
+                <jdk>11</jdk>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.compiler.source>11</maven.compiler.source>
+                <maven.compiler.target>11</maven.compiler.target>
+                <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        <profile>
+            <id>release-oss</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central.publishing-maven.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>oss-central</publishingServerId>
+                            <!-- 自动发布 -->
+                            <autoPublish>false</autoPublish>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release-third</id>
+            <!-- 第三方发布仓库 -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>third-repository</id>
+                    <name>third repository snapshots</name>
+                    <url>${third.snapshots.repository.url}</url>
+                </snapshotRepository>
+
+                <repository>
+                    <id>third-repository</id>
+                    <name>third repository releases</name>
+                    <url>${third.releases.repository.url}</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <!-- GPG,发布maven中央仓库用 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- 这个configuration必须配置，用于gpg非交互式密码输入 -->
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>javadoc</id>
+            <build>
+                <plugins>
+                    <!-- 生成javadoc的插件 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <charset>${project.build.sourceEncoding}</charset>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <docencoding>${project.build.sourceEncoding}</docencoding>
+                            <doctitle>Lodsve Boot JavaDocs</doctitle>
+                            <windowtitle>Lodsve Boot JavaDocs</windowtitle>
+                            <locale>zh_CN</locale>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>include-examples</id>
+            <modules>
+                <module>lodsve-boot-examples</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,10 @@
+description = 'lodsve boot component rdbms'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'com.google.guava:guava'
+    api 'org.aspectj:aspectjweaver'
+    api 'org.springframework:spring-jdbc'
+    api project(':lodsve-boot-project:lodsve-boot')
+}

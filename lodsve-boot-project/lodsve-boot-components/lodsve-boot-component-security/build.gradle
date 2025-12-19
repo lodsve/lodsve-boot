@@ -1,0 +1,9 @@
+description = 'lodsve boot component security'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot')
+    api 'javax.servlet:javax.servlet-api'
+    api 'org.springframework:spring-webmvc'
+}

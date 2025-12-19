@@ -1,0 +1,11 @@
+description = 'lodsve boot component script'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot')
+
+    compileOnly 'org.codehaus.groovy:groovy'
+    compileOnly 'org.jruby:jruby'
+    compileOnly 'org.python:jython-standalone'
+}

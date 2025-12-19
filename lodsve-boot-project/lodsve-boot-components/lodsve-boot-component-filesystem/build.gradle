@@ -1,0 +1,14 @@
+description = 'lodsve boot component filesystem'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'org.apache.commons:commons-lang3'
+    api 'commons-io:commons-io'
+    api project(':lodsve-boot-project:lodsve-boot')
+
+    compileOnly 'com.aliyun.oss:aliyun-sdk-oss'
+    compileOnly 'com.amazonaws:aws-java-sdk-s3'
+    compileOnly 'com.qcloud:cos_api'
+    compileOnly 'io.minio:minio'
+}

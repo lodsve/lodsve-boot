@@ -23,7 +23,7 @@ import com.lodsve.boot.component.script.PythonScriptEngine;
 import com.lodsve.boot.component.script.RubyScriptEngine;
 import com.lodsve.boot.component.script.ScriptEngine;
 import com.lodsve.boot.component.script.SpelScriptEngine;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
 import org.jruby.embed.jsr223.JRubyEngineFactory;
 import org.python.jsr223.PyScriptEngineFactory;

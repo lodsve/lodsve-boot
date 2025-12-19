@@ -1,0 +1,13 @@
+description = 'Lodsve Boot Example Sample'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.data:spring-data-commons'
+
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-webmvc')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-nacos')
+}

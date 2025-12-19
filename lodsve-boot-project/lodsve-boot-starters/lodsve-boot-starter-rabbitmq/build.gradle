@@ -1,0 +1,8 @@
+description = 'lodsve boot starter RabbitMQ'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'org.springframework.boot:spring-boot-starter-amqp'
+}

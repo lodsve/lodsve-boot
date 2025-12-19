@@ -1,0 +1,10 @@
+description = 'lodsve boot starter open feign'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+}

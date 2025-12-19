@@ -1,0 +1,8 @@
+description = 'lodsve boot component countdown'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'org.springframework.data:spring-data-redis'
+    api project(':lodsve-boot-project:lodsve-boot')
+}

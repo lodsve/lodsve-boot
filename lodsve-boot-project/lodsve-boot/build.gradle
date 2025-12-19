@@ -1,0 +1,42 @@
+description = 'lodsve boot'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    // spring dependencies
+    api 'org.springframework.boot:spring-boot'
+    compileOnly 'org.thymeleaf:thymeleaf'
+    testImplementation 'org.thymeleaf:thymeleaf'
+
+    // lodsve boot dependencies
+    api 'com.github.dozermapper:dozer-core'
+    api 'net.sourceforge.jexcelapi:jxl'
+    api 'com.belerweb:pinyin4j'
+    api 'dom4j:dom4j'
+    api 'org.apache.ant:ant'
+    compileOnly 'com.ibeetl:beetl'
+    testImplementation 'com.ibeetl:beetl'
+    
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    api 'com.fasterxml.jackson.core:jackson-annotations'
+    api 'com.google.code.gson:gson'
+
+    compileOnly 'com.101tec:zkclient'
+    testImplementation 'com.101tec:zkclient'
+
+    // JAXB for Java 11+
+    api 'javax.xml.bind:jaxb-api:2.3.1'
+    api 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+}
+
+// 处理 Java 模板
+task generateSources(type: Copy) {
+    from 'src/main/java-templates'
+    into "$buildDir/generated/sources/java-templates"
+    expand('project': [ 'version': project.version ])
+    filteringCharset = 'UTF-8'
+}
+
+sourceSets.main.java.srcDir "$buildDir/generated/sources/java-templates"
+compileJava.dependsOn generateSources
+sourcesJar.dependsOn generateSources

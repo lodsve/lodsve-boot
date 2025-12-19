@@ -1,0 +1,7 @@
+description = 'lodsve boot starter encryption'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+}

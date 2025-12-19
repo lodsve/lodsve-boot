@@ -1,0 +1,12 @@
+description = 'lodsve boot component redis'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'org.apache.commons:commons-lang3'
+    api 'org.springframework.boot:spring-boot-starter-data-redis'
+    api 'org.aspectj:aspectjweaver'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    api project(':lodsve-boot-project:lodsve-boot')
+}

@@ -1,0 +1,21 @@
+description = 'lodsve boot examples for mybatis'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.data:spring-data-commons'
+
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-webmvc')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-mybatis')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-rdbms')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-encryption')
+    implementation project(':lodsve-boot-project:lodsve-boot-actuator-autoconfigure')
+
+    implementation 'com.alibaba:druid'
+    implementation 'org.jasypt:jasypt'
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'mysql:mysql-connector-java'
+}

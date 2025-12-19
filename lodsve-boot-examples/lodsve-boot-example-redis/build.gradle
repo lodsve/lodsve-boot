@@ -1,0 +1,12 @@
+description = 'lodsve boot examples for redis'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-webmvc')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-redis')
+    implementation project(':lodsve-boot-project:lodsve-boot-actuator-autoconfigure')
+}

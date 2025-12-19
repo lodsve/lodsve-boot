@@ -1,0 +1,10 @@
+description = 'lodsve boot starter rdbms'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'org.springframework.boot:spring-boot-starter-aop'
+    api project(':lodsve-boot-project:lodsve-boot-components:lodsve-boot-component-rdbms')
+    api 'com.zaxxer:HikariCP'
+}

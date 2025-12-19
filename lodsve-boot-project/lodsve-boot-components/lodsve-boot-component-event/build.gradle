@@ -1,0 +1,8 @@
+description = 'lodsve boot component event'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'javax.annotation:javax.annotation-api'
+    api project(':lodsve-boot-project:lodsve-boot')
+}

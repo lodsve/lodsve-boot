@@ -1,0 +1,7 @@
+description = 'lodsve boot examples for rpc api'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-components:lodsve-boot-component-openfeign-client')
+}

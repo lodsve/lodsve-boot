@@ -1,0 +1,14 @@
+description = 'lodsve boot component openfeign client'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api 'org.springframework.data:spring-data-commons'
+    api 'org.apache.commons:commons-lang3'
+    api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+
+    compileOnly 'com.google.code.gson:gson'
+    compileOnly 'com.fasterxml.jackson.core:jackson-annotations'
+}

@@ -1,0 +1,16 @@
+description = 'lodsve boot component mybatis'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api 'org.mybatis:mybatis'
+    api 'org.mybatis:mybatis-spring'
+    api 'javax.persistence:persistence-api'
+    api 'org.javassist:javassist'
+    api 'org.springframework.data:spring-data-commons'
+    api 'org.springframework:spring-jdbc'
+    api 'com.google.guava:guava'
+    api 'com.github.jsqlparser:jsqlparser'
+    api 'com.vip.vjtools:vjkit'
+    api project(':lodsve-boot-project:lodsve-boot')
+}

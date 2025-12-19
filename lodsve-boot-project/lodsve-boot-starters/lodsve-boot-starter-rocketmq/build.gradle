@@ -1,0 +1,8 @@
+description = 'lodsve boot starter rocketmq'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'org.apache.rocketmq:rocketmq-spring-boot-starter'
+}

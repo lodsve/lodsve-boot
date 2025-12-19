@@ -1,0 +1,14 @@
+description = 'lodsve boot examples for script'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-script')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation 'org.codehaus.groovy:groovy-all'
+    implementation 'org.python:jython-standalone'
+    implementation 'org.jruby:jruby'
+    implementation 'com.google.guava:guava'
+}

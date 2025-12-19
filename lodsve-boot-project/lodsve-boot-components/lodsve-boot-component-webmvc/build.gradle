@@ -1,0 +1,14 @@
+description = 'lodsve boot component webmvc'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot')
+    api 'org.springframework.boot:spring-boot-starter-web'
+    api 'javax.servlet:javax.servlet-api'
+    api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'com.fasterxml.jackson.core:jackson-annotations'
+    api 'com.google.guava:guava'
+
+    compileOnly 'org.aspectj:aspectjweaver'
+}

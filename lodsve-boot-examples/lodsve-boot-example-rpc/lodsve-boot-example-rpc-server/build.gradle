@@ -1,0 +1,10 @@
+description = 'lodsve boot examples for rpc server'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-webmvc')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation project(':lodsve-boot-examples:lodsve-boot-example-rpc:lodsve-boot-example-rpc-api')
+}

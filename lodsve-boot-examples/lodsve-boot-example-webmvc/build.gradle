@@ -1,0 +1,16 @@
+description = 'lodsve boot examples for webmvc'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.data:spring-data-commons'
+    implementation 'org.aspectj:aspectjweaver'
+
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-webmvc')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-swagger')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-validator')
+    implementation project(':lodsve-boot-project:lodsve-boot-starters:lodsve-boot-starter-security')
+    implementation project(':lodsve-boot-project:lodsve-boot-actuator-autoconfigure')
+}

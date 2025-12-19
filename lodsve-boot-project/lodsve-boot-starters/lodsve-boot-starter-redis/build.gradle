@@ -1,0 +1,9 @@
+description = 'lodsve boot starter redis'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api project(':lodsve-boot-project:lodsve-boot-components:lodsve-boot-component-redis')
+    api 'org.apache.commons:commons-pool2'
+}

@@ -1,0 +1,9 @@
+description = 'lodsve boot starter swagger'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'io.springfox:springfox-swagger2'
+    api 'io.springfox:springfox-swagger-ui'
+}

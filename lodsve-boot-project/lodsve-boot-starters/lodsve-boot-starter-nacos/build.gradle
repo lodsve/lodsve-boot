@@ -1,0 +1,9 @@
+description = 'lodsve boot starter nacos'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot-autoconfigure')
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+}

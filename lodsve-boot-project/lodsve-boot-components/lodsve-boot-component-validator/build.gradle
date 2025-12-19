@@ -1,0 +1,11 @@
+description = 'lodsve boot component validator'
+
+dependencies {
+    api platform(project(':lodsve-boot-project:lodsve-boot-dependencies'))
+
+    api project(':lodsve-boot-project:lodsve-boot')
+    api 'org.springframework:spring-web'
+    api 'org.javassist:javassist'
+    api 'org.aspectj:aspectjweaver'
+    api 'javax.servlet:javax.servlet-api'
+}

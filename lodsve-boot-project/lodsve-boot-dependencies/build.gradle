@@ -1,0 +1,154 @@
+plugins {
+    id 'java-platform'
+}
+
+// 允许子项目使用此平台
+javaPlatform {
+    allowDependencies()
+}
+
+ext {
+    springCloudVersion = '2021.0.8'
+    dozerVersion = '6.5.0'
+    guavaVersion = '28.2-jre'
+    jxlVersion = '2.6.12'
+    pinyin4jVersion = '2.5.0'
+    dom4jVersion = '1.6.1'
+    antVersion = '1.7.0'
+    beetlVersion = '2.9.8'
+    aliyunSdkOssVersion = '3.11.1'
+    awsJavaSdkS3Version = '1.11.868'
+    cosApiVersion = '5.6.55'
+    minioVersion = '8.5.9'
+    commonsIoVersion = '2.4'
+    mybatisVersion = '3.4.6'
+    mybatisSpringVersion = '1.3.2'
+    jsqlparserVersion = '1.2'
+    persistenceVersion = '1.0'
+    javassistVersion = '3.23.1-GA'
+    vjkitVersion = '1.0.5'
+    druidVersion = '1.2.1'
+    rocketmqSpringBootStarterVersion = '2.1.1'
+    springfoxSwaggerVersion = '3.0.0'
+    alibabaNacosConfigVersion = '2021.0.1.0'
+    alibabaNacosDiscoveryVersion = '2021.0.1.0'
+    groovyAllVersion = '2.4.15'
+    jrubyVersion = '1.7.26'
+    jyphonVersion = '2.7.1b3'
+    jasyptVersion = '1.9.3'
+    zkclientVersion = '0.10'
+    lodsveBootVersion = '1.0.3-SNAPSHOT'
+}
+
+dependencies {
+    // Spring Cloud
+    api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    // Spring Boot
+    api platform("org.springframework.boot:spring-boot-dependencies:2.6.3")
+
+    constraints {
+        api "com.github.dozermapper:dozer-core:${dozerVersion}"
+        api "com.google.guava:guava:${guavaVersion}"
+        api "net.sourceforge.jexcelapi:jxl:${jxlVersion}"
+        
+        // 拼音
+        api "com.belerweb:pinyin4j:${pinyin4jVersion}"
+        
+        // xml处理
+        api "dom4j:dom4j:${dom4jVersion}"
+        
+        // ant
+        api("org.apache.ant:ant:${antVersion}") {
+            because 'exclude ant-launcher'
+        }
+        
+        // 模板引擎
+        api "com.ibeetl:beetl:${beetlVersion}"
+        
+        // aliyun oss
+        api "com.aliyun.oss:aliyun-sdk-oss:${aliyunSdkOssVersion}"
+        
+        // aws s3
+        api "com.amazonaws:aws-java-sdk-s3:${awsJavaSdkS3Version}"
+        
+        // tencent cos
+        api "com.qcloud:cos_api:${cosApiVersion}"
+        api "io.minio:minio:${minioVersion}"
+        api "commons-io:commons-io:${commonsIoVersion}"
+        
+        // mybatis
+        api "org.mybatis:mybatis:${mybatisVersion}"
+        api "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+        
+        // jsqlparser
+        api "com.github.jsqlparser:jsqlparser:${jsqlparserVersion}"
+        
+        // javax
+        api "javax.persistence:persistence-api:${persistenceVersion}"
+        
+        // java字节码操作
+        api "org.javassist:javassist:${javassistVersion}"
+        
+        // vjtools
+        api "com.vip.vjtools:vjkit:${vjkitVersion}"
+        
+        // jasypt
+        api "org.jasypt:jasypt:${jasyptVersion}"
+        
+        // druid
+        api "com.alibaba:druid:${druidVersion}"
+        
+        // rocketmq
+        api "org.apache.rocketmq:rocketmq-spring-boot-starter:${rocketmqSpringBootStarterVersion}"
+        
+        // springfox
+        api "io.springfox:springfox-swagger2:${springfoxSwaggerVersion}"
+        api "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+        
+        // alibaba nacos
+        api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:${alibabaNacosConfigVersion}"
+        api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:${alibabaNacosDiscoveryVersion}"
+        
+        // other languages
+        api "org.codehaus.groovy:groovy-all:${groovyAllVersion}"
+        api "org.jruby:jruby:${jrubyVersion}"
+        api "org.python:jython-standalone:${jyphonVersion}"
+        
+        // zookeeper driver zkclient
+        api "com.101tec:zkclient:${zkclientVersion}"
+        
+        // lodsve boot
+        api "com.lodsve.boot:lodsve-boot:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-actuator:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-actuator-autoconfigure:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-autoconfigure:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-countdown:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-event:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-filesystem:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-mybatis:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-openfeign-client:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-rdbms:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-redis:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-script:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-security:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-validator:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-component-webmvc:${lodsveBootVersion}"
+        
+        api "com.lodsve.boot:lodsve-boot-starter-countdown:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-encryption:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-event:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-filesystem:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-mybatis:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-nacos:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-openfeign:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-rabbitmq:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-rdbms:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-redis:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-rocketmq:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-script:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-security:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-swagger:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-validator:${lodsveBootVersion}"
+        api "com.lodsve.boot:lodsve-boot-starter-webmvc:${lodsveBootVersion}"
+    }
+}
