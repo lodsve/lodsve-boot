@@ -62,11 +62,22 @@ public class EventExecutor implements InitializingBean {
 
     private static final Object REGISTER_LOCK_OBJECT = new Object();
 
+    /**
+     * 构造函数.
+     *
+     * @param executorService 线程池
+     * @param listeners       所有监听器列表
+     */
     public EventExecutor(ExecutorService executorService, List<EventListener> listeners) {
         this.executorService = executorService;
         this.listeners = listeners;
     }
 
+    /**
+     * 初始化监听器，解析其泛型事件类型并注册.
+     *
+     * @param listener 监听器
+     */
     private void initListener(EventListener listener) {
         Type[] clazz = listener.getClass().getGenericInterfaces();
         if (0 == clazz.length) {
@@ -177,6 +188,12 @@ public class EventExecutor implements InitializingBean {
         executorService.execute(() -> execute(asyncListeners, event));
     }
 
+    /**
+     * 执行一组监听器的回调.
+     *
+     * @param listeners 监听器列表
+     * @param event     事件对象
+     */
     private void execute(List<EventListener> listeners, BaseEvent event) {
         for (EventListener listener : listeners) {
             if (logger.isDebugEnabled()) {
@@ -187,6 +204,11 @@ public class EventExecutor implements InitializingBean {
         }
     }
 
+    /**
+     * 接口方法，在属性设置完成后初始化所有监听器.
+     *
+     * @throws Exception 初始化异常
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         if (null == listeners) {

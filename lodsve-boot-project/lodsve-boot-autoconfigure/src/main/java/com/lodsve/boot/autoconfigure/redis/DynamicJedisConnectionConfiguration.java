@@ -56,16 +56,36 @@ import java.util.concurrent.atomic.AtomicReference;
 @ConditionalOnClass({GenericObjectPool.class, JedisConnection.class, Jedis.class})
 public class DynamicJedisConnectionConfiguration extends AbstractRedisConnectionConfiguration {
 
+    /**
+     * 构造函数.
+     *
+     * @param properties                    Redis 配置属性
+     * @param sentinelConfigurationProvider 哨兵配置提供者
+     * @param clusterConfigurationProvider  集群配置提供者
+     */
     protected DynamicJedisConnectionConfiguration(ObjectProvider<RedisProperties> properties, ObjectProvider<RedisSentinelConfiguration> sentinelConfigurationProvider, ObjectProvider<RedisClusterConfiguration> clusterConfigurationProvider) {
         super(properties, sentinelConfigurationProvider, clusterConfigurationProvider);
     }
 
+    /**
+     * 创建 Redis 连接工厂 Bean.
+     *
+     * @param builderCustomizers Jedis 客户端配置构建器自定义器
+     * @return RedisConnectionFactory
+     * @throws UnknownHostException 当主机名无法解析时抛出
+     */
     @Bean
     @ConditionalOnMissingBean(RedisConnectionFactory.class)
     RedisConnectionFactory redisConnectionFactory(ObjectProvider<JedisClientConfigurationBuilderCustomizer> builderCustomizers) throws UnknownHostException {
         return createJedisConnectionFactory(builderCustomizers);
     }
 
+    /**
+     * 内部创建 Jedis 连接工厂的方法，支持多数据源动态切换.
+     *
+     * @param builderCustomizers Jedis 客户端配置构建器自定义器
+     * @return RedisConnectionFactory (动态)
+     */
     private RedisConnectionFactory createJedisConnectionFactory(ObjectProvider<JedisClientConfigurationBuilderCustomizer> builderCustomizers) {
         Map<String, JedisConnectionFactory> factories = Maps.newHashMap();
 
@@ -119,6 +139,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return new DynamicJedisConnectionFactory(StringUtils.isEmpty(getProperties().getDefaultName()) ? defaultName.get() : getProperties().getDefaultName(), factories);
     }
 
+    /**
+     * 创建动态单机模式的连接工厂列表.
+     *
+     * @param clientConfiguration Jedis 客户端配置
+     * @return 包含多个数据源名称及其对应连接工厂的 Map
+     */
     private Map<String, JedisConnectionFactory> createDynamicSingletonConnectionFactory(JedisClientConfiguration clientConfiguration) {
         Map<String, Singleton> singletons = getProperties().getSingletons();
         Map<String, JedisConnectionFactory> factories = Maps.newHashMap();
@@ -135,6 +161,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return factories;
     }
 
+    /**
+     * 创建动态集群模式的连接工厂列表.
+     *
+     * @param clientConfiguration Jedis 客户端配置
+     * @return 包含多个数据源名称及其对应连接工厂的 Map
+     */
     private Map<String, JedisConnectionFactory> createDynamicClusterConnectionFactory(JedisClientConfiguration clientConfiguration) {
         Map<String, Cluster> clusters = getProperties().getClusters();
         Map<String, JedisConnectionFactory> factories = Maps.newHashMap();
@@ -151,6 +183,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return factories;
     }
 
+    /**
+     * 创建动态哨兵模式的连接工厂列表.
+     *
+     * @param clientConfiguration Jedis 客户端配置
+     * @return 包含多个数据源名称及其对应连接工厂的 Map
+     */
     private Map<String, JedisConnectionFactory> createDynamicSentinelConnectionFactory(JedisClientConfiguration clientConfiguration) {
         Map<String, Sentinel> sentinels = getProperties().getSentinels();
         Map<String, JedisConnectionFactory> factories = Maps.newHashMap();
@@ -168,6 +206,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return factories;
     }
 
+    /**
+     * 获取 Jedis 客户端配置.
+     *
+     * @param builderCustomizers 自定义器提供者
+     * @return JedisClientConfiguration
+     */
     private JedisClientConfiguration getJedisClientConfiguration(ObjectProvider<JedisClientConfigurationBuilderCustomizer> builderCustomizers) {
         JedisClientConfigurationBuilder builder = applyProperties(JedisClientConfiguration.builder());
         Pool pool = getProperties().getJedis().getPool();
@@ -178,6 +222,12 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return builder.build();
     }
 
+    /**
+     * 应用 Redis 属性到 Jedis 客户端配置构建器.
+     *
+     * @param builder 构建器
+     * @return JedisClientConfigurationBuilder
+     */
     private JedisClientConfigurationBuilder applyProperties(JedisClientConfigurationBuilder builder) {
         if (getProperties().isSsl()) {
             builder.useSsl();
@@ -192,10 +242,22 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         return builder;
     }
 
+    /**
+     * 应用连接池配置.
+     *
+     * @param pool    连接池属性
+     * @param builder 构建器
+     */
     private void applyPooling(Pool pool, JedisClientConfigurationBuilder builder) {
         builder.usePooling().poolConfig(jedisPoolConfig(pool));
     }
 
+    /**
+     * 将配置属性转换为 JedisPoolConfig.
+     *
+     * @param pool 连接池属性
+     * @return JedisPoolConfig
+     */
     private JedisPoolConfig jedisPoolConfig(Pool pool) {
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(pool.getMaxActive());

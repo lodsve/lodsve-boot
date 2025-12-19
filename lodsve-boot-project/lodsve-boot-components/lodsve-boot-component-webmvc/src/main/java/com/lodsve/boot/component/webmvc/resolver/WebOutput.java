@@ -44,6 +44,11 @@ public class WebOutput {
         this.jsonConverter = jsonConverter;
     }
 
+    /**
+     * 获取原始的 HttpServletResponse.
+     *
+     * @return HttpServletResponse
+     */
     public HttpServletResponse getResponse() {
         return response;
     }
@@ -64,10 +69,21 @@ public class WebOutput {
         this.response.addCookie(c);
     }
 
+    /**
+     * 设置内容类型.
+     *
+     * @param contentType 内容类型
+     */
     public void setContentType(String contentType) {
         this.response.setContentType(contentType);
     }
 
+    /**
+     * 设置内容类型及字符集.
+     *
+     * @param contextType 内容类型
+     * @param charset     字符集
+     */
     public void setContentType(String contextType, String charset) {
         if (charset == null) {
             this.response.setContentType(contextType);
@@ -107,6 +123,12 @@ public class WebOutput {
         write(jsonConverter.toJson(params));
     }
 
+    /**
+     * 向响应中写入文本内容.
+     *
+     * @param content 文本内容
+     * @throws Exception 写入异常
+     */
     public void write(String content) throws Exception {
         Writer out = response.getWriter();
         out.write(content);

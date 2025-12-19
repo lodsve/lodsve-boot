@@ -31,34 +31,74 @@ public class User implements Serializable {
     private String telNo;
     private Date createAt;
 
+    /**
+     * 获取用户编号.
+     *
+     * @return 用户编号
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * 设置用户编号.
+     *
+     * @param id 用户编号
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 获取用户名.
+     *
+     * @return 用户名
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * 设置用户名.
+     *
+     * @param userName 用户名
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * 获取电话号码.
+     *
+     * @return 电话号码
+     */
     public String getTelNo() {
         return telNo;
     }
 
+    /**
+     * 设置电话号码.
+     *
+     * @param telNo 电话号码
+     */
     public void setTelNo(String telNo) {
         this.telNo = telNo;
     }
 
+    /**
+     * 获取创建时间.
+     *
+     * @return 创建时间
+     */
     public Date getCreateAt() {
         return createAt;
     }
 
+    /**
+     * 设置创建时间.
+     *
+     * @param createAt 创建时间
+     */
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }

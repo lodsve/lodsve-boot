@@ -25,29 +25,34 @@ import java.util.EventObject;
  */
 public abstract class BaseEvent extends EventObject {
     /**
-     * System time when the event happened.
+     * 事件发生时的系统时间戳.
      */
     private final long timestamp;
 
     /**
-     * Constructs a prototypical Event.
+     * 构造函数.
      *
-     * @param source The object on which the Event initially occurred.
-     * @throws IllegalArgumentException if source is null.
+     * @param source 最初发生事件的对象
+     * @throws IllegalArgumentException 如果 source 为 null
      */
     public BaseEvent(Object source) {
         super(source);
         this.timestamp = System.currentTimeMillis();
     }
 
+    /**
+     * 获取事件发生的时间戳.
+     *
+     * @return 时间戳
+     */
     public long getTimestamp() {
         return timestamp;
     }
 
     /**
-     * return event display name
+     * 获取事件显示名称.
      *
-     * @return event display name
+     * @return 事件显示名称
      */
     public abstract String getName();
 }

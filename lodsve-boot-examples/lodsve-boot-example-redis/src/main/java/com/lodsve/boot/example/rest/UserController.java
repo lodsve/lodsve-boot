@@ -40,10 +40,20 @@ import java.util.Set;
 public class UserController {
     private final UserService userService;
 
+    /**
+     * 构造函数.
+     *
+     * @param userService 用户服务
+     */
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * 保存用户信息.
+     *
+     * @param id 用户编号
+     */
     @PostMapping("/{id}")
     public void save(@PathVariable Long id) {
         User user = new User();
@@ -55,26 +65,53 @@ public class UserController {
         userService.save(user);
     }
 
+    /**
+     * 从 String 中加载用户.
+     *
+     * @param id 用户编号
+     * @return 用户对象
+     */
     @GetMapping("/load_from_string")
     public User loadFromString(@RequestParam Long id) {
         return userService.loadFromString(id);
     }
 
+    /**
+     * 从 Set 中加载用户.
+     *
+     * @return 用户对象
+     */
     @GetMapping("/load_from_set")
     public User loadFromSet() {
         return userService.getFromSet();
     }
 
+    /**
+     * 从 List 中加载用户.
+     *
+     * @return 用户对象
+     */
     @GetMapping("/load_from_list")
     public User loadFromList() {
         return userService.getFromList();
     }
 
+    /**
+     * 从 Hash 中加载用户.
+     *
+     * @param id 用户编号
+     * @return 用户对象
+     */
     @GetMapping("/load_from_hash")
     public User loadFromHash(@RequestParam Long id) {
         return userService.getFromHash(id);
     }
 
+    /**
+     * 从 ZSet 中加载用户.
+     *
+     * @return 用户集合
+     */
     @GetMapping("/load_from_zset")
     public Set<User> loadFromZset() {
         return userService.getFromZset();

@@ -30,11 +30,11 @@ public class CountdownEvent extends ApplicationEvent {
     private final CountdownEventType<?> type;
 
     /**
-     * Create a new ApplicationEvent.
+     * 构造函数.
      *
-     * @param source the object on which the event initially occurred (never {@code null})
-     * @param key    key
-     * @param type   type
+     * @param source 最初发生事件的对象
+     * @param key    Redis 键
+     * @param type   事件类型
      */
     public CountdownEvent(Object source, Serializable key, CountdownEventType<?> type) {
         super(source);
@@ -42,10 +42,20 @@ public class CountdownEvent extends ApplicationEvent {
         this.type = type;
     }
 
+    /**
+     * 获取 Redis 键.
+     *
+     * @return 键
+     */
     public final Serializable getKey() {
         return key;
     }
 
+    /**
+     * 获取事件类型.
+     *
+     * @return 事件类型
+     */
     public final CountdownEventType<?> getType() {
         return type;
     }

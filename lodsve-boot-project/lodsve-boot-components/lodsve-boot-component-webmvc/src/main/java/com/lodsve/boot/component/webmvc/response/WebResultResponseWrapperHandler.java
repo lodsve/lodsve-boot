@@ -41,6 +41,11 @@ import java.lang.reflect.Method;
 public class WebResultResponseWrapperHandler implements ResponseBodyAdvice<Object> {
     private final JsonConverter jsonConverter;
 
+    /**
+     * 构造函数.
+     *
+     * @param jsonConverter JSON 转换器
+     */
     public WebResultResponseWrapperHandler(JsonConverter jsonConverter) {
         this.jsonConverter = jsonConverter;
     }
@@ -71,6 +76,12 @@ public class WebResultResponseWrapperHandler implements ResponseBodyAdvice<Objec
         return null != controllerWrapper;
     }
 
+    /**
+     * 检查返回值类型是否已经是 WebResult 或 ResponseEntity.
+     *
+     * @param returnType 返回值类型
+     * @return 如果是则返回 true，否则返回 false
+     */
     private boolean checkReturnType(Class<?> returnType) {
         return WebResult.class.isAssignableFrom(returnType) || ResponseEntity.class.isAssignableFrom(returnType);
     }

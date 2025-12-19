@@ -34,6 +34,11 @@ import javax.servlet.http.HttpServletResponse;
 public class WebResourceDataHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     private final JsonConverter jsonConverter;
 
+    /**
+     * 构造函数.
+     *
+     * @param jsonConverter JSON 转换器
+     */
     public WebResourceDataHandlerMethodArgumentResolver(JsonConverter jsonConverter) {
         this.jsonConverter = jsonConverter;
     }

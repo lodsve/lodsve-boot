@@ -33,6 +33,11 @@ public class EventPublisher {
      */
     private final EventExecutor eventExecutor;
 
+    /**
+     * 构造函数.
+     *
+     * @param eventExecutor 事件执行者
+     */
     public EventPublisher(EventExecutor eventExecutor) {
         this.eventExecutor = eventExecutor;
     }
