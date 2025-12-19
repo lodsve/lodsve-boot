@@ -41,6 +41,7 @@
         <lodsve.boot.version>${revision}</lodsve.boot.version>
 
         <!-- 基本属性 -->
+        <java.version>17</java.version>
         <project.encoding>UTF-8</project.encoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -155,15 +156,15 @@
 
     <profiles>
         <profile>
-            <id>jdk-11</id>
+            <id>jdk-17</id>
             <activation>
-                <jdk>11</jdk>
+                <jdk>17</jdk>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <maven.compiler.source>11</maven.compiler.source>
-                <maven.compiler.target>11</maven.compiler.target>
-                <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+                <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
             </properties>
         </profile>
         <profile>

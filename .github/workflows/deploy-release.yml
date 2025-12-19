@@ -11,11 +11,11 @@ jobs:
     steps:
       - name: 🧾 Checkout Code
         uses: actions/checkout@master
-      - name: 🧾 Setup JDK11 And Apache Maven Central
+      - name: 🧾 Setup JDK17 And Apache Maven Central
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt-hotspot'
-          java-version: 11
+          java-version: 17
           cache: 'maven'
           server-id: oss-central
           server-username: MAVEN_USERNAME

@@ -82,7 +82,7 @@
 ## 导入到您的IDE中
 
 在项目根目录运行命令 `mvn idea:idea` 或者 `mvn eclipse:eclipse` 。
-> **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 8`，`Maven 3.3.X` 。
+> **注意:** 根据上述先决条件，确保已在IDE中正确配置了 `JDK 17`，`Maven 3.3.X` 。
 
 1. 配置Git
 

@@ -83,7 +83,7 @@
 ## Import sources into your IDE
 
 Run command `mvn idea:idea` or `mvn eclipse:eclipse` in the root folder.
-> **Note:** Per the prerequisites above, ensure that you have JDK 8 and Maven 3.3.X configured properly in your IDE.
+> **Note:** Per the prerequisites above, ensure that you have JDK 17 and Maven 3.3.X configured properly in your IDE.
 
 1. Config your Git
 

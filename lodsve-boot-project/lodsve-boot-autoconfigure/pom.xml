@@ -167,6 +167,11 @@
             <artifactId>jython-standalone</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- script end -->
         <!-- webmvc start -->
         <dependency>

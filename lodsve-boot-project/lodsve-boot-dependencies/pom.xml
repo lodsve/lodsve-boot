@@ -64,6 +64,7 @@
         <groovy.all.version>2.4.15</groovy.all.version>
         <jruby.version>1.7.26</jruby.version>
         <jyphon.version>2.7.1b3</jyphon.version>
+        <nashorn.core.version>15.4</nashorn.core.version>
         <jasypt.version>1.9.3</jasypt.version>
         <zkclient.version>0.10</zkclient.version>
     </properties>
@@ -294,6 +295,11 @@
                 <groupId>org.python</groupId>
                 <artifactId>jython-standalone</artifactId>
                 <version>${jyphon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.nashorn</groupId>
+                <artifactId>nashorn-core</artifactId>
+                <version>${nashorn.core.version}</version>
             </dependency>
             <!-- other languages end -->
 
