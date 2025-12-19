@@ -55,9 +55,9 @@ public class MessageObject2 implements Serializable {
 
     @Override
     public String toString() {
-        return "Message{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            '}';
+        return "Message{"
+            + "id='" + id + '\''
+            + ", name='" + name + '\''
+            + '}';
     }
 }

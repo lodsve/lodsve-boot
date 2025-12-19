@@ -16,7 +16,11 @@
  */
 package com.lodsve.boot.example.dto;
 
-import com.lodsve.boot.component.validator.annotations.*;
+import com.lodsve.boot.component.validator.annotations.Chinese;
+import com.lodsve.boot.component.validator.annotations.Limit;
+import com.lodsve.boot.component.validator.annotations.NotNull;
+import com.lodsve.boot.component.validator.annotations.Telephone;
+import com.lodsve.boot.component.validator.annotations.ValidateEntity;
 import com.lodsve.boot.example.config.Equals;
 import com.lodsve.boot.example.enums.Gender;
 import com.lodsve.boot.example.enums.Status;

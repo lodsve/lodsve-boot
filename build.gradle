@@ -44,14 +44,14 @@ subprojects {
     checkstyle {
         toolVersion = '8.42'
         configFile = rootProject.file("tools/check-style.xml")
-        ignoreFailures = true
+        ignoreFailures = false
         showViolations = true
     }
 
     pmd {
         toolVersion = '6.55.0' // 对应 maven-pmd-plugin 3.13.0 默认版本，或可调整
         ruleSets = [rootProject.file("tools/pmd-ruleset.xml").absolutePath]
-        ignoreFailures = true // Maven配置中 printFailingErrors=true 可能意味着只打印不失败，保留Maven行为
+        ignoreFailures = false // Maven配置中 printFailingErrors=true 可能意味着只打印不失败，保留Maven行为
         consoleOutput = true
     }
 

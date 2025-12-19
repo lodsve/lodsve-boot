@@ -61,7 +61,7 @@ public class User1Controller {
     @ApiResponses({@ApiResponse(code = 200, message = "登录成功")})
     @GetMapping
     public void login() {
-        AuthzImpl.LOGIN = true;
+        AuthzImpl.login = true;
     }
 
     @ApiOperation(value = "获取用户", notes = "获取用户")

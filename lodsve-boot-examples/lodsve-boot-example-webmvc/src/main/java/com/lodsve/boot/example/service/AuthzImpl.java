@@ -31,11 +31,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AuthzImpl implements Authorization {
-    public static boolean LOGIN = false;
+    public static boolean login = false;
 
     @Override
     public boolean isLogin(HttpServletRequest request) {
-        return LOGIN;
+        return login;
     }
 
     @Override
