@@ -21,6 +21,8 @@ import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
 import org.springframework.beans.factory.DisposableBean;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystemException;
 import java.util.List;
 import java.util.Map;
 
@@ -112,5 +114,55 @@ public interface FileSystemHandler extends DisposableBean {
      * @return 下载的文件路径(路径 + 文件名)
      * @throws IOException 创建目录失败
      */
-    String downloadFileForStream(String bucketName, String objectName, String targetDir) throws IOException;
+    String downloadFile(String bucketName, String objectName, String targetDir) throws IOException;
+
+    /**
+     * 流式下载文件,objectName指上传时指定的folder+fileName
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件流
+     * @throws IOException 文件流异常
+     */
+    InputStream downloadStream(String bucketName, String objectName) throws IOException;
+
+    /**
+     * 获取文件大小
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件大小
+     */
+    long getFileSize(String bucketName, String objectName);
+
+    /**
+     * 生成预签名URL，用于公开访问存储文件
+     *
+     * @param bucketName   桶的名称
+     * @param objectName   返回值中的objectName
+     * @param realFileName 实际文件名
+     * @return 预签名URL
+     */
+    String preSignUrl(String bucketName, String objectName, String realFileName);
+
+    /**
+     * 生成预签名URL，用于公开访问存储文件
+     *
+     * @param bucketName   桶的名称
+     * @param objectName   返回值中的objectName
+     * @param realFileName 实际文件名
+     * @param expireTime   失效时间，单位（毫秒）
+     * @return 预签名URL
+     */
+    String preSignUrl(String bucketName, String objectName, String realFileName, Long expireTime);
+
+    /**
+     * 获取文件的真实文件名
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件的真实文件名
+     * @throws FileSystemException 文件系统异常
+     */
+    String getRealFileName(String bucketName, String objectName) throws FileSystemException;
 }

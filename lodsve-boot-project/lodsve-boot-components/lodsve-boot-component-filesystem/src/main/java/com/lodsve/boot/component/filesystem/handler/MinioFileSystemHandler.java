@@ -18,6 +18,7 @@ package com.lodsve.boot.component.filesystem.handler;
 
 import com.lodsve.boot.component.filesystem.bean.FileBean;
 import com.lodsve.boot.component.filesystem.bean.FileSystemResult;
+import com.lodsve.boot.utils.UrlEncoderUtil;
 import io.minio.GetObjectArgs;
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
@@ -27,6 +28,7 @@ import io.minio.StatObjectArgs;
 import io.minio.StatObjectResponse;
 import io.minio.errors.ErrorResponseException;
 import io.minio.http.Method;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystemException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,9 +113,7 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
             result.setResult(StringUtils.isNotBlank(writeResponse.etag()));
             return result;
         } catch (Exception e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("upload to minio error: " + e.getMessage(), e);
-            }
+            logger.error("upload to minio error: {}", e.getMessage(), e);
             if (e instanceof IOException) {
                 throw (IOException) e;
             }
@@ -127,13 +128,9 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
         try {
             RemoveObjectArgs args = RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build();
             client.removeObject(args);
-            if (logger.isInfoEnabled()) {
-                logger.info("删除" + bucketName + "下的文件" + objectName + "成功");
-            }
+            logger.info("删除{}下的文件{}成功", bucketName, objectName);
         } catch (Exception e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("delete minio object error: " + e.getMessage(), e);
-            }
+            logger.error("delete minio object error: {}", e.getMessage(), e);
         }
     }
 
@@ -144,16 +141,12 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
         try {
             StatObjectResponse stat = client.statObject(StatObjectArgs.builder().bucket(bucketName).object(objectName).build());
             boolean exist = stat != null;
-            if (logger.isInfoEnabled()) {
-                logger.info(bucketName + "下的文件" + objectName + "存在：" + exist);
-            }
+            logger.info("{}下的文件{}存在：{}", bucketName, objectName, exist);
             return exist;
         } catch (ErrorResponseException e) {
             return false;
         } catch (Exception e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("stat minio object error: " + e.getMessage(), e);
-            }
+            logger.error("stat minio object error: {}", e.getMessage(), e);
             return false;
         }
     }
@@ -176,27 +169,94 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
         }
     }
 
+    @Override
+    public long getFileSize(String bucketName, String objectName) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+
+        try {
+            StatObjectResponse stat = client.statObject(StatObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            return stat.size();
+        } catch (Exception e) {
+            logger.error("stat minio object error: {}", e.getMessage(), e);
+            return 0L;
+        }
+    }
+
+    @Override
+    public String preSignUrl(String bucketName, String objectName, String realFileName) {
+        return preSignUrl(bucketName, objectName, realFileName, defaultExpire);
+    }
+
+    @Override
+    public String preSignUrl(String bucketName, String objectName, String realFileName, Long expireTime) {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+        Assert.hasText(objectName, "object name can't be null!");
+
+        if (isPublic(bucketName)) {
+            return getOpenUrl(bucketName, objectName);
+        }
+
+        if (null == expireTime) {
+            expireTime = defaultExpire;
+        }
+
+        int seconds = (int) Math.max(1, Math.min(604800, expireTime / 1000));
+        try {
+            String contentDisposition = String.format("attachment; filename=\"%s\"", realFileName);
+            contentDisposition = UrlEncoderUtil.encodeUriComponent(contentDisposition);
+            GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
+                .method(Method.PUT)
+                .bucket(bucketName)
+                .object(objectName)
+                .expiry(seconds)
+                .extraHeaders(Collections.singletonMap("Content-Disposition", contentDisposition))
+                .build();
+            return client.getPresignedObjectUrl(args);
+        } catch (Exception e) {
+            logger.error("generate minio presigned url error: {}", e.getMessage(), e);
+            return null;
+        }
+    }
+
     private String getOpenUrl(String bucketName, String objectName) {
-        String base = endpoint;
-        String e = StringUtils.removeEnd(base, "/");
-        return String.format("%s/%s/%s", e, bucketName, objectName);
+        return String.format("%s/%s/%s", StringUtils.removeEnd(endpoint, "/"), bucketName, objectName);
     }
 
     private String getPrivateUrl(String bucketName, String objectName, Long expireTime) {
         int seconds = (int) Math.max(1, Math.min(604800, expireTime / 1000));
         try {
+            // 先获取原始文件名称
+            String realFileName;
+            try {
+                realFileName = getRealFileName(bucketName, objectName);
+            } catch (FileSystemException e) {
+                realFileName = FilenameUtils.getName(objectName);
+            }
+
+            String contentDisposition = String.format("attachment; filename=\"%s\"", realFileName);
+            contentDisposition = UrlEncoderUtil.encodeUriComponent(contentDisposition);
             GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
                 .method(Method.GET)
                 .bucket(bucketName)
                 .object(objectName)
                 .expiry(seconds)
+                .extraQueryParams(Map.of("response-content-disposition", contentDisposition))
                 .build();
             return client.getPresignedObjectUrl(args);
         } catch (Exception e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("generate minio presigned url error: " + e.getMessage(), e);
-            }
+            logger.error("generate minio presigned url error: {}", e.getMessage(), e);
             return null;
+        }
+    }
+
+    @Override
+    public InputStream download(String bucketName, String objectName) throws FileSystemException {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+        try {
+            return client.getObject(GetObjectArgs.builder().bucket(bucketName).object(objectName).build());
+        } catch (Exception e) {
+            logger.error("download minio object error: {}", e.getMessage(), e);
+            throw new FileSystemException(e.getMessage());
         }
     }
 
@@ -207,14 +267,12 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
              FileOutputStream out = new FileOutputStream(downloadFile)) {
             IOUtils.copy(in, out);
         } catch (Exception e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("download minio object error: " + e.getMessage(), e);
-            }
+            logger.error("download minio object error: {}", e.getMessage(), e);
         }
     }
 
     @Override
-    public String resolveRealName(String bucketName, String objectName) throws FileSystemException {
+    public String getRealFileName(String bucketName, String objectName) throws FileSystemException {
         Assert.hasText(bucketName, "bucket name can't be null!");
 
         try {
@@ -223,11 +281,14 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
                 throw new FileSystemException(String.format("Object Metadata is NULL! Object name is [%s]!", objectName));
             }
             String disposition = metadata.headers().get("Content-Disposition");
-            String realName = StringUtils.removeStart(disposition, "attachment;filename=\"");
+            if (StringUtils.isBlank(disposition)) {
+                return FilenameUtils.getName(objectName);
+            }
+            // 解码文件名
+            disposition = UrlEncoderUtil.decodeUriComponent(disposition);
+            String realName = StringUtils.removeStart(disposition, "attachment; filename=\"");
             realName = StringUtils.removeEnd(realName, "\"");
             return realName;
-        } catch (ErrorResponseException e) {
-            throw new FileSystemException(e.getMessage());
         } catch (Exception e) {
             throw new FileSystemException(e.getMessage());
         }
@@ -235,5 +296,11 @@ public class MinioFileSystemHandler extends AbstractFileSystemHandler {
 
     @Override
     public void destroy() {
+        try {
+            client.close();
+        } catch (Exception e) {
+            logger.error("close minio client error: {}", e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -24,6 +24,7 @@ import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystemException;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,7 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
     }
 
     @Override
-    public String downloadFileForStream(String bucketName, String objectName, String targetDir) throws IOException {
+    public String downloadFile(String bucketName, String objectName, String targetDir) throws IOException {
         Assert.hasText(bucketName, "bucket name can't be null!");
         File tempFolder = createTempFolder(targetDir);
 
@@ -63,7 +64,7 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
         }
 
         // 获取文件真实名称
-        String realName = resolveRealName(bucketName, objectName);
+        String realName = getRealFileName(bucketName, objectName);
 
         File fileTemp = new File(tempFolder, realName);
         File parentFolder = new File(fileTemp.getParent());
@@ -75,6 +76,12 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
 
         download(bucketName, objectName, fileTemp);
         return fileTemp.getAbsolutePath();
+    }
+
+    @Override
+    public InputStream downloadStream(String bucketName, String objectName) throws IOException {
+        Assert.hasText(bucketName, "bucket name can't be null!");
+        return download(bucketName, objectName);
     }
 
     /**
@@ -131,13 +138,13 @@ public abstract class AbstractFileSystemHandler implements FileSystemHandler {
     public abstract void download(String bucketName, String objectName, File downloadFile);
 
     /**
-     * 解析文件真实名称
+     * 下载文件到输入流
      *
      * @param bucketName 桶的名称
      * @param objectName 需要下载的文件
-     * @return 文件真实名称
+     * @return 文件输入流
      * @throws FileSystemException file not exist!
      */
-    public abstract String resolveRealName(String bucketName, String objectName) throws FileSystemException;
+    public abstract InputStream download(String bucketName, String objectName) throws FileSystemException;
 
 }

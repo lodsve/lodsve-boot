@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystemException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +51,8 @@ import java.util.regex.Pattern;
  * @author Hulk Sun
  */
 public class FileSystemServer {
-    private static final Logger logger = LoggerFactory.getLogger(FileSystemServer.class);
     public static final String FILE_SEPARATOR = "/";
+    private static final Logger logger = LoggerFactory.getLogger(FileSystemServer.class);
     private static final Pattern ENCODED_CHARACTERS_PATTERN;
 
     static {
@@ -220,32 +222,36 @@ public class FileSystemServer {
         String plainText = String.format("%s_%s_%s_%s", FilenameUtils.getBaseName(originFileName), System.currentTimeMillis(), RandomUtils.randomString(4), Snowflake.nextId());
         String encryptText = EncryptUtils.encodeMd5(plainText);
 
+        String extension = FilenameUtils.getExtension(originFileName);
+        if (StringUtils.isNotBlank(extension)) {
+            return String.format("%s.%s", urlEncode(encryptText), extension);
+        }
         return String.format("%s", urlEncode(encryptText));
     }
 
-    private String urlEncode(String value) throws UnsupportedEncodingException {
+    private String urlEncode(String value) {
         if (value == null) {
             return "";
-        } else {
-            String encoded = URLEncoder.encode(value, "UTF-8");
-            Matcher matcher = ENCODED_CHARACTERS_PATTERN.matcher(encoded);
-
-            StringBuffer buffer;
-            String replacement;
-            for (buffer = new StringBuffer(encoded.length()); matcher.find(); matcher.appendReplacement(buffer, replacement)) {
-                replacement = matcher.group(0);
-                if ("+".equals(replacement)) {
-                    replacement = "%20";
-                } else if ("*".equals(replacement)) {
-                    replacement = "%2A";
-                } else if ("%7E".equals(replacement)) {
-                    replacement = "~";
-                }
-            }
-
-            matcher.appendTail(buffer);
-            return buffer.toString();
         }
+
+        String encoded = URLEncoder.encode(value, StandardCharsets.UTF_8);
+        Matcher matcher = ENCODED_CHARACTERS_PATTERN.matcher(encoded);
+
+        StringBuilder buffer;
+        String replacement;
+        for (buffer = new StringBuilder(encoded.length()); matcher.find(); matcher.appendReplacement(buffer, replacement)) {
+            replacement = matcher.group(0);
+            if ("+".equals(replacement)) {
+                replacement = "%20";
+            } else if ("*".equals(replacement)) {
+                replacement = "%2A";
+            } else if ("%7E".equals(replacement)) {
+                replacement = "~";
+            }
+        }
+
+        matcher.appendTail(buffer);
+        return buffer.toString();
     }
 
     /**
@@ -312,6 +318,30 @@ public class FileSystemServer {
     }
 
     /**
+     * 生成预签名URL，用于公开访问存储文件
+     *
+     * @param bucketName 桶的名称
+     * @param objectName 返回值中的objectName
+     * @return 预签名URL
+     */
+    public String preSignUrl(String bucketName, String objectName, String realFileName) {
+        return fileSystemHandler.preSignUrl(bucketName, objectName, realFileName);
+    }
+
+    /**
+     * 生成预签名URL，用于公开访问存储文件
+     *
+     * @param bucketName   桶的名称
+     * @param objectName   返回值中的objectName
+     * @param realFileName 实际文件名
+     * @param expireTime   失效时间，单位（毫秒）
+     * @return 预签名URL
+     */
+    public String preSignUrl(String bucketName, String objectName, String realFileName, Long expireTime) {
+        return fileSystemHandler.preSignUrl(bucketName, objectName, realFileName, expireTime);
+    }
+
+    /**
      * 流式下载文件,objectName指上传时指定的folder+fileName
      *
      * @param bucketName 桶的名称
@@ -320,7 +350,63 @@ public class FileSystemServer {
      * @return 下载的文件路径(路径 + 文件名)
      * @throws IOException 创建目录失败
      */
-    public String downloadFileForStream(String bucketName, String objectName, String targetDir) throws IOException {
-        return fileSystemHandler.downloadFileForStream(bucketName, objectName, targetDir);
+    public String downloadFile(String bucketName, String objectName, String targetDir) throws IOException {
+        return fileSystemHandler.downloadFile(bucketName, objectName, targetDir);
+    }
+
+    /**
+     * 下载文件为字节数组
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件字节数组
+     * @throws IOException 下载失败
+     */
+    public byte[] downloadBytes(String bucketName, String objectName) throws IOException {
+        try (InputStream in = downloadStream(bucketName, objectName)) {
+            return in.readAllBytes();
+        } catch (Exception e) {
+            logger.warn("download file failed, bucketName={}, objectName={}", bucketName, objectName, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下载文件为InputStream
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件输入流
+     * @throws IOException 下载失败
+     */
+    public InputStream downloadStream(String bucketName, String objectName) throws IOException {
+        return fileSystemHandler.downloadStream(bucketName, objectName);
+    }
+
+    /**
+     * 获取文件大小
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件大小（字节）
+     */
+    public long getFileSize(String bucketName, String objectName) {
+        return fileSystemHandler.getFileSize(bucketName, objectName);
+    }
+
+    /**
+     * 获取文件的真实文件名
+     *
+     * @param bucketName 桶的名称
+     * @param objectName folder+fileName 如"test/test.txt"
+     * @return 文件的真实文件名
+     */
+    public String getRealFileName(String bucketName, String objectName) {
+        try {
+            return fileSystemHandler.getRealFileName(bucketName, objectName);
+        } catch (FileSystemException e) {
+            logger.info("get real file name failed, bucketName={}, objectName={}", bucketName, objectName, e);
+            return objectName;
+        }
     }
 }
