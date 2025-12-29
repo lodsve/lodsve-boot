@@ -36,6 +36,7 @@ import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.endpoint.UserSpecifiedEndpointBuilder;
 import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.region.Region;
 import io.minio.MinioClient;
@@ -172,6 +173,13 @@ public class FileSystemAutoConfiguration {
             } else if (Protocol.HTTPS.toString().equals(client.getProtocol())) {
                 configuration.setHttpProtocol(HttpProtocol.https);
             }
+
+            String endpoint = properties.getTencentCos().getEndpoint();
+            if (StringUtils.isNotBlank(endpoint)) {
+                UserSpecifiedEndpointBuilder endpointBuilder = new UserSpecifiedEndpointBuilder(endpoint, "service.cos.myqcloud.com");
+                configuration.setEndpointBuilder(endpointBuilder);
+            }
+
             return configuration;
         }
 
@@ -191,7 +199,7 @@ public class FileSystemAutoConfiguration {
         @Bean
         @ConditionalOnMissingBean
         public FileSystemHandler fileSystemHandler(COSClient cosClient) {
-            return new TencentCosFileSystemHandler(cosClient, properties.getClient().getProtocol(), properties.getDefaultExpire(), properties.getBucketAcl());
+            return new TencentCosFileSystemHandler(cosClient, properties.getTencentCos().getRegion(), properties.getDefaultExpire(), properties.getBucketAcl());
         }
     }
 

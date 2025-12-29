@@ -203,6 +203,10 @@ public class FileSystemProperties {
          * 区域
          */
         private String region;
+        /**
+         * 上传目标地址,可以是自定义域名
+         */
+        private String endpoint;
 
         public String getRegion() {
             return region;
@@ -210,6 +214,14 @@ public class FileSystemProperties {
 
         public void setRegion(String region) {
             this.region = region;
+        }
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
         }
     }
 
