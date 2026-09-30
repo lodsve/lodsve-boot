@@ -74,7 +74,7 @@ jobs:
         with:
           token: ${{ secrets.LODSVE_BOOT_TOKEN }}
           tag_name: ${{ steps.check_revision.outputs.release_version }}
-          prerelease: true
+          prerelease: false
           files: lodsve-boot-${{ steps.check_revision.outputs.release_version }}-archives.zip
           body: |
             This is a release version. Enjoy it! If you have any questions, please contact me in the issue.
