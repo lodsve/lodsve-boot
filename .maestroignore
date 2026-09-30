@@ -1,0 +1,19 @@
+# MaestroGraph code index ignore rules.
+# Uses gitignore syntax and is merged after .gitignore.
+
+.workflow/
+.codegraph/
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+
+# 项目构建产物与本机缓存
+target/
+public/
+.gradle/
+.idea/
+
+# 当前 Maestro 不支持通用 XML；POM 和模板元数据直接检索
+*.xml

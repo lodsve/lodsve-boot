@@ -1,0 +1,21 @@
+{
+  "version": "3.1",
+  "project_name": "lodsve-boot",
+  "status": "idle",
+  "current_milestone": null,
+  "current_task_id": null,
+  "milestones": [],
+  "_milestone_schema": "{ id, name, type: 'standard'|'adhoc', status, phases[], phase_slugs{}, roadmap_ref, created_at }",
+  "artifacts": [],
+  "last_updated": "2026-09-30T15:44:54.674Z",
+  "accumulated_context": {
+    "key_decisions": [],
+    "blockers": [],
+    "deferred": [
+      "W001：4 个并行研究代理各重试一次仍返回 502/503，汇总代理也失败，未形成代理研究报告。保留研究开关，后续阶段可重试；本次规范来自直接源码扫描，不宣称完成了并行研究。",
+      "当前 Maestro 缺少通用 XML 提取器；本次代码索引排除了 XML。POM/模板元数据仍需直接读取。过滤规则已保存到 .maestroignore，后续默认索引会沿用该边界。"
+    ]
+  },
+  "transition_history": [],
+  "milestone_history": []
+}
