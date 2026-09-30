@@ -148,7 +148,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseUpdateRepository#save(Object)
+     * @see BaseUpdateRepository#save(com.lodsve.boot.component.mybatis.pojo.BasePO)
      */
     public String save(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -191,7 +191,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseUpdateRepository#updateAll(Object)
+     * @see BaseUpdateRepository#updateAll(com.lodsve.boot.component.mybatis.pojo.BasePO)
      */
     public String updateAll(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
@@ -217,7 +217,7 @@ public class MapperProvider extends BaseMapperProvider {
      *
      * @param ms MappedStatement
      * @return 生成的SQL语句
-     * @see BaseUpdateRepository#update(Object)
+     * @see BaseUpdateRepository#update(com.lodsve.boot.component.mybatis.pojo.BasePO)
      */
     public String update(MappedStatement ms) {
         Class<?> entityClass = getSelectReturnType(ms);
