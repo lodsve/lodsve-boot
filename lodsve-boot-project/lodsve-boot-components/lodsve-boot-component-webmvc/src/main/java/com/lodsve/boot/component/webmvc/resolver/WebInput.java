@@ -267,7 +267,7 @@ public class WebInput {
         }
         Long[] results = new Long[values.length];
         for (int i = 0; i < values.length; i++) {
-            results[i] = new Long(values[i]);
+            results[i] = Long.valueOf(values[i]);
         }
 
         return results;
