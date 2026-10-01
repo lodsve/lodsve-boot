@@ -2,7 +2,7 @@
 
 ## 项目结构与模块组织
 
-本项目基于 JDK 17 和 Spring Boot 2.6.3，使用 Maven 多模块构建。
+本项目当前基于 JDK 21 和 Spring Boot 2.6.3，使用 Maven 多模块构建。已发布的历史版本可能使用更低版本的 JDK。
 
 - `lodsve-boot-project/`：核心库、Actuator、自动配置、`lodsve-boot-components/` 功能实现和 `lodsve-boot-starters/` 依赖入口。
 - `lodsve-boot-dependencies/` 与 `lodsve-boot-parent/` 位于上述目录中，分别管理依赖与父 POM 配置。
