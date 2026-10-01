@@ -116,7 +116,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.pmd.plugin.version}</version>
                 <configuration>
-                    <targetJdk>21</targetJdk>
+                    <targetJdk>${java.version}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>
                     <linkXRef>false</linkXRef>
                     <includeTests>true</includeTests>

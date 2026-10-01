@@ -27,12 +27,14 @@
     </description>
 
     <rule ref="category/java/bestpractices.xml/CheckResultSet"/>
-    <rule ref="category/java/bestpractices.xml/UnusedImports"/>
+    <rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation"/>
     <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
-    <rule ref="category/java/codestyle.xml/DontImportJavaLang"/>
-    <rule ref="category/java/codestyle.xml/DuplicateImports"/>
 
+    <!-- PMD 7 合并了旧版的导入、空代码块和空语句检查。 -->
+    <rule ref="category/java/codestyle.xml/EmptyControlStatement"/>
+    <rule ref="category/java/codestyle.xml/UnnecessaryImport"/>
     <rule ref="category/java/codestyle.xml/UnnecessaryReturn"/>
+    <rule ref="category/java/codestyle.xml/UnnecessarySemicolon"/>
 
     <rule ref="category/java/errorprone.xml/AvoidBranchingStatementAsLastInLoop"/>
     <rule ref="category/java/errorprone.xml/AvoidDecimalLiteralsInBigDecimalConstructor"/>
@@ -42,16 +44,6 @@
     <rule ref="category/java/errorprone.xml/CheckSkipResult"/>
     <rule ref="category/java/errorprone.xml/ClassCastExceptionWithToArray"/>
     <rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices"/>
-    <rule ref="category/java/errorprone.xml/EmptyFinallyBlock"/>
-    <rule ref="category/java/errorprone.xml/EmptyIfStmt"/>
-    <rule ref="category/java/errorprone.xml/EmptyInitializer"/>
-    <rule ref="category/java/errorprone.xml/EmptyStatementBlock"/>
-    <rule ref="category/java/errorprone.xml/EmptyStatementNotInLoop"/>
-    <rule ref="category/java/errorprone.xml/EmptySwitchStatements"/>
-    <rule ref="category/java/errorprone.xml/EmptySynchronizedBlock"/>
-    <rule ref="category/java/errorprone.xml/EmptyTryBlock"/>
-    <rule ref="category/java/errorprone.xml/EmptyWhileStmt"/>
-    <rule ref="category/java/errorprone.xml/ImportFromSamePackage"/>
     <rule ref="category/java/errorprone.xml/JumbledIncrementer"/>
     <rule ref="category/java/errorprone.xml/MisplacedNullCheck"/>
     <rule ref="category/java/errorprone.xml/OverrideBothEqualsAndHashcode"/>
@@ -64,7 +56,6 @@
     <rule ref="category/java/multithreading.xml/DontCallThreadRun"/>
     <rule ref="category/java/multithreading.xml/DoubleCheckedLocking"/>
     <rule ref="category/java/performance.xml/BigIntegerInstantiation"/>
-    <rule ref="category/java/performance.xml/BooleanInstantiation"/>
 
-    <!-- many more rules are available at https://pmd.github.io/pmd-6.21.0/pmd_rules_java.html -->
+    <!-- 更多规则见 https://docs.pmd-code.org/pmd-doc-7.17.0/pmd_rules_java.html -->
 </ruleset>
