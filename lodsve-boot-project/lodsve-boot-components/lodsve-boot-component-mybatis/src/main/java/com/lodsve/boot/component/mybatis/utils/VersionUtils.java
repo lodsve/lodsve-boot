@@ -78,7 +78,7 @@ public class VersionUtils {
                 TypeHandler typeHandler = parameterMapping.getTypeHandler();
                 try {
                     typeHandler.setParameter(versionStmt, i.get() + 1, value, parameterMapping.getJdbcType());
-                    i.getAndIncrement();
+                    i.incrementAndGet();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }

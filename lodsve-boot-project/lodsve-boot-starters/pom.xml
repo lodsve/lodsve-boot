@@ -52,5 +52,7 @@
 
     <properties>
         <main.user.dir>${basedir}/../..</main.user.dir>
+        <!-- Starter 仅聚合依赖；若新增 Java 源码或测试，需在对应模块将 pmd.skip 设为 false。 -->
+        <pmd.skip>true</pmd.skip>
     </properties>
 </project>
