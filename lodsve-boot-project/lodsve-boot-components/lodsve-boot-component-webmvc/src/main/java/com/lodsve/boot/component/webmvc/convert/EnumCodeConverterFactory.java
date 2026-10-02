@@ -28,7 +28,6 @@ import org.springframework.core.convert.converter.ConverterFactory;
  *
  * @author Hulk Sun
  */
-@SuppressWarnings({"all"})
 public class EnumCodeConverterFactory implements ConverterFactory<String, Enum<? extends Codeable>>, ConditionalConverter {
     @Override
     public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -42,15 +41,13 @@ public class EnumCodeConverterFactory implements ConverterFactory<String, Enum<?
             return null;
         }
 
-        return new StringToEnum(targetType);
+        return new StringToEnum<>(targetType);
     }
 
-    private static class StringToEnum<T extends Enum<T> & Codeable> implements Converter<String, T> {
+    private static class StringToEnum<T extends Enum<? extends Codeable>> implements Converter<String, T> {
         private final T[] enums;
-        private final Class<T> enumType;
 
         private StringToEnum(Class<T> enumType) {
-            this.enumType = enumType;
             this.enums = enumType.getEnumConstants();
         }
 
@@ -60,25 +57,19 @@ public class EnumCodeConverterFactory implements ConverterFactory<String, Enum<?
                 return null;
             }
 
-            T result;
-            try {
-                result = Enum.valueOf(enumType, source);
-            } catch (Exception e) {
-                result = null;
-            }
-
-            if (result != null) {
-                return result;
-            }
-
             for (T em : enums) {
-                if (em.getCode().equals(source)) {
-                    result = em;
-                    break;
+                if (em.name().equals(source)) {
+                    return em;
                 }
             }
 
-            return result;
+            for (T em : enums) {
+                if (Codeable.class.cast(em).getCode().equals(source)) {
+                    return em;
+                }
+            }
+
+            return null;
         }
     }
 }

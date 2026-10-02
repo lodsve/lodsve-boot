@@ -126,20 +126,20 @@ public class ValidatorEngine {
         resolveAnnotation();
     }
 
-    @SuppressWarnings("unchecked")
     private void resolveAnnotation() {
         handlers.forEach(h -> {
             Class<?> genericType = GenericUtils.getGenericParameter0(h.getClass());
             if (!Annotation.class.isAssignableFrom(genericType)) {
                 return;
             }
-            BeanHandler beanHandler = new BeanHandler(genericType.getSimpleName(), (Class<? extends Annotation>) genericType, h);
+            Class<? extends Annotation> annotationType = genericType.asSubclass(Annotation.class);
+            BeanHandler beanHandler = new BeanHandler(genericType.getSimpleName(), annotationType, h);
 
             // 将beanHandlers中的注解-处理类放入beanHandlerMap中(并将注解中文名放入内存中-annotations)
             beanHandlerMap.put(genericType.getSimpleName(), beanHandler);
             // 将所有的注解放入内存中
             annotations.add(genericType.getSimpleName());
-            annotationClasses.add((Class<? extends Annotation>) genericType);
+            annotationClasses.add(annotationType);
         });
     }
 
@@ -208,7 +208,6 @@ public class ValidatorEngine {
      * @param f      待验证字段
      * @param entity 待验证实体
      */
-    @SuppressWarnings("all")
     private List<ErrorMessage> validateField(final Field f, final Object entity) {
         if (f == null || entity == null) {
             logger.error("given field is null or entity is null!");
@@ -227,14 +226,14 @@ public class ValidatorEngine {
                 continue;
             }
 
-            ValidateHandler handler = bh.getValidateHandler();
+            ValidateHandler<?> handler = bh.getValidateHandler();
             if (handler == null) {
                 logger.error("handler is null for annotation '{}'", a);
                 continue;
             }
 
             Object value = ObjectUtils.getFieldValue(entity, f.getName());
-            ErrorMessage message = handler.validate(a, value);
+            ErrorMessage message = validateAnnotation(handler, a, value);
             if (message != null) {
                 message.setClazz(entity.getClass());
                 message.setField(f);
@@ -245,6 +244,11 @@ public class ValidatorEngine {
         }
 
         return messages;
+    }
+
+    private <T extends Annotation> ErrorMessage validateAnnotation(ValidateHandler<T> handler, Annotation annotation, Object value) {
+        Class<T> annotationType = GenericUtils.getGenericParameter0(handler.getClass());
+        return handler.validate(annotationType.cast(annotation), value);
     }
 
     /**

@@ -271,7 +271,7 @@ public class RequestUtils {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         Assert.state(requestAttributes != null, "Could not find current request via RequestContextHolder");
         Assert.isInstanceOf(ServletRequestAttributes.class, requestAttributes);
-        Assert.notNull(requestAttributes);
+        Assert.notNull(requestAttributes, "[Assertion failed] - this argument is required; it must not be null");
         return ((ServletRequestAttributes) requestAttributes).getRequest();
     }
 

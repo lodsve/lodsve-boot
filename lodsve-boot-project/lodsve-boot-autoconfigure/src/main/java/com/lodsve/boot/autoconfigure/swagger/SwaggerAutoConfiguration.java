@@ -151,7 +151,7 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
 
             AuthorizationScope authorizationScope = new AuthorizationScope("global", "authorization");
             List<SecurityReference> securityReferences = Lists.newArrayList(new SecurityReference(authConfig.getKey(), new AuthorizationScope[]{authorizationScope}));
-            List<SecurityContext> securityContexts = Lists.newArrayList(SecurityContext.builder().securityReferences(securityReferences).forPaths(PathSelectors.any()).build());
+            List<SecurityContext> securityContexts = Lists.newArrayList(SecurityContext.builder().securityReferences(securityReferences).build());
             docket.securityContexts(securityContexts);
         }
         return docket;

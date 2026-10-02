@@ -25,6 +25,7 @@ import com.lodsve.boot.autoconfigure.encryption.source.wrapper.EncryptableProper
 import com.lodsve.boot.autoconfigure.encryption.source.wrapper.EncryptableSystemEnvironmentPropertySourceWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -38,6 +39,7 @@ import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
+import org.springframework.util.Assert;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Modifier;
@@ -68,51 +70,52 @@ public class EncryptablePropertiesBeanFactoryPostProcessor implements BeanFactor
         MutablePropertySources propSources = environment.getPropertySources();
 
         StreamSupport.stream(propSources.spliterator(), false)
-            .filter(ps -> !(ps instanceof EncryptablePropertySource))
+            .filter(ps -> !(ps instanceof EncryptablePropertySource<?>))
             .map(this::makeEncryptable)
             .collect(toList())
             .forEach(ps -> propSources.replace(ps.getName(), ps));
     }
 
     public <T> PropertySource<T> makeEncryptable(PropertySource<T> propertySource) {
-        PropertySource<T> encryptablePropertySource = convertPropertySource(propertySource);
+        PropertySource<?> convertedPropertySource = convertPropertySource(propertySource);
+        boolean sameDelegate = AopUtils.isAopProxy(convertedPropertySource)
+            ? AopProxyUtils.getSingletonTarget(convertedPropertySource) == propertySource
+            : convertedPropertySource instanceof EncryptablePropertySource<?> encryptable && encryptable.getDelegate() == propertySource;
+        Assert.isTrue(sameDelegate, "Encrypted property source must preserve its delegate");
+        // 包装器从同一个 delegate 获取 source，保留类型 T；仅在此处处理泛型擦除。
+        @SuppressWarnings("unchecked")
+        PropertySource<T> encryptablePropertySource = (PropertySource<T>) convertedPropertySource;
         logger.info("Converting PropertySource {} [{}] to {}", propertySource.getName(), propertySource.getClass().getName(),
             AopUtils.isAopProxy(encryptablePropertySource) ? "AOP Proxy" : encryptablePropertySource.getClass().getSimpleName());
         return encryptablePropertySource;
     }
 
-    private <T> PropertySource<T> convertPropertySource(PropertySource<T> propertySource) {
-        PropertySource<T> encryptablePropertySource;
-        if (needsProxyAnyway(propertySource)) {
+    private PropertySource<?> convertPropertySource(PropertySource<?> propertySource) {
+        PropertySource<?> encryptablePropertySource;
+        if (needsProxyAnyway(propertySource)
+            && !(propertySource instanceof CommandLinePropertySource<?>)
+            && !Modifier.isFinal(propertySource.getClass().getModifiers())) {
             encryptablePropertySource = proxyPropertySource(propertySource);
-        } else if (propertySource instanceof SystemEnvironmentPropertySource) {
-            encryptablePropertySource = (PropertySource<T>) new EncryptableSystemEnvironmentPropertySourceWrapper((SystemEnvironmentPropertySource) propertySource, propertyResolvers);
-        } else if (propertySource instanceof MapPropertySource) {
-            encryptablePropertySource = (PropertySource<T>) new EncryptableMapPropertySourceWrapper((MapPropertySource) propertySource, propertyResolvers);
-        } else if (propertySource instanceof EnumerablePropertySource) {
-            encryptablePropertySource = new EncryptableEnumerablePropertySourceWrapper<>((EnumerablePropertySource) propertySource, propertyResolvers);
+        } else if (propertySource instanceof SystemEnvironmentPropertySource systemEnvironmentPropertySource) {
+            encryptablePropertySource = new EncryptableSystemEnvironmentPropertySourceWrapper(systemEnvironmentPropertySource, propertyResolvers);
+        } else if (propertySource instanceof MapPropertySource mapPropertySource) {
+            encryptablePropertySource = new EncryptableMapPropertySourceWrapper(mapPropertySource, propertyResolvers);
+        } else if (propertySource instanceof EnumerablePropertySource<?> enumerablePropertySource) {
+            encryptablePropertySource = new EncryptableEnumerablePropertySourceWrapper<>(enumerablePropertySource, propertyResolvers);
         } else {
             encryptablePropertySource = new EncryptablePropertySourceWrapper<>(propertySource, propertyResolvers);
         }
         return encryptablePropertySource;
     }
 
-    private <T> PropertySource<T> proxyPropertySource(PropertySource<T> propertySource) {
-        //Silly Chris Beams for making CommandLinePropertySource getProperty and containsProperty methods final. Those methods
-        //can't be proxied with CGLib because of it. So fallback to wrapper for Command Line Arguments only.
-        if (CommandLinePropertySource.class.isAssignableFrom(propertySource.getClass())
-            // Other PropertySource classes like org.springframework.boot.env.OriginTrackedMapPropertySource
-            // are final classes as well
-            || Modifier.isFinal(propertySource.getClass().getModifiers())) {
-            return convertPropertySource(propertySource);
-        }
+    private PropertySource<?> proxyPropertySource(PropertySource<?> propertySource) {
         ProxyFactory proxyFactory = new ProxyFactory();
         proxyFactory.setTargetClass(propertySource.getClass());
         proxyFactory.setProxyTargetClass(true);
         proxyFactory.addInterface(EncryptablePropertySource.class);
         proxyFactory.setTarget(propertySource);
         proxyFactory.addAdvice(new EncryptablePropertySourceMethodInterceptor<>(propertySource, propertyResolvers));
-        return (PropertySource<T>) proxyFactory.getProxy();
+        return propertySource.getClass().cast(proxyFactory.getProxy());
     }
 
     private <T> boolean needsProxyAnyway(PropertySource<T> propertySource) {

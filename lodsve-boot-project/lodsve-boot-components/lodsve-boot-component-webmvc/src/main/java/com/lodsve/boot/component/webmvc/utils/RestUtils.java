@@ -46,14 +46,14 @@ public class RestUtils {
     }
 
     public static <T> T get(URI url, Class<T> responseType) {
-        Assert.notNull(url);
-        Assert.notNull(responseType);
+        Assert.notNull(url, "[Assertion failed] - this argument is required; it must not be null");
+        Assert.notNull(responseType, "[Assertion failed] - this argument is required; it must not be null");
 
         return restTemplate.getForObject(url, responseType);
     }
 
     public static <T> T get(String url, Class<T> responseType, Object... uriVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
 
         return get(expand(url, uriVariables), responseType);
     }
@@ -63,20 +63,20 @@ public class RestUtils {
     }
 
     public static <T> T get(String url, Class<T> responseType, Map<String, ?> urlVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
 
         return get(expand(url, urlVariables), responseType);
     }
 
     public static <T> T post(URI url, Object request, Class<T> responseType) {
-        Assert.notNull(url);
-        Assert.notNull(responseType);
+        Assert.notNull(url, "[Assertion failed] - this argument is required; it must not be null");
+        Assert.notNull(responseType, "[Assertion failed] - this argument is required; it must not be null");
 
         return restTemplate.postForObject(url, request, responseType);
     }
 
     public static <T> T post(String url, Object request, Class<T> responseType, Object... uriVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
 
         return post(expand(url, uriVariables), request, responseType);
     }
@@ -86,7 +86,7 @@ public class RestUtils {
     }
 
     public static <T> T post(String url, Object request, Class<T> responseType, Map<String, ?> urlVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
 
         return post(expand(url, urlVariables), request, responseType);
     }
@@ -141,12 +141,12 @@ public class RestUtils {
     }
 
     private static URI expand(String url, Object... uriVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
         return restTemplate.getUriTemplateHandler().expand(url, uriVariables);
     }
 
     private static URI expand(String url, Map<String, ?> uriVariables) {
-        Assert.hasText(url);
+        Assert.hasText(url, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
         return restTemplate.getUriTemplateHandler().expand(url, uriVariables);
     }
 }

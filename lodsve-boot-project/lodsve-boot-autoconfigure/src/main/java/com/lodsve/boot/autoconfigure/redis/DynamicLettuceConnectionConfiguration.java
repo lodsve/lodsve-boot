@@ -127,7 +127,7 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
             value.afterPropertiesSet();
         });
 
-        return new DynamicLettuceConnectionFactory(StringUtils.isEmpty(getProperties().getDefaultName()) ? defaultName.get() : getProperties().getDefaultName(), factories);
+        return new DynamicLettuceConnectionFactory(!StringUtils.hasLength(getProperties().getDefaultName()) ? defaultName.get() : getProperties().getDefaultName(), factories);
     }
 
     private Map<String, LettuceConnectionFactory> createDynamicSingletonConnectionFactory(ObjectProvider<LettuceClientConfigurationBuilderCustomizer> builderCustomizers, ClientResources clientResources) {
@@ -245,10 +245,10 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
             config.setMaxIdle(properties.getMaxIdle());
             config.setMinIdle(properties.getMinIdle());
             if (properties.getTimeBetweenEvictionRuns() != null) {
-                config.setTimeBetweenEvictionRunsMillis(properties.getTimeBetweenEvictionRuns().toMillis());
+                config.setTimeBetweenEvictionRuns(properties.getTimeBetweenEvictionRuns());
             }
             if (properties.getMaxWait() != null) {
-                config.setMaxWaitMillis(properties.getMaxWait().toMillis());
+                config.setMaxWait(properties.getMaxWait());
             }
             return config;
         }

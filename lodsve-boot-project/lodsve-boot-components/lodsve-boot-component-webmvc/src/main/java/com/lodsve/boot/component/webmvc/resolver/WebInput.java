@@ -323,16 +323,15 @@ public class WebInput {
      * @param <T>       bean 类型
      * @return bean
      */
-    @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> beanClass) {
-        Object command = BeanUtils.instantiate(beanClass);
+        T command = BeanUtils.instantiateClass(beanClass);
         try {
             bind(request, command);
         } catch (Exception e) {
             log.debug("can not find ant bean use class '{}' from request!", beanClass);
         }
 
-        return (T) command;
+        return command;
     }
 
     /**

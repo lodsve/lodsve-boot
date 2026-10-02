@@ -116,7 +116,7 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
             value.afterPropertiesSet();
         });
 
-        return new DynamicJedisConnectionFactory(StringUtils.isEmpty(getProperties().getDefaultName()) ? defaultName.get() : getProperties().getDefaultName(), factories);
+        return new DynamicJedisConnectionFactory(!StringUtils.hasLength(getProperties().getDefaultName()) ? defaultName.get() : getProperties().getDefaultName(), factories);
     }
 
     private Map<String, JedisConnectionFactory> createDynamicSingletonConnectionFactory(JedisClientConfiguration clientConfiguration) {
@@ -202,10 +202,10 @@ public class DynamicJedisConnectionConfiguration extends AbstractRedisConnection
         config.setMinIdle(pool.getMinIdle());
         config.setMaxIdle(pool.getMaxIdle());
         if (pool.getTimeBetweenEvictionRuns() != null) {
-            config.setTimeBetweenEvictionRunsMillis(pool.getTimeBetweenEvictionRuns().toMillis());
+            config.setTimeBetweenEvictionRuns(pool.getTimeBetweenEvictionRuns());
         }
         if (pool.getMaxWait() != null) {
-            config.setMaxWaitMillis(pool.getMaxWait().toMillis());
+            config.setMaxWait(pool.getMaxWait());
         }
         return config;
     }
