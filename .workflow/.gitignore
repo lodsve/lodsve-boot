@@ -5,6 +5,11 @@
 /wiki-index*
 /spec-analytics.jsonl
 /knowledge-usage*
+/specs/.hit-log.jsonl
+
+# 本机会话状态、执行回执与备份
+/sessions/
+
 *.lock
 *.tmp
 /scratch/*
