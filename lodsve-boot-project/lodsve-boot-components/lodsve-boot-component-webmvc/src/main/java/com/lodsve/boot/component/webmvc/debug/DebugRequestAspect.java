@@ -16,12 +16,9 @@
  */
 package com.lodsve.boot.component.webmvc.debug;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +29,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -88,14 +84,22 @@ public class DebugRequestAspect {
             return joinPoint.proceed();
         }
 
-        before(joinPoint);
+        try {
+            before(joinPoint);
+        } catch (RuntimeException exception) {
+            logger.warn("请求日志记录失败", exception);
+        }
 
         StopWatch watch = new StopWatch();
         watch.start("");
         Object object = joinPoint.proceed();
         watch.stop();
 
-        after(object, watch.getTotalTimeMillis());
+        try {
+            after(object, watch.getTotalTimeMillis());
+        } catch (RuntimeException exception) {
+            logger.warn("响应日志记录失败", exception);
+        }
 
         return object;
     }
@@ -126,7 +130,7 @@ public class DebugRequestAspect {
         Enumeration<String> names = request.getHeaderNames();
 
         List<String> header = Lists.newArrayList();
-        while (names.hasMoreElements()) {
+        while (names != null && names.hasMoreElements()) {
             String name = names.nextElement();
             header.add(name + " = " + request.getHeader(name));
         }
@@ -136,24 +140,35 @@ public class DebugRequestAspect {
             Object[] args = joinPoint.getArgs();
             List<String> toString = Lists.newArrayList();
             for (Object arg : args) {
-                toString.add(ToStringBuilder.reflectionToString(arg, ToStringStyle.JSON_STYLE));
+                toString.add(formatValue(arg));
             }
 
             logger.info(message, StringUtils.join(header, COMMA), joinPoint.getSignature(), toString);
         }
     }
 
-    private void after(Object object, long totalTimeMillis) throws JsonProcessingException {
+    private void after(Object object, long totalTimeMillis) {
         if (logger.isInfoEnabled()) {
             String message = "\n执行情况：\n执行时间为：【{}毫秒】\n返回值为：【{}】";
-            String objectMsg;
-            if (object instanceof Serializable) {
-                objectMsg = objectMapper.writeValueAsString(object);
-            } else {
-                objectMsg = object == null ? "no return" : ToStringBuilder.reflectionToString(object, ToStringStyle.JSON_STYLE);
-            }
+            logger.info(message, totalTimeMillis, object == null ? "no return" : formatValue(object));
+        }
+    }
 
-            logger.info(message, totalTimeMillis, objectMsg);
+    String formatValue(Object value) {
+        if (value == null) {
+            return "null";
+        }
+        if (value instanceof CharSequence || value instanceof Number || value instanceof Boolean
+            || value instanceof Enum<?>) {
+            return String.valueOf(value);
+        }
+        if (value instanceof HttpServletRequest) {
+            return value.getClass().getName();
+        }
+        try {
+            return objectMapper.writeValueAsString(value);
+        } catch (Exception exception) {
+            return "<无法序列化: " + value.getClass().getName() + ">";
         }
     }
 }
