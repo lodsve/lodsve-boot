@@ -16,15 +16,15 @@
  */
 package com.lodsve.boot.example;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * .
  *
  * @author Hulk Sun
  */
-@Configuration
+@AutoConfiguration
 @EnableFeignClients("com.lodsve.boot.example.api")
 public class ExampleRpcApiAutoConfiguration {
 

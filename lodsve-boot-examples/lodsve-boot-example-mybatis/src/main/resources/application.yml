@@ -54,13 +54,7 @@ lodsve:
           enabled: true
           config:
             multi-statement-allow: true
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-      stat-view-servlet:
-        enabled: true
-        login-username: druid
-        login-password: druid
+      # Druid 1.2.28 的监控 Servlet/Filter 仍依赖 javax.servlet，Boot 4 下暂不注册。
   mybatis:
     map-underscore-to-camel-case: true
     enums-locations: com.lodsve.boot.example.enums
