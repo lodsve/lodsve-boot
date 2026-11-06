@@ -21,6 +21,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.media.BooleanSchema;
+import io.swagger.v3.oas.models.media.IntegerSchema;
+import io.swagger.v3.oas.models.media.NumberSchema;
+import io.swagger.v3.oas.models.media.ObjectSchema;
+import io.swagger.v3.oas.models.media.Schema;
+import io.swagger.v3.oas.models.media.StringSchema;
+import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -29,6 +36,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Springdoc OpenAPI configuration.
@@ -75,12 +85,55 @@ public class SwaggerAutoConfiguration {
 
     @Bean
     public GlobalOpenApiCustomizer lodsveGlobalOpenApiCustomizer() {
-        return openAPI -> {
-            if (properties.getGlobalParameters() == null) {
-                return;
-            }
-            // Global parameters remain part of the public configuration model.
-            // Applications can map them to OpenAPI Parameter objects as needed.
+        return this::customizeGlobalParameters;
+    }
+
+    private void customizeGlobalParameters(OpenAPI openAPI) {
+        if (properties.getGlobalParameters() != null
+            && !properties.getGlobalParameters().isEmpty()
+            && openAPI.getPaths() != null) {
+            openAPI.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation ->
+                properties.getGlobalParameters().stream()
+                    .filter(Objects::nonNull)
+                    .map(this::toOpenApiParameter)
+                    .filter(Objects::nonNull)
+                    .filter(parameter -> operation.getParameters() == null
+                        || operation.getParameters().stream().noneMatch(existing ->
+                        Objects.equals(existing.getName(), parameter.getName())
+                            && Objects.equals(existing.getIn(), parameter.getIn())))
+                    .forEach(operation::addParametersItem)));
+        }
+    }
+
+    private Parameter toOpenApiParameter(SwaggerProperties.GlobalParameter globalParameter) {
+        if (globalParameter.getName() == null || globalParameter.getName().isBlank()) {
+            return null;
+        }
+        String scope = globalParameter.getScope() == null
+            ? "query" : globalParameter.getScope().toLowerCase(Locale.ROOT);
+        if (!"query".equals(scope) && !"header".equals(scope)
+            && !"path".equals(scope) && !"cookie".equals(scope)) {
+            return null;
+        }
+        Parameter parameter = new Parameter();
+        parameter.setName(globalParameter.getName());
+        parameter.setIn(scope);
+        parameter.setDescription(globalParameter.getDescription());
+        parameter.setRequired(globalParameter.isRequired() || "path".equals(scope));
+        parameter.setSchema(toSchema(globalParameter.getType()));
+        return parameter;
+    }
+
+    private Schema<?> toSchema(String type) {
+        if (type == null) {
+            return new StringSchema();
+        }
+        return switch (type.toLowerCase(Locale.ROOT)) {
+            case "integer" -> new IntegerSchema();
+            case "number" -> new NumberSchema();
+            case "boolean" -> new BooleanSchema();
+            case "object" -> new ObjectSchema();
+            default -> new StringSchema();
         };
     }
 }
