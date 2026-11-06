@@ -54,7 +54,7 @@ import java.util.Map;
  * @author Hulk Sun
  */
 @Configuration
-@AutoConfigureAfter(org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration.class)
+@AutoConfigureAfter(org.springframework.boot.amqp.autoconfigure.RabbitAutoConfiguration.class)
 @ConditionalOnClass({RabbitTemplate.class, Channel.class})
 @EnableConfigurationProperties(RabbitProperties.class)
 public class RabbitAutoConfiguration implements ApplicationContextAware {

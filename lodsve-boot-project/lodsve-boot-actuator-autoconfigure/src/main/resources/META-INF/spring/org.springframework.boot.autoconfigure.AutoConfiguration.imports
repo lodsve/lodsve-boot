@@ -1,0 +1,3 @@
+com.lodsve.boot.actuator.autoconfigure.version.LodsveBootVersionsAutoConfiguration
+com.lodsve.boot.actuator.autoconfigure.dependencies.DependenciesEndpointAutoConfiguration
+com.lodsve.boot.actuator.autoconfigure.enums.EnumsEndpointAutoConfiguration

@@ -16,13 +16,9 @@
  */
 package com.lodsve.boot.autoconfigure.webmvc;
 
-import com.fasterxml.classmate.TypeResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import com.lodsve.boot.component.webmvc.convert.EnumCodeConverterFactory;
 import com.lodsve.boot.component.webmvc.debug.DebugRequestAspect;
-import com.lodsve.boot.component.webmvc.resolver.WebInput;
-import com.lodsve.boot.component.webmvc.resolver.WebOutput;
 import com.lodsve.boot.component.webmvc.response.LodsveBootExceptionHandler;
 import com.lodsve.boot.component.webmvc.response.WebResultResponseWrapperHandler;
 import com.lodsve.boot.component.webmvc.utils.RestUtils;
@@ -34,24 +30,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.http.converter.autoconfigure.HttpMessageConverters;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.schema.AlternateTypeRule;
-import springfox.documentation.schema.AlternateTypeRuleConvention;
-import springfox.documentation.spring.web.plugins.Docket;
-
-import java.util.List;
 import java.util.Objects;
-
-import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 /**
  * web mvc 配置.
@@ -112,24 +100,4 @@ public class WebMvcAutoConfiguration {
         }
     }
 
-    @Configuration
-    @ConditionalOnClass(Docket.class)
-    public static class SwaggerIgnoreWebInputWebOutConfiguration {
-        @Bean
-        public AlternateTypeRuleConvention ignoreWebInputWebOutConvention(ObjectProvider<TypeResolver> objectProvider) {
-            TypeResolver resolver = (null == objectProvider.getIfUnique() ? new TypeResolver() : objectProvider.getIfUnique());
-            return new AlternateTypeRuleConvention() {
-                @Override
-                public int getOrder() {
-                    return Ordered.HIGHEST_PRECEDENCE;
-                }
-
-                @Override
-                public List<AlternateTypeRule> rules() {
-                    return Lists.newArrayList(newRule(resolver.resolve(WebOutput.class), resolver.resolve(Void.class)),
-                        newRule(resolver.resolve(WebInput.class), resolver.resolve(Void.class)));
-                }
-            };
-        }
-    }
 }

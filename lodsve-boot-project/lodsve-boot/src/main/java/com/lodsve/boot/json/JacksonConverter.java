@@ -44,7 +44,7 @@ public class JacksonConverter extends AbstractJsonConverter {
 
     @Override
     public String toJson(Object obj) {
-        Assert.notNull(obj);
+        Assert.notNull(obj, "argument must not be null");
 
         try {
             return objectMapper.writeValueAsString(obj);
@@ -59,8 +59,8 @@ public class JacksonConverter extends AbstractJsonConverter {
 
     @Override
     public <T> T toObject(String json, Class<T> clazz) {
-        Assert.hasText(json);
-        Assert.notNull(clazz);
+        Assert.hasText(json, "argument must not be empty");
+        Assert.notNull(clazz, "argument must not be null");
 
         try {
             return objectMapper.readValue(json, clazz);
@@ -75,7 +75,7 @@ public class JacksonConverter extends AbstractJsonConverter {
 
     @Override
     public Map<String, Object> toMap(String json) {
-        Assert.hasText(json);
+        Assert.hasText(json, "argument must not be empty");
 
         try {
             return objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {

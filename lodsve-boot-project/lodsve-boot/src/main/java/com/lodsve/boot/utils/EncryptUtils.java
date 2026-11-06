@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springframework.util.Base64Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +30,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /**
  * 加密工具类.
@@ -70,7 +70,7 @@ public class EncryptUtils {
     public static String encodeBase64(String plainText) {
         Assert.hasText(plainText, "plainText must not empty");
 
-        return new String(Base64Utils.encode(plainText.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        return Base64.getEncoder().encodeToString(plainText.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -82,7 +82,7 @@ public class EncryptUtils {
     public static String decodeBase64(String cipherText) {
         Assert.hasText(cipherText, "cipherText must not empty");
 
-        return new String(Base64Utils.decode(cipherText.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        return new String(Base64.getDecoder().decode(cipherText), StandardCharsets.UTF_8);
     }
 
     /**

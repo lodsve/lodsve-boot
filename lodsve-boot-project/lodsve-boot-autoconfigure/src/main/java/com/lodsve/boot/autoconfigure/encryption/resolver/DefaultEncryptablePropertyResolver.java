@@ -18,9 +18,9 @@ package com.lodsve.boot.autoconfigure.encryption.resolver;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
-import org.springframework.util.Base64Utils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * 默认的解密类--Base64.
@@ -35,6 +35,6 @@ public class DefaultEncryptablePropertyResolver extends BaseEncryptablePropertyR
 
     @Override
     protected String decrypt(String property) {
-        return StringUtils.toEncodedString(Base64Utils.decodeFromString(property), StandardCharsets.UTF_8);
+        return StringUtils.toEncodedString(Base64.getDecoder().decode(property), StandardCharsets.UTF_8);
     }
 }

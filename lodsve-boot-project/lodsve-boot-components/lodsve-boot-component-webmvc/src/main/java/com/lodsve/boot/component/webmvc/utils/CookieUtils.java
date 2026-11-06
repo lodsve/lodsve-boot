@@ -19,9 +19,9 @@ package com.lodsve.boot.component.webmvc.utils;
 import com.lodsve.boot.utils.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * cookie处理工具类

@@ -25,11 +25,11 @@ import com.lodsve.boot.example.dto.UserDTO;
 import com.lodsve.boot.example.enums.Gender;
 import com.lodsve.boot.example.service.AuthzImpl;
 import com.lodsve.boot.example.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,69 +50,69 @@ import java.util.Date;
  * @author sunhao(sunhao.java @ gmail.com)
  * @version V1.0, 16/1/18 下午6:42
  */
-@Api(value = "Mybatis的CRUD测试", description = "Mybatis的CRUD测试")
+@Tag(name = "Mybatis的CRUD测试", description = "Mybatis的CRUD测试")
 @RestController
 @RequestMapping("/group1/user")
 public class User1Controller {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "登录", notes = "登录")
-    @ApiResponses({@ApiResponse(code = 200, message = "登录成功")})
+    @Operation(summary = "登录", description = "登录")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "登录成功")})
     @GetMapping
     public void login() {
         AuthzImpl.LOGIN = true;
     }
 
-    @ApiOperation(value = "获取用户", notes = "获取用户")
-    @ApiResponses({@ApiResponse(code = 200, message = "获取用户成功")})
+    @Operation(summary = "获取用户", description = "获取用户")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "获取用户成功")})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Authn
-    public User loadUser(@ApiParam(name = "id", value = "用户ID") @PathVariable("id") Long id, @CurrentAccount Account account) {
+    public User loadUser(@Parameter(name = "id", description = "用户ID") @PathVariable("id") Long id, @CurrentAccount Account account) {
         System.out.println(account);
         return this.userService.loadUser(id);
     }
 
-    @ApiOperation(value = "删除用户", notes = "删除用户")
-    @ApiResponses({@ApiResponse(code = 200, message = "删除用户成功")})
+    @Operation(summary = "删除用户", description = "删除用户")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "删除用户成功")})
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Authz("admin")
-    public boolean delete(@ApiParam(name = "id", value = "用户ID") @RequestParam("id") Long id) {
+    public boolean delete(@Parameter(name = "id", description = "用户ID") @RequestParam("id") Long id) {
         return this.userService.delete(id);
     }
 
-    @ApiOperation(value = "更新用户", notes = "更新用户")
-    @ApiResponses({@ApiResponse(code = 200, message = "更新用户成功")})
+    @Operation(summary = "更新用户", description = "更新用户")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "更新用户成功")})
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public boolean update(@ApiParam(name = "userDto", value = "需要更新的用户") @RequestBody UserDTO userDto) {
+    public boolean update(@Parameter(name = "userDto", description = "需要更新的用户") @RequestBody UserDTO userDto) {
         return this.userService.update(userDto) != null;
     }
 
-    @ApiOperation(value = "保存用户", notes = "保存审核用户")
-    @ApiResponses({@ApiResponse(code = 200, message = "审核用户成功")})
+    @Operation(summary = "保存用户", description = "保存审核用户")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "审核用户成功")})
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public User save(@ApiParam(name = "userDto", value = "需要保存的用户") @RequestBody UserDTO userDto) {
+    public User save(@Parameter(name = "userDto", description = "需要保存的用户") @RequestBody UserDTO userDto) {
         return this.userService.save(userDto);
     }
 
-    @ApiOperation(value = "列出用户", notes = "列出用户")
-    @ApiResponses({@ApiResponse(code = 200, message = "列出用户成功")})
+    @Operation(summary = "列出用户", description = "列出用户")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "列出用户成功")})
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Page<User> findAll(@ApiParam(name = "pageable", value = "分页信息,传参方式：?page=0&size=10") @PageableDefault(page = 0, size = 10) Pageable pageable) {
+    public Page<User> findAll(@Parameter(name = "pageable", description = "分页信息,传参方式：?page=0&size=10") @PageableDefault(page = 0, size = 10) Pageable pageable) {
         return this.userService.findAll(pageable);
     }
 
-    @ApiOperation(value = "测试枚举", notes = "测试枚举")
-    @ApiResponses({@ApiResponse(code = 200, message = "测试枚举")})
+    @Operation(summary = "测试枚举", description = "测试枚举")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "测试枚举")})
     @RequestMapping(value = "/test/enums", method = RequestMethod.GET)
-    public Gender testEnums(@ApiParam(name = "gender", value = "性别") @RequestParam("gender") Gender gender) {
+    public Gender testEnums(@Parameter(name = "gender", description = "性别") @RequestParam("gender") Gender gender) {
         return gender;
     }
 
-    @ApiOperation(value = "测试时间", notes = "测试时间")
-    @ApiResponses({@ApiResponse(code = 200, message = "测试时间")})
+    @Operation(summary = "测试时间", description = "测试时间")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "测试时间")})
     @RequestMapping(value = "/test/date", method = RequestMethod.GET)
-    public Date testDate(@ApiParam(name = "date", value = "时间") @RequestParam("date") Date date) {
+    public Date testDate(@Parameter(name = "date", description = "时间") @RequestParam("date") Date date) {
         return date;
     }
 }

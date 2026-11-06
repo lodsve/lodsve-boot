@@ -24,8 +24,8 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
-import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.gson.autoconfigure.GsonAutoConfiguration;
+import org.springframework.boot.jackson2.autoconfigure.Jackson2AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -41,7 +41,7 @@ public class RedisSerializerConfiguration {
 
     @Configuration
     @ConditionalOnClass(ObjectMapper.class)
-    @AutoConfigureAfter(JacksonAutoConfiguration.class)
+    @AutoConfigureAfter(Jackson2AutoConfiguration.class)
     @ConditionalOnProperty(name = PREFERRED_MAPPER_PROPERTY, havingValue = "jackson", matchIfMissing = true)
     public static class JacksonRedisSerializerConfiguration {
         @Bean

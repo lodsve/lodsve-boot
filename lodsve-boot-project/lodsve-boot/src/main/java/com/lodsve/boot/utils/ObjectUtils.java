@@ -164,9 +164,9 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      * @throws IllegalAccessException field not exist!
      */
     public static Object mergerObject(Object first, Object second) throws IllegalAccessException {
-        Assert.notNull(first);
-        Assert.notNull(second);
-        Assert.isTrue(first.getClass().equals(second.getClass()));
+        Assert.notNull(first, "argument must not be null");
+        Assert.notNull(second, "argument must not be null");
+        Assert.isTrue(first.getClass().equals(second.getClass()), "arguments must have the same type");
 
         Class<?> clazz = first.getClass();
         Object result = BeanUtils.instantiate(clazz);

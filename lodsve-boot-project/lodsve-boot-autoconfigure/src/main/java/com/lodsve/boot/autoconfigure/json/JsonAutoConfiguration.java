@@ -50,10 +50,10 @@ import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
-import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.gson.autoconfigure.GsonAutoConfiguration;
+import org.springframework.boot.gson.autoconfigure.GsonBuilderCustomizer;
+import org.springframework.boot.jackson2.autoconfigure.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.jackson2.autoconfigure.Jackson2AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.Configuration;
@@ -79,7 +79,7 @@ import java.util.TimeZone;
 public class JsonAutoConfiguration {
     @Configuration
     @ConditionalOnClass(ObjectMapper.class)
-    @AutoConfigureAfter(JacksonAutoConfiguration.class)
+    @AutoConfigureAfter(Jackson2AutoConfiguration.class)
     public static class JacksonSerializerConfiguration {
 
         @Bean

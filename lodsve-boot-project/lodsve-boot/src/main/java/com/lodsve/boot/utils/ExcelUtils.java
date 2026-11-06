@@ -59,7 +59,7 @@ public class ExcelUtils {
      */
     public static List<Map<String, String>> evalData(InputStream excel, List<String> excelColumnNames) {
         Assert.notNull(excel, "execl不能为空！");
-        Assert.notEmpty(excelColumnNames);
+        Assert.notEmpty(excelColumnNames, "argument must not be empty");
 
         Workbook workbook;
         try {
@@ -124,9 +124,9 @@ public class ExcelUtils {
      * @throws InvocationTargetException 字段不存在
      */
     public static <T> List<T> evalBean(List<Map<String, String>> data, Class<T> clazz, List<String> excelColumnNames, CheckExcel checkExcel) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-        Assert.notEmpty(data);
-        Assert.notNull(clazz);
-        Assert.notEmpty(excelColumnNames);
+        Assert.notEmpty(data, "argument must not be empty");
+        Assert.notNull(clazz, "argument must not be null");
+        Assert.notEmpty(excelColumnNames, "argument must not be empty");
 
         List<T> result = new ArrayList<>(data.size());
         for (Map<String, String> d : data) {

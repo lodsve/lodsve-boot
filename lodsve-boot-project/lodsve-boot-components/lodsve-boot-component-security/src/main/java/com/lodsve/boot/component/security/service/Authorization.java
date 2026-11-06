@@ -18,8 +18,8 @@ package com.lodsve.boot.component.security.service;
 
 import com.lodsve.boot.component.security.core.Account;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 鉴权.

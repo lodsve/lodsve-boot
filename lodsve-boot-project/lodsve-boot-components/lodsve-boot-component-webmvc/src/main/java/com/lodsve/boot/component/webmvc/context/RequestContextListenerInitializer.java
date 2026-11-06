@@ -19,8 +19,8 @@ package com.lodsve.boot.component.webmvc.context;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.request.RequestContextListener;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 /**
  * <p>注册{@link RequestContextListener}.</p>

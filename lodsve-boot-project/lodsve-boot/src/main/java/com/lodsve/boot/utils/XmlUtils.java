@@ -28,9 +28,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +60,7 @@ public final class XmlUtils {
      * @return 解析xml
      */
     public static Document parseXML(InputStream in) {
-        Assert.notNull(in);
+        Assert.notNull(in, "argument must not be null");
 
         try {
             return SAX_READER.read(in);
@@ -76,7 +76,7 @@ public final class XmlUtils {
      * @return string
      */
     public static String parseXMLToString(Document document) {
-        Assert.notNull(document);
+        Assert.notNull(document, "argument must not be null");
 
         OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding("UTF-8");
@@ -100,8 +100,8 @@ public final class XmlUtils {
      */
     @SuppressWarnings("unchecked")
     public static List<Element> getChildren(Element element, String tagName) {
-        Assert.notNull(element);
-        Assert.hasText(tagName);
+        Assert.notNull(element, "argument must not be null");
+        Assert.hasText(tagName, "argument must not be empty");
 
         return element.elements(tagName);
     }
@@ -114,8 +114,8 @@ public final class XmlUtils {
      * @return 子元素
      */
     public static Element getChild(Element element, String tagName) {
-        Assert.notNull(element);
-        Assert.hasText(tagName);
+        Assert.notNull(element, "argument must not be null");
+        Assert.hasText(tagName, "argument must not be empty");
 
         return element.element(tagName);
     }
@@ -128,7 +128,7 @@ public final class XmlUtils {
      */
     @SuppressWarnings("unchecked")
     public static List<Element> getChildren(Element element) {
-        Assert.notNull(element);
+        Assert.notNull(element, "argument must not be null");
 
         return element.elements();
     }
@@ -140,7 +140,7 @@ public final class XmlUtils {
      * @return 包含的内容
      */
     public static String getElementBody(Element element) {
-        Assert.notNull(element);
+        Assert.notNull(element, "argument must not be null");
 
         return element.getTextTrim();
     }
@@ -153,8 +153,8 @@ public final class XmlUtils {
      * @return 元素属性
      */
     public static String getElementAttr(Element element, String attr) {
-        Assert.notNull(element);
-        Assert.hasText(attr);
+        Assert.notNull(element, "argument must not be null");
+        Assert.hasText(attr, "argument must not be empty");
 
         return element.attributeValue(attr);
     }
@@ -168,9 +168,9 @@ public final class XmlUtils {
      * @return 子元素的属性
      */
     public static String getChildAttr(Element element, String tagName, String attr) {
-        Assert.notNull(element);
-        Assert.hasText(tagName);
-        Assert.hasText(attr);
+        Assert.notNull(element, "argument must not be null");
+        Assert.hasText(tagName, "argument must not be empty");
+        Assert.hasText(attr, "argument must not be empty");
 
         Element child = element.element(tagName);
         return child.attributeValue(attr);
@@ -184,8 +184,8 @@ public final class XmlUtils {
      * @return 路径节点
      */
     public static Element getElement(Element root, String path) {
-        Assert.notNull(root);
-        Assert.hasText(path);
+        Assert.notNull(root, "argument must not be null");
+        Assert.hasText(path, "argument must not be empty");
 
         String[] paths = StringUtils.split(path, "/");
         Element element = null;
@@ -204,8 +204,8 @@ public final class XmlUtils {
      * @return 指定路径节点的属性
      */
     public static String getAttrValue(Element root, String pathAndAttr) {
-        Assert.notNull(root);
-        Assert.hasText(pathAndAttr);
+        Assert.notNull(root, "argument must not be null");
+        Assert.hasText(pathAndAttr, "argument must not be empty");
 
         String[] temp = StringUtils.split(pathAndAttr, ":");
         if (temp.length != 2) {

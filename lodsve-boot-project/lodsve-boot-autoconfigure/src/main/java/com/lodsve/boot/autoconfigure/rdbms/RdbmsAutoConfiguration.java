@@ -20,8 +20,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.google.common.collect.Maps;
 import com.lodsve.boot.autoconfigure.rdbms.druid.DruidFilterConfiguration;
 import com.lodsve.boot.autoconfigure.rdbms.druid.DruidSpringAopConfiguration;
-import com.lodsve.boot.autoconfigure.rdbms.druid.DruidStatViewServletConfiguration;
-import com.lodsve.boot.autoconfigure.rdbms.druid.DruidWebStatFilterConfiguration;
 import com.lodsve.boot.component.rdbms.dynamic.DynamicDataSource;
 import com.lodsve.boot.component.rdbms.dynamic.DynamicDataSourceAspect;
 import com.lodsve.boot.component.rdbms.exception.RdbmsException;
@@ -35,7 +33,7 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,9 +55,7 @@ import java.util.Properties;
 @Configuration
 @Import({
     DruidFilterConfiguration.class,
-    DruidStatViewServletConfiguration.class,
     DruidSpringAopConfiguration.class,
-    DruidWebStatFilterConfiguration.class
 })
 public class RdbmsAutoConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(RdbmsAutoConfiguration.class);

@@ -11,6 +11,6 @@
 | lodsve-boot-starter-rocketmq      | Apache RocketMQ                | 增强RocketMQ 消费者注册。                                    |
 | lodsve-boot-starter-script        | -                            | 实现在JVM中运行一些解释型语言，如Groovy、Python、JS、Ruby、SPEL等|
 | lodsve-boot-starter-security      | -                            | 简单的安全校验，包含身份验证和授权。                             |
-| lodsve-boot-starter-swagger       | Swagger / Springfox            | 改进对 swagger 和 springfox 中的分页、身份验证、通用参数等的支持。|
+| lodsve-boot-starter-swagger       | Springdoc OpenAPI 3            | 改进 OpenAPI 文档中的分页、身份验证和通用参数支持。|
 | lodsve-boot-starter-validator     | -                            | 基于AOP对POJO进行校验。                                       |
 | lodsve-boot-starter-webmvc        | Spring WebMVC                | Spring WebMVC 的增强。                                     |

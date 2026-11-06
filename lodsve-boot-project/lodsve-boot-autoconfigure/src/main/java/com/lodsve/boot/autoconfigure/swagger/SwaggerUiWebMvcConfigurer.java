@@ -30,7 +30,7 @@ public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.
             addResourceHandler("/swagger-ui/**")
-            .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/swagger-ui/")
             .resourceChain(false);
     }
 

@@ -11,6 +11,6 @@
 | lodsve-boot-starter-rocketmq   | Apache RocketMQ              | Enhancing RocketMQ consumer registration.                                                                                           |
 | lodsve-boot-starter-script     | -                            | Realize the running of some interpreted languages in the JVM, such as Groovy, Python, JS, Ruby, SPEL, etc.                          |
 | lodsve-boot-starter-security   | -                            | Simple Security, contains Authentication and Authorization.                                                                         |
-| lodsve-boot-starter-swagger    | Swagger / Springfox          | Improve support for paging, authentication, general parameters, etc. in swagger and springfox.                                      |
+| lodsve-boot-starter-swagger    | Springdoc OpenAPI 3          | Improve support for paging, authentication, and common parameters in OpenAPI documentation.                                      |
 | lodsve-boot-starter-validator  | -                            | Validate for POJO base on AOP.                                                                                                      |
 | lodsve-boot-starter-webmvc     | Spring WebMVC                | Enhancements of Spring WebMVC.                                                                                                      |

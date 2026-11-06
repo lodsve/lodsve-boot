@@ -19,10 +19,10 @@ package com.lodsve.boot.component.security.core;
 import com.lodsve.boot.component.security.annotation.Authz;
 import com.lodsve.boot.component.security.service.Authorization;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
  *
  * @author Hulk Sun
  */
-public class AuthzInterceptor extends HandlerInterceptorAdapter {
+public class AuthzInterceptor implements HandlerInterceptor {
     private final Authorization authorization;
 
     public AuthzInterceptor(Authorization authorization) {
@@ -40,7 +40,7 @@ public class AuthzInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)) {
-            return super.preHandle(request, response, handler);
+            return true;
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -50,7 +50,7 @@ public class AuthzInterceptor extends HandlerInterceptorAdapter {
         Authz ac = method.getAnnotation(Authz.class);
 
         if (ac == null) {
-            return super.preHandle(request, response, handler);
+            return true;
         }
 
         //判断是否有权限
@@ -60,11 +60,11 @@ public class AuthzInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (authorization.authz(account, ac.value())) {
-            return super.preHandle(request, response, handler);
+            return true;
         } else {
             authorization.ifNotAuth(request, response, account);
         }
 
-        return super.preHandle(request, response, handler);
+        return true;
     }
 }

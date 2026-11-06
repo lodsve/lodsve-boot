@@ -30,11 +30,12 @@ import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
+import io.lettuce.core.api.StatefulConnection;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.data.redis.LettuceClientConfigurationBuilderCustomizer;
+import org.springframework.boot.data.redis.autoconfigure.LettuceClientConfigurationBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
@@ -239,8 +240,8 @@ public class DynamicLettuceConnectionConfiguration extends AbstractRedisConnecti
             return LettucePoolingClientConfiguration.builder().poolConfig(getPoolConfig(properties));
         }
 
-        private GenericObjectPoolConfig<?> getPoolConfig(Pool properties) {
-            GenericObjectPoolConfig<?> config = new GenericObjectPoolConfig<>();
+        private GenericObjectPoolConfig<StatefulConnection<?, ?>> getPoolConfig(Pool properties) {
+            GenericObjectPoolConfig<StatefulConnection<?, ?>> config = new GenericObjectPoolConfig<>();
             config.setMaxTotal(properties.getMaxActive());
             config.setMaxIdle(properties.getMaxIdle());
             config.setMinIdle(properties.getMinIdle());

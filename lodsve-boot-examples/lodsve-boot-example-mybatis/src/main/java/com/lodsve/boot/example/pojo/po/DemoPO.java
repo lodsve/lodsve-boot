@@ -19,7 +19,7 @@ package com.lodsve.boot.example.pojo.po;
 import com.lodsve.boot.component.mybatis.pojo.BasePropertyPO;
 import com.lodsve.boot.example.enums.Gender;
 
-import javax.persistence.Table;
+import jakarta.persistence.Table;
 
 /**
  * .

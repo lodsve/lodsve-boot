@@ -33,7 +33,7 @@ public class DisabledSpringRedisAutoConfig implements EnvironmentCustomizer {
     @Override
     public Map<String, Object> customizer() {
         if (ClassUtils.isPresent(DYNAMIC_CONNECTION_FACTORY_CLASS_NAME, Thread.currentThread().getContextClassLoader())) {
-            return Collections.singletonMap(DISABLED_AUTO_CONFIGURATION_EXCLUDE, "org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration");
+            return Collections.singletonMap(DISABLED_AUTO_CONFIGURATION_EXCLUDE, "org.springframework.boot.data.redis.autoconfigure.DataRedisAutoConfiguration");
         }
 
         return Collections.emptyMap();

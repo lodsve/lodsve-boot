@@ -21,10 +21,10 @@ import com.lodsve.boot.component.security.annotation.Authz;
 import com.lodsve.boot.component.security.service.Authorization;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
  *
  * @author Hulk Sun
  */
-public class LoginInterceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor implements HandlerInterceptor {
     private final Authorization authorization;
 
     public LoginInterceptor(Authorization authorization) {
@@ -42,7 +42,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)) {
-            return super.preHandle(request, response, handler);
+            return true;
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -53,29 +53,27 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         Authz authz = method.getAnnotation(Authz.class);
         if (login == null && authz == null) {
             //不需要
-            return super.preHandle(request, response, handler);
+            return true;
         }
 
         boolean isLogin = authorization.isLogin(request);
         if (isLogin) {
             LoginAccountHolder.setCurrentAccount(authorization.getCurrentUser(request));
-            return super.preHandle(request, response, handler);
+            return true;
         } else {
             authorization.ifNotLogin(request, response);
         }
 
-        return super.preHandle(request, response, handler);
+        return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         request.setAttribute("loginAccount", LoginAccountHolder.getCurrentAccount());
-        super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         request.setAttribute("loginAccount", LoginAccountHolder.getCurrentAccount());
-        super.afterCompletion(request, response, handler, ex);
     }
 }
