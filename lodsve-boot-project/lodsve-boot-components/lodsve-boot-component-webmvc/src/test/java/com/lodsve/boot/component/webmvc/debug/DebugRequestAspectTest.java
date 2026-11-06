@@ -76,4 +76,12 @@ public class DebugRequestAspectTest {
         Assert.assertEquals("payload", aspect.formatValue("payload"));
         Assert.assertTrue(aspect.formatValue(new Object()).startsWith("<无法序列化:"));
     }
+
+    @Test
+    public void lineBreaksInValuesAreEscapedBeforeLogging() {
+        DebugRequestAspect aspect = new DebugRequestAspect(new ObjectMapper(), new ArrayList<>(), new ArrayList<>());
+
+        String input = "first\r\nsecond\tthird\u2028fourth";
+        Assert.assertEquals("first\\r\\nsecond\\tthird\\u2028fourth", aspect.formatValue(input));
+    }
 }

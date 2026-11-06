@@ -170,3 +170,4 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/git,intellij+all,java,maven,gradle,java-web
 
 .DS_Store
+.workflow/tmp/

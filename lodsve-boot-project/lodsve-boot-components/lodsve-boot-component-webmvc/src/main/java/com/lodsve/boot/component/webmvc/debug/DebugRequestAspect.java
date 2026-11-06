@@ -132,7 +132,8 @@ public class DebugRequestAspect {
         List<String> header = Lists.newArrayList();
         while (names != null && names.hasMoreElements()) {
             String name = names.nextElement();
-            header.add(name + " = " + request.getHeader(name));
+            String headerValue = request.getHeader(name);
+            header.add(escapeLogValue(name) + " = " + (headerValue == null ? "null" : escapeLogValue(headerValue)));
         }
 
         if (logger.isInfoEnabled()) {
@@ -160,15 +161,46 @@ public class DebugRequestAspect {
         }
         if (value instanceof CharSequence || value instanceof Number || value instanceof Boolean
             || value instanceof Enum<?>) {
-            return String.valueOf(value);
+            return escapeLogValue(String.valueOf(value));
         }
         if (value instanceof HttpServletRequest) {
-            return value.getClass().getName();
+            return escapeLogValue(value.getClass().getName());
         }
         try {
-            return objectMapper.writeValueAsString(value);
+            return escapeLogValue(objectMapper.writeValueAsString(value));
         } catch (Exception exception) {
             return "<无法序列化: " + value.getClass().getName() + ">";
         }
+    }
+
+    private String escapeLogValue(String value) {
+        StringBuilder escaped = new StringBuilder(value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char character = value.charAt(i);
+            switch (character) {
+                case '\r':
+                    escaped.append("\\r");
+                    break;
+                case '\n':
+                    escaped.append("\\n");
+                    break;
+                case '\t':
+                    escaped.append("\\t");
+                    break;
+                case '\u2028':
+                    escaped.append("\\u2028");
+                    break;
+                case '\u2029':
+                    escaped.append("\\u2029");
+                    break;
+                default:
+                    if (Character.isISOControl(character)) {
+                        escaped.append(String.format("\\u%04x", (int) character));
+                    } else {
+                        escaped.append(character);
+                    }
+            }
+        }
+        return escaped.toString();
     }
 }
