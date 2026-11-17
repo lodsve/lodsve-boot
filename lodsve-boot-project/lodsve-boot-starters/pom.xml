@@ -42,6 +42,7 @@
         <module>lodsve-boot-starter-rabbitmq</module>
         <module>lodsve-boot-starter-rdbms</module>
         <module>lodsve-boot-starter-redis</module>
+        <module>lodsve-boot-starter-mongodb</module>
         <module>lodsve-boot-starter-rocketmq</module>
         <module>lodsve-boot-starter-script</module>
         <module>lodsve-boot-starter-security</module>

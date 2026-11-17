@@ -16,6 +16,7 @@
  */
 package com.lodsve.boot.example.service;
 
+import com.lodsve.boot.component.mongodb.dynamic.SwitchMongoDataSource;
 import com.lodsve.boot.example.domain.Demo;
 import com.lodsve.boot.example.repository.DemoRepository;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class DemoService {
     }
 
     public Demo get(Long id) {
+        Optional<Demo> optional = demoRepository.findById(id);
+        return optional.orElseGet(optional::get);
+    }
+
+    @SwitchMongoDataSource("archive")
+    public Demo getFromArchive(Long id) {
         Optional<Demo> optional = demoRepository.findById(id);
         return optional.orElseGet(optional::get);
     }

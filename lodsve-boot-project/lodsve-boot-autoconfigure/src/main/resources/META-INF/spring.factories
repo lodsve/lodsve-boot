@@ -31,7 +31,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lodsve.boot.autoconfigure.webmvc.WebMvcAutoConfiguration,\
   com.lodsve.boot.autoconfigure.validator.ValidatorAutoConfiguration,\
   com.lodsve.boot.autoconfigure.security.SecurityAutoConfiguration,\
-  com.lodsve.boot.autoconfigure.event.EventAutoConfiguration
+  com.lodsve.boot.autoconfigure.event.EventAutoConfiguration,\
+  com.lodsve.boot.autoconfigure.mongo.MongoDataSourceAutoConfiguration
 
 org.springframework.boot.env.EnvironmentPostProcessor=\
   com.lodsve.boot.autoconfigure.env.GlobalEnvironmentPostProcessor

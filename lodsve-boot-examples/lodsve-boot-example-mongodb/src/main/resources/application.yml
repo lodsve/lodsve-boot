@@ -23,12 +23,15 @@ server:
 lodsve:
   swagger:
     enabled: true
+  mongo:
+    default-data-source-name: default
+    data-source:
+      archive:
+        uri: "mongodb://localhost:27017/lodsve_archive"
 
 spring:
+  mongodb:
+    uri: "mongodb://localhost:27017/lodsve"
   data:
     mongodb:
-      username: 
-      password: 
-      host: 
-      port: 
-      database: 
+      auto-index-creation: false
