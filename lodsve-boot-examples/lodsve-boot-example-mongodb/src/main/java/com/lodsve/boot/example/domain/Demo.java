@@ -29,15 +29,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = Constants.COLLECTION_NAME_DEMO)
 public class Demo {
     @Id
-    private Long id;
+    private String id;
     private String name;
     private Integer age;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

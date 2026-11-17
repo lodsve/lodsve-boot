@@ -27,6 +27,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0 2017/12/7 16:01
  */
 @Repository
-public interface DemoRepository extends MongoRepository<Demo, Long> {
+public interface DemoRepository extends MongoRepository<Demo, String> {
 
 }

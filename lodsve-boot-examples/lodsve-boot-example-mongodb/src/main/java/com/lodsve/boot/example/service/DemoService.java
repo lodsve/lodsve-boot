@@ -22,7 +22,6 @@ import com.lodsve.boot.example.repository.DemoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * .
@@ -38,19 +37,27 @@ public class DemoService {
         this.demoRepository = demoRepository;
     }
 
-    public void save(Demo demo) {
-        demoRepository.save(demo);
+    public Demo save(Demo demo) {
+        return demoRepository.save(demo);
     }
 
-    public Demo get(Long id) {
-        Optional<Demo> optional = demoRepository.findById(id);
-        return optional.orElseGet(optional::get);
+    public Demo get(String id) {
+        return demoRepository.findById(id).orElseThrow();
     }
 
     @SwitchMongoDataSource("archive")
-    public Demo getFromArchive(Long id) {
-        Optional<Demo> optional = demoRepository.findById(id);
-        return optional.orElseGet(optional::get);
+    public Demo saveToArchive(Demo demo) {
+        return demoRepository.save(demo);
+    }
+
+    @SwitchMongoDataSource("archive")
+    public Demo getFromArchive(String id) {
+        return demoRepository.findById(id).orElseThrow();
+    }
+
+    @SwitchMongoDataSource("archive")
+    public List<Demo> listFromArchive() {
+        return demoRepository.findAll();
     }
 
     public List<Demo> list() {

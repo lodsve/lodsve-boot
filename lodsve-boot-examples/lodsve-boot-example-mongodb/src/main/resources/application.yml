@@ -24,14 +24,18 @@ lodsve:
   swagger:
     enabled: true
   mongo:
+    # 未切换数据源时使用 Spring Boot 创建的默认 MongoClient。
     default-data-source-name: default
     data-source:
+      # 通过 @SwitchMongoDataSource("archive") 选择此数据源。
       archive:
-        uri: "mongodb://localhost:27017/lodsve_archive"
+        uri: ${MONGODB_ARCHIVE_URI:mongodb://localhost:27017/lodsve_archive}
 
 spring:
   mongodb:
-    uri: "mongodb://localhost:27017/lodsve"
+    # 默认数据源 URI；可通过环境变量替换本地地址。
+    uri: ${MONGODB_URI:mongodb://localhost:27017/lodsve}
   data:
     mongodb:
+      # 由 Spring Data MongoDB 管理的实体索引创建选项。
       auto-index-creation: false

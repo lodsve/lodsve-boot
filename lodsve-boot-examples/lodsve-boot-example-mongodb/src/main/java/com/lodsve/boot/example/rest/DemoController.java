@@ -45,22 +45,43 @@ public class DemoController {
 
     @Operation(summary = "保存到demo", description = "保存到demo")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "保存成功")})
-    @RequestMapping(value = "/saveDemo", method = RequestMethod.POST)
-    public void save2(@Parameter(name = "demo", description = "需要保存的") @RequestBody Demo demo) {
-        demoService.save(demo);
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Demo save(@Parameter(name = "demo", description = "需要保存的") @RequestBody Demo demo) {
+        return demoService.save(demo);
     }
 
     @Operation(summary = "从demo获取", description = "从demo获取")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "获取成功")})
-    @RequestMapping(value = "/demo/{id}", method = RequestMethod.GET)
-    public Demo get2(@Parameter(name = "id", description = "ID") @PathVariable("id") Long id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Demo get(@Parameter(name = "id", description = "ID") @PathVariable("id") String id) {
         return demoService.get(id);
     }
 
     @Operation(summary = "获取demo全部", description = "获取demo全部")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "获取全部成功")})
-    @RequestMapping(value = "/listDemo", method = RequestMethod.GET)
-    public List<Demo> list2() {
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Demo> list() {
         return demoService.list();
+    }
+
+    @Operation(summary = "保存到 archive", description = "保存到 archive 数据源")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "保存成功")})
+    @RequestMapping(value = "/archive/save", method = RequestMethod.POST)
+    public Demo saveToArchive(@RequestBody Demo demo) {
+        return demoService.saveToArchive(demo);
+    }
+
+    @Operation(summary = "从 archive 获取", description = "从 archive 数据源获取")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "获取成功")})
+    @RequestMapping(value = "/archive/{id}", method = RequestMethod.GET)
+    public Demo getFromArchive(@Parameter(name = "id", description = "ID") @PathVariable("id") String id) {
+        return demoService.getFromArchive(id);
+    }
+
+    @Operation(summary = "获取 archive 全部", description = "获取 archive 数据源全部记录")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "获取全部成功")})
+    @RequestMapping(value = "/archive/list", method = RequestMethod.GET)
+    public List<Demo> listFromArchive() {
+        return demoService.listFromArchive();
     }
 }
