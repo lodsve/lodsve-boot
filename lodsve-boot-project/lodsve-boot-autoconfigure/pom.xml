@@ -140,6 +140,23 @@
             <optional>true</optional>
         </dependency>
         <!-- rdbms end -->
+        <!-- mongodb start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-data-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.lodsve.boot</groupId>
+            <artifactId>lodsve-boot-component-mongodb</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- mongodb end -->
         <!-- countdown start -->
         <dependency>
             <groupId>com.lodsve.boot</groupId>
