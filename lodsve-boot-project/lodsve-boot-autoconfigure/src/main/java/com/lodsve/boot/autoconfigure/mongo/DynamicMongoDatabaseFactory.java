@@ -33,9 +33,12 @@ class DynamicMongoDatabaseFactory extends SimpleMongoClientDatabaseFactory {
     }
 
     @Override
+    public MongoDatabase getMongoDatabase() {
+        return super.getMongoDatabase(clientRegistry.getCurrentDatabaseName());
+    }
+
+    @Override
     protected MongoDatabase doGetMongoDatabase(String dbName) {
-        // 忽略传入的 dbName，使用当前数据源配置的数据库名
-        String actualDatabaseName = clientRegistry.getCurrentDatabaseName();
-        return clientRegistry.getCurrentClient().getDatabase(actualDatabaseName);
+        return clientRegistry.getCurrentClient().getDatabase(dbName);
     }
 }

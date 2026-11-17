@@ -21,7 +21,9 @@ import com.lodsve.boot.component.mongodb.dynamic.MongoClientRegistry;
 import com.lodsve.boot.component.mongodb.dynamic.MongoDataSourceAspect;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
+import com.mongodb.connection.SslSettings;
 import com.mongodb.client.MongoClient;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -30,11 +32,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
 import org.springframework.boot.mongodb.autoconfigure.MongoClientFactory;
+import org.springframework.boot.mongodb.autoconfigure.MongoClientSettingsBuilderCustomizer;
+import org.springframework.boot.mongodb.autoconfigure.MongoConnectionDetails;
+import org.springframework.boot.mongodb.autoconfigure.MongoProperties;
+import org.springframework.boot.mongodb.autoconfigure.StandardMongoClientSettingsBuilderCustomizer;
 import org.springframework.boot.data.mongodb.autoconfigure.DataMongoAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -60,7 +67,10 @@ public class MongoDataSourceAutoConfiguration {
     @ConditionalOnMissingBean(name = "dynamicMongoClient")
     public MongoClient dynamicMongoClient(@Qualifier("mongo") MongoClient defaultClient,
                                          DynamicMongoProperties properties,
-                                         org.springframework.boot.mongodb.autoconfigure.MongoConnectionDetails defaultConnectionDetails) {
+                                         MongoProperties mongoProperties,
+                                         MongoConnectionDetails defaultConnectionDetails,
+                                         ObjectProvider<MongoClientSettings> mongoClientSettings,
+                                         ObjectProvider<MongoClientSettingsBuilderCustomizer> builderCustomizers) {
         String defaultDataSourceName = properties.getDefaultDataSourceName();
         Assert.hasText(defaultDataSourceName, "Default MongoDB data source name must not be blank");
 
@@ -71,14 +81,19 @@ public class MongoDataSourceAutoConfiguration {
         Map<String, String> databaseNames = new LinkedHashMap<>();
 
         // 记录默认数据源的数据库名
-        String defaultDatabase = defaultConnectionDetails.getConnectionString().getDatabase();
-        Assert.hasText(defaultDatabase, "Default MongoDB database name must not be blank");
+        String defaultDatabase = getDefaultDatabaseName(mongoProperties, defaultConnectionDetails);
         databaseNames.put(defaultDataSourceName, defaultDatabase);
+        MongoClientSettings baseSettings = mongoClientSettings.getIfAvailable(() -> MongoClientSettings.builder().build());
+        // Boot 的标准 customizer 会应用默认连接信息，具名数据源不能复用它。
+        List<MongoClientSettingsBuilderCustomizer> namedClientCustomizers = builderCustomizers.orderedStream()
+            .filter(customizer -> !(customizer instanceof StandardMongoClientSettingsBuilderCustomizer))
+            .toList();
 
         try {
             dataSources.forEach((name, dataSource) -> {
                 ConnectionString connectionString = new ConnectionString(dataSource.getUri());
-                namedClients.put(name, createMongoClient(connectionString));
+                namedClients.put(name, createMongoClient(connectionString, mongoProperties, baseSettings,
+                    namedClientCustomizers));
 
                 String database = connectionString.getDatabase();
                 Assert.hasText(database, "MongoDB database name for '" + name + "' must not be blank in URI");
@@ -97,15 +112,16 @@ public class MongoDataSourceAutoConfiguration {
     @Bean
     @Primary
     @ConditionalOnMissingBean(MongoDatabaseFactory.class)
-    public MongoDatabaseFactory mongoDatabaseFactory(MongoClient mongoClient,
-                                                    org.springframework.boot.mongodb.autoconfigure.MongoConnectionDetails defaultConnectionDetails) {
+    public MongoDatabaseFactory mongoDatabaseFactory(@Qualifier("dynamicMongoClient") MongoClient mongoClient,
+                                                    MongoProperties mongoProperties,
+                                                    MongoConnectionDetails defaultConnectionDetails) {
+        String defaultDatabase = getDefaultDatabaseName(mongoProperties, defaultConnectionDetails);
         // mongoClient 是动态路由客户端，实现了 RegistryHolder 接口
         if (mongoClient instanceof DynamicMongoClient.RegistryHolder) {
             MongoClientRegistry registry = ((DynamicMongoClient.RegistryHolder) mongoClient).getRegistry();
-            String defaultDatabase = defaultConnectionDetails.getConnectionString().getDatabase();
             return new DynamicMongoDatabaseFactory(mongoClient, registry, defaultDatabase);
         }
-        throw new IllegalStateException("Expected a dynamic MongoClient implementing RegistryHolder");
+        return new SimpleMongoClientDatabaseFactory(mongoClient, defaultDatabase);
     }
 
     @Bean
@@ -125,11 +141,32 @@ public class MongoDataSourceAutoConfiguration {
         });
     }
 
-    private MongoClient createMongoClient(ConnectionString connectionString) {
+    private String getDefaultDatabaseName(MongoProperties mongoProperties, MongoConnectionDetails connectionDetails) {
+        String database = mongoProperties.getDatabase();
+        if (database == null) {
+            database = connectionDetails.getConnectionString().getDatabase();
+        }
+        Assert.hasText(database, "Default MongoDB database name must not be blank");
+        return database;
+    }
+
+    private MongoClient createMongoClient(ConnectionString connectionString, MongoProperties mongoProperties,
+                                          MongoClientSettings baseSettings,
+                                          List<MongoClientSettingsBuilderCustomizer> builderCustomizers) {
         // 为具名客户端创建独立的配置，不继承默认连接的凭据和 TLS 等设置
-        MongoClientSettings.Builder settingsBuilder = MongoClientSettings.builder();
+        MongoClientSettings.Builder settingsBuilder = hasSensitiveConnectionSettings(baseSettings)
+            ? MongoClientSettings.builder()
+            : MongoClientSettings.builder(baseSettings);
+        settingsBuilder.uuidRepresentation(mongoProperties.getRepresentation().getUuid());
+        builderCustomizers.forEach(customizer -> customizer.customize(settingsBuilder));
         settingsBuilder.applyConnectionString(connectionString);
         return new MongoClientFactory(List.of()).createMongoClient(settingsBuilder.build());
+    }
+
+    private boolean hasSensitiveConnectionSettings(MongoClientSettings settings) {
+        SslSettings sslSettings = settings.getSslSettings();
+        return settings.getCredential() != null || sslSettings.isEnabled() || sslSettings.isInvalidHostNameAllowed()
+            || sslSettings.getContext() != null || settings.getTransportSettings() != null;
     }
 
     private void closeNamedClients(Map<String, MongoClient> namedClients, RuntimeException originalFailure) {
