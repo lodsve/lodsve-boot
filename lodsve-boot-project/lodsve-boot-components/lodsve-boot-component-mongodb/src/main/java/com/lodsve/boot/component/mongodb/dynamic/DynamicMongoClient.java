@@ -37,13 +37,27 @@ public final class DynamicMongoClient implements InvocationHandler {
     public static MongoClient create(MongoClientRegistry clientRegistry) {
         DynamicMongoClient invocationHandler = new DynamicMongoClient(clientRegistry);
         return (MongoClient) Proxy.newProxyInstance(MongoClient.class.getClassLoader(),
-            new Class<?>[]{MongoClient.class}, invocationHandler);
+            new Class<?>[]{MongoClient.class, RegistryHolder.class}, invocationHandler);
+    }
+
+    public MongoClientRegistry getRegistry() {
+        return clientRegistry;
+    }
+
+    /**
+     * Marker interface to access the registry from the proxy.
+     */
+    public interface RegistryHolder {
+        MongoClientRegistry getRegistry();
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (method.getDeclaringClass() == Object.class) {
             return handleObjectMethod(proxy, method, args);
+        }
+        if ("getRegistry".equals(method.getName()) && method.getParameterCount() == 0) {
+            return clientRegistry;
         }
         if ("close".equals(method.getName()) && method.getParameterCount() == 0) {
             clientRegistry.close();

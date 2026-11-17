@@ -17,7 +17,6 @@
 package com.lodsve.boot.component.mongodb.dynamic;
 
 import com.mongodb.client.MongoClient;
-import org.springframework.beans.factory.DisposableBean;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,20 +31,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Resolves the current MongoDB client and manages clients created for named sources.
  */
-public final class MongoClientRegistry implements DisposableBean {
+public final class MongoClientRegistry {
     private final String defaultDataSourceName;
     private final MongoClient defaultClient;
     private final Map<String, MongoClient> clients;
+    private final Map<String, String> databaseNames;
     private final List<MongoClient> managedClients;
     private final AtomicBoolean managedClientsClosed = new AtomicBoolean();
 
     public MongoClientRegistry(String defaultDataSourceName, MongoClient defaultClient,
-                               Map<String, MongoClient> namedClients) {
+                               Map<String, MongoClient> namedClients, Map<String, String> databaseNames) {
         if (defaultDataSourceName == null || defaultDataSourceName.isBlank()) {
             throw new IllegalArgumentException("Default MongoDB data source name must not be blank");
         }
         this.defaultDataSourceName = defaultDataSourceName;
         this.defaultClient = Objects.requireNonNull(defaultClient, "Default MongoClient must not be null");
+        Objects.requireNonNull(databaseNames, "Database names map must not be null");
 
         Map<String, MongoClient> clientMap = new LinkedHashMap<>();
         clientMap.put(defaultDataSourceName, defaultClient);
@@ -71,6 +72,7 @@ public final class MongoClientRegistry implements DisposableBean {
         }
 
         this.clients = Collections.unmodifiableMap(clientMap);
+        this.databaseNames = Collections.unmodifiableMap(new LinkedHashMap<>(databaseNames));
         this.managedClients = List.copyOf(managed);
     }
 
@@ -87,12 +89,17 @@ public final class MongoClientRegistry implements DisposableBean {
         return client;
     }
 
-    /**
-     * Closes all named clients created by Lodsve. The default client remains container-owned.
-     */
-    @Override
-    public void destroy() {
-        close();
+    public String getCurrentDatabaseName() {
+        String selectedDataSourceName = MongoDataSourceContextHolder.getCurrentDataSource();
+        if (selectedDataSourceName == null || selectedDataSourceName.isBlank()) {
+            selectedDataSourceName = defaultDataSourceName;
+        }
+
+        String databaseName = databaseNames.get(selectedDataSourceName);
+        if (databaseName == null) {
+            throw new IllegalStateException("MongoDB database name for '" + selectedDataSourceName + "' is not configured");
+        }
+        return databaseName;
     }
 
     /**
